@@ -1,0 +1,6 @@
+style "schrift"
+{
+font_name = "Cousine 8"
+}
+widget_class "*" style "schrift"
+gtk-font-name = "Cousine 8"
