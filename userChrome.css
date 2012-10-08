@@ -1,0 +1,128 @@
+/* (c) Ippytraxx 2012 v.szolnoky@tele2.se */
+/* HIDDEN ELEMENTS */
+#identity-box,
+#urlbar-icons > image,
+#urlbar-container dropmarker,
+#new-tab-button .toolbarbutton-icon,
+#appmenu-toolbar-button > .toolbarbutton-text,
+#appmenu-toolbar-button > .toolbarbutton-menu-dropmarker,
+.tabs-newtab-button {
+    display:none!important;
+}
+
+#back-button .toolbarbutton-icon {
+    list-style-image: url("file:///home/mvo/.mozilla/Nightly_icons/back.png")!important;
+    -moz-image-region:rect(0, 0, 0, 0)!important;
+}
+#forward-button .toolbarbutton-icon {
+    list-style-image: url("file:///home/mvo/.mozilla/Nightly_icons/forward.png")!important;
+    -moz-image-revgion:rect(0, 0, 0, 0)!important;
+}
+#reload-button .toolbarbutton-icon {
+    list-style-image: url("file:///home/mvo/.mozilla/Nightly_icons/reload.png")!important;
+    -moz-image-region:rect(0, 0, 0, 0)!important;
+}
+#appmenu-toolbar-button {
+    list-style-image: url("file:///home/mvo/.mozilla/Nightly_icons/menu.png")!important;
+    -moz-image-region:rect(0, 0, 0, 0)!important;
+}
+#stop-button .toolbarbutton-icon,
+#urlbar-stop-button .toolbarbutton-icon
+{
+    list-style-image: url("file:///home/mvo/.mozilla/Nightly_icons/stop.png")!important;
+    -moz-image-region:rect(0, 0, 0, 0)!important;
+}
+#tabbrowser-tabs tab .tab-close-button .toolbarbutton-icon
+{
+    display:none!important;
+/*    	list-style-image: url("file:///home/mvo/.mozilla/Nightly_icons/close_tab.png")!important;
+	-moz-image-region:rect(0, 0, 0, 0)!important;
+	*/
+}
+
+/* TABS */
+/*
+#main-window #tabbrowser-tabs tab
+vvv{
+    background:#1b1b1b!important;
+    border:0!important;
+    color:rgba(255,255,255,.6)!important;
+    text-shadow:rgba(0,0,0,.8) 0 0 1px!important;
+}
+
+#main-window #tabbrowser-tabs tab .tab-text
+{
+  margin-bottom:6px!important;
+}
+#main-window[sizemode="normal"] #tabbrowser-tabs tab
+{
+  margin:5px 1px 0px!important;
+  max-height:10px!important;
+  padding:0 1px!important;
+  border-radius:0 0 8px 8px!important;
+}
+*/
+#main-window[sizemode="maximized"] #tabbrowser-tabs tab,
+#main-window[sizemode="fullscreen"] #tabbrowser-tabs tab
+{
+    border-top:0!important;
+    margin:0px 1px 0px!important;
+    max-height:10px!important;
+    padding:0 1px!important;
+    border-radius:0 0 0px 0px!important;
+}
+/*
+  #main-window #tabbrowser-tabs tab[selected]
+  {
+  color:#fff!important;
+  }
+  */
+#main-window #tabbrowser-tabs tab .tab-throbber,
+#main-window #tabbrowser-tabs tab .tab-icon-image
+{
+    max-height:10px!important;
+    max-width:10px!important;
+    margin-top:-3px!important;
+}
+/*
+  #main-window #tabbrowser-tabs tab[fadein]
+  {
+  -moz-transition:all .2s ease-in-out!important;
+  }
+
+#main-window #tabbrowser-tabs tab:not([selected]):hover
+{
+color:rgba(255,255,255,.8)!important;
+}
+#main-window #tabbrowser-tabs tab .tab-close-button
+{
+opacity:0!important;
+-moz-transition:all .1s ease-in-out!important;
+}
+#main-window #tabbrowser-tabs tab .tab-close-button .toolbarbutton-icon
+{
+max-height:35px!important;
+max-width:30px!important;
+margin:0px 0px 0px 0px!important;
+padding-bottom:4px!important;
+}
+*/
+#main-window #tabbrowser-tabs tab[selected] .tab-close-button,
+#main-window #tabbrowser-tabs tab:hover .tab-close-button
+{
+    opacity:1!important;
+}
+#main-window #tabbrowser-tabs tab[fadein]:not([pinned])
+{
+    min-width:40px!important;
+    max-width:160px!important;
+}
+#main-window #tabbrowser-tabs tab[pinned]
+{
+    max-width:24px!important;
+    min-width:24px!important;
+}
+#main-window #tabbrowser-tabs tab[pinned] .tab-close-button
+{
+    display:none!important;
+}
