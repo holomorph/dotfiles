@@ -37,8 +37,8 @@ fi
 #xset fp rehash
 
 ## turn off screen after 1800s
-xset +dpms
-xset dpms 1800 1800 1800
+#xset +dpms
+#xset dpms 1800 1800 1800
 
 ## Set background
 ## feh --bg-fill <filename>
@@ -52,12 +52,11 @@ for app in "${list[@]}"; do
 	case "$app" in
 	  mpd) mpd $HOME/.config/mpd.conf ;;
 	  urxvtd) urxvtd -q -o -f ;;
-	  firefox) firefox & ;;
+    firefox) firefox & ;;
 	esac
   fi
 done
 
 urxvtc &
-urxvtc &
-$HOME/.config/bin/dwmstatus &
+/usr/bin/dwmstatus &
 exec dwm

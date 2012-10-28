@@ -7,9 +7,13 @@ set nocompatible
 " LaTeX suite
 filetype plugin indent on
 set grepprg=grep\ -nH\ $*
-let g:tex_flavor = "latex"
+"let g:tex_flavor = "latex"
 syntax on
-"let g:hybrid_use_Xresources=1
+"let b:tex_flavor = 'pdflatex'
+"compiler tex
+"set makeprg=pdflatex\ \-file\-line\-error\ \-interaction=nonstopmode
+"set errorformat=%f:%l:\ %m
+
 colorscheme zenburn
 
 set smartindent
@@ -20,8 +24,9 @@ set smartcase
 set incsearch
 
 " formatting
-set tabstop=4
-set shiftwidth=4
+set expandtab
+set tabstop=2
+set shiftwidth=2
 set softtabstop=2
 set cinoptions=(0
 set smartindent
@@ -73,7 +78,6 @@ command! Wqa wqa
 " semicolon
 map ; :
 noremap ;; ;
-
 
 if has('mouse')
   set mouse=a

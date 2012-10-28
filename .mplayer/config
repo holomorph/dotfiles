@@ -1,3 +1,14 @@
-# Write your default config options here!
+#
+# ~/.mplayer/config
+#
+
+# video settings
 nolirc=yes
 vo=xv
+monitoraspect=16:9
+
+# audio settings
+ao=alsa
+mixer-channel=PCM
+
+

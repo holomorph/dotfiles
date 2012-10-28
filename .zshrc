@@ -2,34 +2,24 @@
 # ~/.zshrc
 #
 
-# Disable Flow Control {{{
-# -----------------------------------------------------------------------------
-
+# Disable Flow Control
 stty -ixon
 
-# }}}
-# Autoload zsh Functions {{{
-# -----------------------------------------------------------------------------
-
+# Autoload zsh Functions
 autoload -U compinit && compinit
 autoload -U colors && colors
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
 
-# }}}
-# Set zsh Options {{{
-# -----------------------------------------------------------------------------
-
+# Set zsh Options
 setopt correct
 setopt extended_glob
 setopt extended_history share_history
 setopt hist_find_no_dups hist_ignore_dups hist_verify
 setopt prompt_subst
 
-# }}}
-# Source Completion Files {{{
-# -----------------------------------------------------------------------------
-
+# Source Completion Files
+#
 if [[ -n "$WORKON_HOME" ]] && (( $+commands[virtualenvwrapper.sh] )); then
 source "$commands[virtualenvwrapper.sh]"
 fi
@@ -38,18 +28,21 @@ if [[ -s "$HOME/.config/git-prompt.sh" ]]; then
 source "$HOME/.config/git-prompt.sh"
 fi
 
-# }}}
-# History Settings {{{
-# -----------------------------------------------------------------------------
+# git completion
+# http://www.zsh.org/mla/workers/2011/msg00490.html
+#__git_files () { 
+#    _wanted files expl 'local files' _files     
+#}
 
+#
+# History Settings
+#
 HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE="$HOME/.zhistory"
 
-# }}}
-# Enhanced Tab Completion {{{
-# -----------------------------------------------------------------------------
-
+# Enhanced Tab Completion
+#
 zstyle ':completion:*' menu select
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 # autocorrect
@@ -71,10 +64,10 @@ GIT_PS1_SHOWDIRTYSTATE=1
 GIT_PS1_SHOWSTASHSTATE=1
 GIT_PS1_SHOWUNTRACKEDFILES=1
 GIT_PS1_SHOWUPSTREAM="auto"
-#PROMPT='%{$fg[black]%}┌─[%{$fg_bold[yellow]%}%~%{$reset_color$fg[black]%}]$(__git_ps1 "\e[0;30m[\e[1;31m%s\e[0;30m]")
-#└─╼%{$reset_color%} '
+PROMPT='%{$fg[black]%}┌─[%{$fg_bold[yellow]%}%~%{$reset_color$fg[black]%}]$(__git_ps1 "\e[0;30m[\e[1;31m%s\e[0;30m]")
+└─╼%{$reset_color%} '
 
-PROMPT='%{$fg[black]%}[%(!.%{$fg[red]%}.%{$fg[white]%})%n%{$fg[white]%}@%{$fg[blue]%}%m%{$fg_bold[yellow]%}%~%{$reset_color$fg[black]%}]%(!.%{$fg[red]%}#.%{$fg[blue]%}$)%{$reset_color%} '
+#PROMPT='%{$fg[black]%}[%(!.%{$fg[red]%}.%{$fg[white]%})%n%{$fg[white]%}@%{$fg[blue]%}%m%{$fg_bold[yellow]%}%~%{$reset_color$fg[black]%}]%(!.%{$fg[red]%}#.%{$fg[blue]%}$)%{$reset_color%} '
 SPROMPT="Correct $fg_bold[red]%R$reset_color to $fg_bold[green]%r$reset_color [nyae]? "
 
 
@@ -99,12 +92,11 @@ case $TERM in
     ;;
 esac
 
-# }}}
-# Custom dircolors {{{
-# -----------------------------------------------------------------------------
 
-if [[ -s "$HOME/.config/dir_colours" ]]; then
-eval $(dircolors -b "$HOME/.config/dir_colours")
+# Custom dircolors
+#
+if [[ -s "$HOME/.config/dircolors" ]]; then
+eval $(dircolors -b "$HOME/.config/dircolors")
 fi
 
 # }}}
@@ -140,7 +132,9 @@ bindkey -M vicmd "?" history-incremental-search-backward
 # Custom Aliases {{{
 # -----------------------------------------------------------------------------
 
-alias ncmpcpp="ncmpcpp -c /home/mvo/.config/ncmpcpp/config"
+alias ssh='eval $(/usr/bin/keychain --eval --agents ssh -Q --quiet ~/.ssh/id_rsa) && ssh'
+#alias emacs="TERM=xterm-256color emacs -nw"
+alias ncmpcpp="ncmpcpp -c $HOME/.config/ncmpcpp/config"
 alias ls="ls -hF --color=auto --group-directories-first"
 alias ll="ls++"
 alias grep="grep --color=auto"

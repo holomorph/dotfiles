@@ -1,33 +1,35 @@
 !
 ! ~/.Xresources
 !
-Xft.antialias: 1
-Xft.autohint: 0
-Xft.dpi: 96
-Xft.hinting: 1
-Xft.hintstyle: hintfull
-Xft.lcdfilter: lcddefault
-Xft.rgba: rgb
+
+!Xft.antialias: 1
+!Xft.autohint: 0
+!Xft.dpi: 96
+!Xft.hinting: 1
+!Xft.hintstyle: hintfull
+!Xft.lcdfilter: lcddefault
+!Xft.rgba: rgb
 
 ! Color scheme
-#include "/home/mvo/.config/termcolors"
-Xcursor.theme: Vanilla-DMZ
+#include "/home/mvo/.config/hybrid"
+!Xcursor.theme: Vanilla-DMZ
 
 ! Emacs options
 Emacs*font: -*-cousine-medium-r-*-*-12-*-*-*-*-*-*-*
-!Emacs*bold.attributeFont: -*-cousine-bold-r-*-*-12-*-*-*-*-*-*-*
+Emacs*bold.attributeFont: -*-cousine-bold-r-*-*-12-*-*-*-*-*-*-*
 Emacs.menuBar: off
 Emacs.verticalScrollBars: off
 Emacs.toolBar: off
 
 ! URxvt options
-!URxvt*termName:urxvt-256color
+URxvt*termName:rxvt-unicode-256color
 URxvt.scrollstyle: rxvt-unicode-256color
 URxvt.scrollBar: off
 URxvt.colorBD: #cc6666
 URxvt.colorIT: #b5bd68
 URxvt.colorUL: #81a2be
 !-Foundry-FamilyName-WeightName-Slant-SetwidthName-AddStyleName -PixelSize-PointSize-ResolutionX-ResolutionY-Spacing-AverageWidth -CharSetRegistry-CharSetCoding 
+!URxvt.font: -*-Cousine-*-*-*-*-*-8-*-*-*-*-*-*-
 URxvt.font: xft:Cousine:size=8
 !URxvt.boldFont: xft:Cousine:size=8
 !URxvt.italicFont: xft:Cousine:size=8
@@ -36,7 +38,7 @@ URxvt.font: xft:Cousine:size=8
 !URxvt.italicFont: xft:DejaVu Sans Mono:size=8
 !URxvt.boldItalicFont: xft:DejaVu Sans Mono:size=8
 
-URxvt.letterSpace: -2
+URxvt.letterSpace: -1
 ! extensions
 URxvt*perl-lib: /usr/lib/urxvt/perl
 URxvt.perl-ext-common: default,matcher

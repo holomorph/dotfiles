@@ -1,31 +1,28 @@
 "
 " ~/.vimperatorrc
 "
+" vim:ft=css
 
-" Options {{{
-" -----------------------------------------------------------------------------
-
+" Options
+"
 set hlsearch
 set noscrollbars
 set tabnumbers
 set complete-=f
 set animations
 
-"}}}
-" Custom colours {{{
-" -----------------------------------------------------------------------------
-
-hi Normal -a color:#969896 !important; background:#282A2E !important;
-hi CompItem[selected] -a color:#282A2E !important;
-hi Filter -a color:#282A2E !important;
+" Custom colours
+"
+hi Normal -a color:#969896 !important; background:#1b1b1b !important;
+hi CompItem[selected] -a color:#1b1b1b !important;
+hi Filter -a color:#1b1b1b !important;
 hi InfoMsg -a color:#f0c674 !important; background:transparent !important;
 hi MoreMsg -a color:#b5bd68 !important; background:transparent !important;
 hi WarningMsg -a color:#cc6666 !important; background:transparent !important;
 
-"}}}
-" Custom Font {{{
-" -----------------------------------------------------------------------------
 
+" Custom Font
+"
 hi CmdLine>* -a font-family: Cousine !important; font-size: 8pt !important;
 hi Normal -a font-family: Cousine !important; font-size: 8pt !important;
 hi StatusLine -a font-family: Cousine !important; font-size: 8pt !important;
@@ -36,11 +33,10 @@ hi InfoMsg -a font-family: Cousine !important; font-size: 8pt !important;
 hi ModeMsg -a font-family: Cousine !important; font-size: 8pt !important;
 hi MoreMsg -a font-family: Cousine !important; font-size: 8pt !important;
 hi WarningMsg -a font-family: Cousine !important; font-size: 8pt !important;
+hi ContentSeparator display: none !important;
 
-"}}}
-" Mappings {{{
-" -----------------------------------------------------------------------------
-
+" Mappings
+"
 let mapleader = ","
 cnoremap <C-n> <Down>
 cnoremap <C-p> <Up>
@@ -54,17 +50,17 @@ map s ;open google
 map S ;tabopen google 
 
 
-"}}}
+"
 " Toggle Styles {{{
-" -----------------------------------------------------------------------------
+" ----------------------------------------------------------------------------
 
 noremap <F3> :styletoggle<Space>-name<Space>tomorrownight<CR>
 
 "}}}
 " Style: Hybrid Colourscheme {{{
-" -----------------------------------------------------------------------------
+" ----------------------------------------------------------------------------
 style -name tomorrownight http://*,https://*,file://*,about:blank <<EOM
-  * {
+* {
     color: #969896 !important;
     background: #1d1f21 !important;
     border-color: #282a2e !important;
