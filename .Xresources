@@ -2,13 +2,13 @@
 ! ~/.Xresources
 !
 
-!Xft.antialias: 1
-!Xft.autohint: 0
-!Xft.dpi: 96
-!Xft.hinting: 1
-!Xft.hintstyle: hintfull
-!Xft.lcdfilter: lcddefault
-!Xft.rgba: rgb
+Xft.antialias: 1
+Xft.autohint: 0
+Xft.dpi: 96
+Xft.hinting: 1
+Xft.hintstyle: hintfull
+Xft.lcdfilter: lcddefault
+Xft.rgba: rgb
 
 ! Color scheme
 #include "/home/mvo/.config/hybrid"
@@ -31,12 +31,8 @@ URxvt.colorUL: #81a2be
 !-Foundry-FamilyName-WeightName-Slant-SetwidthName-AddStyleName -PixelSize-PointSize-ResolutionX-ResolutionY-Spacing-AverageWidth -CharSetRegistry-CharSetCoding 
 !URxvt.font: -*-Cousine-*-*-*-*-*-8-*-*-*-*-*-*-
 URxvt.font: xft:Cousine:size=8
-!URxvt.boldFont: xft:Cousine:size=8
-!URxvt.italicFont: xft:Cousine:size=8
-!URxvt.font: xft:DejaVu Sans Mono:size=8
-!URxvt.boldFont: xft:DejaVu Sans Mono:size=8
-!URxvt.italicFont: xft:DejaVu Sans Mono:size=8
-!URxvt.boldItalicFont: xft:DejaVu Sans Mono:size=8
+URxvt.boldFont: xft:Cousine:size=8
+URxvt.italicFont: xft:Cousine:size=8
 
 URxvt.letterSpace: -1
 ! extensions

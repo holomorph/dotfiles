@@ -75,6 +75,10 @@ command! Wq wq
 command! Wa wa
 command! Wqa wqa
 
+" sane j k actions
+nnoremap j gj
+nnoremap k gk
+
 " semicolon
 map ; :
 noremap ;; ;
