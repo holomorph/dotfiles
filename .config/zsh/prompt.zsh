@@ -11,7 +11,7 @@
 PROMPT='%(?..%B%F{red}exit %?%f%b
 )'\
 '$(vcs_info && echo $vcs_info_msg_0_)'\
-"%F{$(test $UID -eq 0 && echo red || echo green)}%~%f"\
+#"%F{$(test $UID -eq 0 && echo red || echo green)}%~%f"\
 '%(!.#.$) '
 
 # VCS integration for command prompt using vcs_info
