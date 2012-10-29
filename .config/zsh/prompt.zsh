@@ -8,12 +8,6 @@
 #'%(!.#.>) '
 #RPROMPT='%F{cyan}%@%f'
 
-PROMPT='%(?..%B%F{red}exit %?%f%b
-)'\
-'$(vcs_info && echo $vcs_info_msg_0_)'\
-#"%F{$(test $UID -eq 0 && echo red || echo green)}%~%f"\
-'%(!.#.$) '
-
 # VCS integration for command prompt using vcs_info
 # http://zsh.git.sourceforge.net/git/gitweb.cgi?p=zsh/zsh;a=blob_plain;f=Misc/vcs_info-examples
 
@@ -34,7 +28,7 @@ function +vi-git-untracked(){
         # If instead you want to show the marker only if there are untracked
         # files in $PWD, use:
         #[[ -n $(git ls-files --others --exclude-standard) ]] ; then
-        hook_com[unstaged]+='%B%F{magenta}?%f%b'
+        hook_com[unstaged]+='%B%F{white}?%f%b'
     fi
 }
 

@@ -29,7 +29,7 @@ if [[ -s "$HOME/.config/git-prompt.sh" ]]; then
   source "$HOME/.config/git-prompt.sh"
 fi
 #source ~/.git-prompt.sh
-source "$HOME/.config/zsh/prompt.zsh"
+
 
 # History Settings
 #
@@ -51,40 +51,22 @@ zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX
 zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
 zstyle ':completion:*:*:kill:*:processes' list-colors "=(#b) #([0-9]#) ([0-9a-z-]#)*=$color[green]=0=$color[black]"
 zstyle ':completion:*:*:kill:*' force-list always
-# version control
-#zstyle ':vcs_info:*' enable git cvs svn
-#zstyle ':vcs_info:*' actionformats '%F{5}(%f%s%F{5})%F{3}-%F{5}[%F{2}%b%F{3}|%F{1}%a%F{5}]%f '
-#zstyle ':vcs_info:*' formats '%F{5}(%b %m %u %c %F{5})%f'
-#zstyle ':vcs_info:(sv[nk]|bzr):*' branchformat '%b%F{1}:%F{3}%r' #
-###########
-#vcs_info_wrapper() {
-#  vcs_info
-#  [[ -n "$vcs_info_msg_0_" ]] && echo " %{$fg[grey]%}${vcs_info_msg_0_/ /}%{$reset_color%}"
-#}
-#PROMPT='${vcs_info_msg_0_}%# '
-#RPROMPT='$(vcs_info_wrapper)'
 
-
-# }}}
-# Prompt Settings {{{
-# -----------------------------------------------------------------------------
-
-GIT_PS1_SHOWDIRTYSTATE=1
-GIT_PS1_SHOWSTASHSTATE=1
-GIT_PS1_SHOWUNTRACKEDFILES=1
-GIT_PS1_SHOWUPSTREAM="auto"
-#PROMPT='%{$fg[black]%}┌[%{$fg_bold[yellow]%}%~%{$reset_color$fg[black]%}]$(__git_ps1 "\e[0;30m[\e[1;31m%s\e[0;30m]")
-#└╼%{$reset_color%} '
-#PROMPT='%{$fg[black]%}[%(!.%{$fg[red]%}.%{$fg[white]%})%n%{$fg[white]%}@%{$fg[blue]%}%m%{$fg_bold[yellow]%}%~%{$reset_color$fg[black]%}]%(!.%{$fg[red]%}#.%{$fg[blue]%}$)%{$reset_color%} '
-#PROMPT='%{$fg[black]%}[%{$fg[blue]%}%m%{$fg_bold[yellow]%}%~%{$fg[black]%}]$(__git_ps1 "\e[1;30m(\e[0;30m\e[38;05;10m%s\e[1;30m)")%{$fg_bold[yellow]%}$%{$reset_color%} '
-PROMPT+='%{$fg[black]%}[%{$fg[blue]%}%m%{$fg_bold[yellow]%}%~'\
+# Prompt Settings
+#
+if [[ -s "$HOME/.config/zsh/prompt.zsh" ]]; then
+  source "$HOME/.config/zsh/prompt.zsh"
+  PROMPT='%(?..%B%F{red}exit %?%f%b
+)'\
+'%B%F{black}($(vcs_info && echo $vcs_info_msg_0_)%B%F{black})%b'\
+'%F{black}[%B%F{yellow}%~%f%F{black}]%f%b'\
+'%(!.%F{red}#%f.%F{blue}$%f) '
+else
+PROMPT='%{$fg[black]%}[%{$fg[blue]%}%m%{$fg_bold[yellow]%}%~'\
 '%{$fg_no_bold[black]%}]%{$fg_bold[black]%}(%{%b%F{10}%}'\
 '$(__git_ps1 "%s")%{%f$fg_bold[black]%})'\
-'#%{$fg_bold[yellow]%}$%{$reset_color%} '
-
-#PROMPT='%{$fg[black]%}[%{$fg[blue]%}%m%{$fg_bold[yellow]%}%~%{$fg[black]%}]%{$fg_bold[yellow]%}$%{$reset_color%} '
-#RPROMPT='$(__git_ps1 "\e[1;30m(\e[0;30m\e[38;05;10m%s\e[1;30m)")'
-#RPROMPT='%{$fg[red]%}$(__git_ps1 "%s")%{$fg_bold[black]%})%{$reset_color%}'
+'%{$fg_bold[yellow]%}$%{$reset_color%} '
+fi
 SPROMPT="Correct $fg_bold[red]%R$reset_color to $fg_bold[green]%r$reset_color [nyae]? "
 
 
