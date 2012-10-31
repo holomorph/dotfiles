@@ -52,7 +52,7 @@ if [[ -s "$HOME/.config/zsh/prompt.zsh" ]]; then
   source "$HOME/.config/zsh/prompt.zsh"
   PROMPT='%(?..%B%F{red}exit %?%f%b
 )'\
-'$(vcs_info && echo $vcs_info_msg_0_)'\
+'$(vcs_info && echo $vcs_info_msg_0_)%b'\
 '%F{black}[%B%F{yellow}%~%b%f%F{black}]%f%b'\
 '%(!.%F{red}#%f.%F{blue}$%f) '
 else
