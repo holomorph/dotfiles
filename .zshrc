@@ -19,17 +19,11 @@ setopt extended_history share_history
 setopt hist_find_no_dups hist_ignore_dups hist_verify
 setopt prompt_subst
 
-# Source Completion Files
+# Custom dircolors
 #
-if [[ -n "$WORKON_HOME" ]] && (( $+commands[virtualenvwrapper.sh] )); then
-  source "$commands[virtualenvwrapper.sh]"
+if [[ -s "$HOME/.config/dircolors" ]]; then
+  eval $(dircolors -b "$HOME/.config/dircolors")
 fi
-
-if [[ -s "$HOME/.config/git-prompt.sh" ]]; then
-  source "$HOME/.config/git-prompt.sh"
-fi
-#source ~/.git-prompt.sh
-
 
 # History Settings
 #
@@ -58,22 +52,19 @@ if [[ -s "$HOME/.config/zsh/prompt.zsh" ]]; then
   source "$HOME/.config/zsh/prompt.zsh"
   PROMPT='%(?..%B%F{red}exit %?%f%b
 )'\
-'%B%F{black}($(vcs_info && echo $vcs_info_msg_0_)%B%F{black})%b'\
-'%F{black}[%B%F{yellow}%~%f%F{black}]%f%b'\
+'$(vcs_info && echo $vcs_info_msg_0_)'\
+'%F{black}[%B%F{yellow}%~%b%f%F{black}]%f%b'\
 '%(!.%F{red}#%f.%F{blue}$%f) '
 else
-PROMPT='%{$fg[black]%}[%{$fg[blue]%}%m%{$fg_bold[yellow]%}%~'\
-'%{$fg_no_bold[black]%}]%{$fg_bold[black]%}(%{%b%F{10}%}'\
-'$(__git_ps1 "%s")%{%f$fg_bold[black]%})'\
-'%{$fg_bold[yellow]%}$%{$reset_color%} '
+  PROMPT='%(?..%B%F{red}exit %?%f%b
+)'\
+'%B%F{black}[%F{yellow}%~%F{black}]%b'\
+'%(!.%F{red}#%f.%F{blue}$%f) '
 fi
 SPROMPT="Correct $fg_bold[red]%R$reset_color to $fg_bold[green]%r$reset_color [nyae]? "
 
-
-# }}}
-# Dynamic Window Title {{{
-# -----------------------------------------------------------------------------
-
+# Dynamic Window Title
+#
 case $TERM in
   (x|a|ml|dt|E)term*|(u|)rxvt*)
     precmd () { print -Pn "\e]0;%n@%M:%~\a" }
@@ -91,17 +82,8 @@ case $TERM in
     ;;
 esac
 
-
-# Custom dircolors
+# Custom Keybindings
 #
-if [[ -s "$HOME/.config/dircolors" ]]; then
-  eval $(dircolors -b "$HOME/.config/dircolors")
-fi
-
-# }}}
-# Custom Keybindings {{{
-# -----------------------------------------------------------------------------
-
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 bindkey "\e[1~" beginning-of-line # Home (tmux)
@@ -127,24 +109,14 @@ bindkey -M vicmd "u" undo
 bindkey -M vicmd "/" history-incremental-search-forward
 bindkey -M vicmd "?" history-incremental-search-backward
 
-# }}}
-# Custom Aliases {{{
-# -----------------------------------------------------------------------------
-
-alias ssh='eval $(/usr/bin/keychain --eval --agents ssh -Q --quiet ~/.ssh/id_rsa) && ssh'
-#alias emacs="TERM=xterm-256color emacs -nw"
-alias ncmpcpp="ncmpcpp -c $HOME/.config/ncmpcpp/config"
-alias ls="ls -hF --color=auto --group-directories-first"
-alias ll="ls++"
-alias grep="grep --color=auto"
-#alias gist="jist -p"
-#alias range="urxvtc -name ranger -e ranger"
-alias sprunge="curl -F 'sprunge=<-' http://sprunge.us"
-alias ix="curl -n -F 'f:1=<-' http://ix.io"
-#alias tm="urxvtc -name chatmail -e tmux attach-session -d -t 0"
-#alias usbmount="sudo ntfs-3g -o gid=100,fmask=113,dmask=002 /dev/sde1 /mnt/usb"
-#alias usbumount="sudo umount /mnt/usb"
+# Custom Aliases
 #
-#
+if [[ -s "$HOME/.config/zsh/aliases.zsh" ]]; then
+  source "$HOME/.config/zsh/aliases.zsh"
+fi
 
-source "$HOME/.config/zsh/extract.zsh"
+# Extract function
+#
+if [[ -s "$HOME/.config/zsh/extract.zsh" ]]; then
+  source "$HOME/.config/zsh/extract.zsh"
+fi

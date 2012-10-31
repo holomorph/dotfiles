@@ -15,8 +15,8 @@ autoload -Uz vcs_info
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' stagedstr     '%B%F{green}+%f%b'
 zstyle ':vcs_info:*' unstagedstr   '%B%F{yellow}*%f%b'
-zstyle ':vcs_info:*' formats       '%c%u%b%m '
-zstyle ':vcs_info:*' actionformats '%c%u%b%m %B%s-%a%%b '
+zstyle ':vcs_info:*' formats       '%B%F{black}(%c%u%b%m%B%F{black})'
+zstyle ':vcs_info:*' actionformats '%c%u%b%m %B%s-%a%%b'
 zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-aheadbehind git-remotebranch
 
 ### git: Show marker (T) if there are untracked files in repository
