@@ -1,33 +1,28 @@
+"
 " file:   ~/.vimrc
+"
 " author: Simon Gomizelj
 " alias:  vodik
 " site: https://github.com/vodik
 
 set nocompatible
-" LaTeX suite
-filetype plugin indent on
-set grepprg=grep\ -nH\ $*
-"let g:tex_flavor = "latex"
+filetype indent plugin on
 syntax on
-"let b:tex_flavor = 'pdflatex'
-"compiler tex
-"set makeprg=pdflatex\ \-file\-line\-error\ \-interaction=nonstopmode
-"set errorformat=%f:%l:\ %m
-
 colorscheme zenburn
-
-set smartindent
 
 " searching
 set hlsearch
-set smartcase
 set incsearch
+set smartcase
+set ignorecase
+set wrapscan
 
 " formatting
 set expandtab
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
+set smartindent
 set cinoptions=(0
 set smartindent
 set linebreak
@@ -56,7 +51,7 @@ set whichwrap+=<,>,[,],h,l
 set history=50
 set confirm
 set equalalways
-
+set shortmess=atToOI
 
 set wildignore+=*.aux,*.out,*.toc             " LaTeX intermediates
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpg " images
@@ -86,3 +81,11 @@ noremap ;; ;
 if has('mouse')
   set mouse=a
 endif
+
+if has ('gui_running')
+  set guioptions=acM
+  set mousefocus
+  set guifont=Cousine\ 8
+  autocmd GUIEnter * set t_vb=
+endif
+
