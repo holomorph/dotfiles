@@ -14,7 +14,7 @@ Emacs.toolBar: off
 
 ! URxvt options
 URxvt*termName:rxvt-unicode-256color
-URxvt.scrollstyle: rxvt-unicode-256color
+URxvt.scrollstyle: rxvt
 URxvt.scrollBar: off
 
 ! URxvt font options

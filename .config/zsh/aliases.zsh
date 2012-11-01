@@ -2,6 +2,9 @@
 # ~/.config/zsh/aliases.zsh
 #
 
+alias v='vim'
+alias g='git'
+
 alias ssh='eval $(/usr/bin/keychain --eval --agents ssh -Q --quiet ~/.ssh/id_rsa) && ssh'
 #alias emacs="TERM=xterm-256color emacs -nw"
 alias ncmpcpp="ncmpcpp -c $HOME/.config/ncmpcpp/config"
