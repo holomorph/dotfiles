@@ -1,7 +1,7 @@
 "
 " ~/.vimperatorrc
 "
-" vim:ft=css
+" vim:ft=vimperator
 
 " Options
 "
@@ -193,7 +193,7 @@ EOM
 " -----------------------------------------------------------------------------
 style -name head-fi-font http://www.head-fi.org/* <<EOM
   .post-content-area {
-    font-family: "sans-serif" !important;
+    font-family: sans-serif !important;
   }
 EOM
 "}}}

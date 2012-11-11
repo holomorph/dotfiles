@@ -37,26 +37,28 @@ fi
 #xset fp rehash
 
 ## turn off screen after 1800s
-#xset +dpms
-#xset dpms 1800 1800 1800
+xset +dpms
+xset dpms 1800 1800 1800
 
 ## Set background
 ## feh --bg-fill <filename>
 sh $HOME/.fehbg &
 
 ## start apps in background
-list=(mpd urxvtd firefox)
+#list=(mpd urxvtd firefox)
+list=(mpd termite firefox)
 for app in "${list[@]}"; do
   check=$(ps -C "$app" -opid=)
   if [[ -z "$check" ]]; then
 	case "$app" in
 	  mpd) mpd $HOME/.config/mpd.conf ;;
-	  urxvtd) urxvtd -q -o -f ;;
+#	  urxvtd) urxvtd -q -o -f ;;
+    termite) termite & ;;
     firefox) firefox & ;;
 	esac
   fi
 done
 
-urxvtc &
+#urxvtc &
 /usr/bin/dwmstatus &
 exec dwm

@@ -1,7 +1,7 @@
 "
 " ~/.pentadactylrc
 "
-" vim:ft=vim
+" vim:ft=vimperator
 
 " Options
 "
@@ -63,15 +63,12 @@ nmap -builtin : ;
 vmap -builtin ; :
 vmap -builtin : ;
 
-" Toggle Styles {{{
-" -----------------------------------------------------------------------------
-
+" Toggle Styles
+"
 map -builtin <F3> :styletoggle<Space>-name<Space>hybrid<CR>
 
-"}}}
-" Style: Hybrid Colourscheme {{{
-" -----------------------------------------------------------------------------
-
+" Style: Hybrid Colourscheme
+"
 style -name hybrid http://*,https://*,file://*,about:blank <<EOM
   * {
     color: #969896 !important;
@@ -94,10 +91,8 @@ style -name hybrid http://*,https://*,file://*,about:blank <<EOM
 EOM
 styledisable -name=hybrid
 
-"}}}
-" Style: Minimalistic Tabs {{{
-" -----------------------------------------------------------------------------
-
+" Style: Minimalistic Tabs
+"
 style -name minitabs chrome://* <<EOM
   #TabsToolbar toolbarbutton {
     display: none !important;
@@ -134,8 +129,8 @@ EOM
 
 " Style: Head-fi fonts
 "
-style -name head-fi-font http://www.head-fi.org/* <<EOM
-  .post-content-area {
-    font-family: "sans-serif" !important;
-  }
-EOM
+"style -name head-fi-font http://www.head-fi.org/* <<EOM
+"  .post-content-area {
+"    font-family: sans-serif !important;
+"  }
+"EOM

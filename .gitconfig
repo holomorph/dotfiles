@@ -1,0 +1,33 @@
+[core]
+	editor = vim
+  excludesfile = /home/mvo/.gitignore_global
+[user]
+	name = holomorph
+	email = 
+[url "git@github.com:holomorph/"]
+  pushInsteadof = "https://github.com/holomorph/"
+[alias]
+  s = status
+  a = add --all
+[merge]
+  tool = vimdiff
+  verbosity = 1
+  summary = true
+[color]
+  ui = always
+  branch = auto
+  diff = auto
+  status = auto
+[color "branch"]
+  current = green bold
+  local = blue
+  remote = red reverse
+[color "diff"]
+  meta = white bold
+  frag = cyan bold
+  old = red bold
+  new = green bold
+[color "status"]
+  added = green bold
+  changed = yellow bold
+  untracked = red bold

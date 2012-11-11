@@ -40,11 +40,18 @@ zstyle ':completion:*' completer _complete _match _approximate
 zstyle ':completion:*:approximate:*' max-errors 1 numeric
 zstyle ':completion:*:match:*' original only
 # increase max-errors based on length of word
-zstyle -e ':completion:*:approximate:*' max-errors 'reply=($((($#PREFIX+$#SUFFIX)/3))numeric)'
+zstyle -e ':completion:*:approximate:*' max-errors \
+  'reply=($((($#PREFIX+$#SUFFIX)/3))numeric)'
 # kill
-zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm -w -w"
-zstyle ':completion:*:*:kill:*:processes' list-colors "=(#b) #([0-9]#) ([0-9a-z-]#)*=$color[green]=0=$color[black]"
+zstyle ':completion:*:*:*:*:processes' command \
+  "ps -u $USER -o pid,user,comm -w -w"
+zstyle ':completion:*:*:kill:*:processes' list-colors \
+  "=(#b) #([0-9]#) ([0-9a-z-]#)*=$color[green]=0=$color[blue]"
 zstyle ':completion:*:*:kill:*' force-list always
+zstyle ':completion:*:*:vim:*:all-files' ignored-patterns \
+  '*.aux' '*.log' '*.pdf'
+zstyle ':completion:*:*:zathura:*:*' file-patterns \
+  '(#i)*.{ps,pdf}:files:ps|pdf\ files *(-/):directories:directories'
 
 # Prompt Settings
 #
@@ -53,12 +60,12 @@ if [[ -s "$HOME/.config/zsh/prompt.zsh" ]]; then
   PROMPT='%(?..%B%F{red}exit %?%f%b
 )'\
 '$(vcs_info && echo $vcs_info_msg_0_)%b'\
-'%F{black}[%B%F{yellow}%~%b%f%F{black}]%f%b'\
+'%F{black}[%F{11}%~%F{black}]%f'\
 '%(!.%F{red}#%f.%F{blue}$%f) '
 else
   PROMPT='%(?..%B%F{red}exit %?%f%b
 )'\
-'%B%F{black}[%F{yellow}%~%F{black}]%b'\
+'%F{black}[%F{11}%~%F{black}]%f'\
 '%(!.%F{red}#%f.%F{blue}$%f) '
 fi
 SPROMPT="Correct $fg_bold[red]%R$reset_color to $fg_bold[green]%r$reset_color [nyae]? "
