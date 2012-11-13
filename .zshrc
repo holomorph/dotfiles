@@ -2,10 +2,8 @@
 # ~/.zshrc
 #
 
-# Disable Flow Control
-stty -ixon
-
 # Autoload zsh Functions
+#
 autoload -U compinit && compinit
 autoload -U colors && colors
 autoload -U up-line-or-beginning-search
@@ -13,23 +11,24 @@ autoload -U down-line-or-beginning-search
 autoload -U vcs_info
 
 # Set zsh Options
+#
 setopt correct
 setopt extended_glob
 setopt extended_history share_history
 setopt hist_find_no_dups hist_ignore_dups hist_verify
 setopt prompt_subst
+unsetopt flow_control
 
 # Custom dircolors
 #
-if [[ -s "$HOME/.config/dircolors" ]]; then
+[[ -e "$HOME/.config/dircolors" ]] && \
   eval $(dircolors -b "$HOME/.config/dircolors")
-fi
 
 # History Settings
 #
 HISTSIZE=10000
 SAVEHIST=10000
-HISTFILE="$HOME/.zhistory"
+HISTFILE="$HOME/.logs/.zhistory"
 
 # Enhanced Tab Completion
 #
@@ -89,10 +88,11 @@ case $TERM in
     ;;
 esac
 
-# Custom Keybindings
+# Keybindings
 #
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
+
 bindkey "\e[1~" beginning-of-line # Home (tmux)
 bindkey "\e[2~" quoted-insert # Ins
 bindkey "\e[3~" delete-char # Del
@@ -104,6 +104,7 @@ bindkey "\e[8~" end-of-line # End (rxvt)
 bindkey "\e[Z" reverse-menu-complete # Shift+Tab
 bindkey "^[[A" up-line-or-beginning-search # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
+
 bindkey "^A" beginning-of-line
 bindkey "^E" end-of-line
 bindkey ' ' magic-space
@@ -116,14 +117,13 @@ bindkey -M vicmd "u" undo
 bindkey -M vicmd "/" history-incremental-search-forward
 bindkey -M vicmd "?" history-incremental-search-backward
 
-# Custom Aliases
+# Aliases
 #
-if [[ -s "$HOME/.config/zsh/aliases.zsh" ]]; then
+[[ -e "$HOME/.config/zsh/aliases.zsh" ]] && \
   source "$HOME/.config/zsh/aliases.zsh"
-fi
 
 # Extract function
 #
-if [[ -s "$HOME/.config/zsh/extract.zsh" ]]; then
+[[ -e "$HOME/.config/zsh/extract.zsh" ]] && \
   source "$HOME/.config/zsh/extract.zsh"
-fi
+

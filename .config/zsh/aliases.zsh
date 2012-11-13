@@ -5,18 +5,25 @@
 alias v='vim'
 alias g='git'
 
-alias ssh='eval $(/usr/bin/keychain --eval --agents ssh -Q --quiet ~/.ssh/id_rsa) && ssh'
-#alias emacs="TERM=xterm-256color emacs -nw"
-alias ncmpcpp="ncmpcpp -c $HOME/.config/ncmpcpp/config"
-alias ls="ls -hF --color=auto --group-directories-first"
-alias ll="ls++"
+alias df='df -h'
+alias du='du -h'
+alias cp='cp -iv'
+alias mv='mv -iv'
+alias rm='rm -Iv'
+alias ln='ln -iv'
+alias ls='ls -hF --color=auto --group-directories-first'
+alias la='ls -A'
+alias ll="ls++ --potsf"
 alias grep="grep --color=auto"
-#alias gist="jist -p"
-#alias range="urxvtc -name ranger -e ranger"
-alias sprunge="curl -F 'sprunge=<-' http://sprunge.us"
+
+alias ncmpcpp="ncmpcpp -c $HOME/.config/ncmpcpp/config"
+
+# pastebins
 alias ix="curl -F 'f:1=<-' http://ix.io"
-#alias tm="urxvtc -name chatmail -e tmux attach-session -d -t 0"
+alias sprunge="curl -F 'sprunge=<-' http://sprunge.us"
+
 #alias usbmount="sudo ntfs-3g -o gid=100,fmask=113,dmask=002 /dev/sde1 /mnt/usb"
 #alias usbumount="sudo umount /mnt/usb"
 #
-#
+#alias ssh='eval $(/usr/bin/keychain --eval --agents ssh -Q --quiet ~/.ssh/id_rsa) && ssh'
+#alias emacs="TERM=xterm-256color emacs -nw"

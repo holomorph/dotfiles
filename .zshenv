@@ -1,3 +1,6 @@
-# if you want all your zsh dotfiles not in home dir... (V) (0_o) (v)
-#ZDOTDIR=~/.config/zsh
+#
+# ~/.zshenv
+#
+export BROWSER="firefox"
+export MOZ_DISABLE_PANGO=1
 
