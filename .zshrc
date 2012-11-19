@@ -44,6 +44,12 @@ zstyle ':completion:*:*:zathura:*:*' file-patterns \
 zstyle -e ':completion:*:approximate:*' max-errors \
   'reply=($((($#PREFIX+$#SUFFIX)/3))numeric)'
 
+# ssh hosts
+zstyle -e ':completion:*:hosts' hosts 'reply=(
+${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) 2>/dev/null)"}%%[#| ]*}//,/ }
+${=${${${${(@M)${(f)"$(cat ~/.ssh/config 2>/dev/null)"}:#Host *}#Host }:#*\**}:#*\?*}}
+)'
+
 # Prompt Settings
 #
 if [[ -s "$HOME/.config/zsh/prompt.zsh" ]]; then

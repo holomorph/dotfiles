@@ -1,9 +1,6 @@
 "
 " file:   ~/.vimrc
 "
-" author: Simon Gomizelj
-" alias:  vodik
-" site: https://github.com/vodik
 
 set nocompatible
 filetype indent plugin on
@@ -30,7 +27,7 @@ set cinoptions=(0
 set smartindent
 set linebreak
 set nolist
-"set nowrap
+set nowrap
 set formatoptions=qn1
 
 " editing
@@ -54,7 +51,7 @@ set whichwrap+=<,>,[,],h,l
 set history=50
 set confirm
 set equalalways
-set shortmess=atToOI
+"set shortmess=atToOI
 
 set wildignore+=*.aux,*.out,*.toc             " LaTeX intermediates
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpg " images
@@ -74,8 +71,16 @@ command! Wq wq
 command! Wa wa
 command! Wqa wqa
 
+nnoremap q: <Nop>
+nnoremap q/ <Nop>
+nnoremap q? <Nop>
+
+" semicolon
+map ; :
+noremap ;; ;
+
 " tap enter again to remove hlsearch
-" nnoremap <cr> :nohlsearch<cr>
+nnoremap <cr> :nohlsearch<cr>
 
 " save the current file as root
 " cmap w!! w !sudo tee % >/dev/null<cr>:e!<cr><cr>
@@ -85,10 +90,10 @@ nnoremap j gj
 nnoremap k gk
 
 " pane movement
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
+"nnoremap <C-j> <C-w>j
+"nnoremap <C-k> <C-w>k
+"nnoremap <C-h> <C-w>h
+"nnoremap <C-l> <C-w>l
 
 " pane splitting
 "set winwidth=84
@@ -110,9 +115,9 @@ augroup vimrcEx
         \ endif
 
   " when an omnicompletion opens up a preview window (eclim) the following
-  " " will close the window on cursor movement or insert-exit
-  "autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
-  "autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+  " will close the window on cursor movement or insert-exit
+  autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+  autocmd InsertLeave  * if pumvisible() == 0|pclose|endif
 augroup END
 " }}}
 
@@ -133,12 +138,6 @@ function! SetStatusLine()
   let l:s3="%=\\ 0x%-8B\\ \\ %-14.(%l,%c%V%)\\ %<%P"
   execute "set statusline=" . l:s1 . l:s2 . l:s3
 endfunction
-
-
-
-" semicolon
-map ; :
-noremap ;; ;
 
 if has('mouse')
   set mouse=a

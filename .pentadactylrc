@@ -93,6 +93,8 @@ styledisable -name=hybrid
 
 " Style: Minimalistic Tabs
 "
+" about: plugins toggle browser.tabs.onTop to rid the pesky
+" pixel line. Thanks heftig!
 style -name minitabs chrome://* <<EOM
   #TabsToolbar toolbarbutton {
     display: none !important;
