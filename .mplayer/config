@@ -8,7 +8,8 @@ vo=xv
 monitoraspect=16:9
 
 # audio settings
-ao=alsa
-mixer-channel=PCM
+ao=pulse
+#ao=alsa
+#mixer-channel=PCM
 
 
