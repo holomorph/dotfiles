@@ -27,7 +27,7 @@ set cinoptions=(0
 set smartindent
 set linebreak
 set nolist
-set nowrap
+"set nowrap
 set formatoptions=qn1
 
 " editing
