@@ -14,7 +14,7 @@
   (normal-top-level-add-subdirs-to-load-path))
 ;;(load-file "/usr/share/emacs/site-lisp/cedet/common/cedet.el")
 ;;(add-to-list 'load-path "~/path/to/matlab-emacs")
-(load-library "matlab-load")
+;;(load-library "matlab-load")
 ;;(matlab-cedet-setup)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -44,23 +44,20 @@
 ;;(set-face-attribute 'default nil :font "cousine" :height 90)
 ;;(set-face-attribute 'default nil :font "dejavu sans mono")
 
-(setq inhibit-startup-message t          ;; don't show ...    
+(setq inhibit-startup-message t              ;; don't show ...
       inhibit-startup-echo-area-message t)   ;; ... startup messages
 (setq require-final-newline t)           ;; end files with a newline
 (setq-default cursor-type '(hbar . 2))   ;; cursor type
 
 ;; color theme
+(require 'org-install)
 (require 'color-theme)
 (require 'zenburn)
 (zenburn)
 (require 'rainbow-delimiters)
 (global-rainbow-delimiters-mode)
 
-;;(add-hook 'clojure-mode-hook 'rainbow-delimiters-mode)
-;;(add-hook 'emacs-lisp-mode-hook 'rainbow-delimiters-mode)
-;;(add-hook 'c-mode-common-hook 'rainbow-delimiters-mode)
-;;(add-hook 'matlab-mode-hook 'rainbow-delimiters-mode)
-;;(add-hook 'latex-mode-hook 'rainbow-delimiters-mode)
+(remove-hook 'find-file-hooks 'vc-find-file-hook)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; the modeline
