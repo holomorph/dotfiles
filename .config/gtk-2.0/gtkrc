@@ -1,0 +1,9 @@
+gtk-theme-name="Adwaita"
+gtk-icon-theme-name="Faenza-Darkest"
+gtk-key-theme-name="Emacs"
+gtk-font-name="Source Sans Pro 9"
+gtk-cursor-theme-name="Vanilla-DMZ"
+gtk-cursor-theme-size=0
+gtk-toolbar-style=GTK_TOOLBAR_TEXT
+gtk-button-images=0
+gtk-menu-images=0

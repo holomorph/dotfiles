@@ -13,7 +13,7 @@ fi
 
 # add font paths
 #xset fp default
-#[[ -e /usr/share/fonts/local ]] && xset +fp /usr/share/fonts/local
+#[[ -d /usr/share/fonts/local ]] && xset +fp /usr/share/fonts/local
 #[[ -d $HOME/.fonts ]] && xset +fp $HOME/.fonts
 #xset fp rehash
 
