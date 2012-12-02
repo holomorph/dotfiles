@@ -51,7 +51,7 @@ set whichwrap+=<,>,[,],h,l
 set history=50
 set confirm
 set equalalways
-"set shortmess=atToOI
+set shortmess=atToOI
 
 set wildignore+=*.aux,*.out,*.toc             " LaTeX intermediates
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpg " images
