@@ -1,9 +1,6 @@
 [core]
   editor = vim
   excludesfile = /home/mvo/.gitignore_global
-[user]
-  name = holomorph
-  email = 
 [url "git@github.com:holomorph/"]
   pushInsteadof = "https://github.com/holomorph/"
 [alias]

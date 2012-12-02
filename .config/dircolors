@@ -100,7 +100,7 @@ EXEC 01;32
 # executable bit actually set.
 #.sh 01;32
 #.csh 01;32
- # archives or compressed (bright red)
+# archives or compressed (red)
 .7z 00;31
 .Z 00;31
 .ace 00;31
@@ -187,18 +187,25 @@ EXEC 01;32
 # audio formats
 .aac 00;36
 .au 00;36
-.flac 00;36
+.flac 00;34
 .mid 00;36
 .midi 00;36
 .mka 00;36
+.m4a 00;34
+.mp2 00;36
 .mp3 00;36
 .mpc 00;36
 .ogg 00;36
 .ra 00;36
-.wav 00;36
+.wav 00;34
 .axa 00;36
 .oga 00;36
 .spx 00;36
 .xspf 00;36
+# document formats
+.doc 03;34
+.pdf 03;91
+.tex 00;96;100
+.xls 03;32
 # http://wiki.xiph.org/index.php/MIME_Types_and_File_Extensions
 
