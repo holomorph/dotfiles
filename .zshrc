@@ -15,8 +15,6 @@ setopt hist_find_no_dups hist_ignore_dups hist_verify
 setopt prompt_subst
 unsetopt flow_control
 
-[[ -e "$HOME/.config/dircolors" ]] && eval $(dircolors -b "$HOME/.config/dircolors")
-
 HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE="$HOME/.logs/.zhistory"
@@ -44,7 +42,7 @@ zstyle ':completion:*:*:zathura:*:*' file-patterns \
 zstyle -e ':completion:*:approximate:*' max-errors \
   'reply=($((($#PREFIX+$#SUFFIX)/3))numeric)'
 
-# ssh hosts
+# Ssh hosts
 zstyle -e ':completion:*:hosts' hosts 'reply=(
 ${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) 2>/dev/null)"}%%[#| ]*}//,/ }
 ${=${${${${(@M)${(f)"$(cat ~/.ssh/config 2>/dev/null)"}:#Host *}#Host }:#*\**}:#*\?*}}
@@ -66,6 +64,22 @@ else
 '%(!.%F{red}#%f.%F{blue}$%f) '
 fi
 SPROMPT="Correct $fg_bold[red]%R$reset_color to $fg_bold[green]%r$reset_color [nyae]? "
+
+# Tmux
+#
+#if which tmux 2>&1 >/dev/null; then
+#  # if not inside a tmux session, and if no session is started,
+#  # then start a new session
+#  test -z "$TMUX" && (tmux attach || tmux new-session)
+#fi
+#if which tmux 2>&1 >/dev/null; then
+#  # if no session is started, start a new session
+#  test -z ${TMUX} && tmux
+#  # when quitting tmux, try to attach
+#  while test -z ${TMUX}; do
+#    tmux attach || break
+#  done
+#fi
 
 # Dynamic Window Title
 #
@@ -114,6 +128,11 @@ bindkey -M vicmd "^R" redo
 bindkey -M vicmd "u" undo
 bindkey -M vicmd "/" history-incremental-search-forward
 bindkey -M vicmd "?" history-incremental-search-backward
+
+# Dircolors
+#
+[[ -e "$HOME/.config/dircolors" ]] && \
+  eval $(dircolors -b "$HOME/.config/dircolors")
 
 # Aliases
 #

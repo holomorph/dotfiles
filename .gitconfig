@@ -1,11 +1,14 @@
 [core]
   editor = vim
-  excludesfile = /home/mvo/.gitignore_global
+  excludesfile = /home/mvo/.gitignore
 [url "git@github.com:holomorph/"]
   pushInsteadof = "https://github.com/holomorph/"
 [alias]
-  s = status
   a = add --all
+  s = status -sb
+  l = log --abbrev-commit --date=relative --graph --pretty=format:'%CRed%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset'
+[diff]
+  tool = vimdiff
 [merge]
   tool = vimdiff
   verbosity = 1

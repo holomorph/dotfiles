@@ -26,21 +26,18 @@ xset dpms 1800 1800 1800
 sh $HOME/.fehbg &
 
 ## start apps in background
-#list=(mpd urxvtd firefox)
 list=(mpd termite firefox)
 for app in "${list[@]}"; do
   check=$(ps -C "$app" -opid=)
   if [[ -z "$check" ]]; then
 	case "$app" in
 	  mpd) mpd $HOME/.config/mpd.conf ;;
-#	  urxvtd) urxvtd -q -o -f ;;
     termite) termite & ;;
     firefox) firefox & ;;
 	esac
   fi
 done
 
-#urxvtc &
 /usr/bin/dwmstatus &
 while true; do
   # Log stderror to a file
