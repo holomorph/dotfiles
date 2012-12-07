@@ -6,7 +6,7 @@
 [alias]
   a = add --all
   s = status -sb
-  l = log --abbrev-commit --date=relative --graph --pretty=format:'%CRed%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset'
+  l = log --abbrev-commit --date=relative --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset'
 [diff]
   tool = vimdiff
 [merge]
