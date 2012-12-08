@@ -204,8 +204,10 @@ EXEC 01;32
 .xspf 00;36
 # document formats
 .doc 03;34
+.docx 03;34
 .pdf 03;91
 .tex 00;96;100
 .xls 03;32
+.xlsx 03;32
 # http://wiki.xiph.org/index.php/MIME_Types_and_File_Extensions
 

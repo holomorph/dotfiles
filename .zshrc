@@ -34,7 +34,7 @@ zstyle ':completion:*:*:kill:*' force-list always
 
 # apps
 zstyle ':completion:*:*:vim:*:all-files' ignored-patterns \
-  '*.aux' '*.log' '*.pdf'
+  '*.aux' '*.log' '*.out' '*.pdf'
 zstyle ':completion:*:*:zathura:*:*' file-patterns \
   '(#i)*.{ps,pdf}:files:ps|pdf\ files *(-/):directories:directories'
 
