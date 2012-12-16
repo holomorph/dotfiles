@@ -5,6 +5,7 @@
   pushInsteadof = "https://github.com/holomorph/"
 [alias]
   a = add --all
+  d = difftool
   s = status -sb
   l = log --abbrev-commit --date=relative --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset'
 [diff]
