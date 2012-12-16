@@ -34,7 +34,7 @@ export _JAVA_OPTIONS=-Dawt.useSystemAAFontSettings=lcd
 export GTK2_RC_FILES=~/.config/gtk-2.0/gtkrc
 
 # set path to mpd socket
-# export MPD_HOST=~/music/socket
+export MPD_HOST=~/music/socket
 
 if (( UID )); then
   [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx &> ~/.logs/.xlog
