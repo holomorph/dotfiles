@@ -1,7 +1,6 @@
 "
 " ~/.vimperatorrc
 "
-" vim:ft=vimperator
 
 " Options
 "
@@ -86,6 +85,9 @@ styledisable -name=tomorrownight
 " -----------------------------------------------------------------------------
 
 style -name minitabs chrome://* <<EOM
+#TabsToolbar toolbarbutton {
+  display: none !important;
+}
 .tabbrowser-tabs {
   background: #1b1b1b !important;
 }
@@ -110,90 +112,9 @@ style -name minitabs chrome://* <<EOM
   max-width: 1px !important;
   min-width: 1px !important;
 }
-/*
-.tabbrowser-tab:hover {
-  background: #f0c674 !important;
-  color: #282a2e !important;
-}
-*/
 .tabbrowser-tab[selected] {
   background: #1b1b1b !important;
   color: #f0c674 !important;
 }
 EOM
-
-"}}}
-" Style: Github and Gist fonts {{{
-" -----------------------------------------------------------------------------
-
-style -name github-font https://github.com/* <<EOM
-  #dashboard .filter-bar .filter_input,
-  #missing-readme,
-  .boxed-group.flush ul.boxed-group-list.settings-repos>li h3 small,
-  .bubble#files .file .meta .info,
-  .connected,
-  .file-comments,
-  .forgot_password_form form input[type=submit],
-  .homehead input.search,
-  .line-comments,
-  .line_numbers.comment-count .counter,
-  .login_form form input[type=submit],
-  .minibutton,
-  .pagehead>ul.tabs li a .counter,
-  .profilecols .filter-bar .filter_input,
-  a.button.classy,
-  a.button.classy.disabled,
-  a.button.classy.disabled:disabled:hover,
-  a.button.classy.disabled:hover,
-  a.button.classy.disabled:hover:disabled,
-  a.button.classy:disabled,
-  a.button.classy:disabled:hover,
-  body,
-  body.page-profile-next .profilecols .filter-bar .filter_input,
-  button.classy,
-  button.classy.disabled,
-  button.classy.disabled:disabled:hover,
-  button.classy:disabled,
-  button.classy:disabled:hover,
-  dl.keyboard-mappings dt em,
-EOM
-
-style -name gist-font https://gist.github.com/* <<EOM
-  #missing-readme,
-  #readme,
-  .forgot_password_form form input[type=submit],
-  .login_form form input[type=submit],
-  a.button.classy,
-  a.button.classy.disabled:hover,
-  body,
-  button.classy,
-  button.classy:disabled:hover,
-  ul.usernav li button {
-    font-family: "Cousine" !important;
-  }
-  #files>.description input,
-  #readme div.plain pre,
-  #revisions a.id,
-  .file .data pre,
-  .file .input textarea,
-  .file .meta input.gist-name-textbox,
-  .gist .gist-file .gist-data pre,
-  .gist .gist-file,
-  .linux .file .data pre,
-  .linux .file .input textarea,
-  .windows .file .data pre,
-  .windows .file .input textarea,
-  tt {
-    font-family: "Cousine" !important;
-  }
-EOM
-"}}}
-
-" Style: Head-fi fonts {{{
-" -----------------------------------------------------------------------------
-style -name head-fi-font http://www.head-fi.org/* <<EOM
-  .post-content-area {
-    font-family: sans-serif !important;
-  }
-EOM
-"}}}
+" vim:ft=vimperator

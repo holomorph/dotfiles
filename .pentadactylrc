@@ -1,7 +1,6 @@
 "
 " ~/.pentadactylrc
 "
-" vim:ft=vimperator
 
 " Options
 "
@@ -128,3 +127,4 @@ style -name minitabs chrome://* <<EOM
     color: #f0c674 !important;
   }
 EOM
+" vim:ft=vimperator
