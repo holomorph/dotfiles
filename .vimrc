@@ -83,7 +83,7 @@ noremap ;; ;
 nnoremap <cr> :nohlsearch<cr>
 
 " save the current file as root
-" cmap w!! w !sudo tee % >/dev/null<cr>:e!<cr><cr>
+cmap w!! w !sudo tee % >/dev/null<cr>:e!<cr><cr>
 
 " sane j k actions
 nnoremap j gj
