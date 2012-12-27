@@ -2,12 +2,17 @@
 # ~/.mplayer/config
 #
 
-# video settings
+# video
 nolirc=yes
 vo=xv
 monitoraspect=16:9
+double=yes
 
-# audio settings
+# audio
 ao=pulse
 
-
+# subtitles
+#fontconfig=1
+#font="Source Code Pro"
+#subfont-text-scale=3
+#subfont-osd-scale=3
