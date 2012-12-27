@@ -38,6 +38,7 @@ for app in "${list[@]}"; do
   fi
 done
 
+/usr/bin/dwmvolume
 /usr/bin/dwmstatus &
 while true; do
   # Log stderror to a file
