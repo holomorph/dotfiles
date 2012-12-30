@@ -68,7 +68,7 @@
 ;;(set-face-attribute 'default nil :font "cousine" :height 90)
 ;;(set-face-attribute 'default nil :font "dejavu sans mono")
 (if window-system
-  (set-face-attribute 'default nil :font "envy code r" :height 90))
+  (set-face-attribute 'default nil :font "envy code r" :height 95))
 
 (remove-hook 'find-file-hooks 'vc-find-file-hook)
 

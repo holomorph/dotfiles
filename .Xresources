@@ -5,24 +5,16 @@
 ! Color scheme
 #include "/home/mvo/.config/hybrid"
 
-! Emacs options
-Emacs*font: -*-cousine-medium-r-*-*-11-*-*-*-*-*-*-*
-Emacs*bold.attributeFont: -*-cousine-bold-r-*-*-11-*-*-*-*-*-*-*
-Emacs.menuBar: off
-Emacs.verticalScrollBars: off
-Emacs.toolBar: off
-
 ! URxvt options
-URxvt*termName:rxvt-unicode-256color
 URxvt.scrollstyle: rxvt
 URxvt.scrollBar: off
+URxvt.urgentOnBell: True
 
 ! URxvt font options
 URxvt.colorBD: #cc6666
 URxvt.colorIT: #b5bd68
 URxvt.colorUL: #81a2be
-URxvt.font: xft:Cousine:size=8
-URxvt.letterSpace: -1
+URxvt.font: xft:Envy Code R:size=12
 
 ! extensions
 URxvt*perl-lib: /usr/lib/urxvt/perl
