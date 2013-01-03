@@ -8,30 +8,43 @@ set hlsearch
 set noscrollbars
 set tabnumbers
 set complete-=f
-set animations
+
+" Status Line
+"
+"hi -a StatusLine font-family: Cousine !important; font-size: 8pt !important;
+hi -a StatusLine font-weight:normal; padding-right: 5px !important;
+hi -a StatusLineNormal color:#969896 !important; background:#282a2e !important;
+hi -a StatusLineSecure color:#81a2be !important; background:#282a2e !important;
+hi -a StatusLineExtended color:#a0ffa0 !important; background:#282a2e !important;
+hi -a WarningMsg color:#cc6666 !important; background:#282a2e !important;
+hi -a ErrorMsg color:#a54242 !important; background:#282a2e !important;
 
 " Custom colours
 "
-hi Normal -a color:#969896 !important; background:#1b1b1b !important;
-hi CompItem[selected] -a color:#1b1b1b !important;
-hi Filter -a color:#1b1b1b !important;
-hi InfoMsg -a color:#f0c674 !important; background:transparent !important;
-hi MoreMsg -a color:#b5bd68 !important; background:transparent !important;
-hi WarningMsg -a color:#cc6666 !important; background:transparent !important;
+hi -a Normal color:#969896 !important; background:#1b1b1b !important;
 
+hi -a CompDesc color: #cc9393 !important; width: 55% !important;
+hi -a CompGroup color: inherit; font-weight: bold !important;
+hi -a CompItem[selected] color:#1b1b1b !important;
+hi -a Filter color:#1b1b1b !important;
+hi -a InfoMsg color:#f0c674 !important; background:transparent !important;
+hi -a MoreMsg color:#b5bd68 !important; background:transparent !important;
+hi -a WarningMsg color:#cc6666 !important; background:transparent !important;
 
 " Custom Font
 "
-hi CmdLine>* -a font-family: Cousine !important; font-size: 8pt !important;
-hi Normal -a font-family: Cousine !important; font-size: 8pt !important;
-hi StatusLine -a font-family: Cousine !important; font-size: 8pt !important;
+hi -a CmdLine color: inherit; background: inherit;
+hi -a CmdLine>* font-family: Cousine !important; font-size: 8pt !important;
+hi -a Normal font-family: Cousine !important; font-size: 8pt !important;
 
-hi CompMsg -a font-family: Cousine !important; font-size: 8pt !important;
-hi ErrorMsg -a font-family: Cousine !important; font-size: 8pt !important;
-hi InfoMsg -a font-family: Cousine !important; font-size: 8pt !important;
-hi ModeMsg -a font-family: Cousine !important; font-size: 8pt !important;
-hi MoreMsg -a font-family: Cousine !important; font-size: 8pt !important;
-hi WarningMsg -a font-family: Cousine !important; font-size: 8pt !important;
+
+hi -a CompIcon display: none;
+hi -a CompMsg font-family: Cousine !important; font-size: 8pt !important;
+hi -a ErrorMsg font-family: Cousine !important; font-size: 8pt !important;
+hi -a InfoMsg font-family: Cousine !important; font-size: 8pt !important;
+hi -a ModeMsg font-family: Cousine !important; font-size: 8pt !important;
+hi -a MoreMsg font-family: Cousine !important; font-size: 8pt !important;
+hi -a WarningMsg font-family: Cousine !important; font-size: 8pt !important;
 hi ContentSeparator display: none !important;
 
 " Mappings
@@ -48,16 +61,8 @@ vnoremap ; :
 map s ;open google 
 map S ;tabopen google 
 
-
-"
-" Toggle Styles {{{
-" ----------------------------------------------------------------------------
-
+" hybrid colourscheme
 noremap <F3> :styletoggle<Space>-name<Space>tomorrownight<CR>
-
-"}}}
-" Style: Hybrid Colourscheme {{{
-" ----------------------------------------------------------------------------
 style -name tomorrownight http://*,https://*,file://*,about:blank <<EOM
 * {
     color: #969896 !important;
@@ -80,10 +85,7 @@ style -name tomorrownight http://*,https://*,file://*,about:blank <<EOM
 EOM
 styledisable -name=tomorrownight
 
-"}}}
-" Style: Minimalistic Tabs {{{
-" -----------------------------------------------------------------------------
-
+" tabs
 style -name minitabs chrome://* <<EOM
 #TabsToolbar toolbarbutton {
   display: none !important;

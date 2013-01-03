@@ -47,9 +47,9 @@ hi -a DownloadTitle color: #7f9f7f !important;
 
 " Font
 "
-hi FontCode  -a font-family: Cousine !important; font-size: 8pt !important;
-hi FontFixed -a font-family: Cousine !important; font-size: 8pt !important;
-hi Normal    -a font-family: Cousine !important; font-size: 8pt !important;
+hi -a FontCode  font-family: Cousine !important; font-size: 8pt !important;
+hi -a FontFixed font-family: Cousine !important; font-size: 8pt !important;
+hi -a Normal    font-family: Cousine !important; font-size: 8pt !important;
 
 
 " Mappings
