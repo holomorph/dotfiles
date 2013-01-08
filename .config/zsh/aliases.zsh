@@ -2,7 +2,7 @@
 # ~/.config/zsh/aliases.zsh
 #
 
-alias v='vim'
+alias v='vim -p'
 alias g='git'
 
 alias df='df -h'

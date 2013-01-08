@@ -31,10 +31,7 @@ export XZ_OPT=-9
 export _JAVA_OPTIONS=-Dawt.useSystemAAFontSettings=lcd
 
 # set location of gtk2 gtkrc (also needed for Qt's gtk style)
-#export GTK2_RC_FILES=~/.config/gtk-2.0/gtkrc
-
-# set path to mpd socket
-#export MPD_HOST=~/.mpd/socket
+export GTK2_RC_FILES=~/.config/gtk-2.0/gtkrc
 
 if (( UID )); then
   [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx &> ~/.logs/x.log
