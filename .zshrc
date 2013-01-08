@@ -22,19 +22,29 @@ HISTFILE="$HOME/.logs/.zhistory"
 ## Enhanced Tab Completion
 #
 zstyle ':completion:*' menu select
+zstyle ':completion:*:matches' group 'yes'
+zstyle ':completion:*:options' description 'yes'
+zstyle ':completion:*:options' auto-description '%d'
+
+zstyle ':completion:*:functions' ignored-patterns '_*'
+zstyle ':completion:*:match:*' original only
+
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' completer _complete _match _approximate
 zstyle ':completion:*:approximate:*' max-errors 1 numeric
 zstyle ':completion:*:match:*' original only
 zstyle ':completion:*:*:*:*:processes' command \
   "ps -u $USER -o pid,user,comm -w -w"
+
+# kill
+zstyle ':completion:*:*:kill:*' command 'ps -e -o pid,%cpu,tty,cputime,cmd'
 zstyle ':completion:*:*:kill:*:processes' list-colors \
-  "=(#b) #([0-9]#) ([0-9a-z-]#)*=$color[green]=0=$color[blue]"
-zstyle ':completion:*:*:kill:*' force-list always
+  '=(#b) #([0-9]#) ([0-9a-z-]#)*=32=0=34'
+zstyle ':completion:*:*:kill:*' insert-ids single
 
 # apps
-zstyle ':completion:*:*:vim:*:all-files' ignored-patterns \
-  '*.aux' '*.log' '*.out' '*.pdf'
+zstyle ':completion:*:*:(vim|gvim):*:*files' ignored-patterns \
+	'*~|*.(aux|old|out|pdf)'
 zstyle ':completion:*:*:zathura:*:*' file-patterns \
   '(#i)*.{ps,pdf}:files:ps|pdf\ files *(-/):directories:directories'
 
@@ -42,11 +52,10 @@ zstyle ':completion:*:*:zathura:*:*' file-patterns \
 zstyle -e ':completion:*:approximate:*' max-errors \
   'reply=($((($#PREFIX+$#SUFFIX)/3))numeric)'
 
-# Ssh hosts
-zstyle -e ':completion:*:hosts' hosts 'reply=(
-${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) 2>/dev/null)"}%%[#| ]*}//,/ }
-${=${${${${(@M)${(f)"$(cat ~/.ssh/config 2>/dev/null)"}:#Host *}#Host }:#*\**}:#*\?*}}
-)'
+# Zstyle
+#
+[[ -e "$HOME/.config/zsh/zstyle.zsh" ]] && \
+	eval $(dircolors -b "$HOME/.config/zsh/zstyle.zsh")
 
 # Prompt Settings
 #
