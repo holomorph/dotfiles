@@ -13,7 +13,7 @@
 (global-rainbow-delimiters-mode)
 
 (if window-system
-  (set-face-attribute 'default nil :font "envy code r" :height 95))
+  (set-face-attribute 'default nil :font "inconsolata" :height 95))
 
 ;; set the load path...
 ;; add everything under ~/.emacs.d to it
