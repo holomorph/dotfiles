@@ -8,6 +8,22 @@
 #'%(!.#.>) '
 #RPROMPT='%F{cyan}%@%f'
 
+# initialize vimode (stops linux console glitch)
+#vimode=i
+# set vimode to current editing mode
+#function zle-line-init zle-keymap-select {
+#  vimode="${${KEYMAP/vicmd/c}/(main|viins)/i}"
+#  zle reset-prompt
+#}
+#zle -N zle-line-init
+#zle -N zle-keymap-select
+
+PROMPT='%(?..%B%F{red}exit %?%f%b
+)'\
+'$(vcs_info && echo $vcs_info_msg_0_)%b'\
+'%F{black}[%F{11}%~%F{black}]%f'\
+'${vimode}%(!.%F{red}#%f.%F{blue}$%f) '
+
 # VCS integration for command prompt using vcs_info
 # http://zsh.git.sourceforge.net/git/gitweb.cgi?p=zsh/zsh;a=blob_plain;f=Misc/vcs_info-examples
 
@@ -16,7 +32,7 @@ zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' stagedstr     '%B%F{green}+%f%b'
 zstyle ':vcs_info:*' unstagedstr   '%B%F{yellow}*%f%b'
 zstyle ':vcs_info:*' formats       '%B%F{black}(%c%u%%b%F{9}%b%m%B%F{black})'
-zstyle ':vcs_info:*' actionformats '%c%u%b%m %B%s-%a%%b'
+#zstyle ':vcs_info:*' actionformats '%c%u%b%m %B%s-%a%%b'
 zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-aheadbehind git-remotebranch
 
 ### git: Show marker (T) if there are untracked files in repository
