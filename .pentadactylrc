@@ -17,7 +17,6 @@ hi -a StatusLineExtended color:#a0ffa0 !important; background:#282a2e !important
 hi -a WarningMsg color:#cc6666 !important; background:#282a2e !important;
 hi -a ErrorMsg color:#a54242 !important; background:#282a2e !important;
 
-
 hi -a Normal color: #969896 !important; background:#2f2f2f !important;
 hi -a CmdLine color: inherit; background: inherit;
 hi -a CompDesc color: #cc9393 !important; width: 55% !important;
@@ -63,8 +62,10 @@ vmap -builtin ; :
 vmap -builtin : ;
 nmap -builtin <C-S-n> :tabmove! +1<CR>
 nmap -builtin <C-S-p> :tabmove! -1<CR>
+nmap -builtin h 3h
 nmap -builtin j 3j
 nmap -builtin k 3k
+nmap -builtin l 3l
 
 " Toggle Styles
 "
@@ -96,7 +97,7 @@ styledisable -name=hybrid
 
 " Style: Minimalistic Tabs
 "
-" about: plugins toggle browser.tabs.onTop to rid the pesky
+" in `about:config` toggle `browser.tabs.onTop` to rid the pesky
 " pixel line. Thanks heftig!
 style -name minitabs chrome://* <<EOM
   #TabsToolbar toolbarbutton {
