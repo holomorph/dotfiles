@@ -16,8 +16,6 @@ alias la='ls -A'
 alias ll="ls++ --potsf"
 alias grep="grep --color=auto"
 
-alias ncmpcpp="ncmpcpp -c $HOME/.config/ncmpcpp/config"
-
 # pastebins
 alias ix="curl -F 'f:1=<-' http://ix.io"
 alias sprunge="curl -F 'sprunge=<-' http://sprunge.us"
