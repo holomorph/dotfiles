@@ -1,16 +1,10 @@
-#####################################################
-## this is example key configuration file, copy it ##
-## to ~/.ncmpcpp/keys and set up your preferences  ##
-#####################################################
-##
-## Tips:
-## - it's possible to bind maximum two keys to a command
-## - keys can be defined with a character or a decimal value
-## - a command can be disabled by binding it to 0
-##
-## Note: First bind of volume_up/down
-## will be used to switch between columns.
-##
+# ~/.ncmpcpp/keys
+#
+# - it's possible to bind maximum two keys to a command
+# - keys can be defined with a character or a decimal value
+# - a command can be disabled by binding it to 0
+#
+# Note: First bind of volume_up/down # will be used to switch between columns.
 #
 #key_up = 259 'k'
 #
@@ -24,9 +18,9 @@
 #
 #key_down_artist = '}'
 #
-key_page_up = 21
+key_page_up = 21  # C-u
 #
-key_page_down = 4
+key_page_down = 4 # C-d
 #
 #key_home = 262
 #
@@ -42,9 +36,9 @@ key_page_down = 4
 #
 #key_volume_down = 260 '-'
 #
-#key_prev_column = 260
+key_prev_column = 260 'h'
 #
-#key_next_column = 261
+key_next_column = 261 'l'
 #
 #key_toggle_space_mode = 't'
 #
