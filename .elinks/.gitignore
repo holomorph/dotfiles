@@ -1,0 +1,5 @@
+*
+!.gitignore
+!elinks.conf
+!colors.conf
+!ui.conf
