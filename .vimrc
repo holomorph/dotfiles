@@ -1,6 +1,4 @@
-"
-" file:   ~/.vimrc
-"
+" ~/.vimrc
 
 set nocompatible
 filetype indent plugin on
@@ -40,7 +38,6 @@ set showcmd
 set title
 set ruler
 set cursorline
-set shortmess=at
 set hidden
 set laststatus=2
 set scrolloff=3
@@ -89,10 +86,10 @@ nnoremap j gj
 nnoremap k gk
 
 " pane movement
-"nnoremap <C-j> <C-w>j
-"nnoremap <C-k> <C-w>k
-"nnoremap <C-h> <C-w>h
-"nnoremap <C-l> <C-w>l
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
 
 " pane splitting
 "set winwidth=84
