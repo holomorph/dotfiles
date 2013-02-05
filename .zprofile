@@ -2,9 +2,8 @@
 # ~/.zprofile
 #
 
-# colors
+# grep colors
 export GREP_COLOR='1;32'
-export GREP_OPTIONS='--color=auto'
 
 # man page colors in less
 export LESS_TERMCAP_mb=$'\E[01;31m'
@@ -18,9 +17,8 @@ export LESS_TERMCAP_us=$'\E[01;37m'
 # dircolors
 eval $(dircolors -b $HOME/.config/dircolors)
 
-# disable less history file and display color control sequences as colors
+# disable less history file
 export LESSHISTFILE=-
-export LESS=-R
 
 # highest compression
 export GZIP=-9

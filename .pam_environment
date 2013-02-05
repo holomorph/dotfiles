@@ -1,0 +1,7 @@
+# ~/.pam_environment
+
+EDITOR=vim
+VISUAL=vim
+PAGER=less
+GREP_OPTIONS=--color=auto
+LESS=-R
