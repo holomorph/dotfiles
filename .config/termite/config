@@ -9,7 +9,7 @@ allow_bold          = true
 dynamic_title       = true
 urgent_on_bell      = true
 clickable_url       = true
-font                = Cousine 8
+font                = Consolas 9
 scrollback_lines    = 1000
 search_wrap         = true
 #icon_name = terminal
@@ -59,14 +59,5 @@ color12 = #81a2be
 color13 = #b294bb
 color14 = #8abeb7
 color15 = #c5c8c6
-
-[hints]
-#font = Monospace 12
-#foreground = #dcdccc
-#background = #3f3f3f
-#padding = 2
-#border = #3f3f3f
-#border_width = 0.5
-#roundness = 2.0
 
 # vim: ft=dosini

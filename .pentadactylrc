@@ -46,9 +46,9 @@ hi -a DownloadTitle color: #7f9f7f !important;
 
 " Font
 "
-hi -a FontCode  font-family: Cousine !important; font-size: 8pt !important;
-hi -a FontFixed font-family: Cousine !important; font-size: 8pt !important;
-hi -a Normal    font-family: Cousine !important; font-size: 8pt !important;
+hi -a FontCode  font-family: Consolas !important; font-size: 9pt !important;
+hi -a FontFixed font-family: Consolas !important; font-size: 9pt !important;
+hi -a Normal    font-family: Consolas !important; font-size: 9pt !important;
 
 
 " Mappings
@@ -112,8 +112,8 @@ style -name minitabs chrome://* <<EOM
     background: #282a2e !important;
     border: none !important;
     color: #969896 !important;
-    font-family: Cousine;
-    font-size: 8pt !important;
+    font-family: Consolas;
+    font-size: 9pt !important;
     height: 18px !important;
     margin: 0 !important;
     min-height: 0 !important;
