@@ -29,7 +29,7 @@ hi -a CompTitleSep display: none!important;
 
 hi -a Filter color: #ffffff !important; font-weight:bold !important;
 hi -a String color: #1d1f21 !important;
-hi -a NonText color: #373b41 !important;
+hi -a NonText color: #5b605e !important;
 hi -a Preview color: #373b41 !important;
 hi -a Buffers color: #23abd2 !important;
 hi -a URL color: #7f9f7f !important;
@@ -46,9 +46,9 @@ hi -a DownloadTitle color: #7f9f7f !important;
 
 " Font
 "
-hi -a FontCode  font-family: Consolas !important; font-size: 9pt !important;
-hi -a FontFixed font-family: Consolas !important; font-size: 9pt !important;
-hi -a Normal    font-family: Consolas !important; font-size: 9pt !important;
+hi -a FontCode  font-family: monospace !important; font-size: 9pt !important;
+hi -a FontFixed font-family: monospace !important; font-size: 9pt !important;
+hi -a Normal    font-family: monospace !important; font-size: 9pt !important;
 
 
 " Mappings
@@ -112,7 +112,7 @@ style -name minitabs chrome://* <<EOM
     background: #282a2e !important;
     border: none !important;
     color: #969896 !important;
-    font-family: Consolas;
+    font-family: monospace;
     font-size: 9pt !important;
     height: 18px !important;
     margin: 0 !important;
