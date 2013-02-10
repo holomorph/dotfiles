@@ -12,10 +12,10 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 fi
 
 # add font paths
-#xset fp default
+xset fp default
 #[[ -d /usr/share/fonts/local ]] && xset +fp /usr/share/fonts/local
-#[[ -d $HOME/.fonts ]] && xset +fp $HOME/.fonts
-#xset fp rehash
+[[ -d $HOME/.fonts ]] && xset +fp $HOME/.fonts
+xset fp rehash
 
 ## turn off screen after 1800s
 xset +dpms
@@ -26,15 +26,15 @@ xset dpms 1800 1800 1800
 sh $HOME/.fehbg &
 
 ## start apps in background
-list=(mpd termite firefox)
+list=(mpd termite) # firefox)
 for app in "${list[@]}"; do
   check=$(ps -C "$app" -opid=)
   if [[ -z "$check" ]]; then
-	case "$app" in
-	  mpd) mpd $HOME/.config/mpd.conf ;;
+  case "$app" in
+    mpd) mpd $HOME/.config/mpd.conf ;;
     termite) termite & ;;
-    firefox) firefox & ;;
-	esac
+#    firefox) firefox & ;;
+  esac
   fi
 done
 
