@@ -6,46 +6,49 @@
 "
 set hlsearch
 set noscrollbars
-set tabnumbers
+"set tabnumbers
 set complete-=f
 
 " Status Line
 "
-"hi -a StatusLine font-family: Cousine !important; font-size: 8pt !important;
-hi -a StatusLine font-weight:normal; padding-right: 5px !important;
-hi -a StatusLineNormal color:#969896 !important; background:#282a2e !important;
-hi -a StatusLineSecure color:#81a2be !important; background:#282a2e !important;
-hi -a StatusLineExtended color:#a0ffa0 !important; background:#282a2e !important;
-hi -a WarningMsg color:#cc6666 !important; background:#282a2e !important;
-hi -a ErrorMsg color:#a54242 !important; background:#282a2e !important;
+"hi StatusLine font-family: monospace; font-size: 9pt;
+hi StatusLine font-weight:normal;
+hi Prompt back
+hi PromptText color:#efef8f;
+
+" messages
+"hi CompMsg font-family: monospace !important; font-size: 9pt !important;
+hi ErrorMsg font-weight: bold; color: #a54242;
+hi InfoMsg font-weight: bold; color: #8abeb7;
+"hi -a ModeMsg font-family: monospace !important; font-size: 9pt !important;
+"hi -a MoreMsg color:#b5bd68 !important; background:transparent !important;
+hi WarningMsg color: #8abeb7;
+"hi -a InfoMsg color:#f0c674 !important; background:transparent !important;
 
 " Custom colours
 "
-hi -a Normal color:#969896 !important; background:#1b1b1b !important;
+hi Normal font-weight:normal; color:#969896; background:#282a2e;
 
-hi -a CompDesc color: #cc9393 !important; width: 55% !important;
-hi -a CompGroup color: inherit; font-weight: bold !important;
-hi -a CompItem[selected] color:#1b1b1b !important;
-hi -a Filter color:#1b1b1b !important;
-hi -a InfoMsg color:#f0c674 !important; background:transparent !important;
-hi -a MoreMsg color:#b5bd68 !important; background:transparent !important;
-hi -a WarningMsg color:#cc6666 !important; background:transparent !important;
+hi CompDesc color: #749f7f; width: 55%;
+"hi CompGroup color: inherit; "font-weight: bold;
+hi CompIcon display: none;
+hi CompItem[selected] color:#f0c674; background:#434443;
+hi CompTitle font-weight: bold; color: #ccdc90; background: #1d1f21;
+hi CompTitle>* padding: 0 .5ex;
+hi Filter font-weight: bold; color: #ffffff;
 
 " Custom Font
 "
-hi -a CmdLine color: inherit; background: inherit;
-hi -a CmdLine>* font-family: Cousine !important; font-size: 8pt !important;
-hi -a Normal font-family: Cousine !important; font-size: 8pt !important;
+hi CmdLine color: inherit; background: inherit;
+hi CmdLine>* font-family: monospace;
+"hi -a Normal font-family: monospace !important; font-size: 9pt !important;
 
+hi ContentSeparator display: none;
+hi Indicator color: #373b41;
+hi URL color: #7f9f7f; background: inherit;
+hi Title color: #efef8f; background: #664040; padding-left: 4px;
+hi NonText font-weight: bold; color: #5b605e;
 
-hi -a CompIcon display: none;
-hi -a CompMsg font-family: Cousine !important; font-size: 8pt !important;
-hi -a ErrorMsg font-family: Cousine !important; font-size: 8pt !important;
-hi -a InfoMsg font-family: Cousine !important; font-size: 8pt !important;
-hi -a ModeMsg font-family: Cousine !important; font-size: 8pt !important;
-hi -a MoreMsg font-family: Cousine !important; font-size: 8pt !important;
-hi -a WarningMsg font-family: Cousine !important; font-size: 8pt !important;
-hi ContentSeparator display: none !important;
 
 " Mappings
 "
@@ -58,6 +61,8 @@ nnoremap : ;
 nnoremap ; :
 vnoremap : ;
 vnoremap ; :
+nmap <C-S-n> :tabmove! +1<CR>
+nmap <C-S-p> :tabmove! -1<CR>
 map s ;open google 
 map S ;tabopen google 
 
@@ -86,21 +91,22 @@ EOM
 styledisable -name=tomorrownight
 
 " tabs
+"
 style -name minitabs chrome://* <<EOM
 #TabsToolbar toolbarbutton {
   display: none !important;
 }
 .tabbrowser-tabs {
-  background: #1b1b1b !important;
+  background: #282a2e !important;
 }
 .tabbrowser-tab {
   -moz-appearance: none !important;
   -moz-border-radius: 0 !important;
-  background: #1b1b1b !important;
+  background: #282a2e !important;
   border: none !important;
   color: #969896 !important;
-  font-family: Cousine !important;
-  font-size: 8pt !important;
+  font-family: monospace !important;
+  font-size: 9pt !important;
   height: 18px !important;
   margin: 0 !important;
   min-height: 0 !important;
@@ -115,7 +121,7 @@ style -name minitabs chrome://* <<EOM
   min-width: 1px !important;
 }
 .tabbrowser-tab[selected] {
-  background: #1b1b1b !important;
+  background: #282a2e !important;
   color: #f0c674 !important;
 }
 EOM
