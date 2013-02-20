@@ -1,9 +1,8 @@
-#
 # ~/.config/zsh/aliases.zsh
-#
 
 alias v='vim -p'
 alias g='git'
+alias z='zathura --fork'
 
 alias df='df -h'
 alias du='du -h'
