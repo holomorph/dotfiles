@@ -82,8 +82,8 @@ nnoremap <cr> :nohlsearch<cr>
 cmap w!! w !sudo tee % >/dev/null<cr>:e!<cr><cr>
 
 " sane j k actions
-nnoremap j gj
-nnoremap k gk
+"nnoremap j gj
+"nnoremap k gk
 
 " pane movement
 nnoremap <C-j> <C-w>j
@@ -143,6 +143,6 @@ endif
 if has ('gui_running')
   set guioptions=acM
   set mousefocus
-  set guifont=Cousine\ 8
+  set guifont=Consolas\ 10
   autocmd GUIEnter * set t_vb=
 endif
