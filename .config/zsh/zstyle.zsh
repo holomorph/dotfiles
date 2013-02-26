@@ -24,7 +24,7 @@ zstyle ':completion:*:*:kill:*' insert-ids single
 # apps
 zstyle ':completion:*:*:(vim|gvim):*:*files' ignored-patterns \
 	'*~|*.(aux|old|out|pdf)'
-zstyle ':completion:*:*:zathura:*:*' file-patterns \
+zstyle ':completion:*:*:(zathura|mupdf):*:*' file-patterns \
   '(#i)*.{ps,pdf}:files:ps|pdf\ files *(-/):directories:directories'
 
 # increase max-errors based on length of word
