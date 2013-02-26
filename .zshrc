@@ -15,7 +15,7 @@ unsetopt flow_control
 
 HISTSIZE=10000
 SAVEHIST=10000
-HISTFILE="$HOME/.logs/.zhistory"
+HISTFILE="$HOME/.logs/zhistory"
 
 # Dircolors
 #
