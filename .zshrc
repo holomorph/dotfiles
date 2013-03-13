@@ -17,15 +17,17 @@ HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE="$HOME/.logs/zhistory"
 
+# Config Files
+#
+for cfg in aliases bindings extract zstyle; do
+  [[ -e "$HOME/.config/zsh/$cfg.zsh" ]] && \
+		source "$HOME/.config/zsh/$cfg.zsh"
+done
+
 # Dircolors
 #
 [[ -e "$HOME/.config/dircolors" ]] && \
   eval $(dircolors -b "$HOME/.config/dircolors")
-
-# Zstyle
-#
-[[ -e "$HOME/.config/zsh/zstyle.zsh" ]] && \
-  source "$HOME/.config/zsh/zstyle.zsh"
 
 # Prompt Settings
 #
@@ -37,13 +39,7 @@ else
 '%F{black}[%F{11}%~%F{black}]%f'\
 '%(!.%F{red}#%f.%F{blue}$%f) '
 fi
-#SPROMPT="Correct $fg_bold[red]%R$reset_color to $fg_bold[green]%r$reset_color [nyae]? "
 SPROMPT="Correct %B%F{red}%R%b%f to %B%F{green}%r%b%f [nyae]? "
-
-# Vim-like keybindings
-#
-#[[ -e "$HOME/.config/zsh/vim.zsh" ]] && \
-#  source "$HOME/.config/zsh/vim.zsh"
 
 # Tmux
 #
@@ -79,18 +75,3 @@ case $TERM in
     }
     ;;
 esac
-
-# Aliases
-#
-[[ -e "$HOME/.config/zsh/aliases.zsh" ]] && \
-  source "$HOME/.config/zsh/aliases.zsh"
-
-# Bindings
-#
-[[ -e "$HOME/.config/zsh/bindings.zsh" ]] && \
-  source "$HOME/.config/zsh/bindings.zsh"
-
-# Extract function
-#
-[[ -e "$HOME/.config/zsh/extract.zsh" ]] && \
-  source "$HOME/.config/zsh/extract.zsh"
