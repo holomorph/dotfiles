@@ -3,7 +3,7 @@
 # ~/.xinitrc
 #
 
-# source xinitrc.d scripts
+## source xinitrc.d scripts
 if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 	for f in /etc/X11/xinit/xinitrc.d/* ; do
 		[ -x "$f" ] && . "$f"
@@ -11,7 +11,7 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 	unset f
 fi
 
-# add font paths
+## add font paths
 xset fp default
 #[[ -d /usr/share/fonts/local ]] && xset +fp /usr/share/fonts/local
 [[ -d $HOME/.fonts ]] && xset +fp $HOME/.fonts
@@ -26,14 +26,13 @@ xset dpms 1800 1800 1800
 sh $HOME/.fehbg &
 
 ## start apps in background
-list=(mpd termite) # firefox)
+list=(mpd termite)
 for app in "${list[@]}"; do
   check=$(ps -C "$app" -opid=)
   if [[ -z "$check" ]]; then
   case "$app" in
     mpd) mpd $HOME/.config/mpd.conf ;;
     termite) termite & ;;
-#    firefox) firefox & ;;
   esac
   fi
 done
@@ -41,8 +40,5 @@ done
 /usr/bin/dwmvolume
 /usr/bin/dwmstatus &
 while true; do
-  # Log stderror to a file
   dwm 2> ~/.logs/dwm.log
-  # No error logging
-  #dwm >/dev/null 2>&1
 done
