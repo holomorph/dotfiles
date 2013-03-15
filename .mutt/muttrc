@@ -1,0 +1,73 @@
+# ~/.mutt/muttrc
+
+# directories and commands
+set alias_file       = ~/.mutt/alias         # alias file
+set certificate_file = ~/.mutt/certificates  # where to store certs
+set header_cache     = ~/.mutt/cache/headers # where to store headers
+set message_cachedir = ~/.mutt/cache/bodies  # where to store bodies
+set mailcap_path     = ~/.mutt/mailcap       # entries for filetypes
+set signature        = ~/.mutt/signature     # my signature file
+set tmpdir           = ~/.mutt/temp          # where to keep temp files
+set editor           = "vim +:silent+?^$"    # use vim and skip to last blank line
+set ispell           = "aspell -e -c"        # use aspell as ispell
+
+# sources
+source "gpg2 -dq ~/.mutt/kitty.gpg |" # decrypt gpg file
+source $alias_file                    # required for functionality
+source ~/.mutt/bindings.muttrc        # key bindings
+source ~/.mutt/colors.muttrc          # source colors
+source ~/.mutt/gmail.muttrc           # source gmail as default
+source ~/.mutt/sidebar.muttrc         # source sidebar patch after gmail
+
+# main options
+set beep_new
+unset confirmappend                  # don't ask, just do!
+set delete                           # don't ask, just do!
+set mail_check        = 0            # minimum time between scans
+unset markers                        # no ugly plus signs
+unset mark_old                       # read/new is good enough for me
+set mbox_type         = Maildir      # mailbox type
+set menu_scroll                      # scroll in menus
+unset move                           # like gmail???
+set pager_index_lines = 8            # number of index lines to show
+set pager_context     = 5            # number of context lines to show
+set pager_stop                       # don't go to next message automatically
+set pipe_decode                      # strip headers and eval mimes when piping
+#set quit                             # don't ask, just do!
+set reverse_alias                    # show names from alias file in index
+set sort              = reverse-date # like gmail???
+set smart_wrap                       # don't wrap mid-word
+set thorough_search                  # strip headers and eval mimes before searching
+set tilde                            # show tildes like in vim
+set timeout           = 10           # idle time before scanning
+set wait_key          = no           # shut up, mutt
+
+# enriched messages
+auto_view text/html                                  # view html automatically
+#alternative_order text/plain text/enriched text/html # but save it for last
+
+# formats and regexps
+set alias_format = "%4n %t %-20a %r"
+set date_format  = "%d/%m/%y at %I:%M%P"
+set index_format = "%3C %Z %[!%d/%m] %-17.17F %s"
+set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
+set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
+
+# composing mail
+set askcc                      # always ask for CC:
+set edit_headers               # show headers when composing
+set fast_reply                 # skip to compose when replying
+set forward_format = "Fwd: %s" # format for subject when forwarding
+set forward_quote              # include message in forwards
+set include                    # include message in replies
+set reply_to                   # reply to Reply-to: field, not From:
+set reverse_name               # reply as who it was sent to (see alternates)
+
+# headers to show
+ignore *                               # ignore all headers
+unignore from: to: cc: date: subject:  # show only these
+hdr_order from: to: cc: date: subject: # and in this order
+
+# hooks
+#folder-hook . set sort = reverse-date
+#folder-hook <ml> source ~/.mutt/ml.muttrc

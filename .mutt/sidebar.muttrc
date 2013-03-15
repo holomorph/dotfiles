@@ -1,0 +1,17 @@
+# ~/.mutt/sidebar.muttrc
+
+set sidebar_delim   = '|'
+set sidebar_visible = no
+set sidebar_width   = 22
+set sidebar_sort    = no
+set sidebar_shortpath = yes
+color sidebar_new color15 default
+
+bind index,pager \Cp sidebar-prev
+bind index,pager \Cn sidebar-next
+bind index,pager \Co sidebar-open
+macro index b '<enter-command>toggle sidebar_visible<enter>'
+macro pager b '<enter-command>toggle sidebar_visible<enter>'
+bind index B bounce-message
+
+# vim:ft=muttrc

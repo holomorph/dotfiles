@@ -1,0 +1,34 @@
+# ~/.mutt/bindings.muttrc
+
+# keybindings
+bind pager       <Space> toggle-quoted
+bind index       <Space> collapse-thread
+bind index       i       noop
+bind pager       j       next-line
+bind pager       k       previous-line
+bind pager       gg      top
+bind pager       G       bottom
+bind index       gg      first-entry
+bind index       G       last-entry
+bind pager       J       next-undeleted
+bind pager       K       previous-undeleted
+bind index       J       next-unread
+bind index       K       previous-unread
+bind index,pager R       group-reply
+bind index,pager \Cd     half-down
+bind index,pager \Cu     half-up
+bind index,pager \#      noop
+
+# postpone
+bind compose     p       postpone-message
+bind index       p       recall-message
+
+# attach
+bind attach      i       exit
+
+# macros
+macro index,pager ,i "<change-folder>+inbox<enter>"            "go to Gmail Inbox"
+macro index,pager Z  "<shell-escape>offlineimap -q -o<return>" "sync IMAP"
+macro index,pager D  "<save-message>+trash<enter>"             "move message to the trash"
+
+# vim:ft=muttrc

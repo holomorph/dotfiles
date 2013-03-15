@@ -1,0 +1,68 @@
+# ~/.mutt/colors.muttrc
+
+# general
+color normal white default
+color status brightblue black
+color error brightcyan default
+color markers brightwhite color233
+
+# index
+color tree color8 default
+color indicator color11 color8
+color index brightwhite default ~N
+color index red default ~D
+color index cyan default ~T
+color index color9 default ~F
+
+# headers
+color hdrdefault cyan default
+color header brightyellow default "^Subject:"
+
+# url, email and web
+color body blue default "(finger|ftp|http|https|news|telnet)://[^ >]*"
+color body blue default "<URL:[^ ]*>"
+color body blue default "www\\.[-.a-z0-9]+\\.[a-z][a-z][a-z]?([-_./~a-z0-9]+)?"
+color body blue default "[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+"
+#color body brightred default "^[-|=|\.|\*]{4}.*"
+
+# diff
+color body blue default "^diff \-.*"
+color body blue default "^index [a-f0-9].*"
+color body blue default "^new file mode [0-9].*"
+color body blue default "^\-\-\- .*"
+color body blue default "^[\+]{3} .*"
+color body brightblue default "^@@ .*"
+color body color10 default "^[\+][^ \+][^\+]*.*"
+color body color9 default "^\-[^ \-][^\-]*.*"
+color body color10 default "^\+$"
+color body color9 default "^\-$"
+
+# message body
+color attachment color109 color233
+color signature brightwhite default
+color search brightyellow red
+color tilde color8 default
+
+# smileys, the right way and the backward-ass euro way
+color body brightmagenta default "(^| )+(|[<>|])[8;:](|[^ ])[)(/|DOPS]( |$)+"
+color body brightmagenta default "(^| )+[)(/|DOPS](|[^ ])[8;:](|[<>|])( |$)+"
+
+# *bold*, _underline_, and /italic/
+color body brightwhite default "(^| )\\*[^*]+\\*( |$)"
+color body brightwhite default "(^| )_[^_]+_( |$)"
+color body brightwhite default "(^| )/[^/]+/( |$)"
+
+color bold      cyan  default # highliting bold patterns in body
+color underline green default # highliting underlined patterns in body
+color quoted    cyan  default # quoted text in body
+
+# quote levels
+color quoted yellow default
+color quoted1 green default
+color quoted2 magenta default
+color quoted3 cyan default
+color quoted4 red default
+color quoted5 magenta default
+color quoted6 cyan default
+
+# vim:ft=muttrc

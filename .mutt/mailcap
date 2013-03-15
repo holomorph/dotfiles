@@ -1,0 +1,19 @@
+application/octet-stream; echo %s "can be anything..."; copiousoutput;
+#text/html; links -html-numbered-links 1 -dump %s; copiousoutput;
+text/html; elinks -dump %s; copiousoutput;
+
+# damn docx
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; docx2txt.pl < %s;copiousoutput;
+#application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; %s ; copiousoutput;
+application/vnd.ms-excel; xls2csv %s | column -ts,; copiousoutput;
+application/msword;       antiword -f %s;           copiousoutput;
+
+application/pdf;        zathura %s;
+application/postscript; zathura %s;
+
+application/x-tex;   vim %s;
+application/x-latex; vim %s;
+
+image/*; feh -. %s;
+audio/*; mplayer %s; copiousoutput;
+video/*; mplayer %s; copiousoutput;
