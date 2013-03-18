@@ -7,6 +7,7 @@
 *.dll
 *.exe
 *.o
+*.pyc
 *.so
 
 # Packages #
@@ -49,5 +50,11 @@ Thumbs.db
 
 # Temp files #
 ##############
-*.pyc
 *.swp
+
+# Crypto #
+##########
+*.asc
+*.gpg
+*.key
+*.tc
