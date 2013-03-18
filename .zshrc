@@ -75,3 +75,19 @@ case $TERM in
     }
     ;;
 esac
+
+# Keychain
+#
+if type -p keychain >/dev/null && (( UID != 0 )); then
+	source <(keychain --eval)
+fi
+
+# Envoy
+#
+#envoy -t ssh-agent
+#envoy -t gpg-agent
+#source <(envoy -p)
+
+# GPG Agent
+#
+#source ~/.gnupg/gpg-agent.sh &>/dev/null
