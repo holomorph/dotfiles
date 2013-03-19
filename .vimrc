@@ -59,6 +59,9 @@ set dir=~/.vim/tmp
 set backup	  backupdir=~/.vim/backup
 set undofile  undodir=~/.vim/undo
 
+" buffers
+au BufRead,BufNew ~/.mutt/temp/mutt* so ~/.mutt/mutt.vim
+
 " fix typos
 command! Q q
 command! W w
