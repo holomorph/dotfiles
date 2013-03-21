@@ -24,11 +24,6 @@ for cfg in aliases bindings extract zstyle; do
 		source "$HOME/.config/zsh/$cfg.zsh"
 done
 
-# Dircolors
-#
-[[ -e "$HOME/.config/dircolors" ]] && \
-  eval $(dircolors -b "$HOME/.config/dircolors")
-
 # Prompt Settings
 #
 if [[ -s "$HOME/.config/zsh/prompt.zsh" ]]; then
@@ -41,53 +36,23 @@ else
 fi
 SPROMPT="Correct %B%F{red}%R%b%f to %B%F{green}%r%b%f [nyae]? "
 
-# Tmux
-#
-#if which tmux 2>&1 >/dev/null; then
-#  # if not inside a tmux session, and if no session is started,
-#  # then start a new session
-#  test -z "$TMUX" && (tmux attach || tmux new-session)
-#fi
-#if which tmux 2>&1 >/dev/null; then
-#  # if no session is started, start a new session
-#  test -z ${TMUX} && tmux
-#  # when quitting tmux, try to attach
-#  while test -z ${TMUX}; do
-#    tmux attach || break
-#  done
-#fi
-
 # Dynamic Window Title
 #
-case $TERM in
-  (x|a|ml|dt|E)term*|(u|)rxvt*)
-    precmd () { print -Pn "\e]0;%n@%M:%~\a" }
-    preexec () { print -Pn "\e]0;%n@%M:%~ ($1)\a" }
-    ;;
-  screen*)
-    precmd () {
-      print -Pn "\e]83;title - \"$1\"\a"
-      print -Pn "\e]0;%n@%M:%~\a"
-    }
-    preexec () {
-      print -Pn "\e]83;title - \"$1\"\a"
-      print -Pn "\e]0;%n@%M:%~ ($1)\a"
-    }
-    ;;
-esac
+if [[ $TERM == xterm-termite ]]; then
+	. /etc/profile.d/vte.sh
+	__vte_ps1
+	chpwd() {
+		__vte_ps1
+	}
+fi
 
 # Keychain
 #
-if type -p keychain >/dev/null && (( UID != 0 )); then
-	source <(keychain --eval)
-fi
+#if type -p keychain >/dev/null && (( UID != 0 )); then
+#	source <(keychain --eval --quiet)
+#fi
 
 # Envoy
 #
-#envoy -t ssh-agent
-#envoy -t gpg-agent
-#source <(envoy -p)
-
-# GPG Agent
-#
-#source ~/.gnupg/gpg-agent.sh &>/dev/null
+envoy -t gpg-agent
+source <(envoy -p)
