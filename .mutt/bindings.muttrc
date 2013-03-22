@@ -27,8 +27,8 @@ bind index       p       recall-message
 bind attach      i       exit
 
 # macros
-macro index,pager ,i "<change-folder>+inbox<enter>"         "go to Gmail Inbox"
-macro index,pager Z  "<shell-escape>offlineimap -o<return>" "sync IMAP"
+macro index,pager ,i "<change-folder>+inbox<enter>"         "go to gmail inbox"
+macro index,pager Z  "<shell-escape>offlineimap -o<return>" "sync imap"
 macro index,pager D  "<save-message>+trash<enter>"          "move message to the trash"
 
 # vim:ft=muttrc
