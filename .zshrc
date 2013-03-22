@@ -17,27 +17,23 @@ HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE="$HOME/.logs/zhistory"
 
-# Config Files
-#
+# configs
 for cfg in aliases bindings extract zstyle; do
   [[ -e "$HOME/.config/zsh/$cfg.zsh" ]] && \
 		source "$HOME/.config/zsh/$cfg.zsh"
 done
 
-# Prompt Settings
-#
+# prompt
 if [[ -s "$HOME/.config/zsh/prompt.zsh" ]]; then
   source "$HOME/.config/zsh/prompt.zsh"
 else
-  PROMPT='%(?..%B%F{red}exit %?%f%b
-)'\
+  PROMPT="%(?..%B%F{red}exit %?%f%b\n)"\
 '%F{black}[%F{11}%~%F{black}]%f'\
 '%(!.%F{red}#%f.%F{blue}$%f) '
 fi
 SPROMPT="Correct %B%F{red}%R%b%f to %B%F{green}%r%b%f [nyae]? "
 
-# Dynamic Window Title
-#
+# window title
 if [[ $TERM == xterm-termite ]]; then
 	. /etc/profile.d/vte.sh
 	__vte_ps1
@@ -46,13 +42,6 @@ if [[ $TERM == xterm-termite ]]; then
 	}
 fi
 
-# Keychain
-#
-#if type -p keychain >/dev/null && (( UID != 0 )); then
-#	source <(keychain --eval --quiet)
-#fi
-
-# Envoy
-#
+# envoy
 envoy -t gpg-agent
 source <(envoy -p)
