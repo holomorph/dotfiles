@@ -1,0 +1,30 @@
+# ~/.offlineimaprc
+
+[general]
+ui = ttyui
+accounts = gmail
+fsync = false
+pythonfile = ~/.mutt/gmail.py
+
+[Account gmail]
+localrepository = gmail-local
+remoterepository = gmail-remote
+status_backend = sqlite
+
+[Repository gmail-local]
+type = Maildir
+localfolders = ~/.mutt/mail
+nametrans = nt_local
+
+[Repository gmail-remote]
+maxconnections = 3
+type = Gmail
+remotehost = imap.gmail.com
+remoteusereval = username("gmail")
+remotepasseval = password("gmail")
+realdelete = no
+nametrans = nt_remote
+folderfilter = exclude(['Important', 'Starred'])
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+
+# vim:ft=cfg
