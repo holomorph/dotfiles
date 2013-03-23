@@ -210,5 +210,10 @@ EXEC 01;32
 .tex 00;96;100
 .xls 03;32
 .xlsx 03;32
+# crypto
+.asc 00;31
+.gpg 00;31
+.key 00;31
+.tc 00;31
 # http://wiki.xiph.org/index.php/MIME_Types_and_File_Extensions
 
