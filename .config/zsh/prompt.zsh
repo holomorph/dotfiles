@@ -44,7 +44,7 @@ function +vi-git-untracked(){
         # If instead you want to show the marker only if there are untracked
         # files in $PWD, use:
         #[[ -n $(git ls-files --others --exclude-standard) ]] ; then
-        hook_com[unstaged]+='%B%F{white}?%b%f'
+				hook_com[unstaged]+='%B%F{white}^%b%f'
     fi
 }
 
