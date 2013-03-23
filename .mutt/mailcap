@@ -1,11 +1,5 @@
 application/octet-stream; echo %s "can be anything..."; copiousoutput;
-#text/html; links -html-numbered-links 1 -dump %s; copiousoutput;
 text/html; elinks -dump %s; copiousoutput;
-
-application/vnd.openxmlformats-officedocument.wordprocessingml.document; docx2txt.pl < %s;copiousoutput;
-application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; ~/bin/xlsx2csv/xlsx2csv.pl %s | sed -e 's/^"//g' -e 's/","/###/g' -e 's/",$//g' | column -ts###; copiousoutput;
-application/vnd.ms-excel; xls2csv %s | column -ts,; copiousoutput;
-application/msword; antiword -f %s; copiousoutput;
 
 application/pdf; zathura %s;
 application/postscript; zathura %s;
@@ -16,3 +10,8 @@ application/x-latex; vim %s;
 image/*; feh -. %s;
 audio/*; mplayer %s; copiousoutput;
 video/*; mplayer %s; copiousoutput;
+
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; docx2txt.pl < %s; nametemplate=%s.docx; copiousoutput;
+application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; ~/bin/xlsx2csv/xlsx2csv.pl %s | sed -f ~/.mutt/xlsx.sed | column -ts; copiousoutput;
+application/vnd.ms-excel; xls2csv %s | sed -f ~/.mutt/xls.sed | column -ts; copiousoutput;
+application/msword; antiword -f %s; copiousoutput;
