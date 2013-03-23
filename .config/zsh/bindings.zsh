@@ -17,14 +17,17 @@ bindkey "^[[B" down-line-or-beginning-search # Down
 
 bindkey "^A" beginning-of-line
 bindkey "^E" end-of-line
-bindkey ' ' magic-space
+bindkey "^U" kill-whole-line
+bindkey "^B" backward-word
+bindkey "^F" forward-word
+bindkey " " magic-space
 bindkey "^?" backward-delete-char
-bindkey -M viins "^N" down-line-or-beginning-search
-bindkey -M viins "^P" up-line-or-beginning-search
-bindkey -M viins "jj" vi-cmd-mode
-bindkey -M vicmd "^R" redo
-bindkey -M vicmd "u" undo
-bindkey -M vicmd "/" history-incremental-search-forward
-bindkey -M vicmd "?" history-incremental-search-backward
+#bindkey -M viins "^N" down-line-or-beginning-search
+#bindkey -M viins "^P" up-line-or-beginning-search
+#bindkey -M viins "jj" vi-cmd-mode
+#bindkey -M vicmd "^R" redo
+#bindkey -M vicmd "u" undo
+#bindkey -M vicmd "/" history-incremental-search-forward
+#bindkey -M vicmd "?" history-incremental-search-backward
 
 
