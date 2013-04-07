@@ -60,4 +60,13 @@ color13 = #b294bb
 color14 = #8abeb7
 color15 = #c5c8c6
 
+[hints]
+font = Monospace 9
+foreground = #1d1f21
+background = #ffffff
+padding = 2
+border = #ffffff
+border_width = 0.5
+roundness = 1.0
+
 # vim: ft=dosini
