@@ -10,10 +10,11 @@ setopt correct
 setopt extended_glob
 setopt extended_history share_history
 setopt hist_find_no_dups hist_ignore_dups hist_verify
+setopt hist_expire_dups_first
 setopt prompt_subst
 unsetopt flow_control
 
-HISTSIZE=10000
+HISTSIZE=20000
 SAVEHIST=10000
 HISTFILE="$HOME/.logs/zhistory"
 
