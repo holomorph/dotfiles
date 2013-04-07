@@ -1,6 +1,7 @@
 " ~/.vimrc
 
 set nocompatible
+call pathogen#runtime_append_all_bundles()
 filetype indent plugin on
 syntax on
 let g:zenburn_old_Visual = 1
@@ -28,7 +29,7 @@ set nowrap
 set formatoptions=qn1
 
 " editing
-set list listchars=tab:\ \ ,extends:$,precedes:^,trail:-
+set list listchars=tab:\ \ ,extends:$,precedes:^,trail:·
 set nrformats+=alpha
 
 " vim ui
@@ -59,9 +60,6 @@ set dir=~/.vim/tmp
 set backup	  backupdir=~/.vim/backup
 set undofile  undodir=~/.vim/undo
 
-" buffers
-au BufRead,BufNew ~/.mutt/temp/mutt* so ~/.mutt/mutt.vim
-
 " fix typos
 command! Q q
 command! W w
@@ -78,8 +76,8 @@ nnoremap q? <Nop>
 map ; :
 noremap ;; ;
 
-" tap enter again to remove hlsearch
-nnoremap <cr> :nohlsearch<cr>
+nnoremap <silent> <Space> :nohlsearch<Bar>:echo<cr>
+nnoremap <F5> :!make<cr>
 
 " save the current file as root
 cmap w!! w !sudo tee % >/dev/null<cr>:e!<cr><cr>
@@ -101,6 +99,8 @@ nnoremap <C-l> <C-w>l
 "set winheight=999
 
 " autocommands {{{
+au BufRead,BufNew ~/.mutt/temp/mutt* so ~/.mutt/mutt.vim
+
 augroup vimrcEx
   autocmd!
 
@@ -118,7 +118,6 @@ augroup vimrcEx
   autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
   autocmd InsertLeave  * if pumvisible() == 0|pclose|endif
 augroup END
-" }}}
 
 
 " Called when opening every file. If the containing directory doesn't
