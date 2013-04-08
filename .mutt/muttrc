@@ -33,7 +33,7 @@ set pager_index_lines = 8            # number of index lines to show
 set pager_context     = 5            # number of context lines to show
 set pager_stop                       # don't go to next message automatically
 set pipe_decode                      # strip headers and eval mimes when piping
-#set quit                             # don't ask, just do!
+set quit                             # don't ask, just do!
 set reverse_alias                    # show names from alias file in index
 set sort              = reverse-date # like gmail???
 set smart_wrap                       # don't wrap mid-word
@@ -69,5 +69,5 @@ unignore from: to: cc: date: subject:  # show only these
 hdr_order from: to: cc: date: subject: # and in this order
 
 # hooks
-#folder-hook . set sort = reverse-date
-#folder-hook <ml> source ~/.mutt/ml.muttrc
+folder-hook . set sort = reverse-date
+folder-hook +cycling source ~/.mutt/ml.muttrc

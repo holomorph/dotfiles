@@ -22,13 +22,18 @@ bind index,pager \#      noop
 # postpone
 bind compose     p       postpone-message
 bind index       p       recall-message
+bind postpone    p       exit
 
 # attach
 bind attach      i       exit
 
+bind browser     \Cd     half-down
+bind browser     \Cu     half-up
+
 # macros
 macro index,pager ,i "<change-folder>+inbox<enter>"         "go to gmail inbox"
-macro index,pager Z  "<shell-escape>offlineimap -o<return>" "sync imap"
+macro index,pager ,s "<change-folder>+sent<enter>"          "go to gmail sent"
+macro index,pager Z  "<shell-escape>offlineimap<return>"    "sync imap"
 macro index,pager D  "<save-message>+trash<enter>"          "move message to the trash"
 
 # vim:ft=muttrc
