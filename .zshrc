@@ -23,6 +23,7 @@ for cfg in aliases bindings extract zstyle; do
   [[ -e "$HOME/.config/zsh/$cfg.zsh" ]] && \
 		source "$HOME/.config/zsh/$cfg.zsh"
 done
+unset cfg
 
 # prompt
 if [[ -s "$HOME/.config/zsh/prompt.zsh" ]]; then
