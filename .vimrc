@@ -26,7 +26,7 @@ set smartindent
 set linebreak
 set nolist
 set nowrap
-set formatoptions=qn1
+set formatoptions+=qn1
 
 " editing
 set list listchars=tab:\ \ ,extends:$,precedes:^,trail:·
@@ -98,7 +98,7 @@ nnoremap <C-l> <C-w>l
 "set winminheight=5
 "set winheight=999
 
-" autocommands {{{
+" autocommands
 au BufRead,BufNew ~/.mutt/temp/mutt* so ~/.mutt/mutt.vim
 
 augroup vimrcEx
@@ -119,9 +119,7 @@ augroup vimrcEx
   autocmd InsertLeave  * if pumvisible() == 0|pclose|endif
 augroup END
 
-
-" Called when opening every file. If the containing directory doesn't
-" exist, create it.
+" functions
 function! Mkdir()
   let dir = expand('%:p:h')
   if !isdirectory(dir)
@@ -139,12 +137,4 @@ endfunction
 
 if has('mouse')
   set mouse=a
-endif
-
-" gvim
-if has ('gui_running')
-  set guioptions=acM
-  set mousefocus
-  set guifont=Consolas\ 10
-  autocmd GUIEnter * set t_vb=
 endif
