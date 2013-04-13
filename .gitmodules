@@ -1,0 +1,3 @@
+[submodule ".vim/bundle/commentary"]
+	path = .vim/bundle/commentary
+	url = https://github.com/tpope/vim-commentary
