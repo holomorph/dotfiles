@@ -1,3 +1,6 @@
 [submodule ".vim/bundle/commentary"]
 	path = .vim/bundle/commentary
 	url = https://github.com/tpope/vim-commentary
+[submodule ".local/bin"]
+	path = .local/bin
+	url = https://github.com/holomorph/bin
