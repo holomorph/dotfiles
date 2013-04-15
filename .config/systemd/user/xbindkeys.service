@@ -1,0 +1,10 @@
+[Unit]
+Description=Xbindkeys
+Requires=xorg.target
+After=xorg.target
+
+[Service]
+ExecStart=/usr/bin/xbindkeys --nodaemon
+
+[Install]
+WantedBy=default.target
