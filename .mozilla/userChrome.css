@@ -1,5 +1,4 @@
 /* (c) Ippytraxx 2012 v.szolnoky@tele2.se */
-/* HIDDEN ELEMENTS */
 #identity-box,
 #urlbar-icons > image,
 #urlbar-container dropmarker,
@@ -15,6 +14,7 @@
 #main-window[sizemode="maximized"] #tabbrowser-tabs tab,
 #main-window[sizemode="fullscreen"] #tabbrowser-tabs tab
 {
+	background:#282a2e!important;
   border-top:0!important;
   margin:0px 0px 0px!important;
   max-height:10px!important;
@@ -46,4 +46,37 @@
 #main-window #tabbrowser-tabs tab[pinned] .tab-close-button
 {
   display:none!important;
+}
+
+/* pentadactyl/vimperator rc */
+#TabsToolbar toolbarbutton {
+	display: none !important;
+}
+.tabbrowser-tabs {
+	background: #282a2e !important;
+}
+.tabbrowser-tab {
+	-moz-appearance: none !important;
+	-moz-border-radius: 0 !important;
+	background: #282a2e !important;
+	border: none !important;
+	color: #969896 !important;
+	font-family: monospace;
+	font-size: 9pt !important;
+	height: 18px !important;
+	margin: 0 !important;
+	min-height: 0 !important;
+	padding: 0 0.5ex !important;
+}
+.tabbrowser-tab:not([pinned]) {
+	max-width: 100px !important;
+	min-width: 100px !important;
+}
+.tabbrowser-tab:not([fadein]) {
+	max-width: 1px !important;
+	min-width: 1px !important;
+}
+.tabbrowser-tab[selected] {
+	background: #282a2e !important;
+	color: #f0c674 !important;
 }
