@@ -1,61 +1,68 @@
-"
 " ~/.pentadactylrc
-"
 
-" Options
-"
 set guioptions-=br
 set guioptions+=n
-set hlfind
+"set hlfind
 
-" Status line
-"
-hi -a StatusLine font-weight:normal; padding-right: 5px !important;
-hi -a StatusLineNormal color:#969896 !important; background:#282a2e !important;
-hi -a StatusLineSecure color:#81a2be !important; background:#282a2e !important;
-hi -a StatusLineExtended color:#a0ffa0 !important; background:#282a2e !important;
-hi -a WarningMsg color:#cc6666 !important; background:#282a2e !important;
-hi -a ErrorMsg color:#a54242 !important; background:#282a2e !important;
+" command line
+hi Normal color: #969896; background:#282a2e;
+hi CmdLine color: inherit; background: inherit;
+hi StatusLine font-weight: normal; padding-right: 5px; min-height: 14px;
+hi StatusLineBroken   color: #1d1f21; background: #ffa0a0;
+hi StatusLineNormal   color: #969896; background: #282a2e;
+hi StatusLineSecure   color: #81a2be; background: #282a2e;
+hi StatusLineExtended color: #a0ffa0; background: #282a2e;
 
-hi -a Normal color: #969896 !important; background:#2f2f2f !important;
-hi -a CmdLine color: inherit; background: inherit;
-hi -a CompDesc color: #cc9393 !important; width: 55% !important;
-hi -a CompGroup color: inherit; font-weight: bold !important;
-hi -a CompIcon display: none;
-hi -a CompItem color: inherit; background: inherit; font-weight: normal !important;
-hi -a CompItem[selected] color: #f0c674 !important; background:#434443;
-hi -a CompTitle color:#ffcfaf !important; background:#1b1b1b !important;
-hi -a CompTitleSep display: none!important;
+" completions
+hi CompDesc color: #cc9393; width: 55%;
+hi CompGroup color: inherit; font-weight: bold;
+hi CompIcon display: none;
+hi CompItem color:inherit; background:inherit; font-weight:normal;
+hi CompItem:nth-child(2n+1) background:transparent;
+hi CompItem[selected] color:#f0c674; background:#434443;
+hi CompTitle color:#ffcfaf; background:#1b1b1b;
+hi CompTitleSep display: none;
 
-hi -a Filter color: #ffffff !important; font-weight:bold !important;
-hi -a String color: #1d1f21 !important;
-hi -a NonText color: #5b605e !important;
-hi -a Preview color: #373b41 !important;
-hi -a Buffers color: #23abd2 !important;
-hi -a URL color: #7f9f7f !important;
+" messages
+hi ErrorMsg color: #80d4aa; font-weight: bold;
+hi InfoMsg color:#f8f893;
+hi ModeMsg color:#ffcfaf;
+hi MoreMsg color:#b5bd68;
+hi WarningMsg color: #dfe4cf; font-weight: bold;
+hi StatusErrorMsg color:#80d4aa !important;
+hi StatusInfoMsg color:#f8f893 !important; font-weight:inherit;
+hi StatusModeMsg color:#ffcfaf !important;
+hi StatusMoreMsg color:#b5bd68 !important; font-weight:bold;
+hi StatusWarningMsg color:#dfe4cf !important; font-weight:bold !important;
 
-" Downloads
-"
-hi -a Download color: #969896 !important;
-hi -a DownloadPercent color: #8cd0d3 !important;
-hi -a DownloadSource color: #7f9f7f !important;
-hi -a DownloadTitle color: #7f9f7f !important;
+hi Filter color: #ffffff; font-weight:bold;
+"hi -a String color: #1d1f21 !important;
+hi NonText color:#5b605e; font-weight:bold;
+"hi -a Preview color: #373b41 !important;
+"hi -a Buffers color: #23abd2 !important;
+hi URL color: #7f9f7f;
+hi Indicator color: #93b3a3; font-weight: bold; width:1em; text-align: center;
+
+" downloads
+"hi -a Download color: #969896 !important;
+"hi -a DownloadPercent color: #8cd0d3 !important;
+"hi -a DownloadSource color: #7f9f7f !important;
+"hi -a DownloadTitle color: #7f9f7f !important;
 
 "hi -a CmdNormal color:#969896 !important; background:#1b1b1b !important; height:16px !important;
 "hi -a CmdPrompt color:#969896 !important; background:#1b1b1b !important; height:16px !important;
 
-" Font
-"
-hi -a FontCode  font-family: monospace !important; font-size: 9pt !important;
-hi -a FontFixed font-family: monospace !important; font-size: 9pt !important;
-hi -a Normal    font-family: monospace !important; font-size: 9pt !important;
+" font
+"hi -a FontCode  font-family: monospace !important; font-size: 9pt !important;
+"hi -a FontFixed font-family: monospace !important; font-size: 9pt !important;
+"hi -a Normal    font-family: monospace !important; font-size: 9pt !important;
 
-
-" Mappings
-"
+" mappings
 map , <Leader>
-nmap -builtin <Leader>p :set private!<CR>
 nmap -builtin <Leader>, :noh<CR>
+nmap -builtin <Leader>d :downloads<CR>
+nmap -builtin <Leader>m :messages<CR>
+nmap -builtin <Leader>p :set private!<CR>
 nmap -builtin ; :
 nmap -builtin : ;
 vmap -builtin ; :
@@ -66,70 +73,10 @@ nmap -builtin h 3h
 nmap -builtin j 3j
 nmap -builtin k 3k
 nmap -builtin l 3l
+nmap -builtin <C-a> <Nop>
+nmap -builtin <C-h> <Nop>
+nmap -builtin <C-j> <Nop>
+nmap -builtin <C-k> <Nop>
+nmap -builtin <C-l> <Nop>
 
-" Toggle Styles
-"
-map -builtin <F3> :styletoggle<Space>-name<Space>hybrid<CR>
-
-" Style: Hybrid Colourscheme
-"
-style -name hybrid http://*,https://*,file://*,about:blank <<EOM
-  * {
-    color: #969896 !important;
-    background: #1d1f21 !important;
-    border-color: #282a2e !important;
-  }
-  a, a * {
-    color: #81a2be !important;
-    text-decoration: none !important;
-  }
-  a:hover, a:hover * {
-    color: #f0c674 !important;
-  }
-  a:visited, a:visited * {
-    color: #b294bb !important;
-  }
-  a:visited:hover, a:visited:hover * {
-    color: #de935f !important;
-  }
-EOM
-styledisable -name=hybrid
-
-" Style: Minimalistic Tabs
-"
-" in `about:config` toggle `browser.tabs.onTop` to rid the pesky
-" pixel line. Thanks heftig!
-style -name minitabs chrome://* <<EOM
-  #TabsToolbar toolbarbutton {
-    display: none !important;
-  }
-  .tabbrowser-tabs {
-    background: #282a2e !important;
-  }
-  .tabbrowser-tab {
-    -moz-appearance: none !important;
-    -moz-border-radius: 0 !important;
-    background: #282a2e !important;
-    border: none !important;
-    color: #969896 !important;
-    font-family: monospace;
-    font-size: 9pt !important;
-    height: 18px !important;
-    margin: 0 !important;
-    min-height: 0 !important;
-    padding: 0 0.5ex !important;
-  }
-  .tabbrowser-tab:not([pinned]) {
-    max-width: 100px !important;
-    min-width: 100px !important;
-  }
-  .tabbrowser-tab:not([fadein]) {
-    max-width: 1px !important;
-    min-width: 1px !important;
-  }
-  .tabbrowser-tab[selected] {
-    background: #282a2e !important;
-    color: #f0c674 !important;
-  }
-EOM
-" vim:ft=vimperator
+" vim: ft=vimperator
