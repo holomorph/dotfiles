@@ -1,128 +1,66 @@
-"
 " ~/.vimperatorrc
-"
 
-" Options
-"
-set hlsearch
-set noscrollbars
-"set tabnumbers
 set complete-=f
+set noscrollbars
+set smartcase
 
-" Status Line
-"
-"hi StatusLine font-family: monospace; font-size: 9pt;
-hi StatusLine font-weight:normal;
+" command line
+hi ContentSeparator display: none;
+hi Normal color:#969896; background:#282a2e;
+hi CmdLine color: inherit; background: inherit;
+hi StatusLine color: #969896; background: #282a2e; font-weight: normal !important;
+hi Filter color: #ffffff; font-weight: bold;
 hi Prompt back
-hi PromptText color:#efef8f;
+hi PromptText color: #ffcfaf; font-weight: bold;
 
-" messages
-"hi CompMsg font-family: monospace !important; font-size: 9pt !important;
-hi ErrorMsg font-weight: bold; color: #a54242;
-hi InfoMsg font-weight: bold; color: #8abeb7;
-"hi -a ModeMsg font-family: monospace !important; font-size: 9pt !important;
-"hi -a MoreMsg color:#b5bd68 !important; background:transparent !important;
-hi WarningMsg color: #8abeb7;
-"hi -a InfoMsg color:#f0c674 !important; background:transparent !important;
-
-" Custom colours
-"
-hi Normal font-weight:normal; color:#969896; background:#282a2e;
-
-hi CompDesc color: #749f7f; width: 55%;
-"hi CompGroup color: inherit; "font-weight: bold;
+" completions
+hi CompDesc color: #cc9393; min-width: 450px; max-width: 450px;
 hi CompIcon display: none;
 hi CompItem[selected] color:#f0c674; background:#434443;
-hi CompTitle font-weight: bold; color: #ccdc90; background: #1d1f21;
-hi CompTitle>* padding: 0 .5ex;
-hi Filter font-weight: bold; color: #ffffff;
+hi CompTitle font-weight: bold; color: #ffcfaf; background: #1b1b1b;
+hi CompTitle>* padding: 1px .5ex;
+hi CompResult min-width: 450px; max-width: 450px; overflow: hidden;
 
-" Custom Font
-"
-hi CmdLine color: inherit; background: inherit;
-hi CmdLine>* font-family: monospace;
-"hi -a Normal font-family: monospace !important; font-size: 9pt !important;
+" messages
+hi InfoMsg color:#f8f893;
+hi ErrorMsg font-weight: bold; color: #80d4aa;
+hi ModeMsg color: #ffcfaf; border-radius: 1px; padding: 0px 8px;
+hi MoreMsg color: #b5bd68;
+hi WarningMsg color: #dfe4cf; font-weight: bold;
 
-hi ContentSeparator display: none;
-hi Indicator color: #373b41;
-hi URL color: #7f9f7f; background: inherit;
-hi Title color: #efef8f; background: #664040; padding-left: 4px;
+" hints
+hi Hint font-family: monospace; font-size: 8pt; font-weight: normal;
+hi -a Hint color: white; background-color: red;  padding: 0px 1px 0px 1px;
+hi HintActive background-color: #88ff00; color: black;
+hi HintElem background-color: yellow; color: black
+
+hi Indicator color: #efef8f;
 hi NonText font-weight: bold; color: #5b605e;
+hi Title color: #e37170; background: #664040; font-weight: bold; padding: 0 4px;
+hi URL color: #7f9f7f;
 
-
-" Mappings
-"
+" mappings
 let mapleader = ","
-cnoremap <C-n> <Down>
-cnoremap <C-p> <Up>
 nnoremap <Leader>, :nohlsearch<CR>
+nnoremap <Leader>d :downloads<CR>
+nnoremap <Leader>m :messages<CR>
 nnoremap <Leader>p :set private!<CR>
+map s ;open google 
+map S ;tabopen google 
+nmap <C-S-n> ;tabmove! +1<CR>
+nmap <C-S-p> ;tabmove! -1<CR>
+nmap <F3> <Nop>
+nmap <C-h> <Nop>
+nmap <C-j> <Nop>
+nmap <C-k> <Nop>
+nmap <C-l> <Nop>
+noremap h 5h
+noremap j 5j
+noremap k 5k
+noremap l 5l
 nnoremap : ;
 nnoremap ; :
 vnoremap : ;
 vnoremap ; :
-nmap <C-S-n> :tabmove! +1<CR>
-nmap <C-S-p> :tabmove! -1<CR>
-map s ;open google 
-map S ;tabopen google 
 
-" hybrid colourscheme
-noremap <F3> :styletoggle<Space>-name<Space>tomorrownight<CR>
-style -name tomorrownight http://*,https://*,file://*,about:blank <<EOM
-* {
-    color: #969896 !important;
-    background: #1d1f21 !important;
-    border-color: #282a2e !important;
-  }
-  a, a * {
-    color: #81a2be !important;
-    text-decoration: none !important;
-  }
-  a:hover, a:hover * {
-    color: #f0c674 !important;
-  }
-  a:visited, a:visited * {
-    color: #b294bb !important;
-  }
-  a:visited:hover, a:visited:hover * {
-    color: #de935f !important;
-  }
-EOM
-styledisable -name=tomorrownight
-
-" tabs
-"
-style -name minitabs chrome://* <<EOM
-#TabsToolbar toolbarbutton {
-  display: none !important;
-}
-.tabbrowser-tabs {
-  background: #282a2e !important;
-}
-.tabbrowser-tab {
-  -moz-appearance: none !important;
-  -moz-border-radius: 0 !important;
-  background: #282a2e !important;
-  border: none !important;
-  color: #969896 !important;
-  font-family: monospace !important;
-  font-size: 9pt !important;
-  height: 18px !important;
-  margin: 0 !important;
-  min-height: 0 !important;
-  padding: 0 0.5ex !important;
-}
-.tabbrowser-tab:not([pinned]) {
-  max-width: 60px !important;
-  min-width: 160px !important;
-}
-.tabbrowser-tab:not([fadein]) {
-  max-width: 1px !important;
-  min-width: 1px !important;
-}
-.tabbrowser-tab[selected] {
-  background: #282a2e !important;
-  color: #f0c674 !important;
-}
-EOM
 " vim:ft=vimperator
