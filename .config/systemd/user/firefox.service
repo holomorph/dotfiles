@@ -1,0 +1,8 @@
+[Unit]
+Description=Firefox
+
+[Service]
+ExecStart=/usr/bin/firefox
+
+[Install]
+WantedBy=default.target
