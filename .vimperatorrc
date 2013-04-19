@@ -1,7 +1,10 @@
 " ~/.vimperatorrc
 
 set complete-=f
+set focuscontent=false
+set incsearch
 set noscrollbars
+set showstatuslinks=0
 set smartcase
 
 " command line
