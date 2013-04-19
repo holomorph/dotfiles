@@ -53,6 +53,7 @@ map S ;tabopen google
 nmap <C-S-n> ;tabmove! +1<CR>
 nmap <C-S-p> ;tabmove! -1<CR>
 nmap <F3> <Nop>
+nmap <C-a> <Nop>
 nmap <C-h> <Nop>
 nmap <C-j> <Nop>
 nmap <C-k> <Nop>
