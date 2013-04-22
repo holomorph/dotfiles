@@ -1,7 +1,7 @@
 " ~/.vimperatorrc
 
 set complete-=f
-set focuscontent=false
+set focuscontent=true
 set incsearch
 set noscrollbars
 set showstatuslinks=0
