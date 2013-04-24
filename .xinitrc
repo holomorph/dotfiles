@@ -21,7 +21,6 @@ sh "$HOME/.fehbg" &
 
 ## key mapping
 setxkbmap -option ctrl:nocaps
-setxkbmap -option shift:both_shiftlock
 xmodmap -e "keycode 135 = Super_R"
 xbindkeys
 
