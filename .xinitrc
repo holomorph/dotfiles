@@ -28,7 +28,6 @@ systemd --user &
 
 [[ -z $(pidof -s termite) ]] && termite &
 
-/usr/bin/dwmvolume
 /usr/bin/dwmstatus &
 while true; do
   dwm 2> "$HOME/.logs/dwm.log"
