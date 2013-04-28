@@ -1,22 +1,6 @@
 # my "sunaku" prompt for ZSH using vcs_info stdlib
 # http://snk.tuxfamily.org/log/sunaku-zsh-prompt.png
-
-#PROMPT='%(?..%B%F{red}exit %?%f%b
-#)'\
-#'$(vcs_info && echo $vcs_info_msg_0_)'\
-#"%F{$(test $UID -eq 0 && echo red || echo green)}%~%f"\
-#'%(!.#.>) '
-#RPROMPT='%F{cyan}%@%f'
-
-# initialize vimode (stops linux console glitch)
-#vimode=i
-# set vimode to current editing mode
-#function zle-line-init zle-keymap-select {
-#  vimode="${${KEYMAP/vicmd/c}/(main|viins)/i}"
-#  zle reset-prompt
-#}
-#zle -N zle-line-init
-#zle -N zle-keymap-select
+# https://github.com/sunaku/home/blob/master/.zsh/config/prompt.zsh
 
 PROMPT='%(?..%B%F{red}exit %?%f%b
 )'\
@@ -24,15 +8,12 @@ PROMPT='%(?..%B%F{red}exit %?%f%b
 '%F{black}[%F{11}%~%F{black}]%f'\
 '${vimode}%(!.%F{red}#%f.%F{blue}$%f) '
 
-# VCS integration for command prompt using vcs_info
-# http://zsh.git.sourceforge.net/git/gitweb.cgi?p=zsh/zsh;a=blob_plain;f=Misc/vcs_info-examples
-
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' stagedstr     '%B%F{green}+%f%b'
 zstyle ':vcs_info:*' unstagedstr   '%B%F{yellow}*%f%b'
 zstyle ':vcs_info:*' formats       '%B%F{black}(%c%u%%b%F{9}%b%f%m%B%F{black})'
-#zstyle ':vcs_info:*' actionformats '%c%u%b%m %B%s-%a%%b'
+zstyle ':vcs_info:*' actionformats '%c%u%b%m %B%s-%a%%b'
 zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-aheadbehind git-remotebranch
 
 ### git: Show marker (T) if there are untracked files in repository
@@ -80,8 +61,7 @@ function +vi-git-remotebranch() {
     # second test, however, will only show the remote branch's name if it
     # differs from the local one.
     #if [[ -n ${remote} ]] ; then
-    #if [[ -n ${remote} && ${remote#*/} != ${hook_com[branch]} ]] ; then
-		#	hook_com[branch]="${hook_com[branch]}%F{cyan}(${remote})%f"
-    #fi
+    if [[ -n ${remote} && ${remote#*/} != ${hook_com[branch]} ]] ; then
+			hook_com[branch]="${hook_com[branch]}%F{cyan}(${remote})%f"
+    fi
 }
-
