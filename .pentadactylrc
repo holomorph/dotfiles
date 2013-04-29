@@ -2,13 +2,14 @@
 
 set guioptions-=br
 set guioptions+=n
-"set hlfind
 
 " command line
-hi Normal color: #969896; background:#282a2e;
+hi CmdNormal color:#969896; background:#1b1b1b;
 hi CmdLine color: inherit; background: inherit;
+hi Normal color: #969896; background:#282a2e;
+hi StatusNormal: background: #282a2e;
 hi StatusLine font-weight: normal; padding-right: 5px; min-height: 14px;
-hi StatusLineBroken   color: #1d1f21; background: #ffa0a0;
+hi StatusLineBroken   color: #ffa0a0; background: #1d1f21;
 hi StatusLineNormal   color: #969896; background: #282a2e;
 hi StatusLineSecure   color: #81a2be; background: #282a2e;
 hi StatusLineExtended color: #a0ffa0; background: #282a2e;
@@ -18,9 +19,9 @@ hi CompDesc color: #cc9393; width: 55%;
 hi CompGroup color: inherit; font-weight: bold;
 hi CompIcon display: none;
 hi CompItem color:inherit; background:inherit; font-weight:normal;
-hi CompItem:nth-child(2n+1) background:transparent;
+hi CompItem:nth-child(2n+1) none;
 hi CompItem[selected] color:#f0c674; background:#434443;
-hi CompTitle color:#ffcfaf; background:#1b1b1b;
+hi CompTitle font-weight: bold; color:#ffcfaf; background:#1b1b1b;
 hi CompTitleSep display: none;
 
 " messages
@@ -36,33 +37,42 @@ hi StatusMoreMsg color:#b5bd68 !important; font-weight:bold;
 hi StatusWarningMsg color:#dfe4cf !important; font-weight:bold !important;
 
 hi Filter color: #ffffff; font-weight:bold;
-"hi -a String color: #1d1f21 !important;
+hi String color: #cc9393; white-space: pre;
 hi NonText color:#5b605e; font-weight:bold;
-"hi -a Preview color: #373b41 !important;
-"hi -a Buffers color: #23abd2 !important;
+hi Title color:#ffcfaf; font-weight:bold;
 hi URL color: #7f9f7f;
 hi Indicator color: #93b3a3; font-weight: bold; width:1em; text-align: center;
 
+hi Question color: #82a282; background: #282a2e; font-weight: bold;
+hi StatusQuestion color: #82a282; background: #282a2e; font-weight: bold;
+
 " downloads
-"hi -a Download color: #969896 !important;
-"hi -a DownloadPercent color: #8cd0d3 !important;
-"hi -a DownloadSource color: #7f9f7f !important;
-"hi -a DownloadTitle color: #7f9f7f !important;
+"hi Download color:#969896;
+"hi Download>* color:#969896;
+"hi Download:nth-child(2n+1) none;
+"hi DownloadPercent color:#8cd0d3;
+"hi DownloadProgress color:#8cd0d3;
+"hi DownloadProgressHave color:#8cd0d3;
+"hi DownloadProgressTotal color:#8cd0d3;
+"hi DownloadSource color:#7f9f7f;
+"hi DownloadState color:#dca3a3;
+"hi DownloadTitle font-weight: bold !important; color:#7f9f7f !important;
+"hi Button display:inline-block; cursor: pointer; color:#efef8f; text-decoration: none;
+"hi Button:hover text-decoration: none;
+"hi Button::after content:">"; color:#8f8f8f;
+"hi Button::before content:"<"; color:#8f8f8f;
+"hi Button:not([collapsed]) content:"/<";
+"hi Button:not([collapsed]) ~ Button:not([collapsed])::before content:"/<";
+"hi LinkInfo color: #969896; background: #121212; position: absolute; left: 100%; padding: 0.5ex; margin: -1ex -1ex;
 
-"hi -a CmdNormal color:#969896 !important; background:#1b1b1b !important; height:16px !important;
-"hi -a CmdPrompt color:#969896 !important; background:#1b1b1b !important; height:16px !important;
-
-" font
-"hi -a FontCode  font-family: monospace !important; font-size: 9pt !important;
-"hi -a FontFixed font-family: monospace !important; font-size: 9pt !important;
-"hi -a Normal    font-family: monospace !important; font-size: 9pt !important;
+"hi Private\ StatusLine::before
 
 " mappings
 map , <Leader>
 nmap -builtin <Leader>, :noh<CR>
-nmap -builtin <Leader>d :downloads<CR>
+nmap -builtin <Leader>d :tabopen about:downloads<CR>
 nmap -builtin <Leader>m :messages<CR>
-nmap -builtin <Leader>p :set private!<CR>
+nmap -builtin <Leader>p :private winopen<CR>
 nmap -builtin ; :
 nmap -builtin : ;
 vmap -builtin ; :
