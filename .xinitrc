@@ -16,19 +16,17 @@ xset +dpms
 xset dpms 1800 1800 1800
 
 ## Set background
-## feh --bg-fill <filename>
-sh "$HOME/.fehbg" &
+feh --bg-fill "$HOME/pictures/wallpaper/default" &
 
 ## key mapping
 setxkbmap -option ctrl:nocaps
 xmodmap -e "keycode 135 = Super_R"
-xbindkeys
+# xbindkeys
 
 systemd --user &
 
 [[ -z $(pidof -s termite) ]] && termite &
 
-/usr/bin/dwmstatus &
 while true; do
   dwm 2> "$HOME/.logs/dwm.log"
 done
