@@ -1,0 +1,9 @@
+[Unit]
+Description=Dwm Status Line
+
+[Service]
+ExecStart=/usr/bin/dwmstatus
+Restart=no
+
+[Install]
+WantedBy=default.target
