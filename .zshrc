@@ -1,10 +1,8 @@
 # ~/.zshrc
 
 autoload -U compinit && compinit
-autoload -U colors && colors
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
-autoload -U vcs_info
 
 setopt correct
 setopt extended_glob
@@ -18,32 +16,24 @@ HISTSIZE=20000
 SAVEHIST=10000
 HISTFILE="$HOME/.logs/zhistory"
 
-# configs
+## configs
 for cfg in aliases bindings extract zstyle; do
-  [[ -e "$HOME/.config/zsh/$cfg.zsh" ]] && \
+	[[ -e "$HOME/.config/zsh/$cfg.zsh" ]] && \
 		source "$HOME/.config/zsh/$cfg.zsh"
 done
 unset cfg
 
-# prompt
+## prompt
 if [[ -s "$HOME/.config/zsh/prompt.zsh" ]]; then
-  source "$HOME/.config/zsh/prompt.zsh"
+	source "$HOME/.config/zsh/prompt.zsh"
 else
-  PROMPT="%(?..%B%F{red}exit %?%f%b\n)"\
-'%F{black}[%F{11}%~%F{black}]%f'\
+	PROMPT="%(?..%B%F{red}exit %?%f%b
+)%B%F{black}[%b%f"\
+'%F{11}%~%B%F{black}]%b%f'\
 '%(!.%F{red}#%f.%F{blue}$%f) '
 fi
 SPROMPT="Correct %B%F{red}%R%b%f to %B%F{green}%r%b%f [nyae]? "
 
-# window title
-if [[ $TERM == xterm-termite ]]; then
-	. /etc/profile.d/vte.sh
-	__vte_ps1
-	chpwd() {
-		__vte_ps1
-	}
-fi
-
-# envoy
+## envoy
 envoy -t gpg-agent
 source <(envoy -p)
