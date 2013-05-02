@@ -1,5 +1,7 @@
 [Unit]
 Description=Dwm Status Line
+Requires=mpd.socket
+After=mpd.socket
 
 [Service]
 ExecStart=/usr/bin/dwmstatus
