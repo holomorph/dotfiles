@@ -12,13 +12,13 @@
 #     Alt + backslash
 
 # volume control
-# "dwmvolume toggle"
+# "ponymix toggle"
 #     m:0x0 + c:121
 #     XF86AudioMute
-# "dwmvolume decrease"
+# "ponymix decrease 1"
 #     m:0x0 + c:122
 #     XF86AudioLowerVolume
-# "dwmvolume increase"
+# "ponymix increase 1"
 #     m:0x0 + c:123
 #     XF86AudioRaiseVolume
 
@@ -34,3 +34,8 @@
 "vex"
     m:0x0 + c:235
     XF86Display
+
+# printscreen
+# "printscreen -e 'mv $f ~/pictures/scrot'"
+#     m:0x0 + c:107
+#     Print
