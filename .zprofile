@@ -15,7 +15,7 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;37m'
 
 # dircolors
-eval $(dircolors -b $HOME/.config/dircolors)
+source <(dircolors -b "$HOME/.config/dircolors")
 
 # disable less history file
 export LESSHISTFILE=-
