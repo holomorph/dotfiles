@@ -16,7 +16,7 @@ xset +dpms
 xset dpms 1800 1800 1800
 
 ## Set background
-feh --bg-fill "$HOME/pictures/wallpaper/default" &
+feh --no-fehbg --bg-fill "$HOME/pictures/wallpaper/default" &
 
 ## key mapping
 setxkbmap -option ctrl:nocaps
