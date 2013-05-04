@@ -35,5 +35,5 @@ export GTK2_RC_FILES=~/.config/gtk-2.0/gtkrc
 export PATH="$HOME/.local/bin:$PATH"
 
 if (( UID )); then
-  [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx &> ~/.logs/x.log
+  [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx &> "$HOME/.logs/x.log"
 fi
