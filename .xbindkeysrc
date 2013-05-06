@@ -36,6 +36,6 @@
     XF86Display
 
 # printscreen
-# "printscreen -e 'mv $f ~/pictures/scrot'"
-#     m:0x0 + c:107
-#     Print
+"printscreen -e 'mv $f ~/pictures/scrot'"
+    m:0x0 + c:107
+    Print
