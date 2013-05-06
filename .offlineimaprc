@@ -4,12 +4,15 @@
 ui = ttyui
 accounts = gmail
 fsync = false
+metadata = ~/.cache/offlineimap
 pythonfile = ~/.mutt/gmail.py
 
 [Account gmail]
 localrepository = gmail-local
 remoterepository = gmail-remote
 status_backend = sqlite
+#autorefresh = 3
+#quick = 9
 
 [Repository gmail-local]
 type = Maildir
@@ -24,7 +27,7 @@ remoteusereval = username("gmail")
 remotepasseval = password("gmail")
 realdelete = no
 nametrans = nt_remote
-folderfilter = exclude(['Important', 'Starred'])
+folderfilter = lambda foldername: foldername not in ['[Gmail]/All Mail', '[Gmail]/Imporant', '[Gmail]/Starred']
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 
 # vim:ft=cfg
