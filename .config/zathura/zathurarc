@@ -1,7 +1,6 @@
 # ~/.config/zathura/zathurarc
 
 set font "monospace normal 9"
-set database sqlite
 
 set default-bg "#1d1f21"
 set default-fg "#969896"
