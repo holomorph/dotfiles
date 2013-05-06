@@ -1,0 +1,5 @@
+# ~/.mpv/config
+
+lirc=no
+vo=xv
+ao=pulse
