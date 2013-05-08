@@ -44,8 +44,8 @@ color search brightyellow red
 color tilde color8 default
 
 # smileys, the right way and the backward-ass euro way
-color body brightmagenta default "(^| )+(|[<>|])[8;:](|[^ ])[)(/|DOPS]( |$)+"
-color body brightmagenta default "(^| )+[)(/|DOPS](|[^ ])[8;:](|[<>|])( |$)+"
+color body brightwhite default "(^| )+(|[<>|])[8;:](|[^ ])[)(/|DOPS]( |$)+"
+color body brightwhite default "(^| )+[)(/|DOPS](|[^ ])[8;:](|[<>|])( |$)+"
 
 # *bold*, _underline_, and /italic/
 color body brightwhite default "(^| )\\*[^*]+\\*( |$)"

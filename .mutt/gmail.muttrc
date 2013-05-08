@@ -7,12 +7,11 @@ set from      = $my_gmail
 set folder    = "~/.mutt/mail/"
 set sendmail  = "/usr/bin/msmtp -a gmail -f $my_gmail --user=$my_gmail"
 set spoolfile = "+inbox"
-set mbox      = "+archive"
 set postponed = "+drafts"
 
 unset record # gmail saves sent mail in +sent anyways
 
-mailboxes +inbox +archive +amazon +cycling +drafts \
+mailboxes +inbox +amazon +cycling +drafts \
           +sent +spam +thesis +trash
 
 # vim:ft=muttrc

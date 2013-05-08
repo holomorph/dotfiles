@@ -44,7 +44,7 @@ set wait_key          = no           # shut up, mutt
 
 # enriched messages
 auto_view text/html                                  # view html automatically
-#alternative_order text/plain text/enriched text/html # but save it for last
+alternative_order text/plain text/enriched text/html # but save it for last
 
 # formats and regexps
 set alias_format = "%4n %t %-20a %r"

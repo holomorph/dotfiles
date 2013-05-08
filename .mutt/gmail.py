@@ -7,12 +7,12 @@ import subprocess
 import sys
 
 mapping = { 'INBOX':              'inbox'
-          , '[Gmail]/All Mail':   'archive'
+#         , '[Gmail]/All Mail':   'archive'
           , '[Gmail]/Drafts':     'drafts'
-          , '[Gmail]/Important':  'important'
+#         , '[Gmail]/Important':  'important'
           , '[Gmail]/Sent Mail':  'sent'
           , '[Gmail]/Spam':       'spam'
-          , '[Gmail]/Starred':    'starred'
+#         , '[Gmail]/Starred':    'starred'
           , '[Gmail]/Trash':      'trash'
           }
 
