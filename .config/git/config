@@ -1,6 +1,8 @@
+# ~/.config/git/config
+
 [core]
   editor = vim
-  excludesfile = ~/.gitignore_global
+  excludesfile = ~/.config/git/ignore
 [url "git@github.com:holomorph/"]
   pushInsteadof = "https://github.com/holomorph/"
 [alias]
@@ -32,3 +34,5 @@
   added = green bold
   changed = yellow bold
   untracked = red bold
+
+# vim: ft=gitconfig
