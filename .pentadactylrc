@@ -3,6 +3,8 @@
 set guioptions-=br
 set guioptions+=n
 
+set! plugins.hide_infobar_for_missing_plugin=true
+
 " command line
 hi CmdNormal color:#969896; background:#1b1b1b;
 hi CmdLine color: inherit; background: inherit;
@@ -79,10 +81,10 @@ vmap -builtin ; :
 vmap -builtin : ;
 nmap -builtin <C-S-n> :tabmove! +1<CR>
 nmap -builtin <C-S-p> :tabmove! -1<CR>
-nmap -builtin h 3h
-nmap -builtin j 3j
-nmap -builtin k 3k
-nmap -builtin l 3l
+nmap -builtin h 5h
+nmap -builtin j 5j
+nmap -builtin k 5k
+nmap -builtin l 5l
 nmap -builtin <C-a> <Nop>
 nmap -builtin <C-h> <Nop>
 nmap -builtin <C-j> <Nop>

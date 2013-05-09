@@ -7,6 +7,8 @@ set noscrollbars
 set showstatuslinks=0
 set smartcase
 
+set! plugins.hide_infobar_for_missing_plugin=true
+
 " command line
 hi ContentSeparator display: none;
 hi Normal color:#969896; background:#282a2e;
