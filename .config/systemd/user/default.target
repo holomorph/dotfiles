@@ -1,6 +1,0 @@
-[Unit]
-Description=Systemd user default target
-After=xorg.target
-
-[Install]
-Alias=default.target
