@@ -214,6 +214,7 @@ EXEC 01;32
 .asc 00;31
 .gpg 00;31
 .key 00;31
+.sig 00;31
 .tc 00;31
 # http://wiki.xiph.org/index.php/MIME_Types_and_File_Extensions
 
