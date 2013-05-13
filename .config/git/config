@@ -9,7 +9,9 @@
   a = add --all
   d = difftool
   s = status -sb
-  l = log --graph --pretty=format:'%Cred%h%Creset%C(yellow)%d%Creset %s %Cgreen(%cr) %Cblue<%an>%Creset'
+  l = log --decorate --graph --oneline --all
+[log]
+	decorate = short
 [diff]
   tool = vimdiff
 [merge]
