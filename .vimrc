@@ -57,8 +57,8 @@ set wildignore+=*/.git/*                      " git repositories
 
 " backup
 set dir=~/.vim/tmp
-set backup	  backupdir=~/.vim/backup
-set undofile  undodir=~/.vim/undo
+set backup backupdir=~/.vim/backup
+set undofile undodir=~/.vim/undo
 
 " fix typos
 command! Q q
@@ -82,10 +82,6 @@ nnoremap <F5> :!make<cr>
 " save the current file as root
 cmap w!! w !sudo tee % >/dev/null<cr>:e!<cr><cr>
 
-" sane j k actions
-"nnoremap j gj
-"nnoremap k gk
-
 " pane movement
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -105,7 +101,6 @@ augroup vimrcEx
   autocmd!
 
   autocmd BufRead * call SetStatusLine()
-  autocmd BufWritePre * call Mkdir()
 
   " Restore cursor position when reopening a file
   autocmd BufReadPost *
@@ -120,14 +115,6 @@ augroup vimrcEx
 augroup END
 
 " functions
-function! Mkdir()
-  let dir = expand('%:p:h')
-  if !isdirectory(dir)
-    call mkdir(dir, "p")
-    echo "created non-existing directory: " . dir
-  endif
-endfunction
-
 function! SetStatusLine()
   let l:s1="%3.3n\\ %f\\ %h%m%r%w"
   let l:s2="[%{strlen(&filetype)?&filetype:'?'},\\ %{&encoding},\\ %{&fileformat}]"
