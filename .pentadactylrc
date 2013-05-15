@@ -67,28 +67,36 @@ hi StatusQuestion color: #82a282; background: #282a2e; font-weight: bold;
 "hi Button:not([collapsed]) ~ Button:not([collapsed])::before content:"/<";
 "hi LinkInfo color: #969896; background: #121212; position: absolute; left: 100%; padding: 0.5ex; margin: -1ex -1ex;
 
-"hi Private\ StatusLine::before
-
 " mappings
 map , <Leader>
-nmap -builtin <Leader>, :noh<CR>
-nmap -builtin <Leader>d :tabopen about:downloads<CR>
-nmap -builtin <Leader>m :messages<CR>
-nmap -builtin <Leader>p :private winopen<CR>
-nmap -builtin ; :
-nmap -builtin : ;
-vmap -builtin ; :
-vmap -builtin : ;
-nmap -builtin <C-S-n> :tabmove! +1<CR>
-nmap -builtin <C-S-p> :tabmove! -1<CR>
-nmap -builtin h 5h
-nmap -builtin j 5j
-nmap -builtin k 5k
-nmap -builtin l 5l
-nmap -builtin <C-a> <Nop>
-nmap -builtin <C-h> <Nop>
-nmap -builtin <C-j> <Nop>
-nmap -builtin <C-k> <Nop>
-nmap -builtin <C-l> <Nop>
+nmap -b <Leader>, :noh<CR>
+nmap -b <Leader>d :tabopen about:downloads<CR>
+nmap -b <Leader>m :messages<CR>
+nmap -b <Leader>p :private winopen<CR>
+nmap -b ; :
+nmap -b : ;
+vmap -b ; :
+vmap -b : ;
+nmap -b <C-S-n> :tabmove! +1<CR>
+nmap -b <C-S-p> :tabmove! -1<CR>
+nmap -b h 5h
+nmap -b j 5j
+nmap -b k 5k
+nmap -b l 5l
+nmap <C-a> <Nop>
+nmap <C-h> <Nop>
+nmap <C-j> <Nop>
+nmap <C-k> <Nop>
+nmap <C-l> <Nop>
 
-" vim: ft=vimperator
+" quvi
+js <<EOF
+hints.addMode("l", "Launch video from hint", function (elem, loc)
+              commands.execute('!quvi "' + loc.replace(/([$`"\\])/g, "\\$1")
+              + '" &>/dev/null &'));
+EOF
+nmap -builtin x ;l
+nmap <A-x> -s -js commands.execute('!quvi "' + content.location.href.replace(/([$`"\\])/g, "\\$1") + '" &> /dev/null &');
+"map <A-x> -s -js CommandExMode().open("!quvi '" + content.location.href + "' &> /dev/null &");
+
+" vim: ft=pentadactyl
