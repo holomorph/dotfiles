@@ -1,0 +1,5 @@
+# ~/.quvirc
+
+exec = "mpv --really-quiet --prefer-ipv4 --cache=4096 --cache-min=10 --title=%t %u"
+format = fmt45_720p,fmt44_480p,default
+verbosity = quiet
