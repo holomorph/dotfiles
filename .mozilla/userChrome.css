@@ -12,8 +12,7 @@
 
 /* TABS */
 #main-window[sizemode="maximized"] #tabbrowser-tabs tab,
-#main-window[sizemode="fullscreen"] #tabbrowser-tabs tab
-{
+#main-window[sizemode="fullscreen"] #tabbrowser-tabs tab {
 	background:#282a2e!important;
   border-top:0!important;
   margin:0px 0px 0px!important;
@@ -22,29 +21,24 @@
   border-radius:0 0 0px 0px!important;
 }
 #main-window #tabbrowser-tabs tab .tab-throbber,
-#main-window #tabbrowser-tabs tab .tab-icon-image
-{
+#main-window #tabbrowser-tabs tab .tab-icon-image {
   max-height:10px!important;
   max-width:10px!important;
   margin-top:-3px!important;
 }
 #main-window #tabbrowser-tabs tab[selected] .tab-close-button,
-#main-window #tabbrowser-tabs tab:hover .tab-close-button
-{
+#main-window #tabbrowser-tabs tab:hover .tab-close-button {
   opacity:1!important;
 }
-#main-window #tabbrowser-tabs tab[fadein]:not([pinned])
-{
+#main-window #tabbrowser-tabs tab[fadein]:not([pinned]) {
   min-width:40px!important;
   max-width:160px!important;
 }
-#main-window #tabbrowser-tabs tab[pinned]
-{
+#main-window #tabbrowser-tabs tab[pinned] {
   max-width:24px!important;
   min-width:24px!important;
 }
-#main-window #tabbrowser-tabs tab[pinned] .tab-close-button
-{
+#main-window #tabbrowser-tabs tab[pinned] .tab-close-button {
   display:none!important;
 }
 
