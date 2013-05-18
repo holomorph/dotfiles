@@ -30,6 +30,8 @@ export _JAVA_OPTIONS=-Dawt.useSystemAAFontSettings=lcd
 
 # set location of gtk2 gtkrc (also needed for Qt's gtk style)
 export GTK2_RC_FILES=~/.config/gtk-2.0/gtkrc
+export MPLAYER_HOME=~/.config/mplayer
+export MPV_HOME=~/.config/mpv
 
 # path
 export PATH="$HOME/.local/bin:$PATH"
