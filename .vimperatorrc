@@ -7,6 +7,7 @@ set noscrollbars
 set showstatuslinks=0
 set smartcase
 
+set! plugins.click_to_play=true
 set! plugins.hide_infobar_for_missing_plugin=true
 
 " command line
@@ -68,5 +69,13 @@ nnoremap : ;
 nnoremap ; :
 vnoremap : ;
 vnoremap ; :
+
+" quvi
+js <<EOF
+hints.addMode("l", "Launch video from hint", function (elem, loc)
+              commandline.open('', '!quvi "' + loc.replace(/([$`"\\])/g, "\\$1")
+              + '" &>/dev/null &', modes.EX));
+EOF
+nmap <silent> x :l
 
 " vim:ft=vimperator
