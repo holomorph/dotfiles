@@ -50,10 +50,10 @@ set confirm
 set equalalways
 set shortmess=atToOI
 
-set wildignore+=*.aux,*.out,*.toc             " LaTeX intermediates
-set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpg " images
+set wildignore+=*.aux,*.out,*.toc
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpg
 set wildignore+=*.a,*.o,*.obj,*.so,*.hi
-set wildignore+=*/.git/*                      " git repositories
+set wildignore+=*/.git/*
 
 " backup
 set dir=~/.vim/tmp
@@ -96,31 +96,17 @@ nnoremap <C-l> <C-w>l
 
 " autocommands
 au BufRead,BufNew ~/.mutt/temp/mutt* so ~/.mutt/mutt.vim
+au FileType edp set commentstring=//\ %s
 
 augroup vimrcEx
   autocmd!
-
-  autocmd BufRead * call SetStatusLine()
 
   " Restore cursor position when reopening a file
   autocmd BufReadPost *
         \ if line("'\"") > 0 && line("'\"") <= line("$") |
         \ exe "normal g`\"" |
         \ endif
-
-  " when an omnicompletion opens up a preview window (eclim) the following
-  " will close the window on cursor movement or insert-exit
-  autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
-  autocmd InsertLeave  * if pumvisible() == 0|pclose|endif
 augroup END
-
-" functions
-function! SetStatusLine()
-  let l:s1="%3.3n\\ %f\\ %h%m%r%w"
-  let l:s2="[%{strlen(&filetype)?&filetype:'?'},\\ %{&encoding},\\ %{&fileformat}]"
-  let l:s3="%=\\ 0x%-8B\\ \\ %-14.(%l,%c%V%)\\ %<%P"
-  execute "set statusline=" . l:s1 . l:s2 . l:s3
-endfunction
 
 if has('mouse')
   set mouse=a
