@@ -31,11 +31,11 @@
 #     XF86MonBrightnessUp
 
 # external display
-"vex"
-    m:0x0 + c:235
-    XF86Display
+# "vex"
+#     m:0x0 + c:235
+#     XF86Display
 
 # printscreen
-"printscreen -e 'mv $f ~/pictures/scrot'"
-    m:0x0 + c:107
-    Print
+# "printscreen"
+#     m:0x0 + c:107
+#     Print
