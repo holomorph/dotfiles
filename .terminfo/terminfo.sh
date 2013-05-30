@@ -3,6 +3,8 @@
 # find "vim disp" in tmux FAQ
 # http://tmux.svn.sourceforge.net/viewvc/tmux/trunk/FAQ
 
+unset CDPATH
+
 TERMINFO="screen-256color"
 
 ALL_OFF="\e[1;0m"
@@ -48,5 +50,3 @@ infocmp "$TERMINFO" | sed \
 msg "Compiling new terminfo file..."
 tic "$HOME/.terminfo/"$TERMINFO".terminfo"
 msg "Done!"
-
-unset CDPATH
