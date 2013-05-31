@@ -1,13 +1,5 @@
-#
-# ~/.zlogin
-#
-# Executes commands at login post-zshrc.
-#
-# Authors:
-# Sorin Ionescu <sorin.ionescu@gmail.com>
-#
+# ~/.config/zsh/zlogin
 
-# Execute code that does not affect the current session in the background.
 {
   # Compile the completion dump to increase startup speed.
   zcompdump="${ZDOTDIR:-$HOME}/.zcompdump"

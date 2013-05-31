@@ -1,9 +1,4 @@
-#
-# ~/.zprofile
-#
-
-# grep colors
-export GREP_COLOR='1;32'
+# ~/.config/zsh/zprofile
 
 # man page colors in less
 export LESS_TERMCAP_mb=$'\E[01;31m'
@@ -39,3 +34,5 @@ export PATH="$HOME/.local/bin:$PATH"
 if (( UID )); then
   [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx &> "$HOME/.logs/x.log"
 fi
+
+# vim: syn=sh

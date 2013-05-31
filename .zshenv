@@ -1,3 +1,3 @@
 # ~/.zshenv
 
-export BROWSER="firefox"
+ZDOTDIR=~/.config/zsh

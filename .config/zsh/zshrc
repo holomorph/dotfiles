@@ -1,4 +1,4 @@
-# ~/.zshrc
+# ~/.config/zsh/zshrc
 
 autoload -U compinit && compinit
 autoload -U up-line-or-beginning-search
