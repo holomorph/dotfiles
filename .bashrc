@@ -21,7 +21,7 @@ export HISTFILESIZE=20000
 
 # prompt
 PS1="\[\e[1;30m\][\[\e[0;31m\]\u\[\e[1;30m\]@\[\e[0;91m\]\h \
-\[\e[0;93m\]\w\[\e[1;30m\]]\n\[\e[0;31m\] #\[\e[0m\] "
+\[\e[0;93m\]\w\[\e[1;30m\]]\n\[\e[0;34m\] \$\[\e[0m\] "
 
 # aliases
 alias v='vim -p'
@@ -48,6 +48,11 @@ bind '"\e[B": history-search-forward'
 bind '"\C-a": beginning-of-line'
 bind '"\C-e": end-of-line'
 bind '"\C-u": kill-whole-line'
+
+# function
+function cd() {
+	builtin cd "$@" && ls;
+}
 
 # configs
 # for cfg in aliases bindings; do
