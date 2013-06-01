@@ -19,3 +19,4 @@ bindkey "^P" up-line-or-beginning-search
 bindkey "^U" kill-whole-line
 bindkey "^W" vi-backward-kill-word
 bindkey "^?" backward-delete-char
+bindkey "^[[3~" delete-char
