@@ -11,8 +11,8 @@ pythonfile = ~/.mutt/gmail.py
 localrepository = gmail-local
 remoterepository = gmail-remote
 status_backend = sqlite
-#autorefresh = 3
-#quick = 9
+autorefresh = 3
+quick = 9
 
 [Repository gmail-local]
 type = Maildir
@@ -23,8 +23,6 @@ nametrans = nt_local
 maxconnections = 3
 type = Gmail
 remotehost = imap.gmail.com
-remoteusereval = username("gmail")
-remotepasseval = password("gmail")
 realdelete = no
 nametrans = nt_remote
 folderfilter = lambda foldername: foldername not in ['[Gmail]/All Mail', '[Gmail]/Imporant', '[Gmail]/Starred']
