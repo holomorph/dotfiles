@@ -205,6 +205,7 @@ EXEC 01;32
 # document formats
 .doc 03;34
 .docx 03;34
+.djvu 03;91
 .pdf 03;91
 .rst 03;94
 .tex 00;96;100
