@@ -63,6 +63,7 @@ set wildignore+=.git,.hg
 set dir=~/.vim/tmp
 set backup backupdir=~/.vim/backup
 set undofile undodir=~/.vim/undo
+set viminfo+=n~/.vim/.viminfo
 
 " fix typos
 command! Q q
