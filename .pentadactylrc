@@ -42,6 +42,7 @@ hi StatusWarningMsg color:#dfe4cf !important; font-weight:bold !important;
 hi Filter color: #ffffff; font-weight:bold;
 hi String color: #cc9393; white-space: pre;
 hi NonText color:#5b605e; font-weight:bold;
+hi Tag color: #efef8f;
 hi Title color:#ffcfaf; font-weight:bold;
 hi URL color: #7f9f7f;
 hi Indicator color: #93b3a3; font-weight: bold; width:1em; text-align: center;
