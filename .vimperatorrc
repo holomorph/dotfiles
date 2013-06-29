@@ -75,8 +75,8 @@ vnoremap ; :
 " quvi
 js <<EOF
 hints.addMode("l", "Launch video from hint", function (elem, loc)
-              commandline.open('', '!quvi "' + loc.replace(/([$`"\\])/g, "\\$1")
-              + '" &>/dev/null &', modes.EX));
+              io.system('quvi "' + loc.replace(/([$`"\\])/g, "\\$1")
+              + '" &>/dev/null &'));
 EOF
 nmap <silent> x :l
 
