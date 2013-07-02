@@ -1,5 +1,5 @@
 application/octet-stream; echo %s "can be anything..."; copiousoutput;
-text/html; elinks -dump %s; copiousoutput;
+text/html; elinks -dump-charset %{charset} -dump %s; copiousoutput;
 
 application/pdf; zathura %s;
 application/postscript; zathura %s;
