@@ -1,11 +1,13 @@
 # ~/.config/newsbeuter/config
 
-browser "firefox %u &> /dev/null &"
+browser       "firefox %u &> /dev/null &"
 html-renderer "elinks -dump"
 
 auto-reload yes
 reload-time 30
 reload-threads 3
+mark-as-read-on-hover yes
+max-items 100
 
 bind-key j down
 bind-key k up
@@ -20,3 +22,7 @@ highlight article "^Title:.*" yellow default bold
 highlight article "^Author:.*" cyan default
 highlight article "^Link:.*" cyan default
 highlight article "^Date:.*" cyan default
+
+feedlist-format    "%4i %n %11u %t"
+articlelist-format "%4i %f %D  %?T?|%-17T|  ?%t"
+notify-format      "%d new articles (%n unread articles, %f unread feeds)"
