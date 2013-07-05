@@ -8,6 +8,7 @@ set folder    = "~/.mutt/mail/"
 set sendmail  = "/usr/bin/msmtp -a gmail -f $my_gmail --user=$my_gmail"
 set spoolfile = "+inbox"
 set postponed = "+drafts"
+set trash     = "+trash"
 
 unset record # gmail saves sent mail in +sent anyways
 
