@@ -5,6 +5,7 @@ color normal white default
 color status brightblue black
 color error brightcyan default
 color markers brightwhite color233
+color search color16 color79
 
 # index
 color tree color8 default
@@ -23,7 +24,6 @@ color body blue default "(finger|ftp|http|https|news|telnet)://[^ >]*"
 color body blue default "<URL:[^ ]*>"
 color body blue default "www\\.[-.a-z0-9]+\\.[a-z][a-z][a-z]?([-_./~a-z0-9]+)?"
 color body blue default "[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+"
-#color body brightred default "^[-|=|\.|\*]{4}.*"
 
 # diff
 color body blue default "^diff \-.*"
@@ -40,7 +40,6 @@ color body color9 default "^\-$"
 # message body
 color attachment color109 color233
 color signature brightwhite default
-color search brightyellow red
 color tilde color8 default
 
 # smileys, the right way and the backward-ass euro way
@@ -52,8 +51,8 @@ color body brightwhite default "(^| )\\*[^*]+\\*( |$)"
 color body brightwhite default "(^| )_[^_]+_( |$)"
 color body brightwhite default "(^| )/[^/]+/( |$)"
 
-color bold      cyan  default # highliting bold patterns in body
-color underline green default # highliting underlined patterns in body
+color bold      cyan  default # highlighting bold patterns in body
+color underline green default # highlighting underlined patterns in body
 color quoted    cyan  default # quoted text in body
 
 # quote levels
