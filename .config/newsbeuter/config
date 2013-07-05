@@ -16,6 +16,7 @@ bind-key ^U pageup
 
 color listfocus color11 color8
 color info green black bold
+search-highlight-colors color16 color79
 
 highlight article "^Feed:.*" cyan default bold
 highlight article "^Title:.*" yellow default bold
