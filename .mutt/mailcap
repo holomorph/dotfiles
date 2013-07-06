@@ -11,7 +11,7 @@ image/*; feh -. %s;
 audio/*; mplayer %s; copiousoutput;
 video/*; mplayer %s; copiousoutput;
 
-application/vnd.openxmlformats-officedocument.wordprocessingml.document; docx2txt.pl < %s; nametemplate=%s.docx; copiousoutput;
+application/vnd.openxmlformats-officedocument.wordprocessingml.document; docx2txt %s; nametemplate=%s.docx; copiousoutput;
 application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; xlsx2csv %s | sed -f ~/.mutt/xlsx.sed | column -ts; copiousoutput;
 application/vnd.ms-excel; xls2csv %s | sed -f ~/.mutt/xls.sed | column -ts; copiousoutput;
 application/msword; antiword -f %s; copiousoutput;
