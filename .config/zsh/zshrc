@@ -17,7 +17,7 @@ SAVEHIST=10000
 HISTFILE="$HOME/.logs/zhistory"
 
 ## configs
-for cfg in aliases bindings extract fun zstyle; do
+for cfg in aliases bindings extract fun style; do
 	[[ -e "$HOME/.config/zsh/$cfg.zsh" ]] && \
 		source "$HOME/.config/zsh/$cfg.zsh"
 done

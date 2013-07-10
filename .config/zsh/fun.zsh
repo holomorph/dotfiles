@@ -1,5 +1,10 @@
-# ~/.config/zsh/function.zsh
+# ~/.config/zsh/fun.zsh
 
-function cd() {
+cd() {
   builtin cd "$@" && ls;
 }
+
+n() {
+  $EDITOR "${@[@]/#/"$HOME/doc/notes/"}";
+}
+compdef "_files -W ~/doc/notes -/" n
