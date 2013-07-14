@@ -1,5 +1,6 @@
 # ~/.quvirc
 
-exec = "mpv --really-quiet --cache=4096 --cache-min=10 --title=%t %u"
+exec = "mpv --really-quiet --cache=4096 --title=%t %u"
+agent = ""
 format = fmt45_720p,fmt44_480p,default
 verbosity = quiet
