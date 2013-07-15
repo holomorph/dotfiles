@@ -1,0 +1,11 @@
+[Unit]
+Description=Dwm Status Line on %i
+After=mpd.service
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/dwmstatus -i %i -m %h/.mutt/mail/inbox/new
+Restart=no
+
+[Install]
+WantedBy=default.target
