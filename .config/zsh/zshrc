@@ -33,7 +33,3 @@ else
 '%(!.%F{red}#%f.%F{blue}$%f) '
 fi
 SPROMPT="Correct %B%F{red}%R%b%f to %B%F{green}%r%b%f [nyae]? "
-
-## envoy
-envoy -t gpg-agent
-source <(envoy -p)
