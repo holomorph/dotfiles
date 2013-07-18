@@ -6,6 +6,7 @@ function x() {
 	while (( $# > 0 )); do
 		case "$1" in
 		(*.7z) 7za x "$1";;
+		(*.bz2) bunzip2 "$1";;
 		(*.gz) gunzip -k "$1";;
 		(*.rar) unrar e -ad "$1";;
 		(*) bsdtar -xf "$1";;
