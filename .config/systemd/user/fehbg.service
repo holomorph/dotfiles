@@ -1,0 +1,9 @@
+[Unit]
+Description=Feh Background
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/feh --no-fehbg --bg-fill %h/pictures/wallpaper/default
+
+[Install]
+WantedBy=default.target
