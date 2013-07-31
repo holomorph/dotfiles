@@ -44,6 +44,7 @@ hi HintElem background-color: inherit;
 
 hi Indicator color: #efef8f;
 hi NonText font-weight: bold; color: #5b605e;
+hi Tag color: #efef8f;
 hi Title color: #e37170; background: #664040; font-weight: bold; padding: 0 4px;
 hi URL color: #7f9f7f;
 
