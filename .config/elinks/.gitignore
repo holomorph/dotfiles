@@ -1,5 +1,6 @@
-*
-!.gitignore
-!elinks.conf
-!colors.conf
-!bookmarks
+# ~/.config/elinks/.gitignore
+
+cookies
+globhist
+gotohist
+searchhist
