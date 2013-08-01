@@ -27,6 +27,8 @@ export _JAVA_OPTIONS=-Dawt.useSystemAAFontSettings=lcd
 export GTK2_RC_FILES=~/.config/gtk-2.0/gtkrc
 export MPLAYER_HOME=~/.config/mplayer
 export MPV_HOME=~/.config/mpv
+export ELINKS_CONFDIR=~/.config/elinks
+export TERMINFO=~/.local/share/terminfo
 
 # path
 export PATH="$HOME/.local/bin:$PATH"
