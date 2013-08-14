@@ -54,10 +54,10 @@ nnoremap <Leader>, :nohlsearch<CR>
 nnoremap <Leader>d :downloads<CR>
 nnoremap <Leader>m :messages<CR>
 nnoremap <Leader>p :winopen -private<CR>
-map s ;open google 
-map S ;tabopen google 
-nmap <C-S-n> ;tabmove! +1<CR>
-nmap <C-S-p> ;tabmove! -1<CR>
+map s :open google 
+map S :tabopen google 
+nmap <C-S-n> :tabmove! +1<CR>
+nmap <C-S-p> :tabmove! -1<CR>
 nmap <F3> <Nop>
 nmap <C-a> <Nop>
 nmap <C-h> <Nop>
@@ -68,10 +68,6 @@ noremap h 5h
 noremap j 5j
 noremap k 5k
 noremap l 5l
-nnoremap : ;
-nnoremap ; :
-vnoremap : ;
-vnoremap ; :
 
 " quvi
 js <<EOF

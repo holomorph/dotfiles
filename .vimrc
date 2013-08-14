@@ -73,13 +73,10 @@ command! Wq wq
 command! Wa wa
 command! Wqa wqa
 
-" nnoremap q: <Nop>
-" nnoremap q/ <Nop>
-" nnoremap q? <Nop>
-nnoremap Q <Nop>
-
-map ; :
 noremap Y y$
+nnoremap H :help 
+nnoremap Q :quitall<cr>
+nnoremap ZW :write<cr>
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<cr>
 nnoremap <F5> :!make<cr>
 cmap w!! w !sudo tee % >/dev/null<cr>:e!<cr><cr>
@@ -91,7 +88,7 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
 " fugitive
-nnoremap <leader>gg :copen<cr>:Ggrep
+nnoremap <leader>gg :copen<cr>:Ggrep 
 nnoremap <silent> <leader>gs :Gstatus<cr>
 nnoremap <silent> <leader>gd :Gdiff<cr>
 nnoremap <silent> <leader>ge :Gedit<cr>

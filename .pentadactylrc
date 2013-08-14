@@ -82,10 +82,6 @@ nmap -b <Leader>, :noh<CR>
 nmap -b <Leader>d :tabopen about:downloads<CR>
 nmap -b <Leader>m :messages<CR>
 nmap -b <Leader>p :private winopen<CR>
-nmap -b ; :
-nmap -b : ;
-vmap -b ; :
-vmap -b : ;
 nmap -b <C-S-n> :tabmove! +1<CR>
 nmap -b <C-S-p> :tabmove! -1<CR>
 nmap -b h 5h
@@ -106,6 +102,5 @@ hints.addMode("l", "Launch video from hint", function (elem, loc)
 EOF
 nmap -builtin x ;l
 nmap <A-x> -s -js commands.execute('!quvi "' + content.location.href.replace(/([$`"\\])/g, "\\$1") + '" &> /dev/null &');
-"map <A-x> -s -js CommandExMode().open("!quvi '" + content.location.href + "' &> /dev/null &");
 
 " vim: ft=pentadactyl
