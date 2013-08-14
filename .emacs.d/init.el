@@ -1,5 +1,11 @@
 ;; ~/.emacs.d/init.el
 
+(let ((default-directory "~/.emacs.d/site-lisp/"))
+  (normal-top-level-add-to-load-path '("."))
+  (normal-top-level-add-subdirs-to-load-path))
+
+(require 'zenburn-theme)
+
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 (menu-bar-mode -1)
