@@ -1,5 +1,6 @@
 # ~/.config/zsh/aliases.zsh
 
+alias e='emacs -nw'
 alias v='vim'
 alias g='git'
 alias z='zathura --fork'

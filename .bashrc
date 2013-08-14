@@ -24,6 +24,7 @@ PS1="\[\e[1;30m\][\[\e[0;31m\]\u\[\e[1;30m\]@\[\e[0;91m\]\h \
 \[\e[0;93m\]\w\[\e[1;30m\]]\n\[\e[0;34m\] \$\[\e[0m\] "
 
 # aliases
+alias e='emacs -nw'
 alias v='vim'
 alias g='git'
 alias z='zathura --fork'
