@@ -27,6 +27,8 @@ systemd --user &
 
 [[ -z $(pidof -s termite) ]] && termite &
 
+compton --backend xrender -b
+
 while true; do
   dwm 2> "$HOME/.logs/dwm.log"
 done
