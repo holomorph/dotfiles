@@ -60,10 +60,10 @@ set wildignore+=*.a,*.o,*.obj,*.so,*.hi
 set wildignore+=.git,.hg
 
 " backup
-set dir=~/.vim/tmp
-set backup backupdir=~/.vim/backup
-set undofile undodir=~/.vim/undo
-set viminfo+=n~/.vim/.viminfo
+set dir=~/.cache/vim/tmp
+set backup backupdir=~/.cache/vim/backup
+set undofile undodir=~/.cache/vim/undo
+set viminfo+=n~/.cache/vim/viminfo
 
 " fix typos
 command! Q q

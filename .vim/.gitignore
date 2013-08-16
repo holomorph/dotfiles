@@ -1,6 +1,3 @@
 # ~/.vim/.gitignore
 
-backup/
-tmp/
-undo/
 .netrwhist
