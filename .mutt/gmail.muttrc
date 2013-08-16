@@ -5,7 +5,7 @@ color status brightgreen black
 set realname  = $my_realname
 set from      = $my_gmail
 set folder    = "~/.mutt/mail/"
-set sendmail  = "/usr/bin/msmtp -a gmail -f $my_gmail --user=$my_gmail"
+set sendmail  = "/usr/bin/msmtp -C $HOME/.config/msmtp/msmtprc -a gmail -f $my_gmail --user=$my_gmail"
 set spoolfile = "+inbox"
 set postponed = "+drafts"
 set trash     = "+trash"

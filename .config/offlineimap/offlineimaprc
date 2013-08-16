@@ -28,4 +28,4 @@ nametrans = nt_remote
 folderfilter = lambda foldername: foldername not in ['[Gmail]/All Mail', '[Gmail]/Imporant', '[Gmail]/Starred']
 sslcacertfile = /etc/ssl/certs/ca-certificates.crt
 
-# vim:ft=cfg
+# vim: ft=cfg
