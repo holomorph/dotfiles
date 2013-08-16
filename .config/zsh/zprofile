@@ -29,6 +29,7 @@ export MPLAYER_HOME=~/.config/mplayer
 export MPV_HOME=~/.config/mpv
 export ELINKS_CONFDIR=~/.config/elinks
 export TERMINFO=~/.local/share/terminfo
+export QUVI_HOME=~/.config/quvi
 
 # path
 export PATH="$HOME/.local/bin:$PATH"
