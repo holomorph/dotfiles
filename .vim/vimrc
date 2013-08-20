@@ -96,7 +96,7 @@ nnoremap <silent> <leader>gb :Gblame<cr>
 nnoremap <silent> <leader>gl :Glog<cr>
 
 " autocommands
-au BufRead,BufNew ~/.mutt/temp/mutt* so ~/.mutt/mutt.vim
+au BufRead,BufNew /tmp/mutt* so ~/.mutt/mutt.vim
 au FileType edp set commentstring=//\ %s
 au BufReadPost *
 	\ if line("'\"") > 0 && line("'\"") <= line("$") |
