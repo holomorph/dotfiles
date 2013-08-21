@@ -1,6 +1,7 @@
 # ~/.config/zathura/zathurarc
 
-set font "monospace normal 9"
+set font "monospace normal 10"
+set guioptions ""
 
 set default-bg "#1d1f21"
 set default-fg "#969896"
