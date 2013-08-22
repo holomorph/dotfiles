@@ -23,7 +23,7 @@ window_border_color            = "green"
 active_window_border           = "red"
 
 ##### directories ######
-#ncmpcpp_directory = "~/.config/ncmpcpp"
+ncmpcpp_directory = "~/.config/ncmpcpp"
 lyrics_directory  = "~/.cache/ncmpcpp/lyrics"
 
 ##### columns settings #####
