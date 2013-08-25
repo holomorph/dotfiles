@@ -1,17 +1,17 @@
 [options]
-resize_grip         = false
-scroll_on_output    = false
+resize_grip = false
+scroll_on_output = false
 scroll_on_keystroke = true
-audible_bell        = false
-visible_bell        = false
-mouse_autohide      = false
-allow_bold          = true
-dynamic_title       = true
-urgent_on_bell      = true
-clickable_url       = true
-font                = Consolas 10
-scrollback_lines    = 1000
-search_wrap         = true
+audible_bell = false
+visible_bell = false
+mouse_autohide = false
+allow_bold = true
+dynamic_title = true
+urgent_on_bell = true
+clickable_url = true
+font = Consolas 10
+scrollback_lines = 1000
+search_wrap = true
 #icon_name = terminal
 #geometry = 640x480
 
@@ -19,9 +19,9 @@ search_wrap         = true
 transparency = 0.0
 pseudo_transparency = false
 
-## CURSOR
 # "system", "on" or "off"
 cursor_blink = off
+
 # "block", "underline" or "ibeam"
 cursor_shape = block
 
@@ -32,9 +32,12 @@ cursor_shape = block
 # (default if unset: all graphic non-punctuation/space characters)
 #word_chars = -A-Za-z0-9,./?%&#:_=+@~
 
+# set size hints for the window
+#size_hints = false
+
 [colors]
 foreground = #969896
-#foreground_bold = #c5c8c6
+foreground_bold = #ffffff
 #foreground_dim = #888888
 background = #1d1f21
 #cursor = #dcdccc
@@ -43,16 +46,16 @@ background = #1d1f21
 highlight = #2f2f2f
 
 # colors from color0 to color254 can be set
-color0  = #282a2e
-color1  = #a54242
-color2  = #8c9440
-color3  = #de935f
-color4  = #5f819d
-color5  = #85678F
-color6  = #5e8d87
-color7  = #969896
-color8  = #373b41
-color9  = #cc6666
+color0 = #282a2e
+color1 = #a54242
+color2 = #8c9440
+color3 = #de935f
+color4 = #5f819d
+color5 = #85678F
+color6 = #5e8d87
+color7 = #969896
+color8 = #373b41
+color9 = #cc6666
 color10 = #b5bd68
 color11 = #f0c674
 color12 = #81a2be
@@ -69,4 +72,4 @@ border = #ffffff
 border_width = 0.5
 roundness = 1.0
 
-# vim: ft=dosini
+# vim: ft=desktop
