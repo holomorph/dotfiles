@@ -1,8 +1,5 @@
 # ~/.ncmpcpp/config
 
-##### connection settings #####
-mpd_music_dir = "/media"
-
 ##### colors definitions #####
 colors_enabled                 = "yes"
 empty_tag_color                = "cyan"
