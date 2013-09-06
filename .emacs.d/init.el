@@ -23,10 +23,11 @@
 
 (setq-default truncate-lines t)
 (setq-default indent-tabs-mode nil)
+(show-paren-mode 1)
 
 ;; backup
 (setq make-backup-files t)
-(setq backup-directory-alist `(("." . "~/.emacs.d/backup")))
+(setq backup-directory-alist `(("." . "~/.cache/emacs/backup")))
 (setq backup-by-copying-when-linked t)
 (setq delete-old-versions t
       kept-new-versions 6
