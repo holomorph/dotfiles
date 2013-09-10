@@ -1,4 +1,4 @@
-" ~/.vimrc
+" ~/.vim/vimrc
 
 set nocompatible
 call pathogen#runtime_append_all_bundles()
@@ -29,12 +29,6 @@ set tabstop=4
 set list listchars=tab:›\ ,extends:$,precedes:^,trail:·
 set nrformats+=alpha
 
-" folding
-set foldenable
-set foldmethod=marker
-set foldmarker={{{,}}}
-set foldcolumn=0
-
 " vim ui
 set autoread
 set autowrite
@@ -43,7 +37,6 @@ set cursorline
 set equalalways
 set hidden
 set history=50
-set lazyredraw
 set laststatus=2
 set mouse=a
 set ruler
@@ -93,11 +86,7 @@ nnoremap <silent> <leader>gs :Gstatus<cr>
 nnoremap <silent> <leader>gd :Gdiff<cr>
 nnoremap <silent> <leader>ge :Gedit<cr>
 nnoremap <silent> <leader>gb :Gblame<cr>
-nnoremap <silent> <leader>gl :Glog<cr>
 
 " autocommands
 au BufRead,BufNew /tmp/mutt* so ~/.mutt/mutt.vim
 au FileType edp set commentstring=//\ %s
-au BufReadPost *
-	\ if line("'\"") > 0 && line("'\"") <= line("$") |
-	\ exe "normal g`\"" | endif

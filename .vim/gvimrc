@@ -1,4 +1,4 @@
-" ~/.gvimrc
+" ~/.vim/gvimrc
 
 set lines=40
 set columns=80
