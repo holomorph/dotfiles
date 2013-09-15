@@ -16,7 +16,7 @@ zstyle ':completion:*:*:kill:*' insert-ids single
 
 # apps
 zstyle ':completion:*:*:(vim|gvim):*:*files' ignored-patterns \
-	'*~|*.(aux|old|out|pdf)'
+	'*~|*.(aux|out|pdf)'
 zstyle ':completion:*:*:zathura:*:*' file-patterns \
   '(#i)*.{ps,pdf,djvu}:files:ps|pdf|djvu\ files *(-/):directories:directories'
 
