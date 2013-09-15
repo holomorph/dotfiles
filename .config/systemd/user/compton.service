@@ -1,0 +1,8 @@
+[Unit]
+Description=Compton
+
+[Service]
+ExecStart=/usr/bin/compton --backend xrender
+
+[Install]
+WantedBy=default.target

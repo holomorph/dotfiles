@@ -25,9 +25,7 @@ xmodmap -e "keycode 135 = Super_R"
 
 systemd --user &
 
-[[ -z $(pidof -s termite) ]] && termite &
-
-compton --backend xrender -b
+[[ -z $(pgrep termite) ]] && termite &
 
 while true; do
   dwm 2> "$HOME/.logs/dwm.log"
