@@ -1,8 +1,8 @@
 # ~/.config/zsh/aliases.zsh
 
-alias e='emacs -nw'
 alias v='vim'
 alias g='git'
+alias e='emacsclient -t'
 alias z='zathura --fork'
 
 alias ncmpcpp='ncmpcpp -c ~/.config/ncmpcpp/config'
