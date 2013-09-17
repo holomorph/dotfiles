@@ -1,14 +1,14 @@
 # ~/.config/zsh/zshrc
 
-autoload -U compinit && compinit
+zmodload zsh/complist
+autoload -Uz compinit && compinit
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
 
-setopt correct
-setopt extended_glob
-setopt extended_history share_history
-setopt hist_find_no_dups hist_ignore_dups hist_verify
-setopt hist_expire_dups_first
+setopt auto_cd correct
+setopt extended_glob append_history extended_history share_history
+setopt hist_find_no_dups hist_expire_dups_first hist_ignore_dups
+setopt hist_ignore_space hist_reduce_blanks hist_save_no_dups hist_verify
 setopt prompt_subst
 unsetopt flow_control
 
@@ -33,3 +33,13 @@ else
 '%(!.%F{red}#%f.%F{blue}$%f) '
 fi
 SPROMPT="Correct %B%F{red}%R%b%f to %B%F{green}%r%b%f [nyae]? "
+
+## hooks
+precmd() {
+	print -Pn "\e];%m (%~) - Terminal\a"
+}
+
+preexec() {
+	local cmd=${1[(wr)^(*=*|sudo|-*)]}
+	print -Pn "\e];$cmd:q - Terminal\a"
+}

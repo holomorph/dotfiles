@@ -10,9 +10,7 @@ bindkey "^[[A" up-line-or-beginning-search   # Up
 bindkey "^[[B" down-line-or-beginning-search # Down
 bindkey "^[[Z" reverse-menu-complete         # Shift+Tab
 bindkey "^A" beginning-of-line
-bindkey "^B" backward-word
 bindkey "^E" end-of-line
-bindkey "^F" forward-word
 bindkey "^K" kill-line
 bindkey "^N" down-line-or-beginning-search
 bindkey "^P" up-line-or-beginning-search
