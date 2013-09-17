@@ -12,14 +12,6 @@ export LESS_TERMCAP_us=$'\E[01;37m'
 # dircolors
 source <(dircolors -b "$HOME/.config/dircolors")
 
-# disable less history file
-export LESSHISTFILE=-
-
-# highest compression
-export GZIP=-9
-export BZIP=-9
-export XZ_OPT=-9
-
 # turn on font antialiasing in java
 export _JAVA_OPTIONS=-Dawt.useSystemAAFontSettings=lcd
 
@@ -31,6 +23,7 @@ export ELINKS_CONFDIR=~/.config/elinks
 export TERMINFO=~/.local/share/terminfo
 export QUVI_HOME=~/.config/quvi
 export NETHACKOPTIONS=~/.config/nethack/nethackrc
+export NOTMUCH_CONFIG=~/.config/notmuch/config
 
 # path
 export PATH="$HOME/.local/bin:$PATH"

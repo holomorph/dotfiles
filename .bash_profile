@@ -12,14 +12,6 @@ export LESS_TERMCAP_us=$'\E[01;37m'
 # dircolors
 source <(dircolors -b "$HOME/.config/dircolors")
 
-# disable less history file
-export LESSHISTFILE=-
-
-# highest compression
-export GZIP=-9
-export BZIP=-9
-export XZ_OPT=-9
-
 # turn on font antialiasing in java
 export _JAVA_OPTIONS=-Dawt.useSystemAAFontSettings=lcd
 
