@@ -1,22 +1,23 @@
 # ~/.config/zsh/zstyle.zsh
 
 zstyle ':completion:*' menu select
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' rehash yes
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' completer _complete _match _approximate
 zstyle ':completion:*:approximate:*' max-errors 1 numeric
 zstyle ':completion:*:match:*' original only
-zstyle ':completion:*:*:*:*:processes' command \
-  "ps -u $USER -o pid,user,comm -w -w"
+zstyle ':completion:*' ignore-parents parent pwd
 
 # kill
-zstyle ':completion:*:*:kill:*' command 'ps -e -o pid,%cpu,tty,cputime,cmd'
+zstyle ':completion:*:*:*:*:processes' command \
+  "ps -u$USER -o pid,comm,stat -w -w"
 zstyle ':completion:*:*:kill:*:processes' list-colors \
-  '=(#b) #([0-9]#) ([0-9a-z-]#)*=32=0=34'
-zstyle ':completion:*:*:kill:*' insert-ids single
+  '=(#b) #([0-9]#) ([0-9a-z-]#)*=36=0=32'
 
 # apps
 zstyle ':completion:*:*:(vim|gvim):*:*files' ignored-patterns \
-	'*~|*.(aux|out|pdf)'
+  '*.(o|aux|out|pdf)'
 zstyle ':completion:*:*:zathura:*:*' file-patterns \
   '(#i)*.{ps,pdf,djvu}:files:ps|pdf|djvu\ files *(-/):directories:directories'
 
@@ -27,7 +28,7 @@ zstyle -e ':completion:*:approximate:*' max-errors \
 # users
 zstyle ':completion:*:*:*:users' ignored-patterns \
 	bin daemon mail ftp http nobody dbus avahi named git bitlbee mpd \
-	rtkit ntp usbmux gdm
+	rtkit ntp usbmux gdm polkitd uuidd sagemath
 
 # ssh/scp/rsync
 zstyle ':completion:*:(scp|rsync):*' tag-order \
