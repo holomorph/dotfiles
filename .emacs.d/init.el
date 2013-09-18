@@ -13,26 +13,28 @@
 (line-number-mode t)
 (column-number-mode t)
 (size-indication-mode t)
-
-(setq inhibit-startup-screen t)
-(setq auto-save-default nil)
-(setq search-highlight t)
-(setq query-replace-highlight t)
-(setq mouse-sel-retain-highlight t)
-(setq scroll-preserve-screen-position t)
-
-(setq-default truncate-lines t)
-(setq-default indent-tabs-mode nil)
 (show-paren-mode 1)
 
+(setq
+ inhibit-startup-screen t
+ auto-save-default nil
+ search-highlight t
+ query-replace-highlight t
+ mouse-sel-retain-highlight t
+ scroll-preserve-screen-position t)
+
+(setq-default
+ truncate-lines t
+ indent-tabs-mode nil)
+
 ;; backup
-(setq make-backup-files t)
-(setq backup-directory-alist `(("." . "~/.cache/emacs/backup")))
-(setq backup-by-copying-when-linked t)
-(setq delete-old-versions t
-      kept-new-versions 6
-      kept-old-versions 2
-      version-control t)
+(setq make-backup-files t
+ backup-directory-alist `(("." . "~/.cache/emacs/backup"))
+ backup-by-copying-when-linked t
+ delete-old-versions t
+ kept-new-versions 6
+ kept-old-versions 2
+ version-control t)
 
 ;; bindings
 (defun goto-next-window nil
