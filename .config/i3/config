@@ -1,0 +1,166 @@
+## ~/.config/i3/config
+##
+## i3 config file (v4)
+## http://i3wm.org/docs/userguide.html
+
+set $mod Mod4
+
+## Font for window titles
+set $font -*-terminus-medium-r-normal-*-*-*-*-*-*-*-*-*
+font $font
+
+## Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+## start a terminal
+bindsym $mod+Return exec termite
+
+## kill focused window
+bindsym $mod+Shift+c kill
+
+## start dmenu (a program launcher)
+bindsym $mod+o exec dmenu_run -fn "$font" -sf "#ffffff" -sb "#373b41" -nf "#f0c674"
+
+## change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+## move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+## split in horizontal orientation
+bindsym $mod+v split h
+
+## split in vertical orientation
+bindsym $mod+apostrophe split v
+
+## enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen
+
+## change container layout (stacked, tabbed, toggle split)
+bindsym $mod+Shift+s layout stacking
+bindsym $mod+t layout tabbed
+bindsym $mod+e layout toggle split
+
+## toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+space focus mode_toggle
+
+## focus the parent container
+bindsym $mod+Shift+a focus parent
+
+## focus the child container
+bindsym $mod+d focus child
+
+## switch to workspace
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+
+## move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+## reload the configuration file
+bindsym $mod+Ctrl+r reload
+## restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $mod+Shift+r restart
+## exit i3 (logs you out of your X session)
+bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'Really quit?' -b 'Yes' 'i3-msg exit'"
+
+## resize window (you can also use the mouse for that)
+mode "resize" {
+        bindsym h resize shrink width 10 px or 4 ppt
+        bindsym j resize grow height 10 px or 4 ppt
+        bindsym k resize shrink height 10 px or 4 ppt
+        bindsym l resize grow width 10 px or 4 ppt
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+## class                border  backgr. text    indicator
+client.focused          #373b41 #373b41 #ffffff #23abd2
+client.focused_inactive #222222 #222222 #f0c674 #222222
+client.unfocused        #222222 #222222 #888888 #292d2e
+client.urgent           #a54252 #222222 #cc6666 #cc6666
+
+## i3bar
+bar {
+	position top
+	status_command i3status
+
+	colors {
+		background         #1b1b1b
+		statusline         #606060
+		separator          #373b41
+		focused_workspace  #373b41 #373b41 #ffffff
+		active_workspace   #373b41 #373b41 #ffffff
+		inactive_workspace #1b1b1b #1b1b1b #f0c674
+		urgent_workspace   #a54252 #1b1b1b #cc6666
+	}
+}
+
+for_window [class="feh"] floating enable
+for_window [class="ffplay"] floating enable
+for_window [class="Gbdfed"] floating enable
+for_window [class="Firefox"] floating enable
+for_window [class="Firefox" instance="Navigator"] floating disable
+for_window [class="Mplayer"] floating enable
+for_window [class="mplayer2"] floating enable
+for_window [class="mpv"] floating enable
+for_window [class="MuPDF"] floating enable
+for_window [class="Xfd"] floating enable
+for_window [class="XFontSel"] floating enable
+for_window [class="Zathura"] floating enable
+
+assign [Class="Fig"] 8
+assign [Class="Firefox"] 1
+assign [Class="Gimp"] 8
+assign [Class="Inkscape"] 8
+
+## bindings
+bindsym $mod+w      exec firefox
+bindsym $mod+Ctrl+l exec i3lock -d -c000000
+bindsym XK_Print    exec printscreen
+bindsym XF86Display exec vex
+
+## backlight
+bindsym XF86MonBrightnessUp   exec bset -i 2
+bindsym XF86MonBrightnessDown exec bset -d 2
+
+## volume
+bindsym XF86AudioMute        exec amixer -q set Master toggle
+bindsym XF86AudioLowerVolume exec amixer -q set Master playback 1dB-
+bindsym XF86AudioRaiseVolume exec amixer -q set Master playback 1dB+
+bindsym $mod+a               exec amixer -q set Master playback 1dB-
+bindsym $mod+s               exec amixer -q set Master playback 1dB+
+
+## music
+bindsym $mod+backslash    exec ncmpcpp toggle
+bindsym $mod+bracketright exec ncmpcpp next
+bindsym $mod+bracketleft  exec ncmpcpp prev

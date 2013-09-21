@@ -1,0 +1,68 @@
+# i3status configuration file.
+# see "man i3status" for documentation.
+
+# It is important that this file is edited as UTF-8.
+# The following line should contain a sharp s:
+# ß
+# If the above line is not correctly displayed, fix your editor first!
+
+general {
+	output_format = "i3bar"
+	interval = 15
+	colors = true
+	color_good     = "#00ff00"
+	color_degraded = "#b5bd68"
+	color_bad      = "#a54252"
+}
+
+order += "volume master"
+order += "load"
+order += "cpu_temperature 0"
+order += "run_watch DHCP"
+order += "ethernet bond0"
+order += "wireless wlp2s0"
+order += "ethernet enp5s0"
+order += "battery 1"
+order += "tztime local"
+
+volume master {
+	format = "V: %volume"
+	device = "default"
+	mixer = "Master"
+	mixer_idx = 0
+}
+
+load {
+	format = "L: %1min %5min %15min"
+}
+
+cpu_temperature 0 {
+	format = "T: %degreesC"
+	path = "/sys/devices/platform/coretemp.0/temp2_input"
+}
+
+ethernet bond0 {
+	format_up = "B: %ip"
+	format_down = ""
+}
+
+wireless wlp2s0 {
+	format_up = "W: %quality @ %essid"
+	format_down = "W: down"
+}
+
+ethernet enp5s0 {
+	format_up = "E: up (%speed)"
+	format_down = ""
+}
+
+battery 1 {
+	format = "%status %percentage (%remaining) %consumption"
+	path = "/sys/class/power_supply/BAT%d/uevent"
+	low_threshold = 10
+}
+
+tztime local {
+	format = "%Y-%m-%d %H:%M"
+}
+
