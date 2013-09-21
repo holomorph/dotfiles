@@ -2,12 +2,14 @@
 Description=DHCP Client Daemon on %I
 Wants=network.target
 Before=network.target
+BindsTo=sys-subsystem-net-devices-%i.device
+After=sys-subsystem-net-devices-%i.device
 
 [Service]
 Type=forking
-PIDFile=/run/dhcpcd.pid
-ExecStart=/usr/bin/sudo dhcpcd -q -b
-ExecStop=/usr/bin/sudo dhcpcd -x
+PIDFile=/run/dhcpcd-%I.pid
+ExecStart=/usr/bin/sudo dhcpcd -q -b %I
+ExecStop=/usr/bin/sudo dhcpcd -x %I
 
 [Install]
 WantedBy=default.target
