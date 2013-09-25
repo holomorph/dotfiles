@@ -17,10 +17,13 @@
 
 (setq
  inhibit-startup-screen t
+ compilation-read-command nil
  auto-save-default nil
  search-highlight t
  query-replace-highlight t
  mouse-sel-retain-highlight t
+ scroll-margin 3
+ scroll-conservatively 40
  scroll-preserve-screen-position t)
 
 (setq-default
