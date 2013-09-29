@@ -7,15 +7,14 @@ set passkeys=github.com:<Return>
 set! plugins.hide_infobar_for_missing_plugin=true
 
 " command line
-hi CmdNormal color:#969896; background:#1b1b1b;
+hi CmdNormal color:#969896; background:#121212;
 hi CmdLine color: inherit; background: inherit;
-hi Normal color: #969896; background:#282a2e;
-hi StatusNormal: background: #282a2e;
+hi Normal color: #969896; background:#1f1f1f;
 hi StatusLine font-weight: normal; padding-right: 5px; min-height: 14px;
-hi StatusLineBroken   color: #ffa0a0; background: #1d1f21;
-hi StatusLineNormal   color: #969896; background: #282a2e;
-hi StatusLineSecure   color: #81a2be; background: #282a2e;
-hi StatusLineExtended color: #a0ffa0; background: #282a2e;
+hi StatusLineBroken color: #ffa0a0; background: #121212;
+hi StatusLineNormal color: #969896; background: #121212;
+hi StatusLineSecure color: #81a2be; background: #121212;
+hi StatusLineExtended color: #a0ffa0; background: #121212;
 
 " completions
 hi CompDesc color: #cc9393; width: 55%;
@@ -23,21 +22,22 @@ hi CompGroup color: inherit; font-weight: bold;
 hi CompIcon display: none;
 hi CompItem color:inherit; background:inherit; font-weight:normal;
 hi CompItem:nth-child(2n+1) none;
-hi CompItem[selected] color:#f0c674; background:#434443;
-hi CompTitle font-weight: bold; color:#ffcfaf; background:#1b1b1b;
+hi CompItem[selected] background:#434443;
+hi CompTitle font-weight: bold; color:#ffcfaf; background:#121212;
 hi CompTitleSep display: none;
 
 " messages
-hi ErrorMsg color: #80d4aa; font-weight: bold;
-hi InfoMsg color:#f8f893;
-hi ModeMsg color:#ffcfaf;
-hi MoreMsg color:#b5bd68;
-hi WarningMsg color: #dfe4cf; font-weight: bold;
-hi StatusErrorMsg color:#80d4aa !important;
-hi StatusInfoMsg color:#f8f893 !important; font-weight:inherit;
-hi StatusModeMsg color:#ffcfaf !important;
-hi StatusMoreMsg color:#b5bd68 !important; font-weight:bold;
-hi StatusWarningMsg color:#dfe4cf !important; font-weight:bold !important;
+hi ErrorMsg color: #80d4aa !important; font-weight: bold !important;
+hi InfoMsg color: #f8f893;
+hi ModeMsg color: #ffcfaf;
+hi MoreMsg color: #b5bd68;
+hi WarningMsg color: #ffffff; font-weight: bold;
+hi StatusErrorMsg color: #80d4aa !important;
+hi StatusInfoMsg color: #f8f893 !important; background: transparent !important;
+hi StatusModeMsg color: #ffcfaf !important; background: transparent !important;
+hi StatusMoreMsg color: #efefef !important; background: transparent !important; font-weight: bold !important;
+hi StatusWarningMsg color: #ffffff !important; background: transparent !important; font-weight: bold !important;
+hi StatusQuestion color: #efefef !important; background: transparent !important; font-weight: bold;
 
 " hints
 hi Hint font-family: monospace; font-size: 8pt; font-weight: bold;
@@ -46,48 +46,42 @@ hi Hint -a padding: 0px 1px 0px 1px;
 hi HintActive background-color: #88ff00; color: black !important;
 hi HintElem background-color: inherit;
 
-hi Filter color: #ffffff; font-weight:bold;
+" other
+hi Comment color: #7f9f7f;
+hi Disabled color: #f18c96; font-weight: bold;
+hi Enabled color: #71d3b4; font-weight: bold;
+hi Filter color: #ffffff; font-weight: bold;
+hi Indicator /* buffers */ color: #efef8f; font-weight: bold; width: 1em; text-align: center;
+hi Key color: #f0dfaf; font-weight: bold;
+hi NonText color: #404040; font-weight: bold;
+hi Question /* hint modes */ color: #82a282; background: #282a2e; font-weight: bold;
 hi String color: #cc9393; white-space: pre;
-hi NonText color:#5b605e; font-weight:bold;
-hi Tag color: #efef8f;
-hi Title color:#ffcfaf; font-weight:bold;
+hi Tag /* bmarks */ color: #e89393; font-weight: bold;
+hi Title color: #ffcfaf; font-weight: bold;
 hi URL color: #7f9f7f;
-hi Indicator color: #93b3a3; font-weight: bold; width:1em; text-align: center;
-
-hi Question color: #82a282; background: #282a2e; font-weight: bold;
-hi StatusQuestion color: #82a282; background: #282a2e; font-weight: bold;
 
 " downloads
-"hi Download color:#969896;
-"hi Download>* color:#969896;
-"hi Download:nth-child(2n+1) none;
-"hi DownloadPercent color:#8cd0d3;
-"hi DownloadProgress color:#8cd0d3;
-"hi DownloadProgressHave color:#8cd0d3;
-"hi DownloadProgressTotal color:#8cd0d3;
-"hi DownloadSource color:#7f9f7f;
-"hi DownloadState color:#dca3a3;
-"hi DownloadTitle font-weight: bold !important; color:#7f9f7f !important;
-"hi Button display:inline-block; cursor: pointer; color:#efef8f; text-decoration: none;
-"hi Button:hover text-decoration: none;
-"hi Button::after content:">"; color:#8f8f8f;
-"hi Button::before content:"<"; color:#8f8f8f;
-"hi Button:not([collapsed]) content:"/<";
-"hi Button:not([collapsed]) ~ Button:not([collapsed])::before content:"/<";
-"hi LinkInfo color: #969896; background: #121212; position: absolute; left: 100%; padding: 0.5ex; margin: -1ex -1ex;
+hi DownloadPercent color:#8cd0d3;
+hi DownloadSource color:#7f9f7f;
+hi Button display:inline-block; cursor: pointer; color: #dfdfdf; font-weight: bold; text-decoration: none;
+hi Button:hover text-decoration: none;
+hi Button::after -a color:#404040 !important;
+hi Button::before -a color:#404040 !important;
+hi LinkInfo color: #969896; background: #121212; position: absolute; left: 100%; padding: 0.5ex; margin: -1ex -1ex;
 
 " mappings
 map , <Leader>
 nmap -b <Leader>, :noh<CR>
-nmap -b <Leader>d :tabopen about:downloads<CR>
+nmap -b <Leader>a :addons<CR>
+nmap -b <Leader>d :downloads<CR>
 nmap -b <Leader>m :messages<CR>
 nmap -b <Leader>p :private winopen<CR>
 nmap -b <C-S-n> :tabmove! +1<CR>
 nmap -b <C-S-p> :tabmove! -1<CR>
-nmap -b h 5h
-nmap -b j 5j
-nmap -b k 5k
-nmap -b l 5l
+nmap -b h 7h
+nmap -b j 7j
+nmap -b k 7k
+nmap -b l 7l
 nmap <C-a> <Nop>
 nmap <C-h> <Nop>
 nmap <C-j> <Nop>
@@ -97,10 +91,13 @@ nmap <C-l> <Nop>
 " quvi
 js <<EOF
 hints.addMode("l", "Launch video from hint", function (elem, loc)
-              commands.execute('!quvi "' + loc.replace(/([$`"\\])/g, "\\$1")
-              + '" &>/dev/null &'));
+              commands.execute('!quvi dump -b mute "'
+              + loc.replace(/([$`"\\])/g, "\\$1") + '"'));
 EOF
 nmap -builtin x ;l
-nmap <A-x> -s -js commands.execute('!quvi "' + content.location.href.replace(/([$`"\\])/g, "\\$1") + '" &> /dev/null &');
+nmap <A-x> -s -js <<EOF
+commands.execute('!quvi dump -b mute"' +
+                 content.location.href.replace(/([$`"\\])/g, "\\$1") + '"');
+EOF
 
 " vim: ft=pentadactyl

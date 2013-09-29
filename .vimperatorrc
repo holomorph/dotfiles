@@ -72,8 +72,8 @@ noremap l 5l
 " quvi
 js <<EOF
 hints.addMode("l", "Launch video from hint", function (elem, loc)
-              io.system('quvi "' + loc.replace(/([$`"\\])/g, "\\$1")
-              + '" &>/dev/null &'));
+              io.system('quvi dump -b mute "'
+              + loc.replace(/([$`"\\])/g, "\\$1") + '"'));
 EOF
 nmap <silent> x :l
 

@@ -1,6 +1,13 @@
-# ~/.quvirc
+# ~/.config/quvi/quvirc
 
-exec = "mpv --really-quiet --cache=4096 --title=%t %u"
-agent = ""
-format = fmt45_720p,fmt44_480p,default
-verbosity = quiet
+[core]
+check-mode-offline = true
+stream = 480p,720p,best
+
+[exec]
+external = mpv --really-quiet --cache=4096 --title=%t %u
+
+[http]
+user-agent = ""
+
+# vim: ft=cfg

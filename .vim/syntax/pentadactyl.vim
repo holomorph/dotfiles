@@ -126,6 +126,7 @@ syn keyword pentadactylTodo FIXME NOTE TODO XXX contained
 syn region pentadactylString start="\z(["']\)" end="\z1" skip="\\\\\|\\\z1" oneline
 
 syn match pentadactylLineComment +^\s*".*$+ contains=pentadactylTodo,@Spell
+syn match pentadactylLineComment +\/\*.*\*\/+ contains=pentadactylTodo,@Spell
 
 " NOTE: match vim.vim highlighting group names
 hi def link pentadactylAutoCmd              pentadactylCommand
