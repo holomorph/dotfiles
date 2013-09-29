@@ -21,7 +21,6 @@ export MPLAYER_HOME=~/.config/mplayer
 export MPV_HOME=~/.config/mpv
 export ELINKS_CONFDIR=~/.config/elinks
 export TERMINFO=~/.local/share/terminfo
-export QUVI_HOME=~/.config/quvi
 export NETHACKOPTIONS=~/.config/nethack/nethackrc
 export NOTMUCH_CONFIG=~/.config/notmuch/config
 
