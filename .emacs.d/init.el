@@ -48,6 +48,7 @@
   (select-window (previous-window)))
 
 (global-set-key (kbd "RET") 'newline-and-indent)
+(global-set-key (kbd "<f5>") 'recompile)
 (global-set-key (kbd "C-.") 'repeat)
 (global-set-key (kbd "M-g") 'goto-line)
 (global-set-key (kbd "M-n") 'next-buffer)
