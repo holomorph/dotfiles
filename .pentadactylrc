@@ -11,10 +11,10 @@ hi CmdNormal color:#969896; background:#121212;
 hi CmdLine color: inherit; background: inherit;
 hi Normal color: #969896; background:#1f1f1f;
 hi StatusLine font-weight: normal; padding-right: 5px; min-height: 14px;
-hi StatusLineBroken color: #ffa0a0; background: #121212;
-hi StatusLineNormal color: #969896; background: #121212;
-hi StatusLineSecure color: #81a2be; background: #121212;
-hi StatusLineExtended color: #a0ffa0; background: #121212;
+hi StatusLineBroken color: #ffa0a0; background: #1f1f1f;
+hi StatusLineNormal color: #969896; background: #1f1f1f;
+hi StatusLineSecure color: #81a2be; background: #1f1f1f;
+hi StatusLineExtended color: #a0ffa0; background: #1f1f1f;
 
 " completions
 hi CompDesc color: #cc9393; width: 55%;
@@ -22,8 +22,8 @@ hi CompGroup color: inherit; font-weight: bold;
 hi CompIcon display: none;
 hi CompItem color:inherit; background:inherit; font-weight:normal;
 hi CompItem:nth-child(2n+1) none;
-hi CompItem[selected] background:#434443;
-hi CompTitle font-weight: bold; color:#ffcfaf; background:#121212;
+hi CompItem[selected] color: #f0c674; background:#373b41;
+hi CompTitle font-weight: bold; color: #ffcfaf; background:#121212;
 hi CompTitleSep display: none;
 
 " messages
@@ -58,11 +58,11 @@ hi Question /* hint modes */ color: #82a282; background: #282a2e; font-weight: b
 hi String color: #cc9393; white-space: pre;
 hi Tag /* bmarks */ color: #e89393; font-weight: bold;
 hi Title color: #ffcfaf; font-weight: bold;
-hi URL color: #7f9f7f;
+hi URL color: #9ece9e;
 
 " downloads
 hi DownloadPercent color:#8cd0d3;
-hi DownloadSource color:#7f9f7f;
+hi DownloadSource color: #9ece9e;
 hi Button display:inline-block; cursor: pointer; color: #dfdfdf; font-weight: bold; text-decoration: none;
 hi Button:hover text-decoration: none;
 hi Button::after -a color:#404040 !important;
