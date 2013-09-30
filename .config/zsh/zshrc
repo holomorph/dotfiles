@@ -17,7 +17,7 @@ SAVEHIST=10000
 HISTFILE="$HOME/.logs/zhistory"
 
 ## configs
-for cfg in aliases bindings extract fun style; do
+for cfg in aliases bindings extract fun hook style; do
 	[[ -e "$HOME/.config/zsh/$cfg.zsh" ]] && \
 		source "$HOME/.config/zsh/$cfg.zsh"
 done
@@ -33,13 +33,3 @@ else
 '%(!.%F{red}#%f.%F{blue}$%f) '
 fi
 SPROMPT="Correct %B%F{red}%R%b%f to %B%F{green}%r%b%f [nyae]? "
-
-## hooks
-precmd() {
-	print -Pn "\e];%m (%~) - Terminal\a"
-}
-
-preexec() {
-	local cmd=${1[(wr)^(*=*|sudo|-*)]}
-	print -Pn "\e];$cmd:q - Terminal\a"
-}
