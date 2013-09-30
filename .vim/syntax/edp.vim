@@ -85,13 +85,6 @@ syn cluster	ffFunctions	contains=ffFuncField,ffFuncDiff,ffFuncFE,ffFuncInt,ffFun
 syn cluster	ffFunctions	add=ffFuncMatrix,ffFuncMesh,ffFuncPara,ffFuncPlot,ffFuncSolver
 syn cluster	ffFunctions	add=ffFunSystem
 
-" Integer, float or complex numbers
-syn match	ffNumbers	display transparent "\<\.\=\d\|[eE\d]\d" contains=ffNumber,ffFloat
-syn match	ffNumber	display contained "\d\+\>"
-syn match	ffFloat		display contained "\d\+\.\d*\([eE][-+]\=\d\+\)\="
-syn match	ffFloat		display contained "\.\d\+\([eE][-+]\=\d\+\)\="
-syn match	ffFloat		display contained "\d\+[eE][-+]\=\d\+"
-
 " Default highlighting
 if version >= 508 || !exists("did_ff_syntax_inits")
   if version < 508
@@ -118,7 +111,7 @@ if version >= 508 || !exists("did_ff_syntax_inits")
   HiLink ffFuncPlot		Function
   HiLink ffFuncSolver		Function
   HiLink ffFuncSystem		Function
-  HiLink ffGlobal		Function
+  HiLink ffGlobal		Keyword
   HiLink ffMacro		Macro
   HiLink ffMethodFESpace	Function
   HiLink ffMethodMatrix		Identifier
@@ -126,9 +119,6 @@ if version >= 508 || !exists("did_ff_syntax_inits")
   HiLink ffMethodStream		Function
   HiLink ffMethodString		Function
   HiLink ffMethodVector		Function
-  HiLink ffNumbers		Number
-  HiLink ffNumber		Number
-  HiLink ffFloat		Number
   HiLink ffParameter		Identifier
   HiLink ffStatement		Statement
   HiLink ffType			Type
