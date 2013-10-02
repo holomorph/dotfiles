@@ -19,7 +19,7 @@ zstyle ':completion:*:*:kill:*:processes' list-colors \
 zstyle ':completion:*:*:(vim|gvim):*:*files' ignored-patterns \
   '*.(o|aux|out|pdf)'
 zstyle ':completion:*:*:zathura:*:*' file-patterns \
-  '(#i)*.{ps,pdf,djvu}:files:ps|pdf|djvu\ files *(-/):directories:directories'
+  '(#i)*.{[e]ps,pdf,djvu}:files:\ files *(-/):directories:directories'
 
 # increase max-errors based on length of word
 zstyle -e ':completion:*:approximate:*' max-errors \
