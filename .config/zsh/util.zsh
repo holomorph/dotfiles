@@ -1,6 +1,10 @@
-# ~/.config/zsh/extract.zsh
+# ~/.config/zsh/util.zsh
 
-function x() {
+cd() {
+  builtin cd "$@" && ls;
+}
+
+x() {
 	[[ $# -eq 0 ]] && ( echo "usage: x <archive1> [<archive2> [...]]" && exit 1 )
 
 	while (( $# > 0 )); do

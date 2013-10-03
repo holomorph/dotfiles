@@ -1,9 +1,5 @@
 # ~/.config/zsh/fun.zsh
 
-cd() {
-  builtin cd "$@" && ls;
-}
-
 n() {
   $EDITOR "${@[@]/#/"$HOME/doc/notes/"}";
 }
