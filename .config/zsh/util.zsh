@@ -5,15 +5,21 @@ cd() {
 }
 
 x() {
-	[[ $# -eq 0 ]] && ( echo "usage: x <archive1> [<archive2> [...]]" && exit 1 )
+	if [[ $# -eq 0 ]]; then
+		printf '%s\n' "usage: x <archive1> [<archive2> [...]]"
+		return 1
+	fi
 
 	while (( $# > 0 )); do
 		case "$1" in
-		(*.7z) 7za x "$1";;
-		(*.bz2) bunzip2 "$1";;
-		(*.gz) gunzip -k "$1";;
-		(*.rar) unrar e -ad "$1";;
-		(*) bsdtar -xf "$1";;
+			*.tar.gz | *.tgz) bsdtar -xvzf "$1";;
+			*.tar.bz2 | *.tbz) bsdtar -xvjf "$1";;
+			*.7z) 7za x "$1";;
+			*.bz2) bunzip2 "$1";;
+			*.gz) gunzip -k "$1";;
+			*.rar) unrar e -ad "$1";;
+			*.zip) bsdtar -d "${1%.zip}" -xvf "$1";;
+			*) bsdtar -xvf "$1";;
 		esac
 
 		shift
