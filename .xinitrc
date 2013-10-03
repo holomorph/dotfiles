@@ -21,9 +21,6 @@ feh --no-fehbg --bg-fill "$HOME/pictures/wallpaper/default" &
 ## key mapping
 setxkbmap -option ctrl:nocaps
 xmodmap -e "keycode 135 = Super_R"
-# xbindkeys
-
-systemd --user &
 
 [[ -z $(pgrep termite) ]] && termite &
 
