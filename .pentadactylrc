@@ -7,9 +7,9 @@ set passkeys=github.com:<Return>
 set! plugins.hide_infobar_for_missing_plugin=true
 
 " command line
-hi CmdNormal color:#969896; background:#121212;
+hi CmdNormal color: #969896; background: #121212;
 hi CmdLine color: inherit; background: inherit;
-hi Normal color: #969896; background:#1f1f1f;
+hi Normal color: #969896; background: #1f1f1f;
 hi StatusLine font-weight: normal; padding-right: 5px; min-height: 14px;
 hi StatusLineBroken color: #ffa0a0; background: #1f1f1f;
 hi StatusLineNormal color: #969896; background: #1f1f1f;
@@ -20,10 +20,10 @@ hi StatusLineExtended color: #a0ffa0; background: #1f1f1f;
 hi CompDesc color: #cc9393; width: 55%;
 hi CompGroup color: inherit; font-weight: bold;
 hi CompIcon display: none;
-hi CompItem color:inherit; background:inherit; font-weight:normal;
+hi CompItem color: inherit; background: inherit; font-weight: normal;
 hi CompItem:nth-child(2n+1) none;
-hi CompItem[selected] color: #f0c674; background:#373b41;
-hi CompTitle font-weight: bold; color: #ffcfaf; background:#121212;
+hi CompItem[selected] color: #f0c674; background: #434443;
+hi CompTitle font-weight: bold; color: #ffcfaf; background: #121212;
 hi CompTitleSep display: none;
 
 " messages
@@ -61,12 +61,12 @@ hi Title color: #ffcfaf; font-weight: bold;
 hi URL color: #9ece9e;
 
 " downloads
-hi DownloadPercent color:#8cd0d3;
+hi DownloadPercent color: #8cd0d3;
 hi DownloadSource color: #9ece9e;
-hi Button display:inline-block; cursor: pointer; color: #dfdfdf; font-weight: bold; text-decoration: none;
+hi Button display: inline-block; cursor: pointer; color: #dfdfdf; font-weight: bold; text-decoration: none;
 hi Button:hover text-decoration: none;
-hi Button::after -a color:#404040 !important;
-hi Button::before -a color:#404040 !important;
+hi Button::after -a color: #404040 !important;
+hi Button::before -a color: #404040 !important;
 hi LinkInfo color: #969896; background: #121212; position: absolute; left: 100%; padding: 0.5ex; margin: -1ex -1ex;
 
 " mappings
@@ -92,12 +92,12 @@ nmap <C-l> <Nop>
 js <<EOF
 hints.addMode("l", "Launch video from hint", function (elem, loc)
               commands.execute('!quvi dump -b mute "'
-              + loc.replace(/([$`"\\])/g, "\\$1") + '"'));
+              + loc.replace(/([$`"\\])/g, "\\$1") + '" &'));
 EOF
 nmap -builtin x ;l
 nmap <A-x> -s -js <<EOF
-commands.execute('!quvi dump -b mute"' +
-                 content.location.href.replace(/([$`"\\])/g, "\\$1") + '"');
+commands.execute('!quvi dump -b mute "' +
+                 content.location.href.replace(/([$`"\\])/g, "\\$1") + '" &');
 EOF
 
 " vim: ft=pentadactyl

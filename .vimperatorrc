@@ -12,9 +12,9 @@ set! plugins.hide_infobar_for_missing_plugin=true
 
 " command line
 hi ContentSeparator display: none;
-hi Normal color:#969896; background:#282a2e;
-hi CmdLine color: inherit; background: inherit;
-hi StatusLine color: #969896; background: #282a2e; font-weight: normal !important;
+hi Normal color: #969896; background: #1f1f1f;
+hi CmdLine color: inherit; background: #121212;
+hi StatusLine color: #969896; background: #1f1f1f;
 hi Filter color: #ffffff; font-weight: bold;
 hi Prompt back
 hi PromptText color: #ffcfaf; font-weight: bold;
@@ -22,17 +22,17 @@ hi PromptText color: #ffcfaf; font-weight: bold;
 " completions
 hi CompDesc color: #cc9393; min-width: 450px; max-width: 450px;
 hi CompIcon display: none;
-hi CompItem[selected] color:#f0c674; background:#434443;
-hi CompTitle font-weight: bold; color: #ffcfaf; background: #1b1b1b;
+hi CompItem[selected] color: #f0c674; background: #373b41;
+hi CompTitle font-weight: bold; color: #ffcfaf; background: #121212;
 hi CompTitle>* padding: 1px .5ex;
 hi CompResult min-width: 450px; max-width: 450px; overflow: hidden;
 
 " messages
-hi InfoMsg color:#f8f893;
+hi InfoMsg color: #f8f893;
 hi ErrorMsg font-weight: bold; color: #80d4aa;
 hi ModeMsg color: #ffcfaf; border-radius: 1px; padding: 0px 8px;
 hi MoreMsg color: #b5bd68;
-hi WarningMsg color: #dfe4cf; font-weight: bold;
+hi WarningMsg color: #ffffff; font-weight: bold;
 
 " hints
 hi Hint font-family: monospace; font-size: 8pt; font-weight: bold;
@@ -41,12 +41,12 @@ hi Hint -a padding: 0px 1px 0px 1px;
 hi HintActive background-color: #88ff00; color: black !important;
 hi HintElem background-color: inherit;
 
-
+" other
 hi Indicator color: #efef8f;
-hi NonText font-weight: bold; color: #5b605e;
-hi Tag color: #efef8f;
+hi NonText font-weight: bold; color: #404040;
+hi Tag color: #e89393; font-weight: bold;
 hi Title color: #e37170; background: #664040; font-weight: bold; padding: 0 4px;
-hi URL color: #7f9f7f;
+hi URL color: #9ece9e;
 
 " mappings
 let mapleader = ","
@@ -73,8 +73,8 @@ noremap l 5l
 js <<EOF
 hints.addMode("l", "Launch video from hint", function (elem, loc)
               io.system('quvi dump -b mute "'
-              + loc.replace(/([$`"\\])/g, "\\$1") + '"'));
+              + loc.replace(/([$`"\\])/g, "\\$1") + '" &'));
 EOF
-nmap <silent> x :l
+nmap <silent> x ;l
 
 " vim:ft=vimperator
