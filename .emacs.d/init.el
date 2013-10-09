@@ -4,6 +4,8 @@
   (normal-top-level-add-to-load-path '("."))
   (normal-top-level-add-subdirs-to-load-path))
 
+(require 'saveplace)
+(require 'uniquify)
 (require 'zenburn-theme)
 
 (scroll-bar-mode -1)
@@ -22,16 +24,23 @@
  search-highlight t
  query-replace-highlight t
  mouse-sel-retain-highlight t
+ save-interprogram-paste-before-kill t
  scroll-margin 3
  scroll-conservatively 40
- scroll-preserve-screen-position t)
+ scroll-preserve-screen-position t
+ x-select-enable-clipboard t
+ x-select-enable-primary t)
 
 (setq-default
+ indent-tabs-mode nil
+ save-place t
+ save-place-file "~/.cache/emacs/places"
  truncate-lines t
- indent-tabs-mode nil)
+ uniquify-buffer-name-style 'forward)
 
 ;; backup
-(setq make-backup-files t
+(setq
+ make-backup-files t
  backup-directory-alist `(("." . "~/.cache/emacs/backup"))
  backup-by-copying-when-linked t
  delete-old-versions t
