@@ -24,6 +24,7 @@ set softtabstop=2
 set tabstop=4
 
 " editing
+set clipboard=unnamed
 set list listchars=tab:›\ ,extends:$,precedes:^,trail:·
 set nrformats+=alpha
 
@@ -56,17 +57,7 @@ set backup backupdir=~/.cache/vim/backup
 set undofile undodir=~/.cache/vim/undo
 set viminfo+=n~/.cache/vim/viminfo
 
-" fix typos
-command! Q q
-command! W w
-command! Qa qa
-command! Wq wq
-command! Wa wa
-command! Wqa wqa
-
 noremap Y y$
-nnoremap H :help 
-nnoremap Q :quitall<cr>
 nnoremap ZW :write<cr>
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<cr>
 nnoremap <F5> :!make<cr>
@@ -87,4 +78,6 @@ nnoremap <silent> <leader>gb :Gblame<cr>
 
 " autocommands
 au BufRead,BufNew /tmp/mutt* so ~/.mutt/mutt.vim
-au FileType edp set commentstring=//\ %s
+au BufReadPost *
+ \ if line("'\"") > 0 && line("'\"") <= line("$") |
+ \ exe "normal g`\"" | endif 
