@@ -3,15 +3,13 @@
 [core]
   editor = vim
   excludesfile = ~/.config/git/ignore
-[url "git@github.com:holomorph/"]
-  pushInsteadof = "https://github.com/holomorph/"
 [alias]
   a = add --all
   d = difftool
   s = status -sb
   l = log --decorate --graph --oneline --all
 [log]
-	decorate = short
+  decorate = short
 [diff]
   tool = vimdiff
 [merge]
