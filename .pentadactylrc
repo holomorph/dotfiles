@@ -10,7 +10,7 @@ set! plugins.hide_infobar_for_missing_plugin=true
 hi CmdNormal color: #969896; background: #121212;
 hi CmdLine color: inherit; background: inherit;
 hi Normal color: #969896; background: #1f1f1f;
-hi StatusLine font-weight: normal; padding-right: 5px; min-height: 14px;
+hi StatusLine font-weight: normal; padding-right: 5px; min-height: 18px;
 hi StatusLineBroken color: #ffa0a0; background: #1f1f1f;
 hi StatusLineNormal color: #969896; background: #1f1f1f;
 hi StatusLineSecure color: #81a2be; background: #1f1f1f;
