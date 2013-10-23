@@ -11,7 +11,6 @@ set editor           = "vim +:silent+?^$"    # skip to last blank line
 set ispell           = "aspell -e -c"        # use aspell as ispell
 
 # sources
-source "gpg2 -dq ~/.mutt/gmail.gpg |" # decrypt gpg file
 source $alias_file                    # required for functionality
 source ~/.mutt/bindings.muttrc        # key bindings
 source ~/.mutt/colors.muttrc          # source colors

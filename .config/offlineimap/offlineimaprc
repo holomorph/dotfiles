@@ -1,11 +1,11 @@
-# ~/.offlineimaprc
+# ~/.config/offlineimap/offlineimaprc
 
 [general]
 ui = ttyui
 accounts = gmail
 fsync = false
 metadata = ~/.cache/offlineimap
-pythonfile = ~/.mutt/gmail.py
+pythonfile = ~/.config/offlineimap/gmail.py
 
 [Account gmail]
 localrepository = gmail-local
