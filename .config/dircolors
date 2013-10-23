@@ -204,6 +204,7 @@ EXEC 01;32
 .spx 00;36
 .xspf 00;36
 # document formats
+.bib 00;96;100
 .doc 03;34
 .docx 03;34
 .djvu 03;91
