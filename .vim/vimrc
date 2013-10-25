@@ -77,7 +77,6 @@ nnoremap <silent> <leader>ge :Gedit<cr>
 nnoremap <silent> <leader>gb :Gblame<cr>
 
 " autocommands
-au BufRead,BufNew /tmp/mutt* so ~/.mutt/mutt.vim
 au BufReadPost *
  \ if line("'\"") > 0 && line("'\"") <= line("$") |
  \ exe "normal g`\"" | endif 

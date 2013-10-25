@@ -1,4 +1,4 @@
-# ~/.mutt/.gitignore
+# ~/.config/mutt/.gitignore
 
 alias
 cache/

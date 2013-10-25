@@ -1,4 +1,4 @@
-# ~/.mutt/colors.muttrc
+# ~/.config/mutt/colors.muttrc
 
 # general
 color normal white default

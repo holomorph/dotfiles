@@ -1,4 +1,4 @@
-# ~/.mutt/sidebar.muttrc
+# ~/.config/mutt/sidebar.muttrc
 
 set sidebar_delim   = '|'
 set sidebar_visible = no

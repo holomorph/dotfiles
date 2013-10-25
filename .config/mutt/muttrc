@@ -1,20 +1,20 @@
-# ~/.mutt/muttrc
+# ~/.config/mutt/muttrc
 
 # directories and commands
-set alias_file       = ~/.mutt/alias         # alias file
-set certificate_file = ~/.mutt/certificates  # where to store certs
-set mailcap_path     = ~/.mutt/mailcap       # entries for filetypes
-set signature        = ~/.mutt/signature     # my signature file
-set header_cache     = ~/.cache/mutt/headers # where to store headers
-set message_cachedir = ~/.cache/mutt/bodies  # where to store bodies
-set editor           = "vim +:silent+?^$"    # skip to last blank line
-set ispell           = "aspell -e -c"        # use aspell as ispell
+set alias_file       = ~/.config/mutt/alias        # alias file
+set certificate_file = ~/.config/mutt/certificates # where to store certs
+set mailcap_path     = ~/.config/mutt/mailcap      # entries for filetypes
+set signature        = ~/.config/mutt/signature    # my signature file
+set header_cache     = ~/.cache/mutt/headers       # where to store headers
+set message_cachedir = ~/.cache/mutt/bodies        # where to store bodies
+set editor           = "vim +:sil+?^$ +:sil:nohl"  # skip to last blank line
+set ispell           = "aspell -e -c"              # use aspell as ispell
 
 # sources
 source $alias_file                    # required for functionality
-source ~/.mutt/bindings.muttrc        # key bindings
-source ~/.mutt/colors.muttrc          # source colors
-source ~/.mutt/gmail.muttrc           # source gmail as default
+source ~/.config/mutt/bindings.muttrc # key bindings
+source ~/.config/mutt/colors.muttrc   # source colors
+source ~/.config/mutt/gmail.muttrc    # source gmail as default
 
 # main options
 set beep_new
@@ -67,4 +67,4 @@ hdr_order from: to: cc: date: subject: # and in this order
 
 # hooks
 folder-hook . set sort = reverse-date
-folder-hook +cycling source ~/.mutt/ml.muttrc
+folder-hook +cycling source ~/.config/mutt/ml.muttrc

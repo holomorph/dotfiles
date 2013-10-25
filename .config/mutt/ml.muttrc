@@ -1,4 +1,4 @@
-# ~/.mutt/ml.muttrc
+# ~/.config/mutt/ml.muttrc
 
 set sort            = threads
 set sort_aux        = reverse-last-date-received

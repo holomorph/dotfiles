@@ -1,4 +1,4 @@
-# ~/.mutt/gmail.muttrc
+# ~/.config/mutt/gmail.muttrc
 
 color status brightgreen black
 
