@@ -71,4 +71,4 @@ border = #ffffff
 border_width = 0.5
 roundness = 1.0
 
-# vim: ft=desktop
+# vim: ft=desktop cms=#%s
