@@ -21,6 +21,7 @@
  inhibit-startup-screen t
  compilation-read-command nil
  auto-save-default nil
+ echo-keystrokes 0.1
  search-highlight t
  query-replace-highlight t
  mouse-sel-retain-highlight t
