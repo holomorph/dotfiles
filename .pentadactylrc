@@ -19,7 +19,8 @@ hi StatusLineExtended color: #a0ffa0; background: #1f1f1f;
 " completions
 hi CompDesc color: #cc9393; width: 55%;
 hi CompGroup color: inherit; font-weight: bold;
-hi CompIcon display: none;
+hi CompIcon width: 12px; display: inline-block; margin-right: .5ex;
+hi CompIcon>img width: 10px; height: 10px; vertical-align: middle;
 hi CompItem color: inherit; background: inherit; font-weight: normal;
 hi CompItem:nth-child(2n+1) none;
 hi CompItem[selected] color: #f0c674; background: #434443;
