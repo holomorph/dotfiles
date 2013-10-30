@@ -1,4 +1,4 @@
-# ~/.mpv/config
+# ~/.config/mpv/config
 
 lirc=no
 vo=xv
