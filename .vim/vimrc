@@ -16,6 +16,7 @@ set wrapscan
 
 " formatting
 set cinoptions=(0
+set expandtab
 set formatoptions+=qn1
 set nolist
 set nowrap
@@ -25,7 +26,7 @@ set tabstop=4
 
 " editing
 set clipboard=unnamed
-set list listchars=tab:›\ ,extends:$,precedes:^,trail:·
+set list listchars=tab:»\ ,extends:$,precedes:^,trail:·
 set nrformats+=alpha
 
 " vim ui
@@ -79,4 +80,4 @@ nnoremap <silent> <leader>gb :Gblame<cr>
 " autocommands
 au BufReadPost *
  \ if line("'\"") > 0 && line("'\"") <= line("$") |
- \ exe "normal g`\"" | endif 
+ \ exe "normal g`\"" | endif
