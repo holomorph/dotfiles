@@ -3,7 +3,7 @@
 # general
 color normal white default
 color status brightblue black
-color error brightcyan default
+color error brightdefault black
 color markers brightwhite color233
 color search color16 color79
 
