@@ -64,10 +64,12 @@ color15 = #c5c8c6
 
 [hints]
 font = Monospace 9
-foreground = #1d1f21
-background = #ffffff
+foreground = #1c1c1c
+background = #ffc524
+active_foreground = #1c1c1c
+active_background = #88ff00
 padding = 2
-border = #ffffff
+border = #1c1c1c
 border_width = 0.5
 roundness = 1.0
 
