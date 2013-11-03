@@ -22,6 +22,7 @@ active_window_border           = "red"
 ##### directories ######
 ncmpcpp_directory = "~/.config/ncmpcpp"
 lyrics_directory  = "~/.cache/ncmpcpp/lyrics"
+mpd_music_dir     = "~/music"
 
 ##### columns settings #####
 song_columns_list_format     = "(40)[]{t|f} (8f)[green]{lr} (35)[cyan]{a} (20)[red]{b}"
