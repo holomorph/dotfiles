@@ -38,7 +38,7 @@ color body color10 default "^\+$"
 color body color9 default "^\-$"
 
 # message body
-color attachment color109 color233
+color attachment color109 color232
 color signature brightwhite default
 color tilde color8 default
 
