@@ -3,6 +3,7 @@
 set guioptions-=br
 set guioptions+=n
 set passkeys=github.com:<Return>
+set showtabline=never
 
 set! plugins.hide_infobar_for_missing_plugin=true
 
