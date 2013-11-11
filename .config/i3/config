@@ -154,13 +154,13 @@ bindsym XF86MonBrightnessUp   exec bset -i 2
 bindsym XF86MonBrightnessDown exec bset -d 2
 
 ## volume
-bindsym XF86AudioMute        exec amixer -q set Master toggle
-bindsym XF86AudioLowerVolume exec amixer -q set Master playback 1dB-
-bindsym XF86AudioRaiseVolume exec amixer -q set Master playback 1dB+
-bindsym $mod+a               exec amixer -q set Master playback 1dB-
-bindsym $mod+s               exec amixer -q set Master playback 1dB+
+bindsym XF86AudioMute        exec ponymix toggle
+bindsym XF86AudioLowerVolume exec ponymix decrease 5
+bindsym XF86AudioRaiseVolume exec ponymix increase 5
+bindsym $mod+a               exec ponymix decrease 5
+bindsym $mod+s               exec ponymix increase 5
 
 ## music
-bindsym $mod+backslash    exec ncmpcpp toggle
-bindsym $mod+bracketright exec ncmpcpp next
-bindsym $mod+bracketleft  exec ncmpcpp prev
+bindsym $mod+backslash    exec mpc -q toggle
+bindsym $mod+bracketright exec mpc -q next
+bindsym $mod+bracketleft  exec mpc -q prev
