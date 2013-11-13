@@ -33,7 +33,6 @@ set nrformats+=alpha
 set autoread
 set autowrite
 set completeopt=longest,menuone,preview
-set cursorline
 set equalalways
 set hidden
 set history=50
@@ -43,6 +42,7 @@ set ruler
 set scrolloff=3
 set shortmess=atToOI
 set showcmd
+set statusline=%f\ \ %<%y%m%r%=%12.(\(%l,%c%V\)%)\ \ %P
 set title
 set whichwrap+=<,>,[,],h,l
 set wildmenu wildmode=list:longest,full
