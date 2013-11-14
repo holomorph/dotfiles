@@ -20,6 +20,7 @@ bind index,pager \Cu     half-up
 bind index,pager \#      noop
 
 # postpone
+bind compose     P       pgp-menu
 bind compose     p       postpone-message
 bind index       p       recall-message
 bind postpone    p       exit
