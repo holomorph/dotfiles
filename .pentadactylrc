@@ -8,14 +8,14 @@ set showtabline=never
 set! plugins.hide_infobar_for_missing_plugin=true
 
 " command line
-hi CmdNormal color: #969896; background: #121212;
+hi CmdNormal color: #bbbdbb; background: #121212;
 hi CmdLine color: inherit; background: inherit;
-hi Normal color: #969896; background: #1f1f1f;
+hi Normal color: #bbbdbb; background: #1f1f1f;
 hi StatusLine font-weight: normal; padding-right: 5px; min-height: 18px;
-hi StatusLineBroken color: #ffa0a0; background: #1f1f1f;
-hi StatusLineNormal color: #969896; background: #1f1f1f;
-hi StatusLineSecure color: #81a2be; background: #1f1f1f;
-hi StatusLineExtended color: #a0ffa0; background: #1f1f1f;
+hi StatusLineBroken color: #ffa0a0; background: #121212;
+hi StatusLineNormal color: #bbbdbb; background: #121212;
+hi StatusLineSecure color: #84aed3; background: #121212;
+hi StatusLineExtended color: #a0ffa0; background: #121212;
 
 " completions
 hi CompDesc color: #cc9393; width: 55%;
@@ -24,7 +24,7 @@ hi CompIcon width: 12px; display: inline-block; margin-right: .5ex;
 hi CompIcon>img width: 10px; height: 10px; vertical-align: middle;
 hi CompItem color: inherit; background: inherit; font-weight: normal;
 hi CompItem:nth-child(2n+1) none;
-hi CompItem[selected] color: #f0c674; background: #434443;
+hi CompItem[selected] color: #facb70; background: #373b41;
 hi CompTitle font-weight: bold; color: #ffcfaf; background: #121212;
 hi CompTitleSep display: none;
 
@@ -69,7 +69,7 @@ hi Button display: inline-block; cursor: pointer; color: #dfdfdf; font-weight: b
 hi Button:hover text-decoration: none;
 hi Button::after -a color: #404040 !important;
 hi Button::before -a color: #404040 !important;
-hi LinkInfo color: #969896; background: #121212; position: absolute; left: 100%; padding: 0.5ex; margin: -1ex -1ex;
+hi LinkInfo color: #bbbdbb; background: #121212; position: absolute; left: 100%; padding: 0.5ex; margin: -1ex -1ex;
 
 " mappings
 map , <Leader>
@@ -90,16 +90,8 @@ nmap <C-j> <Nop>
 nmap <C-k> <Nop>
 nmap <C-l> <Nop>
 
-" quvi
-js <<EOF
-hints.addMode("l", "Launch video from hint", function (elem, loc)
-              commands.execute('!quvi dump -b mute "'
-              + loc.replace(/([$`"\\])/g, "\\$1") + '" &'));
-EOF
+" launch videos
 nmap -builtin x ;l
-nmap <A-x> -s -js <<EOF
-commands.execute('!quvi dump -b mute "' +
-                 content.location.href.replace(/([$`"\\])/g, "\\$1") + '" &');
-EOF
+nmap <A-x> :launchv<CR>
 
-" vim: ft=pentadactyl
+" vim: ft=pentadactyl cms="%s

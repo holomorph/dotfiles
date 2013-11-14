@@ -14,7 +14,7 @@
 /* TABS */
 #main-window[sizemode="maximized"] #tabbrowser-tabs tab,
 #main-window[sizemode="fullscreen"] #tabbrowser-tabs tab {
-	background:#1f1f1f!important;
+	background:#121212!important;
 	border-top:0!important;
 	margin:0px 0px 0px!important;
 	max-height:10px!important;
@@ -48,14 +48,14 @@
 	display: none !important;
 }
 .tabbrowser-tabs {
-	background: #1f1f1f !important;
+	background: #121212 !important;
 }
 .tabbrowser-tab {
 	-moz-appearance: none !important;
 	-moz-border-radius: 0 !important;
-	background: #1f1f1f !important;
+	background: #121212 !important;
 	border: none !important;
-	color: #969896 !important;
+	color: #bbbdbb !important;
 	font-family: monospace;
 	font-size: 10pt !important;
 	height: 18px !important;
@@ -72,6 +72,6 @@
 	min-width: 1px !important;
 }
 .tabbrowser-tab[selected] {
-	background: #1f1f1f !important;
-	color: #f0c674 !important;
+	background: #121212 !important;
+	color: #facb70 !important;
 }

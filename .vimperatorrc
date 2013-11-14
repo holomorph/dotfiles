@@ -12,9 +12,9 @@ set! plugins.hide_infobar_for_missing_plugin=true
 
 " command line
 hi ContentSeparator display: none;
-hi Normal color: #969896; background: #1f1f1f;
+hi Normal color: #bbbdbb; background: #121212;
 hi CmdLine color: inherit; background: #121212;
-hi StatusLine color: #969896; background: #1f1f1f;
+hi StatusLine color: #bbbdbb; background: #121212;
 hi Filter color: #ffffff; font-weight: bold;
 hi Prompt back
 hi PromptText color: #ffcfaf; font-weight: bold;
@@ -22,7 +22,8 @@ hi PromptText color: #ffcfaf; font-weight: bold;
 " completions
 hi CompDesc color: #cc9393; min-width: 450px; max-width: 450px;
 hi CompIcon display: none;
-hi CompItem[selected] color: #f0c674; background: #373b41;
+hi CompItem color: inherit; background: #1f1f1f; font-weight: normal;
+hi CompItem[selected] color: #facb70; background: #373b41;
 hi CompTitle font-weight: bold; color: #ffcfaf; background: #121212;
 hi CompTitle>* padding: 1px .5ex;
 hi CompResult min-width: 450px; max-width: 450px; overflow: hidden;
