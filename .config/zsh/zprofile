@@ -7,7 +7,7 @@ export LESS_TERMCAP_me=$'\E[0m'
 export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_so=$'\E[03;92m'
 export LESS_TERMCAP_ue=$'\E[0m'
-export LESS_TERMCAP_us=$'\E[01;37m'
+export LESS_TERMCAP_us=$'\E[01m'
 
 # dircolors
 source <(dircolors -b "$HOME/.config/dircolors")
@@ -17,7 +17,6 @@ export _JAVA_OPTIONS=-Dawt.useSystemAAFontSettings=lcd
 
 # set location of gtk2 gtkrc (also needed for Qt's gtk style)
 export GTK2_RC_FILES=~/.config/gtk-2.0/gtkrc
-export MPLAYER_HOME=~/.config/mplayer
 export MPV_HOME=~/.config/mpv
 export ELINKS_CONFDIR=~/.config/elinks
 export TERMINFO=~/.local/share/terminfo
