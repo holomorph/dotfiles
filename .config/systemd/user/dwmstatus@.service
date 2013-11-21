@@ -1,10 +1,11 @@
 [Unit]
 Description=Dwm Status Line on %i
-After=mpd.service
+BindsTo=sys-subsystem-net-devices-%i.device
 After=network.target
 
 [Service]
 ExecStart=/usr/bin/dwmstatus -i %i -m %h/.mutt/mail/inbox/new
+ExecStop=/usr/bin/xsetroot -name "dwm-6.1"
 Restart=no
 
 [Install]

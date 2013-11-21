@@ -8,7 +8,7 @@ After=sys-subsystem-net-devices-%i.device
 [Service]
 Type=forking
 PIDFile=/run/dhcpcd-%I.pid
-ExecStart=/usr/bin/sudo dhcpcd -q -b %I
+ExecStart=/usr/bin/sudo dhcpcd -4 -q -b %I
 ExecStop=/usr/bin/sudo dhcpcd -x %I
 
 [Install]
