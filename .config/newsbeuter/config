@@ -14,7 +14,7 @@ bind-key k up
 bind-key ^D pagedown
 bind-key ^U pageup
 
-color listfocus color11 color8
+color listfocus yellow color8 bold
 color listnormal_unread white default bold
 color listfocus_unread yellow color8 bold
 color info green black bold
