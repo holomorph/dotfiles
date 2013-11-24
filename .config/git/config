@@ -26,10 +26,10 @@
   local = blue
   remote = red reverse
 [color "diff"]
-  meta = white bold
-  frag = cyan bold
+  func = cyan bold
   old = red bold
   new = green bold
+  whitespace = magenta bold
 [color "status"]
   added = green bold
   changed = yellow bold
