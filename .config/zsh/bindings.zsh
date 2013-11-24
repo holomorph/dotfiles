@@ -1,20 +1,25 @@
 # ~/.config/zsh/bindings.zsh
 
-bindkey -e # emacs
+bindkey -e
+
+autoload -U select-word-style
+select-word-style bash
 
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 
 bindkey " " magic-space
-bindkey "^[[A" up-line-or-beginning-search   # Up
-bindkey "^[[B" down-line-or-beginning-search # Down
-bindkey "^[[Z" reverse-menu-complete         # Shift+Tab
-bindkey "^A" beginning-of-line
-bindkey "^E" end-of-line
-bindkey "^K" kill-line
+bindkey "^[[A" up-line-or-beginning-search
+bindkey "^[[B" down-line-or-beginning-search
+bindkey "^[[Z" reverse-menu-complete
+bindkey "^D" delete-char
 bindkey "^N" down-line-or-beginning-search
 bindkey "^P" up-line-or-beginning-search
-bindkey "^U" kill-whole-line
-bindkey "^W" vi-backward-kill-word
-bindkey "^?" backward-delete-char
+bindkey "^Z" fancy-ctrl-z
+bindkey "^[a" vi-backward-blank-word
+bindkey "^[e" vi-forward-blank-word
+bindkey "^[^R" history-incremental-pattern-search-backward
+bindkey "^[^S" history-incremental-pattern-search-forward
 bindkey "^[[3~" delete-char
+
+bindkey -M isearch '^M' accept-search
