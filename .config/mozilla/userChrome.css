@@ -11,6 +11,16 @@
 	display:none!important;
 }
 
+/* Blank background before clicked link page loads */
+/* see userContent.css for blank tab and initial */
+/* Firefox startup blank before homepage loads */
+browser {
+	background-color: rgb(8, 8, 8) !important;
+}
+tabbrowser tabpanels {
+	background-color: rgb(8, 8, 8) !important;
+}
+
 /* TABS */
 #main-window[sizemode="maximized"] #tabbrowser-tabs tab,
 #main-window[sizemode="fullscreen"] #tabbrowser-tabs tab {

@@ -1,0 +1,5 @@
+/* https://support.mozilla.org/en-US/questions/931924 */
+/* http://forums.mozillazine.org/viewtopic.php?f=38&t=571141 */
+@-moz-document url(about:blank) {
+	html { background-color: rgb(8, 8, 8) !important; }
+}
