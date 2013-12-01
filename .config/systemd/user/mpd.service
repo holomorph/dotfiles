@@ -2,8 +2,8 @@
 Description=Music Player Daemon
 
 [Service]
-ExecStart=/usr/bin/mpd --no-daemon %h/.config/mpd/mpd.conf
-ExecStop=/usr/bin/mpd --kill %h/.config/mpd/mpd.conf
+ExecStart=/usr/bin/mpd --no-daemon
+ExecStop=/usr/bin/mpd --kill
 
 [Install]
 WantedBy=default.target
