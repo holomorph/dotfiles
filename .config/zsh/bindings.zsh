@@ -15,7 +15,8 @@ bindkey "^[[Z" reverse-menu-complete
 bindkey "^D" delete-char
 bindkey "^N" down-line-or-beginning-search
 bindkey "^P" up-line-or-beginning-search
-bindkey "^Z" fancy-ctrl-z
+bindkey "^U" backward-kill-line
+bindkey "^W" kill-region
 bindkey "^[a" vi-backward-blank-word
 bindkey "^[e" vi-forward-blank-word
 bindkey "^[^R" history-incremental-pattern-search-backward

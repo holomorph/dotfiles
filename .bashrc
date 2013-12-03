@@ -3,8 +3,9 @@
 [[ $- = *i* ]] || return
 
 ## bash(1)
-shopt -s cdspell dirspell extglob globstar histverify no_empty_cmd_completion
-# shopt -s checkwinsize
+shopt -s autocd cdspell dirspell extglob globstar no_empty_cmd_completion
+shopt -s cmdhist histappend histverify
+stty -ixon
 
 set -o notify
 

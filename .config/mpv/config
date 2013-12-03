@@ -4,3 +4,4 @@ osc=no
 lirc=no
 vo=xv
 ao=pulse
+cache-default=4096

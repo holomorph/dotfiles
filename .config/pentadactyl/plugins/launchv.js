@@ -11,7 +11,7 @@ function launchv(target) {
     if(uri.match(/twitch\.tv/))
         exec("!lstream", uri);
     else if(uri.match(/playlist\?list=PL/))
-        exec("!mpv", uri );
+        exec("!mpv --really-quiet --cache=4096", uri );
     else
         exec("!quvi dump -b mute", uri);
 }

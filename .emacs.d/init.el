@@ -8,8 +8,8 @@
 (require 'uniquify)
 (require 'zenburn-theme)
 
-(scroll-bar-mode -1)
-(tool-bar-mode -1)
+(when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+(when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (menu-bar-mode -1)
 (blink-cursor-mode 0)
 (line-number-mode t)
@@ -18,6 +18,7 @@
 (show-paren-mode 1)
 
 (setq
+ apropos-do-all t
  inhibit-startup-screen t
  compilation-read-command nil
  auto-save-default nil
