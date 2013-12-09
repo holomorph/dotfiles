@@ -23,6 +23,7 @@ setxkbmap -option ctrl:nocaps
 xmodmap -e "keycode 135 = Super_R"
 
 [[ -z $(pgrep termite) ]] && termite &
+[[ -z $(pgrep emacs) ]] && emacs --daemon &
 
 while true; do
   dwm 2> "$HOME/.logs/dwm.log"
