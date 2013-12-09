@@ -25,18 +25,6 @@ color body blue default "<URL:[^ ]*>"
 color body blue default "www\\.[-.a-z0-9]+\\.[a-z][a-z][a-z]?([-_./~a-z0-9]+)?"
 color body blue default "[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+"
 
-# diff
-color body blue default "^diff \-.*"
-color body blue default "^index [a-f0-9].*"
-color body blue default "^new file mode [0-9].*"
-color body blue default "^\-\-\- .*"
-color body blue default "^[\+]{3} .*"
-color body brightblue default "^@@ .*"
-color body color10 default "^[\+][^ \+][^\+]*.*"
-color body color9 default "^\-[^ \-][^\-]*.*"
-color body color10 default "^\+$"
-color body color9 default "^\-$"
-
 # message body
 color attachment color109 color232
 color signature brightwhite default

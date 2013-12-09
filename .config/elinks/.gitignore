@@ -1,6 +1,4 @@
 # ~/.config/elinks/.gitignore
 
 cookies
-globhist
-gotohist
-searchhist
+*hist

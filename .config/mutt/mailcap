@@ -1,4 +1,3 @@
-application/octet-stream; echo %s "can be anything..."; copiousoutput;
 text/html; elinks -dump-charset %{charset} -dump %s; copiousoutput;
 
 application/pdf; zathura %s;
@@ -6,12 +5,16 @@ application/postscript; zathura %s;
 
 application/x-tex; vim %s;
 application/x-latex; vim %s;
+text/x-diff; vim %s;
+text/x-patch; vim %s;
 
 image/*; feh -. %s;
-audio/*; mplayer %s; copiousoutput;
-video/*; mplayer %s; copiousoutput;
+audio/*; mpv %s; copiousoutput;
+video/*; mpv %s; copiousoutput;
 
 application/vnd.openxmlformats-officedocument.wordprocessingml.document; docx2txt %s; nametemplate=%s.docx; copiousoutput;
 application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; xls2txt %s; copiousoutput;
 application/vnd.ms-excel; xls2txt %s; copiousoutput;
 application/msword; antiword -f %s; copiousoutput;
+
+application/zip; unzip -l %s; copiousoutput;

@@ -7,9 +7,6 @@ set noscrollbars
 set showstatuslinks=0
 set smartcase
 
-set! plugins.click_to_play=true
-set! plugins.hide_infobar_for_missing_plugin=true
-
 " command line
 hi ContentSeparator display: none;
 hi Normal color: #bbbdbb; background: #121212;
@@ -43,15 +40,16 @@ hi HintActive background-color: #88ff00; color: black !important;
 hi HintElem background-color: inherit;
 
 " other
+hi Disabled color: #f18c96; font-weight: bold;
+hi Enabled color: #9ece9e; font-weight: bold;
 hi Indicator color: #efef8f;
 hi NonText font-weight: bold; color: #404040;
+hi Number color: #8cd0d3;
 hi Tag color: #e89393; font-weight: bold;
 hi Title color: #e37170; background: #664040; font-weight: bold; padding: 0 4px;
 hi URL color: #9ece9e;
 
 " mappings
-let mapleader = ","
-nnoremap <Leader>, :nohlsearch<CR>
 nnoremap <Leader>d :downloads<CR>
 nnoremap <Leader>m :messages<CR>
 nnoremap <Leader>p :winopen -private<CR>
@@ -62,13 +60,16 @@ nmap <C-S-p> :tabmove! -1<CR>
 nmap <F3> <Nop>
 nmap <C-a> <Nop>
 nmap <C-h> <Nop>
-nmap <C-j> <Nop>
+nmap <C-j> :jumps<CR>
 nmap <C-k> <Nop>
 nmap <C-l> <Nop>
-noremap h 5h
-noremap j 5j
-noremap k 5k
-noremap l 5l
+noremap h 7h
+noremap j 7j
+noremap k 7k
+noremap l 7l
+cmap <A-b> <C-left>
+cmap <A-f> <C-right>
+cmap <A-BS> <C-w>
 
 " quvi
 js <<EOF
@@ -78,4 +79,4 @@ hints.addMode("l", "Launch video from hint", function (elem, loc)
 EOF
 nmap <silent> x ;l
 
-" vim:ft=vimperator
+" vim:ft=vimperator cms="%s

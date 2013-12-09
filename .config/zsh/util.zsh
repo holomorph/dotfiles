@@ -18,7 +18,7 @@ x() {
 			*.bz2) bunzip2 "$1";;
 			*.gz) gunzip -k "$1";;
 			*.rar) unrar e -ad "$1";;
-			*.zip) bsdtar -d "${1%.zip}" -xvf "$1";;
+			*.zip) unzip "$1";;
 			*) bsdtar -xvf "$1";;
 		esac
 
