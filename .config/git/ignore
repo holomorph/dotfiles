@@ -5,6 +5,7 @@
 *.com
 *.class
 *.dll
+*.elc
 *.exe
 *.o
 *.pyc
