@@ -1,0 +1,12 @@
+[Unit]
+Description=PulseAudio Server
+Documentation=man:pulseaudio(1)
+Requires=dbus.socket
+
+[Service]
+RemainAfterExit=yes
+ExecStart=/usr/bin/pulseaudio --start
+ExecStop=/usr/bin/pulseaudio --kill
+
+[Install]
+WantedBy=default.target
