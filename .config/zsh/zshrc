@@ -17,19 +17,16 @@ SAVEHIST=10000
 HISTFILE="$HOME/.logs/zhistory"
 
 ## configs
-for cfg in aliases bindings fun hook style util; do
-	[[ -e "$HOME/.config/zsh/$cfg.zsh" ]] && \
+for cfg in aliases bindings fun git hook style util; do
+	[[ -r "$HOME/.config/zsh/$cfg.zsh" ]] && \
 		source "$HOME/.config/zsh/$cfg.zsh"
 done
 unset cfg
 
 ## prompt
-if [[ -s "$HOME/.config/zsh/prompt.zsh" ]]; then
-	source "$HOME/.config/zsh/prompt.zsh"
-else
-	PROMPT="%(?..%B%F{red}exit %?%f%b
-)%B%F{black}[%b%f"\
+PROMPT='%(?..%B%F{red}exit %?%f%b
+)%B%F{black}[%b%f'\
+'${vcs_info_msg_0_}'\
 '%F{11}%~%B%F{black}]%b%f'\
 '%(!.%F{red}#%f.%F{blue}$%f) '
-fi
 SPROMPT="Correct %B%F{red}%R%b%f to %B%F{green}%r%b%f [nyae]? "

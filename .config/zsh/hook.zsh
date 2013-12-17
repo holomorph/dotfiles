@@ -5,6 +5,7 @@ case $TERM in
 	rxvt* | vte* | xterm* )
 		precmd() {
 			print -Pn "\e];%m (%~) - Terminal\a"
+			vcs_info
 		}
 		preexec() {
 			local cmd=${1[(wr)^(*=*|sudo|-*)]}
@@ -12,5 +13,8 @@ case $TERM in
 		}
 		;;
 	*)
+		precmd() {
+			vcs_info
+		}
 		;;
 esac

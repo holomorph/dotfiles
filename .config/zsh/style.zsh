@@ -4,11 +4,10 @@ zstyle ':completion:*' menu select
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' rehash yes
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-zstyle ':completion:*' completer _complete _match _approximate
-zstyle ':completion:*:approximate:*' max-errors 1 numeric
+zstyle ':completion:*' completer _complete _match
 zstyle ':completion:*:match:*' original only
 zstyle ':completion:*' ignore-parents parent pwd
-zstyle ':completion:*' matcher-list 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' matcher-list 'r:|.=* r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*' squeeze-slashes true
 zstyle ':completion:*:functions' ignored-patterns '_*'
 
