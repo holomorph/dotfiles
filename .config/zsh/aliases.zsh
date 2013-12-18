@@ -18,7 +18,6 @@ alias ln='ln -iv'
 alias ls='ls -hF --color=auto --group-directories-first'
 alias la='ls -A'
 alias ll='ls -l'
-alias grep='grep --color=auto'
 
 # pastebins
 alias ix="curl -F 'f:1=<-' http://ix.io"
