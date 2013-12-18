@@ -20,13 +20,13 @@ export HISTFILESIZE=20000
 [[ -r "/usr/share/bash-completion/bash_completion" ]] && \
 	. "/usr/share/bash-completion/bash_completion"
 
-## prompt
-PS1="\[\e[1;30m\][\[\e[0;31m\]\u\[\e[1;30m\]@\[\e[0;91m\]\h \
-\[\e[0;93m\]\w\[\e[1;30m\]]\n\[\e[0;34m\] \$\[\e[0m\] "
-
 ## configs
-for cfg in aliases bindings fun util; do
+for cfg in aliases bindings fun git util; do
 	[[ -r "$HOME/.config/bash/$cfg.sh" ]] && \
 		. "$HOME/.config/bash/$cfg.sh"
 done
 unset cfg
+
+## prompt
+PS1="\[\e[1;30m\][\[\e[0;31m\]\u\[\e[1;30m\]@\[\e[0;91m\]\h\$(_vcs_info) \
+\[\e[0;93m\]\w\[\e[1;30m\]]\n\[\e[0;34m\] \$\[\e[0m\] "

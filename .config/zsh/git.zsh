@@ -9,7 +9,7 @@ zstyle ':vcs_info:*' stagedstr     '%B%F{green}+%f%b'
 zstyle ':vcs_info:*' unstagedstr   '%B%F{yellow}*%f%b'
 zstyle ':vcs_info:*' formats       '%F{9}%b%f%c%u%m '
 zstyle ':vcs_info:*' actionformats '%F{9}%b%f%c%u%m %F{14}%a%f '
-zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-aheadbehind git-stash
+zstyle ':vcs_info:git*+set-message:*' hooks git-stash git-untracked git-aheadbehind
 
 ### git: Show marker if there are untracked files in repository
 # Make sure staged is in 'formats':  %c
