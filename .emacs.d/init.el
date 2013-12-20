@@ -19,6 +19,7 @@
 
 (setq
  apropos-do-all t
+ dired-listing-switches "-al -hF --group-directories-first"
  inhibit-startup-screen t
  compilation-read-command nil
  auto-save-default nil
@@ -61,7 +62,6 @@
 (global-set-key (kbd "RET") 'newline-and-indent)
 (global-set-key (kbd "<f5>") 'recompile)
 (global-set-key (kbd "C-.") 'repeat)
-(global-set-key (kbd "M-g") 'goto-line)
 (global-set-key (kbd "M-n") 'next-buffer)
 (global-set-key (kbd "M-p") 'previous-buffer)
 (global-set-key (kbd "C-M-n") 'goto-next-window)
@@ -72,3 +72,8 @@
   (define-key term-raw-map (kbd "M-p") 'previous-buffer)
   (define-key term-raw-map (kbd "C-M-n") 'goto-next-window)
   (define-key term-raw-map (kbd "C-M-p") 'goto-prev-window)))
+
+;; extensions
+(autoload 'magit-status "magit" nil t)
+(autoload 'freefem++-mode "freefem++-mode" "Major mode for FreeFem++ code" t)
+(add-to-list 'auto-mode-alist '("\\.[ei]dp\\'" . freefem++-mode))
