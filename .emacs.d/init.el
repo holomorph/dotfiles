@@ -10,7 +10,7 @@
 
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-(menu-bar-mode -1)
+(when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (blink-cursor-mode 0)
 (line-number-mode t)
 (column-number-mode t)
@@ -23,14 +23,20 @@
  inhibit-startup-screen t
  compilation-read-command nil
  auto-save-default nil
+ auto-save-list-file-name "~/.cache/emacs/auto-save-list/.saves-"
  echo-keystrokes 0.1
  search-highlight t
  query-replace-highlight t
+ eshell-directory-name "~/.cache/emacs/eshell"
+ ido-enable-flex-matching t
+ ido-save-directory-list-file "~/.cache/emacs/ido"
  mouse-sel-retain-highlight t
  save-interprogram-paste-before-kill t
  scroll-margin 3
  scroll-conservatively 40
  scroll-preserve-screen-position t
+ shift-select-mode nil
+ tramp-persistency-file-name "~/.cache/emacs/tramp"
  x-select-enable-clipboard t
  x-select-enable-primary t)
 
@@ -62,6 +68,7 @@
 (global-set-key (kbd "RET") 'newline-and-indent)
 (global-set-key (kbd "<f5>") 'recompile)
 (global-set-key (kbd "C-.") 'repeat)
+(global-set-key (kbd "M-i") 'back-to-indentation)
 (global-set-key (kbd "M-n") 'next-buffer)
 (global-set-key (kbd "M-p") 'previous-buffer)
 (global-set-key (kbd "C-M-n") 'goto-next-window)
