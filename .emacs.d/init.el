@@ -17,33 +17,39 @@
 (size-indication-mode t)
 (show-paren-mode 1)
 
+(fset 'yes-or-no-p 'y-or-n-p)
+(set-face-attribute 'default nil :family "monospace" :height 130)
+
 (setq
  apropos-do-all t
  dired-listing-switches "-al -hF --group-directories-first"
+ gnus-init-file (concat user-emacs-directory "gnus")
+ gnutls-min-prime-bits 2048
  inhibit-startup-screen t
  compilation-read-command nil
  auto-save-default nil
- auto-save-list-file-name "~/.cache/emacs/auto-save-list/.saves-"
+ auto-save-list-file-prefix "~/.cache/emacs/auto-save-list/.saves-"
  echo-keystrokes 0.1
  search-highlight t
  query-replace-highlight t
- eshell-directory-name "~/.cache/emacs/eshell"
+ eshell-directory-name "~/.local/share/emacs/eshell"
  ido-enable-flex-matching t
- ido-save-directory-list-file "~/.cache/emacs/ido"
+ ido-save-directory-list-file "~/.local/share/emacs/ido"
  mouse-sel-retain-highlight t
  save-interprogram-paste-before-kill t
  scroll-margin 3
  scroll-conservatively 40
  scroll-preserve-screen-position t
  shift-select-mode nil
- tramp-persistency-file-name "~/.cache/emacs/tramp"
+ tramp-persistency-file-name "~/.local/share/emacs/tramp"
+ x-gtk-use-system-tooltips nil
  x-select-enable-clipboard t
  x-select-enable-primary t)
 
 (setq-default
  indent-tabs-mode nil
  save-place t
- save-place-file "~/.cache/emacs/places"
+ save-place-file "~/.local/share/emacs/places"
  truncate-lines t
  uniquify-buffer-name-style 'forward)
 
