@@ -23,6 +23,7 @@
 (setq
  apropos-do-all t
  dired-listing-switches "-al -hF --group-directories-first"
+ gnus-home-directory "~/.local/share/emacs/gnus/"
  gnus-init-file (concat user-emacs-directory "gnus")
  gnutls-min-prime-bits 2048
  inhibit-startup-screen t
