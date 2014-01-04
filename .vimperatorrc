@@ -58,18 +58,10 @@ map S :tabopen google
 nmap <C-S-n> :tabmove! +1<CR>
 nmap <C-S-p> :tabmove! -1<CR>
 nmap <F3> <Nop>
-nmap <C-a> <Nop>
-nmap <C-h> <Nop>
-nmap <C-j> :jumps<CR>
-nmap <C-k> <Nop>
-nmap <C-l> <Nop>
 noremap h 7h
 noremap j 7j
 noremap k 7k
 noremap l 7l
-cmap <A-b> <C-left>
-cmap <A-f> <C-right>
-cmap <A-BS> <C-w>
 
 " quvi
 js <<EOF

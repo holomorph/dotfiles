@@ -22,12 +22,12 @@ syn match   pentadactylLineComment	+^[ \t:]*".*$+ contains=pentadactylTodo
 
 " Commands:
 syn keyword pentadactylCommand	contained se[t]
-syn keyword pentadactylCommand	hi map nmap
+syn keyword pentadactylCommand	hi map nmap runtime source
 syn match   pentadactylCommand	contained "\<z[-+^.=]\="
 syn match   pentadactylIsCommand	"\<\h\w*\>" contains=pentadactylCommand
 
 " Options:
-syn keyword pentadactylOption	contained guioptions passkeys showtabline
+syn keyword pentadactylOption	contained guioptions passkeys runtimepath showtabline
 syn region  pentadactylSet	matchgroup=pentadactylCommand start="\<\%(setl\%[ocal]\|setg\%[lobal]\|se\%[t]\)\>" skip="\%(\\\\\)*\\." end="$" end="<[cC][rR]>" keepend oneline contains=pentadactylOption,pentadactylComment,pentadactylString
 
 " Javascript:

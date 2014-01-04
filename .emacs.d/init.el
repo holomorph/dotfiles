@@ -87,6 +87,8 @@
   (define-key term-raw-map (kbd "C-M-n") 'goto-next-window)
   (define-key term-raw-map (kbd "C-M-p") 'goto-prev-window)))
 
+(windmove-default-keybindings)
+
 ;; extensions
 (autoload 'magit-status "magit" nil t)
 (autoload 'freefem++-mode "freefem++-mode" "Major mode for FreeFem++ code" t)
