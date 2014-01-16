@@ -1,7 +1,7 @@
 # ~/.config/zsh/util.zsh
 
 cd() {
-  builtin cd "$@" && ls;
+	builtin cd "$@" && ls;
 }
 
 x() {

@@ -65,29 +65,20 @@
  version-control t)
 
 ;; bindings
-(defun goto-next-window nil
-  (interactive)
-  (select-window (next-window)))
-(defun goto-prev-window nil
-  (interactive)
-  (select-window (previous-window)))
-
 (global-set-key (kbd "RET") 'newline-and-indent)
 (global-set-key (kbd "<f5>") 'recompile)
 (global-set-key (kbd "C-.") 'repeat)
 (global-set-key (kbd "M-i") 'back-to-indentation)
-(global-set-key (kbd "M-n") 'next-buffer)
-(global-set-key (kbd "M-p") 'previous-buffer)
-(global-set-key (kbd "C-M-n") 'goto-next-window)
-(global-set-key (kbd "C-M-p") 'goto-prev-window)
-
-(add-hook 'term-mode-hook (lambda ()
-  (define-key term-raw-map (kbd "M-n") 'next-buffer)
-  (define-key term-raw-map (kbd "M-p") 'previous-buffer)
-  (define-key term-raw-map (kbd "C-M-n") 'goto-next-window)
-  (define-key term-raw-map (kbd "C-M-p") 'goto-prev-window)))
 
 (windmove-default-keybindings)
+
+;; mail
+(setq
+ message-send-mail-function 'smtpmail-send-it
+ smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
+ smtpmail-default-smtp-server "smtp.gmail.com"
+ smtpmail-smtp-server "smtp.gmail.com"
+ smtpmail-smtp-service 587)
 
 ;; extensions
 (autoload 'magit-status "magit" nil t)

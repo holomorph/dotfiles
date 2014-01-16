@@ -1,7 +1,4 @@
 # ~/.config/zsh/git.zsh
-# my "sunaku" prompt for ZSH using vcs_info stdlib
-# http://snk.tuxfamily.org/log/sunaku-zsh-prompt.png
-# https://github.com/sunaku/home/blob/master/.zsh/config/prompt.zsh
 
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git
