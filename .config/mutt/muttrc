@@ -33,6 +33,7 @@ set pipe_decode                      # strip headers and eval mimes when piping
 set quit                             # don't ask, just do!
 set reverse_alias                    # show names from alias file in index
 set sort              = reverse-date # like gmail???
+set sleep_time        = 0            # no delays please
 set smart_wrap                       # don't wrap mid-word
 set thorough_search                  # strip headers and eval mimes before searching
 set tilde                            # show tildes like in vim
