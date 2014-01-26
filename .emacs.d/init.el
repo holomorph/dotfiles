@@ -72,6 +72,13 @@
 
 (windmove-default-keybindings)
 
+(defadvice terminal-init-screen
+  (before tmux activate)
+  "Apply xterm keymap, allowing use of keys passed through tmux."
+  (let ((map (copy-keymap xterm-function-map)))
+    (set-keymap-parent map (keymap-parent input-decode-map))
+    (set-keymap-parent input-decode-map map)))
+
 ;; mail
 (setq
  message-send-mail-function 'smtpmail-send-it
