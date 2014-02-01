@@ -14,7 +14,8 @@ var INFO =
     ["ul", {},
     ["li", {}, "livestreamer, a CLI program that extracts stream info."],
     ["li", {}, "mpv, a movie player based on MPlayer and mplayer2."],
-    ["li", {}, "quvi, a CLI tool for parsing media stream properties."]],
+    ["li", {}, "quvi, a CLI tool for parsing media stream properties."],
+    ["li", {}, "youtube-dl, a CLI tool to download videos from various media sites."]],
 
     ["p", {},
     "A player is started in a shell using a buffer or hint URL. ",
@@ -40,6 +41,8 @@ var INFO =
     ];
 
 function launchv(target) {
+    /* Escape anything which could be used to inject shell commands before
+     * passing it to the commands */
     var uri = target.replace(/([$`"\\])/g, "\\$1");
 
     function exec(launcher, uri) {
@@ -48,12 +51,21 @@ function launchv(target) {
 
     /* filter certain urls to more appropriate programs before passing to
      * quvi */
-    if(uri.match(/twitch\.tv/))
+    if(uri.match(/twitch\.tv\/.*\/c\/[0-9]+/))
+        exec("!yt-dl", uri);
+    else if(uri.match(/twitch\.tv/))
         exec("!lstream", uri);
-    else if(uri.match(/playlist\?list=PL/))
-        exec("!mpv --really-quiet --cache=4096", uri );
+    else if(uri.match(/youtube.*[?&]list=PL/)) {
+        /* Check if the url is part of a playlist but a direct video
+         * (watch?v=) url is provided and return the real playlist url */
+        if(uri.match(/watch\?v=/))
+            exec("!mpv --really-quiet --cache=4096",
+                  uri.replace(/watch\?v.+?\&/, "playlist\?"));
+        else
+            exec("!mpv --really-quiet --cache=4096", uri);
+    }
     else
-        exec("!quvi dump -b mute", uri);
+        exec("!yt-dl", uri);
 }
 
 hints.addMode("l", "Launch video from hint", function (elem, loc) launchv(loc));
