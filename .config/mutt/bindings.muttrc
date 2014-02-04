@@ -15,9 +15,13 @@ bind pager       K       previous-undeleted
 bind index       J       next-unread
 bind index       K       previous-unread
 bind index,pager R       group-reply
-bind index,pager \Cd     half-down
-bind index,pager \Cu     half-up
 bind index,pager \#      noop
+
+# paging
+bind index,pager,attach,browser \Cb     previous-page
+bind index,pager,attach,browser \Cf     next-page
+bind index,pager,attach,browser \Cd     half-down
+bind index,pager,attach,browser \Cu     half-up
 
 # postpone
 bind compose     P       pgp-menu
@@ -29,14 +33,10 @@ bind postpone    p       exit
 bind attach      i       exit
 bind attach      gg      first-entry
 bind attach      G       last-entry
-bind attach      \Cd     half-down
-bind attach      \Cu     half-up
 
 # browser
 bind browser     gg      first-entry
 bind browser     G       last-entry
-bind browser     \Cd     half-down
-bind browser     \Cu     half-up
 
 # macros
 macro index,pager ,i "<change-folder>+inbox<enter>"         "go to gmail inbox"

@@ -11,3 +11,4 @@ user_pref("security.ssl.treat_unsafe_negotiation_as_broken", true);
 
 // NoScript
 user_pref("noscript.notify", false);
+user_pref("noscript.showPlaceholder", false);
