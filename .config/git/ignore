@@ -51,6 +51,8 @@ Thumbs.db
 # Crypto #
 ##########
 *.asc
+*.crt
 *.gpg
 *.key
+*.pem
 *.tc
