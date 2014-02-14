@@ -46,26 +46,25 @@ function launchv(target) {
     var uri = target.replace(/([$`"\\])/g, "\\$1");
 
     function exec(launcher, uri) {
-        return commands.execute(launcher + ' "' + uri + '" &');
+        return commands.execute("!" + launcher + ' "' + uri + '" &');
     }
 
     /* filter certain urls to more appropriate programs before passing to
      * quvi */
     if(uri.match(/twitch\.tv\/.*\/c\/[0-9]+/))
-        exec("!yt-dl", uri);
+        exec("yt-dl", uri);
     else if(uri.match(/twitch\.tv/))
-        exec("!lstream", uri);
+        exec("lstream", uri);
     else if(uri.match(/youtube.*[?&]list=PL/)) {
         /* Check if the url is part of a playlist but a direct video
          * (watch?v=) url is provided and return the real playlist url */
         if(uri.match(/watch\?v=/))
-            exec("!mpv --really-quiet --cache=4096",
-                  uri.replace(/watch\?v.+?\&/, "playlist\?"));
+            exec("mpv --really-quiet --cache=4096", uri.replace(/watch\?v.+?\&/, "playlist\?"));
         else
-            exec("!mpv --really-quiet --cache=4096", uri);
+            exec("mpv --really-quiet --cache=4096", uri);
     }
     else
-        exec("!yt-dl", uri);
+        exec("yt-dl", uri);
 }
 
 hints.addMode("l", "Launch video from hint", function (elem, loc) launchv(loc));

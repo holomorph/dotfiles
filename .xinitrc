@@ -11,7 +11,7 @@ xset dpms 1800 1800 1800
 feh --no-fehbg --bg-fill "$HOME/pictures/wallpaper/default" &
 
 ## key mapping
-setxkbmap -option ctrl:nocaps
+setxkbmap -option ctrl:nocaps -option compose:ralt
 xmodmap -e "keycode 135 = Super_R"
 
 [[ -z $(pgrep termite) ]] && termite &
