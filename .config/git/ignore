@@ -55,4 +55,5 @@ Thumbs.db
 *.gpg
 *.key
 *.pem
+*.sig
 *.tc
