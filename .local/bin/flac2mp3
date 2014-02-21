@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# flac2mp3: converts to MP3 V0 in current directory
+
+for f in *.flac; do
+	ffmpeg -i "$f" -vn -qscale:a 0 "${f[@]/%flac/mp3}"
+done

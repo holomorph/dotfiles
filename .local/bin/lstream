@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# A simple wrapper around livestreamer
+
+flags=(
+    -Q -p 'mpv'
+    --ringbuffer-size 800000
+    "$1"
+    "${2:-medium,high,best,source,mobile}"
+)
+
+exec livestreamer "${flags[@]}"

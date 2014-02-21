@@ -1,0 +1,3 @@
+#!/bin/sh
+
+exec scrot "$@" -e 'mv $f ~/pictures/scrot' '%Y-%m-%d-%H%M%S-$wx$h.png'

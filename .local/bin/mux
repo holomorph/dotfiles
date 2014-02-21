@@ -1,0 +1,29 @@
+#!/bin/bash
+#
+# mux --- recompile screen-256color with italics and xterm keys
+#
+# find "vim disp" in tmux FAQ
+# http://sourceforge.net/p/tmux/tmux-code/ci/master/tree/FAQ
+
+declare -r s="screen-256color"
+declare -r file="${TERMINFO:-$HOME/.terminfo}/$s.terminfo"
+declare -r dir="${file%/*}"
+
+# create directory
+mkdir -vp "$dir"
+
+# generate new terminfo entry in $dir
+tee <<EOF "$file"
+$s|GNU Screen with 256 colors and italics,
+	initc@,
+	smso=\\E[7m, rmso=\\E[27m,
+	sitm=\\E[3m, ritm=\\E[23m,
+	sgr=\\E[0%?%p6%t;1%;%?%p1%t;7%;%?%p2%t;4%;%?%p3%t;7%;%?%p4%t;5%;m%?%p9%t\\016%e\\017%;,
+	use=screen-256color,
+EOF
+
+# clear old terminfo before invoking tic
+[[ -f "$dir/${s:0:1}/$s" ]] && rm -vf "$dir/${s:0:1}/$s"
+
+# compile
+tic -v "$file"

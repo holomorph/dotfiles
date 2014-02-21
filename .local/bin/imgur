@@ -1,0 +1,75 @@
+#!/bin/bash
+
+# imgur v4 by Bart Nagel <bart@tremby.net>
+#
+# Required: curl
+# Optional: xsel or xclip (putting URLs on the X clipboard)
+
+# API Key provided by Alan@imgur.com
+apikey="b3625162d3418ac51a9ee805b1840452"
+
+clip=""
+ret=0
+
+usage() {
+	printf 'Usage: %s <file> [<file> [...]]
+Upload images to imgur.com and output their new URLs to stdout. Each file’s
+delete page is output to stderr between the view URLs.
+If xsel or xclip is available, the URLs are put on the X selection for
+easy pasting.\n' "${0##*/}"
+}
+
+err() {
+	printf >&2 "imgur: %s\n" "$@"
+	ret=$((++ret))
+}
+
+# check arguments
+if [[ $# -eq 0 ]]; then
+	err "no file specified"
+	exit $ret
+elif [[ "$1" = "-h" || "$1" = "--help" ]]; then
+	usage
+	exit $ret
+fi
+
+# main
+while (( $# > 0 )); do
+	file="$1"
+	shift
+
+	if [[ ! -f "$file" ]]; then
+		err "skipping ‘$file’: No such file"
+		continue
+	fi
+
+	# upload the image
+	# the "Expect: " header is to get around a problem when using this through
+	# the Squid proxy. Not sure if it's a Squid bug or what.
+	response=$(curl -F "key=$apikey" -H "Expect: " -F "image=@$file" \
+		http://imgur.com/api/upload.xml 2>/dev/null)
+
+	# handle errors
+	if (( $? != 0 )); then
+		err "upload ‘$file’ failed"
+		continue
+	elif [[ $(grep -cm1 "<error_msg>" <<< $response) -gt 0 ]]; then
+		err "error message from imgur:"
+		sed -r 's/.*<error_msg>(.*)<\/error_msg>.*/\1/' <<< $response >&2
+		continue
+	fi
+
+	# parse the response and output our stuff
+	url="$(sed -r 's/.*<original_image>(.*)<\/original_image>.*/\1/' <<< $response)"
+	deleteurl="$(sed -r 's/.*<delete_page>(.*)<\/delete_page>.*/\1/' <<< $response)"
+	printf "url: %s\n" "$url"
+	printf >&2 "del: %s\n" "$deleteurl"
+done
+
+# put the URLs on the clipboard if we have xsel or xclip
+if [[ -n $DISPLAY ]]; then
+	{ type -p xsel >/dev/null && printf "%s" "$url" | xsel; } \
+		|| { type -p xclip >/dev/null && printf "%s" "$url" | xclip; }
+fi
+
+exit $ret
