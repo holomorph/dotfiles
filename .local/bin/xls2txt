@@ -1,0 +1,25 @@
+#!/bin/bash
+# xls2txt --- format Excel spreadsheets into plaintext tables
+
+f="$1"
+
+if [[ "$f" = *.xlsx ]]; then
+    sed -f - <<EOF <(xlsx2csv "$f") | column -ts'	'
+s/^,*$//g
+s/^"//
+s/",$//
+s/,,/,"",/g
+s/","/	/g
+EOF
+else
+    # for everything else, use xls2csv
+    sed -rf - <<EOF <(xls2csv "$f" 2>/dev/null) | column -ts'	'
+s/^,*$//
+s/,,/,"",/g
+s/^,/"",/
+s/^"//
+s/,*$//
+s/"$//
+s/","/	/g
+EOF
+fi

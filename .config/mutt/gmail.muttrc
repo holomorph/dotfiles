@@ -12,7 +12,6 @@ set trash     = "+trash"
 
 unset record # gmail saves sent mail in +sent anyways
 
-mailboxes +inbox +amazon +cycling +drafts \
-          +sent +spam +thesis +trash
+mailboxes +inbox +amazon +drafts +sent +thesis +trash
 
 # vim:ft=muttrc
