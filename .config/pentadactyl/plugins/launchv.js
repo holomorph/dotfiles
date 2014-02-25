@@ -46,7 +46,8 @@ function launchv(target) {
     var uri = target.replace(/([$`"\\])/g, "\\$1");
 
     function exec(launcher, uri) {
-        return commands.execute("!" + launcher + ' "' + uri + '" &');
+        dactyl.echomsg("Launch " + launcher + " " + uri);
+        return io.system(launcher + ' "' + uri + '" &');
     }
 
     /* filter certain urls to more appropriate programs before passing to
@@ -59,9 +60,9 @@ function launchv(target) {
         /* Check if the url is part of a playlist but a direct video
          * (watch?v=) url is provided and return the real playlist url */
         if(uri.match(/watch\?v=/))
-            exec("mpv --really-quiet --cache=4096", uri.replace(/watch\?v.+?\&/, "playlist\?"));
+            exec("mpv --really-quiet", uri.replace(/watch\?v.+?\&/, "playlist\?"));
         else
-            exec("mpv --really-quiet --cache=4096", uri);
+            exec("mpv --really-quiet", uri);
     }
     else
         exec("yt-dl", uri);

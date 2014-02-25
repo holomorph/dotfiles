@@ -5,7 +5,7 @@ autoload -Uz compinit && compinit
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
 
-setopt auto_cd correct
+setopt auto_cd auto_pushd correct
 setopt extended_glob append_history extended_history share_history
 setopt hist_find_no_dups hist_expire_dups_first hist_ignore_dups
 setopt hist_ignore_space hist_reduce_blanks hist_save_no_dups hist_verify

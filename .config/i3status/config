@@ -18,7 +18,6 @@ general {
 order += "volume master"
 order += "load"
 order += "cpu_temperature 0"
-order += "run_watch DHCP"
 order += "ethernet bond0"
 order += "wireless wlp2s0"
 order += "ethernet enp5s0"

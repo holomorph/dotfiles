@@ -6,7 +6,6 @@ alias e='emacsclient -t'
 alias z='zathura --fork'
 
 alias ncmpcpp='ncmpcpp -c ~/.config/ncmpcpp/config'
-alias irssi='irssi --home=~/.config/irssi'
 alias weechat='weechat -d ~/.config/weechat'
 
 alias df='df -h'
