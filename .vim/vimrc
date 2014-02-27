@@ -18,7 +18,6 @@ set wrapscan
 set cinoptions=(0
 set expandtab
 set formatoptions+=qn1
-set nolist
 set nowrap
 set shiftwidth=4
 set softtabstop=2
@@ -33,12 +32,10 @@ set nrformats+=alpha
 set autoread
 set autowrite
 set completeopt=longest,menuone,preview
-set equalalways
 set hidden
 set history=50
 set laststatus=2
 set mouse=a
-set ruler
 set scrolloff=3
 set shortmess=atToOI
 set showcmd

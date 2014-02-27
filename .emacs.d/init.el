@@ -4,8 +4,6 @@
   (normal-top-level-add-to-load-path '("."))
   (normal-top-level-add-subdirs-to-load-path))
 
-(require 'saveplace)
-(require 'uniquify)
 (load-theme 'zenburn t)
 
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
@@ -52,6 +50,9 @@
  tramp-persistency-file-name "~/.local/share/emacs/tramp"
  truncate-lines t
  uniquify-buffer-name-style 'forward)
+
+(require 'saveplace)
+(require 'uniquify)
 
 ;; backup
 (setq
