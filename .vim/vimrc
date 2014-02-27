@@ -49,12 +49,6 @@ set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpg
 set wildignore+=*.a,*.o,*.obj,*.so,*.hi
 set wildignore+=.git,.hg
 
-" backup
-set dir=~/.cache/vim/tmp
-set backup backupdir=~/.cache/vim/backup
-set undofile undodir=~/.cache/vim/undo
-set viminfo+=n~/.cache/vim/viminfo
-
 noremap Y y$
 nnoremap ZW :write<cr>
 nnoremap <leader>q :quitall<cr>
