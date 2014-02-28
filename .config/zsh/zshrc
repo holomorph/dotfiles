@@ -26,6 +26,7 @@ unset cfg
 ## prompt
 PROMPT='%(?..%B%F{red}exit %?%f%b
 )%B%F{black}[%b%f'\
+'%F{red}%m%f '\
 '${vcs_info_msg_0_}'\
 '%F{11}%~%B%F{black}]%b%f'\
 '%(!.%F{red}#%f.%F{blue}$%f) '
