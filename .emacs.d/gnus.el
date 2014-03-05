@@ -15,10 +15,4 @@
 
 ;; methods
 (setq
- gnus-select-method '(nntp "news.gwene.org" (nntp-port-number 119))
- gnus-secondary-select-methods
- '((nnmaildir
-    "gmail"
-    (directory "~/.mutt/mail")
-    (directory-files nnheader-directory-files-safe)
-    (get-new-mail nil))))
+ gnus-select-method '(nntp "news.gmane.org" (nntp-port-number 119)))
