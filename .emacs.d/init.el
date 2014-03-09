@@ -69,6 +69,7 @@
 (global-set-key (kbd "<f5>") 'recompile)
 (global-set-key (kbd "C-.") 'repeat)
 (global-set-key (kbd "M-i") 'back-to-indentation)
+(global-set-key (kbd "M-o") 'other-window)
 
 (windmove-default-keybindings)
 
