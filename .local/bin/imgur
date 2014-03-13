@@ -3,73 +3,79 @@
 # imgur v4 by Bart Nagel <bart@tremby.net>
 #
 # Required: curl
-# Optional: xsel or xclip (putting URLs on the X clipboard)
+# Optional: xclip
 
 # API Key provided by Alan@imgur.com
 apikey="b3625162d3418ac51a9ee805b1840452"
 
-clip=""
-ret=0
-
-usage() {
-	printf 'Usage: %s <file> [<file> [...]]
-Upload images to imgur.com and output their new URLs to stdout. Each file’s
-delete page is output to stderr between the view URLs.
-If xsel or xclip is available, the URLs are put on the X selection for
-easy pasting.\n' "${0##*/}"
+die() {
+    printf >&2 "imgur: %s\n" "$@"
+    exit 1
 }
 
-err() {
-	printf >&2 "imgur: %s\n" "$@"
-	ret=$((++ret))
-}
-
-# check arguments
+# check argument
 if [[ $# -eq 0 ]]; then
-	err "no file specified"
-	exit $ret
+    die "no file specified"
 elif [[ "$1" = "-h" || "$1" = "--help" ]]; then
-	usage
-	exit $ret
+    printf 'Usage: %s <file>\n' "${0##*/}"
+    exit 0
 fi
+
+print_tag() {
+    local input="$1"
+    local regex="<$2>(.*)</$2>"
+
+    # parse input for regex contents
+    if [[ $input =~ $regex ]]; then
+        printf "%s" "${BASH_REMATCH[1]}"
+        return 0
+    fi
+    return 1
+}
+
+handle_response() {
+    local response="$1"
+    local err url del
+
+    # check for errors from imgur
+    if err=$(print_tag "$response" 'error_msg'); then
+        die "response: $err"
+    fi
+
+    # print direct image link
+    if url=$(print_tag "$response" 'original_image'); then
+        printf "url: %s\n" "$url"
+    fi
+
+    # print deletion link
+    if del=$(print_tag "$response" 'delete_page'); then
+        printf "del: %s\n" "$del" >&2
+    fi
+
+    # try putting the url on the clipboard
+    if [[ -n $DISPLAY ]] && type -p xclip >/dev/null; then
+        printf "%s" "$url" | xclip;
+    fi
+}
+
+upload_image() {
+    local file="$1"
+
+    if [[ ! -f "$file" ]]; then
+        die "skipping ‘$file’: No such file"
+    fi
+
+    # upload the image
+    response="$(curl -F "key=$apikey" -F "image=@$file" \
+        http://imgur.com/api/upload.xml 2>/dev/null)"
+
+    # die if curl errors
+    if (( $? != 0 )); then
+        die "upload ‘$file’ failed"
+    fi
+
+    handle_response "$response"
+}
 
 # main
-while (( $# > 0 )); do
-	file="$1"
-	shift
-
-	if [[ ! -f "$file" ]]; then
-		err "skipping ‘$file’: No such file"
-		continue
-	fi
-
-	# upload the image
-	# the "Expect: " header is to get around a problem when using this through
-	# the Squid proxy. Not sure if it's a Squid bug or what.
-	response=$(curl -F "key=$apikey" -H "Expect: " -F "image=@$file" \
-		http://imgur.com/api/upload.xml 2>/dev/null)
-
-	# handle errors
-	if (( $? != 0 )); then
-		err "upload ‘$file’ failed"
-		continue
-	elif [[ $(grep -cm1 "<error_msg>" <<< $response) -gt 0 ]]; then
-		err "error message from imgur:"
-		sed -r 's/.*<error_msg>(.*)<\/error_msg>.*/\1/' <<< $response >&2
-		continue
-	fi
-
-	# parse the response and output our stuff
-	url="$(sed -r 's/.*<original_image>(.*)<\/original_image>.*/\1/' <<< $response)"
-	deleteurl="$(sed -r 's/.*<delete_page>(.*)<\/delete_page>.*/\1/' <<< $response)"
-	printf "url: %s\n" "$url"
-	printf >&2 "del: %s\n" "$deleteurl"
-done
-
-# put the URLs on the clipboard if we have xsel or xclip
-if [[ -n $DISPLAY ]]; then
-	{ type -p xsel >/dev/null && printf "%s" "$url" | xsel; } \
-		|| { type -p xclip >/dev/null && printf "%s" "$url" | xclip; }
-fi
-
-exit $ret
+upload_image "$1"
