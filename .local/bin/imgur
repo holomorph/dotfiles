@@ -7,19 +7,12 @@
 
 # API Key provided by Alan@imgur.com
 apikey="b3625162d3418ac51a9ee805b1840452"
+apiurl="http://imgur.com/api/upload.xml"
 
 die() {
     printf >&2 "imgur: %s\n" "$@"
     exit 1
 }
-
-# check argument
-if [[ $# -eq 0 ]]; then
-    die "no file specified"
-elif [[ "$1" = "-h" || "$1" = "--help" ]]; then
-    printf 'Usage: %s <file>\n' "${0##*/}"
-    exit 0
-fi
 
 print_tag() {
     local input="$1"
@@ -58,24 +51,23 @@ handle_response() {
     fi
 }
 
-upload_image() {
-    local file="$1"
+# check argument
+if (( $# == 0 )); then
+    die "no file specified"
+elif [[ "$1" = @(-h|--help) ]]; then
+    printf 'Usage: %s <file>\n' "${0##*/}"
+    exit 0
+fi
 
-    if [[ ! -f "$file" ]]; then
-        die "skipping ‘$file’: No such file"
-    fi
+# ensure argument is a file
+if [[ ! -f "$1" ]]; then
+    die "no such file: $1"
+fi
 
-    # upload the image
-    response="$(curl -F "key=$apikey" -F "image=@$file" \
-        http://imgur.com/api/upload.xml 2>/dev/null)"
-
-    # die if curl errors
-    if (( $? != 0 )); then
-        die "upload ‘$file’ failed"
-    fi
-
+# upload the image
+if response="$(curl -F "key=$apikey" -F "image=@$1" "$apiurl" 2>/dev/null)"; then
     handle_response "$response"
-}
-
-# main
-upload_image "$1"
+else
+    # die if curl errors
+    die "upload ‘$1’ failed"
+fi
