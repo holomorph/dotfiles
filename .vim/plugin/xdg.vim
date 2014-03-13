@@ -8,34 +8,37 @@ if exists("g:loaded_xdg") || &cp
 endif
 let g:loaded_xdg = 1
 
-" FindDataHome:  Check if "$XDG_DATA_HOME" is set and use it, otherwise
-" default to "~/.local/share/vim" for Vim's data directory.  Return the
-" directory name.
-function! s:FindDataHome()
-  if exists("$XDG_DATA_HOME")
-    return $XDG_DATA_HOME . "/vim"
+" GetUserDir:  Check if "env" is set and use it, otherwise default to
+" "default" for the user directory.  Return the directory name.
+function! s:GetUserDir(env, default)
+  if exists(a:env)
+    return a:env
   else
-    return expand(expand("~/.local/share/vim"))
+    return expand(expand(a:default))
   endif
 endfunction
 
-" SetDataSettings:  Take the Vim data home directory and set the swap, backup,
-" and undo file directories, as well as setting the location for viminfo.
-function! s:SetDataSettings(dir)
+" SetCacheSettings:  Take the Vim cache home directory and set the swap,
+" backup, and undo file directories, as well as setting the location for
+" viminfo.
+function! s:SetCacheSettings(dir)
   exe "set dir="              . a:dir . "/tmp"
   exe "set backup backupdir=" . a:dir . "/backup"
   exe "set undofile undodir=" . a:dir . "/undo"
   exe "set viminfo+=n"        . a:dir . "/viminfo"
 endfunction
 
-" InitXDG:  Create the directories and set the corresponding directory options
-function! s:InitXDG(dir, perm)
-  sil! call mkdir(a:dir, "p", a:perm)
-  sil! call mkdir(a:dir . "/tmp", a:perm)
-  sil! call mkdir(a:dir . "/backup", a:perm)
-  sil! call mkdir(a:dir . "/undo", a:perm)
+" InitXDG:  Create the XDG directories with "perm" and set the corresponding
+" directory options
+function! s:InitXDG(perm)
+  let l:cache = s:GetUserDir("XDG_CACHE_HOME", "~/.cache") . "/vim"
 
-  call s:SetDataSettings(a:dir)
+  sil! call mkdir(l:cache, "p", a:perm)
+  sil! call mkdir(l:cache . "/tmp", a:perm)
+  sil! call mkdir(l:cache . "/backup", a:perm)
+  sil! call mkdir(l:cache . "/undo", a:perm)
+
+  call s:SetCacheSettings(l:cache)
 endfunction
 
-call s:InitXDG(s:FindDataHome(), 0700)
+call s:InitXDG(0700)
