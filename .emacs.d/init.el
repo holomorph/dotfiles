@@ -42,11 +42,11 @@
  gnus-home-directory "~/.local/share/emacs/gnus/"
  gnus-init-file (concat user-emacs-directory "gnus")
  ido-enable-flex-matching t
- ido-save-directory-list-file "~/.local/share/emacs/ido"
+ ido-save-directory-list-file "~/.cache/emacs/ido"
  indent-tabs-mode nil
  mouse-sel-retain-highlight t
  save-place t
- save-place-file "~/.local/share/emacs/places"
+ save-place-file "~/.cache/emacs/places"
  tramp-persistency-file-name "~/.local/share/emacs/tramp"
  truncate-lines t
  uniquify-buffer-name-style 'forward)
