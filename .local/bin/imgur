@@ -1,6 +1,8 @@
 #!/bin/bash
 
-# imgur v4 by Bart Nagel <bart@tremby.net>
+# imgur v5
+#
+# inspired by imgur v4 written by Bart Nagel <bart@tremby.net>
 #
 # Required: curl
 # Optional: xclip
@@ -65,9 +67,9 @@ if [[ ! -f "$1" ]]; then
 fi
 
 # upload the image
-if response="$(curl -F "key=$apikey" -F "image=@$1" "$apiurl" 2>/dev/null)"; then
+if response="$(curl -s -F "key=$apikey" -F "image=@$1" "$apiurl")"; then
     handle_response "$response"
 else
     # die if curl errors
-    die "upload ‘$1’ failed"
+    die "upload failed: $1"
 fi
