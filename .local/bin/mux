@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# mux --- recompile screen-256color with italics and xterm keys
+# mux --- recompile screen-256color with italics
 #
 # find "vim disp" in tmux FAQ
 # http://sourceforge.net/p/tmux/tmux-code/ci/master/tree/FAQ
