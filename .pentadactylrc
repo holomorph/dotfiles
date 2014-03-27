@@ -2,7 +2,6 @@
 
 set guioptions-=br
 set guioptions+=n
-set passkeys=github.com:<Return>
 set runtimepath=~/.config/pentadactyl
 set showtabline=never
 
