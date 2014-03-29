@@ -47,6 +47,7 @@ alternative_order text/plain text/enriched text/html # but save it for last
 # formats and regexps
 set alias_format = "%4n %t %-20a %r"
 set date_format  = "%d/%m/%y at %I:%M%P"
+set folder_format = "%2C %t %N %F %2l %u %g %4s %d %f"
 set index_format = "%3C %Z %[!%d/%m] %-17.17F %s"
 set quote_regexp = "^( {0,4}[>|:#%]| {0,4}[a-z0-9]+[>|]+)+"
 set reply_regexp = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
