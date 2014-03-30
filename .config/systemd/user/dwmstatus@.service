@@ -4,7 +4,8 @@ BindsTo=sys-subsystem-net-devices-%i.device
 After=network.target
 
 [Service]
-ExecStart=/usr/bin/dwmstatus -i %i -m %h/.mutt/mail/inbox/new
+Environment=MAILDIR=%h/mail
+ExecStart=/usr/bin/dwmstatus -i %i
 
 [Install]
 WantedBy=default.target
