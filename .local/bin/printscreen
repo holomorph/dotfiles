@@ -1,3 +1,12 @@
-#!/bin/sh
+#!/bin/bash
 
-exec scrot "$@" -e 'mv $f ~/pictures/scrot' '%Y-%m-%d-%H%M%S-$wx$h.png'
+dir="$HOME/pictures/scrot"
+shot='%Y-%m-%d-%H%M%S-$wx$h.png'
+
+if [[ ! -d "$dir" ]]; then
+    mkdir -p "$dir"
+fi
+
+if cd "$dir" && f="$(scrot -e 'printf $f' "$shot")" && type -p xclip >/dev/null; then
+    printf '%s/%s' "$dir" "$f" | xclip
+fi
