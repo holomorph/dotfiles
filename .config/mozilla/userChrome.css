@@ -1,15 +1,4 @@
-/* (c) Ippytraxx 2012 v.szolnoky@tele2.se */
 /* DOM chrome://browser/content/browser.xul */
-#identity-box,
-#urlbar-icons > image,
-#urlbar-container dropmarker,
-#new-tab-button .toolbarbutton-icon,
-#appmenu-toolbar-button,
-#appmenu-toolbar-button > .toolbarbutton-text,
-#appmenu-toolbar-button > .toolbarbutton-menu-dropmarker,
-.tabs-newtab-button {
-	display:none!important;
-}
 
 /* Blank background before clicked link page loads */
 /* see userContent.css for blank tab and initial */
@@ -19,69 +8,4 @@ browser {
 }
 tabbrowser tabpanels {
 	background-color: rgb(8, 8, 8) !important;
-}
-
-/* TABS */
-#main-window[sizemode="maximized"] #tabbrowser-tabs tab,
-#main-window[sizemode="fullscreen"] #tabbrowser-tabs tab {
-	background:#121212!important;
-	border-top:0!important;
-	margin:0px 0px 0px!important;
-	max-height:10px!important;
-	padding:0 0px!important;
-	border-radius:0 0 0px 0px!important;
-}
-#main-window #tabbrowser-tabs tab .tab-throbber,
-#main-window #tabbrowser-tabs tab .tab-icon-image {
-	max-height:10px!important;
-	max-width:10px!important;
-	margin-top:-3px!important;
-}
-#main-window #tabbrowser-tabs tab[selected] .tab-close-button,
-#main-window #tabbrowser-tabs tab:hover .tab-close-button {
-	opacity:1!important;
-}
-#main-window #tabbrowser-tabs tab[fadein]:not([pinned]) {
-	min-width:40px!important;
-	max-width:160px!important;
-}
-#main-window #tabbrowser-tabs tab[pinned] {
-	max-width:24px!important;
-	min-width:24px!important;
-}
-#main-window #tabbrowser-tabs tab[pinned] .tab-close-button {
-	display:none!important;
-}
-
-/* pentadactyl/vimperator rc */
-#TabsToolbar toolbarbutton {
-	display: none !important;
-}
-.tabbrowser-tabs {
-	background: #121212 !important;
-}
-.tabbrowser-tab {
-	-moz-appearance: none !important;
-	-moz-border-radius: 0 !important;
-	background: #121212 !important;
-	border: none !important;
-	color: #bbbdbb !important;
-	font-family: monospace;
-	font-size: 10pt !important;
-	height: 18px !important;
-	margin: 0 !important;
-	min-height: 0 !important;
-	padding: 0 0.5ex !important;
-}
-.tabbrowser-tab:not([pinned]) {
-	max-width: 100px !important;
-	min-width: 100px !important;
-}
-.tabbrowser-tab:not([fadein]) {
-	max-width: 1px !important;
-	min-width: 1px !important;
-}
-.tabbrowser-tab[selected] {
-	background: #121212 !important;
-	color: #facb70 !important;
 }
