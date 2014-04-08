@@ -16,3 +16,5 @@ compdef "_files -W ~/doc/notes -/" n
 
 ## add pdf completion for llpp
 compdef "_pdf" llpp
+
+# vim: syn=sh

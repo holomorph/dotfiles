@@ -14,5 +14,3 @@ bind index B bounce-message
 
 macro index,pager,attach b \
 				'<enter-command>toggle sidebar_visible<enter>'
-
-# vim:ft=muttrc

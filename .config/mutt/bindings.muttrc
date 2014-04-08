@@ -41,5 +41,3 @@ bind browser     G       last-entry
 # macros
 macro index,pager ,i "<change-folder>+inbox<enter>"         "go to gmail inbox"
 macro index,pager ,s "<change-folder>+sent<enter>"          "go to gmail sent"
-
-# vim:ft=muttrc

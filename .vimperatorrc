@@ -70,5 +70,3 @@ hints.addMode("l", "Launch video from hint", function (elem, loc)
               + loc.replace(/([$`"\\])/g, "\\$1") + '" &'));
 EOF
 nmap <silent> x ;l
-
-" vim:ft=vimperator cms="%s

@@ -51,5 +51,3 @@ color quoted3 green default
 color quoted4 red default
 color quoted5 magenta default
 color quoted6 cyan default
-
-# vim:ft=muttrc

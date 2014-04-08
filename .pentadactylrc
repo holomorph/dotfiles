@@ -34,5 +34,3 @@ nmap -b l 7l
 " launch videos
 nmap -builtin x ;l
 nmap <A-x> :launchv<CR>
-
-" vim: ft=pentadactyl cms="%s

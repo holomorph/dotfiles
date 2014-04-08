@@ -5,5 +5,3 @@ set sort_aux        = reverse-last-date-received
 set sort_re
 set uncollapse_jump
 set reply_regexp    = "^(([Rr][Ee]?(\[[0-9]+\])?: *)?(\[[^]]+\] *)?)*"
-
-# vim:ft=muttrc
