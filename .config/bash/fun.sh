@@ -1,13 +1,26 @@
 # ~/.config/bash/fun.sh
 
 n() {
-	local arg files=(); for arg; do files+=( ~/"doc/notes/$arg" ); done
-	${EDITOR:-vim} "${files[@]}"
+	local dir="$HOME/doc/notes"
+	local editor="${EDITOR:-vim}"
+	local arg files=()
+
+	for arg; do
+		files+=("$dir/$arg")
+	done
+	if [[ "$@" = @(*.gpg*|*.org*) ]]; then
+		editor=(emacsclient -t -avim)
+	fi
+	command "${editor[@]}" "${files[@]}"
 }
 
 _notes() {
-	local files=($HOME/doc/notes/**/"$2"*)
-	[[ -e ${files[0]} ]] && COMPREPLY=( "${files[@]##~/doc/notes/}" )
+	local dir="$HOME/doc/notes"
+	local files=($dir/**/"$2"*)
+
+	if [[ -e ${files[0]} ]]; then
+		COMPREPLY=("${files[@]##$dir/}")
+	fi
 }
 
 complete -o default -F _notes n

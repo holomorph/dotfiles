@@ -1,7 +1,14 @@
 # ~/.config/zsh/fun.zsh
 
 n() {
-  $EDITOR "${@[@]/#/"$HOME/doc/notes/"}";
+  local dir="$HOME/doc/notes"
+  local editor="${EDITOR:-vim}" # likely vim anyways
+
+  # try emacsclient if arglist includes org or encrypted files
+  if [[ "$@" =~ '(.gpg|.org)' ]]; then
+      editor=(emacsclient -t -avim)
+  fi
+  command "${editor[@]}" "${@[@]/#/$dir/}";
 }
 
 ## add notes completion, thanks to Earnestly
