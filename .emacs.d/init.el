@@ -88,7 +88,15 @@
  smtpmail-smtp-server "smtp.gmail.com"
  smtpmail-smtp-service 587)
 
+;; filetype
+(add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
+
 ;; extensions
+(autoload 'notmuch "notmuch" "The mail indexer" t)
 (autoload 'magit-status "magit" nil t)
 (autoload 'ff++-mode "ff++-mode" "Major mode for FreeFem++ code" t)
+(autoload 'tuareg-mode "tuareg" "Major mode for OCaml code" t)
+
+;; filetype
 (add-to-list 'auto-mode-alist '("\\.[ei]dp\\'" . ff++-mode))
+(add-to-list 'auto-mode-alist '("\\.ml[ilyp]?\\'" . tuareg-mode))
