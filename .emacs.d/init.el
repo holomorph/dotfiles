@@ -110,6 +110,6 @@
 
 (defun common-prog-modes ()
   "Default modes for `prog-mode-hook'."
-  (if (fboundp 'flycheck-mode) (flycheck-mode 1)))
+  (ignore-errors (flycheck-mode 1)))
 
 (add-hook 'prog-mode-hook 'common-prog-modes)
