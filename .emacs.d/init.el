@@ -91,12 +91,25 @@
 ;; filetype
 (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
 
+
 ;; extensions
+(setq-default
+ flycheck-check-syntax-automatically '(save)
+ flycheck-disabled-checkers '(emacs-lisp-checkdoc))
+
+;; autoloads
 (autoload 'notmuch "notmuch" "The mail indexer" t)
 (autoload 'magit-status "magit" nil t)
 (autoload 'ff++-mode "ff++-mode" "Major mode for FreeFem++ code" t)
 (autoload 'tuareg-mode "tuareg" "Major mode for OCaml code" t)
+(autoload 'flycheck-mode "flycheck" "Minor mode for on-the-fly syntax checking" t)
 
 ;; filetype
 (add-to-list 'auto-mode-alist '("\\.[ei]dp\\'" . ff++-mode))
 (add-to-list 'auto-mode-alist '("\\.ml[ilyp]?\\'" . tuareg-mode))
+
+(defun common-prog-modes ()
+  "Default modes for `prog-mode-hook'."
+  (if (fboundp 'flycheck-mode) (flycheck-mode 1)))
+
+(add-hook 'prog-mode-hook 'common-prog-modes)
