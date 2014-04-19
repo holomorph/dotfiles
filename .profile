@@ -5,7 +5,7 @@ export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;31m'
 export LESS_TERMCAP_me=$'\E[0m'
 export LESS_TERMCAP_se=$'\E[0m'
-export LESS_TERMCAP_so=$'\E[03;92m'
+export LESS_TERMCAP_so=$'\E[0;30;102m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01m'
 
