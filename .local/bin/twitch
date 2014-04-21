@@ -1,0 +1,103 @@
+#!/usr/bin/ruby
+# coding: utf-8
+# twitch-dmenu.rb
+# written by Ogion (on freenode/archforum), inspired by Earnestly (likewise on freenode)
+# edited by holomorph (on freenode)
+
+require 'open3'
+require 'json'
+require 'open-uri'
+require 'thread'
+
+def read_config(dir, file)
+    array = []
+
+    IO.foreach(File.join(dir, file)) do |s|
+        next if s.chomp.empty? || s.start_with?("#")
+        array << s.chomp.strip
+    end
+    array
+end
+
+def get_json(uri)
+    JSON.parse(open(uri) {|f| f.read})
+end
+
+def parse_json(mutex, streams, data, index, owner, uri, title)
+    mutex.synchronize do
+        data[index].each do |s|
+            streams << {
+                owner: s["channel"][owner], 
+                uri:   s["channel"][uri],
+                title: s["channel"][title],
+            }
+        end
+    end
+end
+
+def get_streams()
+    threads = []
+    streams = []
+    streams_mx = Mutex.new
+
+    unless ENV["XDG_CONFIG_DIR"] then
+        dir = File.join(ENV["HOME"], ".config/twitch")
+    else
+        dir = File.join(ENV["XDG_CONFIG_DIR"], "twitch")
+    end
+
+    @teams = read_config(dir, "teams")
+    @users = read_config(dir, "streamers")
+
+    @teams.each do |team|
+        threads << Thread.new do
+            data = get_json("http://api.twitch.tv/api/team/#{team}/live_channels.json")
+            parse_json(streams_mx, streams, data, "channels", "display_name", "link", "title")
+        end
+    end
+
+    @users.each_slice(100) do |batch|
+        threads << Thread.new do
+            data = get_json("https://api.twitch.tv/kraken/streams?channel=#{batch.join(",")}&limit=#{batch.count}")
+            parse_json(streams_mx, streams, data, "streams", "display_name", "url", "status")
+        end
+    end
+
+    threads.each(&:join)
+    streams
+end
+
+def dmenu(items)
+    prompt = %W[-p Streams\ (#{items.count})]
+    font = %w[-fn -*-dina-bold-r-*-*-12-*-*-*-*-*-*-*]
+    scheme = %w[-nb #1b1b1b -nf #facb70 -sb #373b41 -sf #ffffff]
+    cmd = %w[dmenu -i -l 20] + prompt + scheme + font;
+
+    out, status = Open3.capture2(*cmd, stdin_data: items.join("\n"))
+
+    if status.success?
+        out.chomp
+    else
+        nil
+    end
+end
+
+class String
+    def escape
+        '"' + self.gsub(/["`\\$]/) { "\\" + $& } + '"'
+    end
+end
+
+quality = "medium,high,best,source"
+
+streams = get_streams()
+streams_by_user = Hash[streams.map{|i| [i[:owner].downcase, i]}]
+
+menu = streams.sort_by{|i| "#{i[:owner].downcase}"}
+menu = menu.map{|i| "#{i[:owner].ljust(24)} #{i[:title].gsub(/\r?\n/, " ")}"}
+sel = dmenu(menu.uniq)
+
+if sel =~ /^(\S+)\s+ / and item = streams_by_user[$1.downcase]
+    exec("livestreamer", "-p", "mpv --title=#{item[:title].escape}",
+         "--ringbuffer-size", "800000", item[:uri], quality)
+end
