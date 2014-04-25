@@ -3,6 +3,7 @@
 alias v='vim'
 alias g='git'
 alias e='emacsclient -t'
+alias s='sudoedit'
 alias z='zathura --fork'
 
 alias gdb='gdb -q'
