@@ -43,6 +43,7 @@ set shortmess=atToOI
 set showcmd
 set statusline=%f\ \ %<%y%m%r%=%12.(\(%l,%c%V\)%)\ \ %P
 set title
+set ttimeoutlen=50
 set whichwrap+=<,>,[,],h,l
 set wildmenu wildmode=list:longest,full
 
