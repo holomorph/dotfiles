@@ -38,6 +38,7 @@
 (setq-default
  apropos-do-all t
  bookmark-default-file "~/.local/share/emacs/bookmarks"
+ c-basic-offset 4
  compilation-read-command nil
  gnus-home-directory "~/.local/share/emacs/gnus/"
  gnus-init-file (concat user-emacs-directory "gnus")
