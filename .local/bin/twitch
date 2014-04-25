@@ -83,8 +83,10 @@ def dmenu(items)
 end
 
 def play_stream(item, quality)
+    title = %Q(#{item[:title]} (#{item[:owner]}))
+
     pid = fork do
-        exec("livestreamer", "-p", "mpv --title=#{item[:title].escape}",
+        exec("livestreamer", "-p", "mpv --title=#{title.escape}",
              "--ringbuffer-size", "800000", item[:uri], quality)
     end
     Process.wait(pid)
