@@ -82,6 +82,14 @@ def dmenu(items)
     end
 end
 
+def play_stream(item, quality)
+    pid = fork do
+        exec("livestreamer", "-p", "mpv --title=#{item[:title].escape}",
+             "--ringbuffer-size", "800000", item[:uri], quality)
+    end
+    Process.wait(pid)
+end
+
 class String
     def escape
         '"' + self.gsub(/["`\\$]/) { "\\" + $& } + '"'
@@ -97,7 +105,15 @@ menu = streams.sort_by{|i| "#{i[:owner].downcase}"}
 menu = menu.map{|i| "#{i[:owner].ljust(24)} #{i[:title].gsub(/\r?\n/, " ")}"}
 sel = dmenu(menu.uniq)
 
-if sel =~ /^(\S+)\s+ / and item = streams_by_user[$1.downcase]
-    exec("livestreamer", "-p", "mpv --title=#{item[:title].escape}",
-         "--ringbuffer-size", "800000", item[:uri], quality)
+if sel
+    threads = []
+    @results = sel.split(/\r?\n/)
+
+    @results.each do |name|
+        if name =~ /^(\S+)\s+ / and item = streams_by_user[$1.downcase]
+            threads << Thread.new do
+                play_stream(item, quality)
+            end
+        end
+    end
 end
