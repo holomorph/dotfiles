@@ -14,6 +14,7 @@
 (column-number-mode t)
 (size-indication-mode t)
 (show-paren-mode 1)
+(winner-mode)
 
 (fset 'yes-or-no-p 'y-or-n-p)
 (set-frame-font "monospace-13")
@@ -50,7 +51,8 @@
  save-place-file "~/.cache/emacs/places"
  tramp-persistency-file-name "~/.local/share/emacs/tramp"
  truncate-lines t
- uniquify-buffer-name-style 'forward)
+ uniquify-buffer-name-style 'forward
+ windmove-wrap-around t)
 
 (require 'saveplace)
 (require 'uniquify)
