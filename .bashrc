@@ -22,10 +22,12 @@ export HISTFILESIZE=20000
 
 ## configs
 for cfg in aliases bindings fun git util; do
-	[[ -r "$HOME/.config/bash/$cfg.sh" ]] && \
-		. "$HOME/.config/bash/$cfg.sh"
+    f="$HOME/.config/bash/$cfg.sh"
+    if [[ -r "$f" ]]; then
+        . "$f"
+    fi
 done
-unset cfg
+unset cfg f
 
 ## prompt
 PS1="\[\e[1;30m\][\[\e[0;91m\]\u\[\e[1;30m\]@\[\e[0;31m\]\h\$(_vcs_info) \

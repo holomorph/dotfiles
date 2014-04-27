@@ -18,10 +18,12 @@ HISTFILE="$HOME/.logs/zhistory"
 
 ## configs
 for cfg in aliases bindings fun git hook style util; do
-	[[ -r "$HOME/.config/zsh/$cfg.zsh" ]] && \
-		source "$HOME/.config/zsh/$cfg.zsh"
+    f="$HOME/.config/zsh/$cfg.zsh"
+    if [[ -r "$f" ]]; then
+        source "$f"
+    fi
 done
-unset cfg
+unset cfg f
 
 ## prompt
 PROMPT='%(?..%B%F{red}exit %?%f%b
