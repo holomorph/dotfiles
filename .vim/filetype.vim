@@ -5,6 +5,7 @@ augroup filetypedetect
 
     au BufNewFile,BufRead PKGBUILD* set syn=sh ts=2 sw=2 et
     au BufNewFile,BufRead *.md setf markdown
+    au BufNewFile,BufRead *.ml,*.ml[ilyp] setl cms=(*%s*)
     au BufNewFile,BufRead *.muttrc setf muttrc
     au BufNewFile,BufRead *.sage,*.spyx,*.pyx setf python
     au BufNewFile,BufRead *.pentadactylrc,*.penta set ft=pentadactyl cms=\"%s
