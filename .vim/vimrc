@@ -57,7 +57,7 @@ nnoremap ZW :write<cr>
 nnoremap <leader>q :quitall<cr>
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<cr>
 nnoremap <F5> :!make<cr>
-cmap w!! w !sudo tee % >/dev/null<cr>:e!<cr><cr>
+command! -bar W silent! exec "write !sudo tee % >/dev/null" | silent! edit!
 
 " pane movement
 nnoremap <C-j> <C-w>j
