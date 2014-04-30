@@ -24,6 +24,7 @@
  echo-keystrokes 0.1
  gnutls-min-prime-bits 2048
  inhibit-startup-screen t
+ mode-line-end-spaces '(:eval "-%-")
  auto-save-default nil
  search-highlight t
  query-replace-highlight t
