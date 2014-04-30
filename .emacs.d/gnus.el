@@ -15,4 +15,7 @@
 
 ;; methods
 (setq
- gnus-select-method '(nntp "news.gmane.org" (nntp-port-number 119)))
+ gnus-select-method '(nntp "news.gmane.org"
+                           (nntp-open-connection-function nntp-open-tls-stream)
+                           (nntp-port-number 563)
+                           (nntp-address "news.gmane.org")))
