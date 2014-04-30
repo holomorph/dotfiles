@@ -1,0 +1,8 @@
+# screenrc
+
+startup_message off
+term "screen-256color"
+
+# https://lists.gnu.org/archive/html/screen-users/2009-12/msg00021.html
+caption always "%{+b .C}%H%{= kw} %L=%-Lw%45L>%{+b .Y}*%n:%f%t*%{-}%+Lw%=%-0="
+hardstatus string "%H (%n:%t) - Screen"
