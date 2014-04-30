@@ -92,6 +92,21 @@
  smtpmail-smtp-server "smtp.gmail.com"
  smtpmail-smtp-service 587)
 
+;; irc
+(setq-default
+ erc-disable-ctcp-replies t
+ erc-hide-list '("329" "353" "366")
+ erc-lurker-hide-list '("JOIN" "PART" "QUIT" "NICK" "MODE")
+ erc-prompt-for-password nil
+ erc-nick "holomorph"
+ erc-user-full-name "holomorph"
+ erc-user-mode "+R")
+
+(defun irc ()
+  "ERC with SSL/TLS."
+  (interactive)
+  (erc-tls :server "chat.freenode.net" :port 7000))
+
 ;; filetype
 (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
 
