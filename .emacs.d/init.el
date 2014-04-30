@@ -94,6 +94,7 @@
 
 ;; irc
 (setq-default
+ erc-default-port 6697
  erc-disable-ctcp-replies t
  erc-hide-list '("329" "353" "366")
  erc-lurker-hide-list '("JOIN" "PART" "QUIT" "NICK" "MODE")
