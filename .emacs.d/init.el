@@ -84,6 +84,14 @@
     (set-keymap-parent map (keymap-parent input-decode-map))
     (set-keymap-parent input-decode-map map)))
 
+;; tls
+(when (fboundp 'gnutls-available-p) (fmakunbound 'gnutls-available-p))
+
+(setq-default
+ tls-program
+ '("gnutls-cli --strict-tofu --x509cafile /etc/ssl/certs/ca-certificates.crt --x509certfile ~/.config/ssl/certs/holomorph.pem --x509keyfile ~/.config/ssl/private/holomorph.key -p %p %h"
+   "gnutls-cli --strict-tofu --x509cafile /etc/ssl/certs/ca-certificates.crt -p %p %h"))
+
 ;; mail
 (setq-default
  message-send-mail-function 'smtpmail-send-it
