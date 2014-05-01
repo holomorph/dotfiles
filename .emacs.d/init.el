@@ -17,9 +17,9 @@
 (winner-mode)
 
 (fset 'yes-or-no-p 'y-or-n-p)
-(set-frame-font "monospace-13")
 
 (setq
+ default-frame-alist '((font . "monospace-13"))
  dired-listing-switches "-al -hF --group-directories-first"
  echo-keystrokes 0.1
  gnutls-min-prime-bits 2048
