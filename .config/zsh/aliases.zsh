@@ -21,7 +21,7 @@ alias la='ls -A'
 alias ll='ls -l'
 alias po='popd'
 alias pu='pushd'
-alias dirs='dirs -p'
+alias dirs='dirs -v'
 
 # pastebins
 alias ix="curl -F 'f:1=<-' http://ix.io"
