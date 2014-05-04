@@ -1,0 +1,7 @@
+" Hints colorscheme
+
+hi Hint font-family: monospace; font-size: 8pt; font-weight: bold;
+hi Hint -a color: #302505; background: #ffc524 !important;
+hi Hint -a padding: 0px 1px 0px 1px;
+hi HintActive background-color: #88ff00; color: black !important;
+hi HintElem background-color: inherit;
