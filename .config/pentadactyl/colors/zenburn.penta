@@ -45,3 +45,10 @@ hi String color: #cc9393; white-space: pre;
 hi Tag /* bmarks */ color: #e89393; font-weight: bold;
 hi Title color: #efefef; font-weight: bold;
 hi URL color: #9ece9e;
+
+" javascript
+hi Boolean color: #dca3a3;
+hi Function color: #efef8f;
+hi Null color: #dca3a3; font-weight: bold;
+hi Number color: #8cd0d3;
+hi Object color: #dfdfbf; font-weight: bold;
