@@ -1,7 +1,7 @@
 # ~/.config/mpv/config
 
 osc=no
-lirc=no
+input-lirc=no
 vo=xv
 cache-default=4096
 slang=eng,en
