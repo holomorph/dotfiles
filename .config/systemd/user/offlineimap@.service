@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/offlineimap -u Quiet -c %h/.config/offlineimap/offlineimaprc -k Repository_gmail-remote:remoteuser=%i
+ExecStart=/usr/bin/offlineimap -u Quiet -k Repository_gmail-remote:remoteuser=%i
 
 [Install]
 WantedBy=default.target
