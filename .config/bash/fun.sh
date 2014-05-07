@@ -24,3 +24,5 @@ _notes() {
 }
 
 complete -o default -F _notes n
+
+complete -f -X '!*.pdf' -o plusdirs llpp
