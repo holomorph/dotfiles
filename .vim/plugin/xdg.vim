@@ -26,6 +26,7 @@ function! s:SetCacheSettings(dir)
   exe "set backup backupdir=" . a:dir . "/backup"
   exe "set undofile undodir=" . a:dir . "/undo"
   exe "set viminfo+=n"        . a:dir . "/viminfo"
+  exe "let g:netrw_home=\""   . a:dir . "\""
 endfunction
 
 " InitXDG:  Create the XDG directories with "perm" and set the corresponding
