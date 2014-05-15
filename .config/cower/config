@@ -17,7 +17,7 @@ Color = always
 
 # Always ignore out of date packages. This can be overridden on the command line
 # with --no-ignore-ood.
-# IgnoreOOD
+#IgnoreOOD
 
 # Ignore the specified packages when checking for updates. Multiple arguments
 # to this option should be space delimited. Similar to the --ignore option,
@@ -28,16 +28,12 @@ Color = always
 # to this option should be space delimited.
 #IgnoreRepo =
 
-# Avoid using SSL connections.
-#NoSSL
-
 # Absolute path to download and extract to. Parameter and tilde expansions are
 # honored here.
 TargetDir = ~/bin/aur/
 
 # Max number of threads cower will use. This is synonymous with the max number
 # of concurrent connections that will be opened to the AUR.
-MaxThreads = 2
+#MaxThreads =
 
 # vim: set noet syn=conf
-
