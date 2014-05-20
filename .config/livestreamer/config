@@ -1,0 +1,4 @@
+# livestreamer/config
+player=mpv
+player-no-close
+retry-open=3
