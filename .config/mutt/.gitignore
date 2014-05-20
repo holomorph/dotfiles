@@ -1,7 +1,4 @@
 # ~/.config/mutt/.gitignore
 
 alias
-cache/
-mail/
-temp/
 signature
