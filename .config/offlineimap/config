@@ -1,4 +1,4 @@
-# ~/.config/offlineimap/offlineimaprc
+# offlineimap/config
 
 [general]
 ui = ttyui
