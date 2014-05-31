@@ -1,8 +1,0 @@
-#!/bin/bash
-
-flags=(
-    -k "Repository_gmail-remote:remoteuser=$1"
-    -o
-)
-
-exec offlineimap "${flags[@]}"
