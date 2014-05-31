@@ -1,5 +1,5 @@
 augroup filetypedetect
-    au BufNewFile,BufRead *.automount,*.busname,*.mount,*.service,*.socket,*.target,*.link,*.netdev,*.network set ft=systemd cms=#%s
+    au BufNewFile,BufRead *.automount,*.busname,*.mount,*.service,*.socket,*.target,*.timer,*.link,*.netdev,*.network set ft=systemd cms=#%s
     au BufNewFile,BufRead /etc/systemd/* set ft=systemd cms=#%s
     au BufNewFile,BufRead *.tmux.conf,.tmux.conf*,tmux.conf* setf tmux
 
