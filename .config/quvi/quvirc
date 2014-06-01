@@ -5,9 +5,9 @@ check-mode-offline = true
 stream = 480p,720p,best
 
 [exec]
-external = mpv --really-quiet --cache=4096 --title=%t %u
+external = mpv --no-terminal --title=%t %u
 
 [http]
 user-agent = ""
 
-# vim: ft=cfg
+# vim: ft=dosini
