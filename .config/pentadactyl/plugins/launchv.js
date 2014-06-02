@@ -61,9 +61,9 @@ function launchv(target) {
         /* Check if the url is part of a playlist but a direct video
          * (watch?v=) url is provided and return the real playlist url */
         if(uri.match(/watch\?v=/))
-            exec("mpv --really-quiet", uri.replace(/watch\?v.+?\&/, "playlist\?"));
+            exec("mpv --no-terminal", uri.replace(/watch\?v.+?\&/, "playlist\?"));
         else
-            exec("mpv --really-quiet", uri);
+            exec("mpv --no-terminal", uri);
     }
     else
         exec("yt-dl", uri);
