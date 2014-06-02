@@ -1,0 +1,14 @@
+# hgrc
+
+[alias]
+l = log -G
+
+[extensions]
+color =
+pager =
+
+[pager]
+attend = l,log
+
+[color]
+log.tag = yellow bold
