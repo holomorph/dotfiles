@@ -8,6 +8,8 @@ set runtimepath=~/.config/vimperator
 set showstatuslinks=0
 set smartcase
 
+colorscheme hints
+
 " command line
 hi ContentSeparator display: none;
 hi Normal color: #bbbdbb; background: #121212;
@@ -32,13 +34,6 @@ hi ErrorMsg font-weight: bold; color: #80d4aa;
 hi ModeMsg color: #ffcfaf; border-radius: 1px; padding: 0px 8px;
 hi MoreMsg color: #b5bd68;
 hi WarningMsg color: #ffffff; font-weight: bold;
-
-" hints
-hi Hint font-family: monospace; font-size: 8pt; font-weight: bold;
-hi Hint -a color: #302505; background: #ffc524 !important;
-hi Hint -a padding: 0px 1px 0px 1px;
-hi HintActive background-color: #88ff00; color: black !important;
-hi HintElem background-color: inherit;
 
 " other
 hi Disabled color: #f18c96; font-weight: bold;
