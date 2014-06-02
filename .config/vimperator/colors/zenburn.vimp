@@ -1,0 +1,44 @@
+" zenburn.vimp - Zenburn colorscheme for vimperator
+
+" command line
+hi ContentSeparator display: none;
+hi Normal color: #bbbdbb; background: #121212;
+hi CmdLine color: inherit; background: #121212;
+hi StatusLine color: #bbbdbb; background: #121212;
+hi Filter color: #ffffff; font-weight: bold;
+hi Prompt back
+hi PromptText color: #ffcfaf; font-weight: bold;
+
+" completions
+hi CompDesc color: #cc9393; min-width: 450px; max-width: 450px;
+hi CompIcon display: none;
+hi CompItem color: inherit; background: #1f1f1f; font-weight: normal;
+hi CompItem[selected] color: #facb70; background: #373b41;
+hi CompTitle font-weight: bold; color: #ffcfaf; background: #121212;
+hi CompTitle>* padding: 1px .5ex;
+hi CompResult min-width: 450px; max-width: 450px; overflow: hidden;
+
+" messages
+hi InfoMsg color: #f8f893;
+hi ErrorMsg font-weight: bold; color: #80d4aa;
+hi ModeMsg color: #ffcfaf; border-radius: 1px; padding: 0px 8px;
+hi MoreMsg color: #b5bd68;
+hi WarningMsg color: #ffffff; font-weight: bold;
+
+" other
+hi Disabled color: #f18c96; font-weight: bold;
+hi Enabled color: #9ece9e; font-weight: bold;
+hi Indicator color: #efef8f;
+hi NonText font-weight: bold; color: #404040;
+hi Number color: #8cd0d3;
+hi Tag color: #e89393; font-weight: bold;
+hi Title color: #e37170; background: #664040; font-weight: bold; padding: 0 4px;
+hi URL color: #9ece9e;
+
+" javascript
+hi Boolean color: #dca3a3;
+hi Function color: #efef8f;
+hi Null color: #dca3a3; font-weight: bold;
+hi Number color: #8cd0d3;
+hi Object color: #dfdfbf; font-weight: bold;
+hi String color: #cc9393;
