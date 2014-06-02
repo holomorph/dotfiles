@@ -46,7 +46,8 @@ function launchv(target) {
     var uri = target.replace(/([$`"\\])/g, "\\$1");
 
     function exec(launcher, uri) {
-        dactyl.echomsg("Launch " + launcher + " " + uri);
+        if(typeof dactyl !== "undefined")
+            dactyl.echomsg("Launch " + launcher + " " + uri);
         return io.system(launcher + ' "' + uri + '" &');
     }
 
@@ -70,5 +71,5 @@ function launchv(target) {
 
 hints.addMode("l", "Launch video from hint", function (elem, loc) launchv(loc));
 
-group.commands.add(["launchv", "lv"], "Launches current buffer video.",
+commands.add(["launchv", "lv"], "Launches current buffer video.",
     function(args) { launchv(buffer.URL); });

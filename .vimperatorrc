@@ -4,6 +4,7 @@ set complete-=f
 set focuscontent=true
 set incsearch
 set noscrollbars
+set runtimepath=~/.config/vimperator
 set showstatuslinks=0
 set smartcase
 
@@ -50,6 +51,7 @@ hi Title color: #e37170; background: #664040; font-weight: bold; padding: 0 4px;
 hi URL color: #9ece9e;
 
 " mappings
+runtime mappings.vim
 nnoremap <Leader>d :downloads<CR>
 nnoremap <Leader>m :messages<CR>
 nnoremap <Leader>p :winopen -private<CR>
@@ -63,10 +65,6 @@ noremap j 7j
 noremap k 7k
 noremap l 7l
 
-" quvi
-js <<EOF
-hints.addMode("l", "Launch video from hint", function (elem, loc)
-              io.system('quvi dump -b mute "'
-              + loc.replace(/([$`"\\])/g, "\\$1") + '" &'));
-EOF
-nmap <silent> x ;l
+" launch videos
+nmap x ;l
+nmap <A-x> :launchv<CR>

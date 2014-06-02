@@ -1,0 +1,1 @@
+../../pentadactyl/plugins/launchv.js
