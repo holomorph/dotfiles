@@ -1,44 +1,49 @@
-# ~/.config/git/config
+# git/config
 
 [core]
-  editor = vim
-  excludesfile = ~/.config/git/ignore
+	editor = vim
+	excludesfile = ~/.config/git/ignore
 [alias]
-  a = add --all
-  ci = commit
-  co = checkout
-  d = difftool
-  s = status -sb
-  l = log --decorate --graph --oneline --all
+	a = add --all
+	ci = commit
+	co = checkout
+	d = difftool
+	s = status -sb
+	l = log --decorate --graph --oneline --all
 [log]
-  decorate = short
+	decorate = short
 [diff]
-  tool = vimdiff
+	tool = vimdiff
 [merge]
-  tool = vimdiff
-  verbosity = 1
-  summary = true
+	tool = vimdiff
+	verbosity = 1
+	summary = true
 [color]
-  ui = auto
-  branch = auto
-  diff = auto
-  status = auto
+	ui = auto
+	branch = auto
+	diff = auto
+	status = auto
 [color "branch"]
-  current = green bold
-  local = blue
-  remote = red reverse
+	current = green bold
+	local = blue
+	remote = red reverse
 [color "diff"]
-  func = cyan bold
-  old = red bold
-  new = green bold
-  whitespace = magenta bold
+	func = cyan bold
+	old = red bold
+	new = green bold
+	whitespace = magenta bold
 [color "status"]
-  added = green bold
-  changed = yellow bold
-  untracked = red bold
+	added = green bold
+	changed = yellow bold
+	untracked = red bold
 [color "grep"]
-  filename = magenta
-  linenumber = green
-  match = green bold
+	filename = magenta
+	linenumber = green
+	match = green bold
 [push]
-  default = simple
+	default = simple
+[sendemail]
+	confirm = auto
+	smtpencryption = tls
+	smtpserver = smtp.gmail.com
+	smtpserverport = 587
