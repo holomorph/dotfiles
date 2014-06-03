@@ -40,3 +40,5 @@
   filename = magenta
   linenumber = green
   match = green bold
+[push]
+  default = simple
