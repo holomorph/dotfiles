@@ -5,6 +5,8 @@
   excludesfile = ~/.config/git/ignore
 [alias]
   a = add --all
+  ci = commit
+  co = checkout
   d = difftool
   s = status -sb
   l = log --decorate --graph --oneline --all
