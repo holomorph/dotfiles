@@ -4,13 +4,13 @@
 hi ContentSeparator display: none;
 hi CmdLine color: inherit; background: #121212;
 hi Normal color: #bbbdbb; background: #1f1f1f;
-hi StatusLine font-weight: normal; color: #bbbdbb; background: #121212;
+hi StatusLine font-weight: normal; color: #bbbdbb; background: #1f1f1f;
 hi Filter color: #ffffff; font-weight: bold;
-" hi Prompt background: ':';
+hi Prompt background: none;
 hi PromptText color: #ffcfaf; font-weight: bold;
 
 " completions
-hi CompDesc color: #cc9393; min-width: 450px; max-width: 450px;
+hi CompDesc color: #9ece9e; min-width: 450px; max-width: 450px;
 hi CompItem[selected] background: #2c302d;
 hi CompTitle font-weight: bold; color: #efefef; background: #121212;
 hi CompTitle>* padding: 1px .5ex;
