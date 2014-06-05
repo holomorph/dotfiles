@@ -6,7 +6,9 @@
 xrandr="$(xrandr)"
 
 swap() {
-	xrandr --output "$1" --off --output "$2" --auto && return
+	if xrandr --output "$1" --off --output "$2" --auto; then
+		return 0
+	fi
 	printf >&2 "vex: operation failed: %s off %s auto" "$1" "$2"
 	return 1
 }
@@ -15,17 +17,17 @@ toggle() {
 	## store xrandr info for the display
 	local display="$(grep "^$1" <<< "$xrandr")"
 	local internal="LVDS1"
+	local ret
 
-	if [[ "$display" =~ "+" ]]; then
+	if [[ $display =~ + ]]; then
 		## display active
-		swap "$1" "$internal" && return
+		ret=$(swap "$1" "$internal")
 	else
 		## display not active
-		swap "$internal" "$1" && return
+		ret=$(swap "$internal" "$1")
 	fi
 
-	## should not happen
-	return 1
+	return $ret
 }
 
 ## generate list of connected external displays
@@ -33,5 +35,7 @@ list=($(awk '/^(HDMI|VGA)[0-9]+ connected/ {print $1}' <<< "$xrandr"))
 
 ## toggle first display in the list
 for display in ${list[@]}; do
-	toggle "$display" && break
+	if toggle "$display"; then
+		break
+	fi
 done
