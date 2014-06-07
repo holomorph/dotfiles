@@ -82,12 +82,11 @@ def dmenu(items)
     end
 end
 
-def play_stream(item, quality)
+def play_stream(item)
     title = %Q(#{item[:title]} (#{item[:owner]}))
 
     pid = fork do
-        exec("livestreamer", "-p", "mpv --title=#{title.escape}",
-             "--ringbuffer-size", "800000", item[:uri], quality)
+        exec("livestreamer", "-p", "mpv --title=#{title.escape}", item[:uri])
     end
     Process.wait(pid)
 end
@@ -97,8 +96,6 @@ class String
         '"' + self.gsub(/["`\\$]/) { "\\" + $& } + '"'
     end
 end
-
-quality = "medium,high,best,source"
 
 streams = get_streams()
 streams_by_user = Hash[streams.map{|i| [i[:owner].downcase, i]}]
@@ -114,7 +111,7 @@ if sel
     @results.each do |name|
         if name =~ /^(\S+)\s+ / and item = streams_by_user[$1.downcase]
             threads << Thread.new do
-                play_stream(item, quality)
+                play_stream(item)
             end
         end
     end

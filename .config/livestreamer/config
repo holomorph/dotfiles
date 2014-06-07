@@ -1,4 +1,5 @@
 # livestreamer/config
+default-stream=medium,high,best,source
 player=mpv
 player-no-close
 retry-open=3

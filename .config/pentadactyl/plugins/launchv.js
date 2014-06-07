@@ -56,7 +56,7 @@ function launchv(target) {
     if(uri.match(/twitch\.tv\/.*\/c\/[0-9]+/))
         exec("yt-dl", uri);
     else if(uri.match(/twitch\.tv/))
-        exec("lstream", uri);
+        exec("livestreamer", uri);
     else if(uri.match(/youtube.*[?&]list=PL/)) {
         /* Check if the url is part of a playlist but a direct video
          * (watch?v=) url is provided and return the real playlist url */
