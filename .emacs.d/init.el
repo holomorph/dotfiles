@@ -121,6 +121,7 @@
 
 ;; autoloads
 (autoload 'clang-format-buffer "clang-format" "Tool to format C/C++/Obj-C code" t)
+(autoload 'legalese "legalese" "Add legalese to your program files" t)
 (autoload 'notmuch "notmuch" "The mail indexer" t)
 (autoload 'magit-status "magit" nil t)
 (autoload 'ff++-mode "ff++-mode" "Major mode for FreeFem++ code" t)
