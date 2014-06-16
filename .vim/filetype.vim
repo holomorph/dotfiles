@@ -8,6 +8,7 @@ augroup filetypedetect
     au BufNewFile,BufRead *.md setf markdown
     au BufNewFile,BufRead *.ml,*.ml[ilyp] setl cms=(*%s*)
     au BufNewFile,BufRead *.muttrc setf muttrc
+    au BufNewFile,BufRead ~/.rtorrent.rc,*/rtorrent/config set ft=cfg cms=#%s
     au BufNewFile,BufRead *.sage,*.spyx,*.pyx setf python
     au BufNewFile,BufRead *.pentadactylrc,*.penta set ft=pentadactyl cms=\"%s
     au BufNewFile,BufRead *.vimperatorrc,*.vimp set ft=vimperator cms=\"%s
