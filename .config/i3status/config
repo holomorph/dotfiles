@@ -37,7 +37,7 @@ load {
 
 cpu_temperature 0 {
 	format = "T: %degreesC"
-	path = "/sys/devices/platform/coretemp.0/temp2_input"
+	path = "/sys/class/hwmon/hwmon0/temp2_input"
 }
 
 ethernet bond0 {
