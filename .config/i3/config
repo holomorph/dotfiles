@@ -102,6 +102,7 @@ mode "resize" {
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
+        bindsym Ctrl+bracketleft mode "default"
 }
 
 bindsym $mod+r mode "resize"
