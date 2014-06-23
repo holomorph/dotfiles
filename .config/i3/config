@@ -19,7 +19,7 @@ bindsym $mod+Return exec termite
 bindsym $mod+Shift+c kill
 
 # start dmenu (a program launcher)
-bindsym $mod+o exec dmenu_run -fn "$font" -sf "#ffffff" -sb "#373b41" -nf "#f0c674"
+bindsym $mod+o exec dmenu_run -fn "$font" -sf "#ffffff" -sb "#373b41" -nf "#facb70"
 
 # change focus
 bindsym $mod+h focus left
@@ -44,8 +44,8 @@ bindsym $mod+f fullscreen
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+Shift+s layout stacking
-bindsym $mod+t layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+m layout tabbed
+bindsym $mod+t layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -54,10 +54,10 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+Shift+a focus parent
+bindsym $mod+p focus parent
 
 # focus the child container
-bindsym $mod+d focus child
+bindsym $mod+c focus child
 
 # switch to workspace
 bindsym $mod+1 workspace 1
