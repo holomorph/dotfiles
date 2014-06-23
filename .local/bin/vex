@@ -19,7 +19,7 @@ toggle() {
 	local internal="LVDS1"
 	local ret
 
-	if [[ $display =~ + ]]; then
+	if [[ $display =~ "+" ]]; then
 		## display active
 		ret=$(swap "$1" "$internal")
 	else
