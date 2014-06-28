@@ -109,6 +109,12 @@
   (interactive)
   (erc-tls :server "chat.freenode.net" :port 7000))
 
+;; org
+(setq-default
+ org-directory "~/doc/notes"
+ org-return-follows-link t
+ org-use-speed-commands t)
+
 ;; filetype
 (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
 
