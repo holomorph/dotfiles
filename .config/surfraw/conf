@@ -1,0 +1,4 @@
+# surfraw/conf
+
+def SURFRAW_text_browser elinks
+def SURFRAW_graphical_browser firefox

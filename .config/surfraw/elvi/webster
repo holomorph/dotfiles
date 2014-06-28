@@ -1,0 +1,42 @@
+#!/bin/sh
+# elvis: webster		-- Search Webster's Revised Unabridged Dictionary (1913 + 1828) (uchicago.edu)
+. surfraw || exit 1
+
+w3_config_hook () {
+    def SURFRAW_webster_results "$SURFRAW_results"
+    def SURFRAW_webster_search search
+    def SURFRAW_webster_base_url "http://machaut.uchicago.edu/"
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [search word]...
+Description:
+  Surfraw search Webster's Revised Unabridged Dictionary (1913 + 1828)
+Local options:
+  -f, -float                    Match word as a substring
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    case "$opt" in
+    -f|-float) setopt SURFRAW_webster_search float ;;
+    *) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+
+escaped_args=$(w3_url_of_arg $w3_args)
+query="?resource=Webster's&word=${SURFRAW_webster_params}${escaped_args}"
+
+if [[ "$SURFRAW_webster_search" == "float" ]]; then
+    query="$query&float=on"
+fi
+
+w3_browse_url "${SURFRAW_webster_base_url}$query"
