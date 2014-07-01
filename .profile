@@ -19,7 +19,6 @@ export _JAVA_OPTIONS=-Dawt.useSystemAAFontSettings=lcd
 
 # set location of gtk2 gtkrc (also needed for Qt's gtk style)
 export GTK2_RC_FILES=~/.config/gtk-2.0/gtkrc
-export MPV_HOME=~/.config/mpv
 export ELINKS_CONFDIR=~/.config/elinks
 export TERMINFO=~/.local/share/terminfo
 export NETHACKOPTIONS=~/.config/nethack/nethackrc
