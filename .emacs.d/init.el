@@ -17,6 +17,7 @@
 (winner-mode)
 
 (fset 'yes-or-no-p 'y-or-n-p)
+(put 'narrow-to-region 'disabled nil)
 
 (setq
  default-frame-alist '((font . "monospace-13"))
