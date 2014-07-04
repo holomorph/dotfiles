@@ -8,6 +8,8 @@ set showtabline=never
 colorscheme zenburn
 colorscheme hints
 
+hi -a FontFixed font-size: 11pt !important;
+
 " completions
 hi CompIcon width: 12px; display: inline-block; margin-right: .5ex;
 hi CompIcon>img width: 10px; height: 10px; vertical-align: middle;
