@@ -11,6 +11,7 @@ zle -N down-line-or-beginning-search
 bindkey " " magic-space
 bindkey "^[[A" up-line-or-beginning-search
 bindkey "^[[B" down-line-or-beginning-search
+bindkey "^[^I" reverse-menu-complete
 bindkey "^[[Z" reverse-menu-complete
 bindkey "^D" delete-char
 bindkey "^N" down-line-or-beginning-search
