@@ -2,6 +2,7 @@
 
 Gdraw.GButton.Font: 400 10pt sans-serif
 Gdraw.GGadget.Font: 400 10pt sans-serif
+Gdraw.GGadget.Popup.Font: 400 10pt sans-serif
 Gdraw.GMenu.Font: 400 10pt sans-serif
 Gdraw.GMenuBar.Font: 400 10pt sans-serif
 
