@@ -16,6 +16,7 @@ else
     sed -rf - <<EOF <(xls2csv "$f" 2>/dev/null) | column -ts'	'
 s/^,*$//
 s/,,/,"",/g
+s/,,/,"",/g
 s/^,/"",/
 s/^"//
 s/,*$//
