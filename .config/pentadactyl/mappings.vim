@@ -9,6 +9,8 @@ nmap <C-l> <Nop>
 nmap <A-a> <Nop>
 
 " command mode
+cmap <C-b> <left>
+cmap <C-f> <right>
 cmap <A-b> <C-left>
 cmap <A-f> <C-right>
 cmap <A-BS> <C-w>
