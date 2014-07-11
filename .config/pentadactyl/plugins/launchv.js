@@ -63,7 +63,7 @@ function launchv(target) {
      * quvi */
     if(uri.match(/twitch\.tv\/.*\/c\/[0-9]+/))
         exec("yt-dl", uri);
-    else if(uri.match(/twitch\.tv/))
+    else if(uri.match(/(hitbox|twitch)\.tv/))
         exec("livestreamer", uri);
     else if(uri.match(/youtube.*[?&]list=PL/)) {
         /* Check if the url is part of a playlist but a direct video
