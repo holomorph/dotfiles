@@ -34,6 +34,7 @@
  scroll-margin 3
  scroll-conservatively 40
  scroll-preserve-screen-position t
+ vc-follow-symlinks t
  x-gtk-use-system-tooltips nil
  x-select-enable-clipboard t
  x-select-enable-primary t)
