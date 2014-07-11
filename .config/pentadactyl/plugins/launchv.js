@@ -46,6 +46,14 @@ function launchv(target) {
     var uri = target.replace(/([$`"\\])/g, "\\$1");
 
     function exec(launcher, uri) {
+        if(!uri || uri.length === 0) {
+            msg = "E474: Invalid argument"
+            if(typeof dactyl !== "undefined" && "echoerr" in dactyl)
+                dactyl.echoerr(msg)
+            else if(typeof liberator !== "undefined" && "echoerr" in liberator)
+                liberator.echoerr(msg)
+            return
+        }
         if(typeof dactyl !== "undefined")
             dactyl.echomsg("Launch " + launcher + " " + uri);
         return io.system(launcher + ' "' + uri + '" &');
