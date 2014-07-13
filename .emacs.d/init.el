@@ -127,7 +127,8 @@
  company-selection-wrap-around t
  flycheck-check-syntax-automatically '(save)
  flycheck-disabled-checkers '(emacs-lisp-checkdoc)
- ledger-highlight-xact-under-point nil)
+ ledger-highlight-xact-under-point nil
+ magit-auto-revert-mode-lighter nil)
 
 ;; autoloads
 (autoload 'clang-format-buffer "clang-format" "Tool to format C/C++/Obj-C code" t)
