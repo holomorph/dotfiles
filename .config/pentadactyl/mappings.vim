@@ -1,12 +1,12 @@
 " ~/.config/pentadactyl/mappings.vim
 
 " normal mode
-nmap <C-a> <Nop>
-nmap <C-h> <Nop>
-nmap <C-j> :jumps<CR>
-nmap <C-k> <Nop>
-nmap <C-l> <Nop>
-nmap <A-a> <Nop>
+nmap <C-a> <nop>
+nmap <C-h> <nop>
+nmap <C-j> :jumps<cr>
+nmap <C-k> <nop>
+nmap <C-l> <nop>
+nmap <A-a> <nop>
 
 " command mode
 cmap <C-b> <left>

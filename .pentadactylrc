@@ -16,12 +16,12 @@ hi CompIcon>img width: 10px; height: 10px; vertical-align: middle;
 
 " mappings
 runtime mappings.vim
-nmap -b <Leader>a :addons<CR>
-nmap -b <Leader>d :downloads<CR>
-nmap -b <Leader>m :messages<CR>
-nmap -b <Leader>p :private winopen<CR>
-nmap -b <C-S-n> :tabmove! +1<CR>
-nmap -b <C-S-p> :tabmove! -1<CR>
+nmap -b <leader>a :addons<cr>
+nmap -b <leader>d :downloads<cr>
+nmap -b <leader>m :messages<cr>
+nmap -b <leader>p :private winopen<cr>
+nmap -b <C-S-n> :tabmove! +1<cr>
+nmap -b <C-S-p> :tabmove! -1<cr>
 nmap -b h 7h
 nmap -b j 7j
 nmap -b k 7k
@@ -29,4 +29,4 @@ nmap -b l 7l
 
 " launch videos
 nmap -builtin x ;l
-nmap <A-x> :launchv<CR>
+nmap <A-x> :launchv<cr>

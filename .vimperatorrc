@@ -8,19 +8,21 @@ set runtimepath=~/.config/vimperator
 set showstatuslinks=0
 set smartcase
 
+hi -a Normal font-size: 11pt !important;
+
 colorscheme hints
 colorscheme zenburn
 
 " mappings
 runtime mappings.vim
-nnoremap <Leader>d :downloads<CR>
-nnoremap <Leader>m :messages<CR>
-nnoremap <Leader>p :winopen -private<CR>
-map s :open google 
-map S :tabopen google 
-nmap <C-S-n> :tabmove! +1<CR>
-nmap <C-S-p> :tabmove! -1<CR>
-nmap <F3> <Nop>
+nnoremap <leader>d :downloads<cr>
+nnoremap <leader>m :messages<cr>
+nnoremap <leader>p :winopen -private<cr>
+map s :open google<space>
+map S :tabopen google<space>
+nmap <C-S-n> :tabmove! +1<cr>
+nmap <C-S-p> :tabmove! -1<cr>
+nmap <F3> <nop>
 noremap h 7h
 noremap j 7j
 noremap k 7k
@@ -28,4 +30,4 @@ noremap l 7l
 
 " launch videos
 nmap x ;l
-nmap <A-x> :launchv<CR>
+nmap <A-x> :launchv<cr>
