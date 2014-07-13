@@ -47,11 +47,10 @@ function launchv(target) {
 
     function exec(launcher, uri) {
         if(!uri || uri.length === 0) {
-            msg = "E474: Invalid argument"
             if(typeof dactyl !== "undefined" && "echoerr" in dactyl)
-                dactyl.echoerr(msg)
+                dactyl.echoerr("E474: Invalid argument")
             else if(typeof liberator !== "undefined" && "echoerr" in liberator)
-                liberator.echoerr(msg)
+                liberator.echoerr("E474: Invalid argument")
             return
         }
         if(typeof dactyl !== "undefined")
