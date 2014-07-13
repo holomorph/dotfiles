@@ -54,10 +54,13 @@ set wildignore+=.git,.hg
 
 noremap Y y$
 nnoremap ZW :write<cr>
-nnoremap <leader>q :quitall<cr>
-nnoremap <silent> <Space> :nohlsearch<Bar>:echo<cr>
-nnoremap <F5> :!make<cr>
+nnoremap <silent> <space> :nohlsearch<bar>:echo<cr>
+nnoremap <f5> :!make<cr>
 command! -bar W silent! exec "write !sudo tee % >/dev/null" | silent! edit!
+
+nnoremap <leader>b :buffers<cr>:buffer<space>
+nnoremap <leader>d :diffupdate<cr>
+nnoremap <leader>q :quitall<cr>
 
 " pane movement
 nnoremap <C-j> <C-w>j
@@ -66,7 +69,7 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
 " fugitive
-nnoremap <leader>gg :copen<cr>:Ggrep 
+nnoremap <leader>gg :copen<cr>:Ggrep<space>
 nnoremap <silent> <leader>gs :Gstatus<cr>
 nnoremap <silent> <leader>gd :Gdiff<cr>
 nnoremap <silent> <leader>ge :Gedit<cr>
