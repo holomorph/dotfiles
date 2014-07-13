@@ -123,6 +123,8 @@
 
 ;; extensions
 (setq-default
+ company-default-lighter nil
+ company-selection-wrap-around t
  flycheck-check-syntax-automatically '(save)
  flycheck-disabled-checkers '(emacs-lisp-checkdoc)
  ledger-highlight-xact-under-point nil)
@@ -137,6 +139,7 @@
 (autoload 'tuareg-mode "tuareg" "Major mode for OCaml code" t)
 (autoload 'ledger-mode "ledger-mode" "Major mode for editing ledger data" t)
 (autoload 'flycheck-mode "flycheck" "Minor mode for on-the-fly syntax checking" t)
+(autoload 'company-mode "company" "Modular in-buffer completion framework" t)
 
 ;; filetype
 (add-to-list 'auto-mode-alist '("\\.[ei]dp\\'" . ff++-mode))
@@ -145,6 +148,7 @@
 
 (defun common-prog-modes ()
   "Default modes for `prog-mode-hook'."
+  (ignore-errors (company-mode 1))
   (ignore-errors (flycheck-mode 1)))
 
 (add-hook 'prog-mode-hook 'common-prog-modes)
