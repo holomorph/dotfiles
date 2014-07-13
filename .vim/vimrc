@@ -68,6 +68,14 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
 
+" autocommands
+au BufReadPost *
+ \ if line("'\"") > 0 && line("'\"") <= line("$") |
+ \ exe "normal g`\"" | endif
+
+" extensions
+let g:tagbar_width = 30
+
 " fugitive
 nnoremap <leader>gg :copen<cr>:Ggrep<space>
 nnoremap <silent> <leader>gs :Gstatus<cr>
@@ -75,7 +83,5 @@ nnoremap <silent> <leader>gd :Gdiff<cr>
 nnoremap <silent> <leader>ge :Gedit<cr>
 nnoremap <silent> <leader>gb :Gblame<cr>
 
-" autocommands
-au BufReadPost *
- \ if line("'\"") > 0 && line("'\"") <= line("$") |
- \ exe "normal g`\"" | endif
+" tagbar
+nnoremap <leader>t :TagbarToggle<cr>
