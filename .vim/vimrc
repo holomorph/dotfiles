@@ -75,6 +75,7 @@ au BufReadPost *
 
 " extensions
 let g:tagbar_width = 30
+let g:syntastic_check_on_wq = 0
 
 " fugitive
 nnoremap <leader>gg :copen<cr>:Ggrep<space>
