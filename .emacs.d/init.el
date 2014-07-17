@@ -135,6 +135,7 @@
 (autoload 'legalese "legalese" "Add legalese to your program files" t)
 (autoload 'newpaste "newpaste" "Paste to http://paste.lisp.org" t)
 (autoload 'notmuch "notmuch" "The mail indexer" t)
+(autoload 'dictionary "dictionary" "Client for RFC2249 dictionary servers" t)
 (autoload 'magit-status "magit" nil t)
 (autoload 'ff++-mode "ff++-mode" "Major mode for FreeFem++ code" t)
 (autoload 'tuareg-mode "tuareg" "Major mode for OCaml code" t)
