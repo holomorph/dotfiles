@@ -7,7 +7,7 @@ user_pref("plugins.hide_infobar_for_missing_plugin", true);
 user_pref("signon.rememberSignons", false);
 
 // Require safe SSL negotiation from websites
-user_pref("security.ssl.require_safe_negotiation", true);
+user_pref("security.ssl.require_safe_negotiation", false);
 user_pref("security.ssl.treat_unsafe_negotiation_as_broken", true);
 
 // NoScript
