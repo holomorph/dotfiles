@@ -12,3 +12,6 @@ attend = l,log
 
 [color]
 log.tag = yellow bold
+
+[ui]
+username = $NAME <$EMAIL>
