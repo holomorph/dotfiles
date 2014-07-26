@@ -1,7 +1,5 @@
 # ~/.profile
 
-export MAILDIR=~/mail
-
 # man page colors in less
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;31m'
@@ -19,6 +17,7 @@ export _JAVA_OPTIONS=-Dawt.useSystemAAFontSettings=lcd
 
 # set location of gtk2 gtkrc (also needed for Qt's gtk style)
 export GTK2_RC_FILES=~/.config/gtk-2.0/gtkrc
+export LESSHISTFILE=~/.cache/less/hist
 export ELINKS_CONFDIR=~/.config/elinks
 export TERMINFO=~/.local/share/terminfo
 export NETHACKOPTIONS=~/.config/nethack/nethackrc
@@ -26,3 +25,8 @@ export NOTMUCH_CONFIG=~/.config/notmuch/config
 
 # path
 export PATH="$HOME/.local/bin:$PATH"
+
+# id
+export NAME='Mark Oteiza'
+export EMAIL='mvoteiza@udel.edu'
+export MAILDIR=~/mail
