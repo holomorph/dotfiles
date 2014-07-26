@@ -1,0 +1,11 @@
+# notmuch/config
+
+[new]
+tags=unread;inbox;
+ignore=trash
+
+[search]
+exclude_tags=trash;spam;
+
+[maildir]
+synchronize_flags=true
