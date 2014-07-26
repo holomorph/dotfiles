@@ -1,33 +1,22 @@
-# ~/.ncmpcpp/config
-
-##### colors definitions #####
-colors_enabled                 = "yes"
-empty_tag_color                = "cyan"
-header_window_color            = "white"
-volume_color                   = "white"
-state_line_color               = "black"
-state_flags_color              = "white"
-main_window_color              = "yellow"
-color1                         = "blue"
-color2                         = "green"
-main_window_highlight_color    = "yellow"
-progressbar_elapsed_color      = "red"
-progressbar_color              = "yellow"
-statusbar_color                = "red"
-alternative_ui_separator_color = "black"
-active_column_color            = "red"
-visualizer_color               = "yellow"
-window_border_color            = "green"
-active_window_border           = "red"
+# ncmpcpp/config
 
 ##### directories ######
 ncmpcpp_directory = "~/.config/ncmpcpp"
-lyrics_directory  = "~/.cache/ncmpcpp/lyrics"
-mpd_music_dir     = "~/music"
+lyrics_directory = "~/.cache/ncmpcpp/lyrics"
+mpd_music_dir = "~/music"
 
 ##### columns settings #####
-song_columns_list_format     = "(40)[]{t|f} (8f)[green]{lr} (35)[cyan]{a} (20)[red]{b}"
-playlist_display_mode        = "columns"
-browser_display_mode         = "columns"
+song_columns_list_format = "(40)[]{t|f} (8f)[green]{lr} (35)[cyan]{a} (20)[red]{b}"
+
+##### various settings #####
+playlist_display_mode = "columns"
+browser_display_mode = "columns"
 playlist_editor_display_mode = "columns"
-user_interface               = "alternative"
+
+##### colors definitions #####
+state_line_color = "black"
+color1 = "green"
+color2 = "cyan"
+progressbar_elapsed_color = "red"
+progressbar_color = "yellow"
+statusbar_color = "red"
