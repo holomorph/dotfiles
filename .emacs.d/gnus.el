@@ -1,6 +1,7 @@
 ;;; ~/.emacs.d/gnus.el
 
-(setq
+(setq-default
+ gnus-message-archive-group "sent"
  gnus-mode-line-image-cache nil
  gnus-startup-file (concat gnus-home-directory "newsrc")
  gnus-summary-line-format "%U%R%z%(%[%&user-date; %-15,15f%]%) %B%s\n"
@@ -14,8 +15,8 @@
  gnus-sum-thread-tree-vertical "│")
 
 ;; methods
-(setq gnus-select-method
-      '(nntp "news.gmane.org"
-             (nntp-open-connection-function nntp-open-tls-stream)
-             (nntp-port-number 563)
-             (nntp-address "news.gmane.org")))
+(setq-default
+ gnus-select-method '(nntp "news.gmane.org"
+                           (nntp-open-connection-function nntp-open-tls-stream)
+                           (nntp-port-number 563)
+                           (nntp-address "news.gmane.org")))
