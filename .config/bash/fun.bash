@@ -1,4 +1,4 @@
-# ~/.config/bash/fun.sh
+# bash/fun.bash
 
 n() {
 	local dir="$HOME/doc/notes"

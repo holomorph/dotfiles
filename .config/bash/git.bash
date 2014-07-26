@@ -1,4 +1,4 @@
-# ~/.config/bash/git.sh
+# bash/git.bash
 #
 # Git - parts borrowed from grawity
 # Parts borrowed from git/contrib/completion/git-prompt.sh

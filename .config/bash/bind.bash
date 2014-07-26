@@ -1,4 +1,4 @@
-# ~/.config/bash/bindings.sh
+# bash/bind.bash
 
 bind '" ": magic-space'
 bind '"\e[A": history-search-backward'
