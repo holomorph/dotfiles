@@ -10,7 +10,7 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01m'
 
 # dircolors
-source <(dircolors -b "$HOME/.config/dircolors")
+source <(dircolors -b <(cat "$HOME/.config/dircolors"/*.conf))
 
 # turn on font antialiasing in java
 export _JAVA_OPTIONS=-Dawt.useSystemAAFontSettings=lcd
