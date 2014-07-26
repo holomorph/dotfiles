@@ -90,9 +90,7 @@
 (setq-default
  smtpmail-stream-type 'starttls
  starttls-extra-arguments '("--strict-tofu" "--x509cafile" "/etc/ssl/certs/ca-certificates.crt")
- tls-program
- '("gnutls-cli --strict-tofu --x509cafile /etc/ssl/certs/ca-certificates.crt --x509certfile ~/.config/ssl/certs/holomorph.pem --x509keyfile ~/.config/ssl/private/holomorph.key -p %p %h"
-   "gnutls-cli --strict-tofu --x509cafile /etc/ssl/certs/ca-certificates.crt -p %p %h"))
+ tls-program '("gnutls-cli --strict-tofu --x509cafile /etc/ssl/certs/ca-certificates.crt -p %p %h"))
 
 ;; mail
 (setq-default
