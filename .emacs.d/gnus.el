@@ -14,8 +14,8 @@
  gnus-sum-thread-tree-vertical "│")
 
 ;; methods
-(setq
- gnus-select-method '(nntp "news.gmane.org"
-                           (nntp-open-connection-function nntp-open-tls-stream)
-                           (nntp-port-number 563)
-                           (nntp-address "news.gmane.org")))
+(setq gnus-select-method
+      '(nntp "news.gmane.org"
+             (nntp-open-connection-function nntp-open-tls-stream)
+             (nntp-port-number 563)
+             (nntp-address "news.gmane.org")))
