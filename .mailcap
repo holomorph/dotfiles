@@ -9,9 +9,10 @@ text/x-diff; vim %s;
 text/x-patch; vim %s;
 text/plain; vim %s;
 
+image/gif; ffplay -loop 0 %s;
 image/*; feh -. %s;
-audio/*; mpv %s; copiousoutput;
-video/*; mpv %s; copiousoutput;
+audio/*; mpv %s;
+video/*; mpv %s;
 
 application/vnd.openxmlformats-officedocument.wordprocessingml.document; docx2txt %s; nametemplate=%s.docx; copiousoutput;
 application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; xls2txt %s; copiousoutput;
