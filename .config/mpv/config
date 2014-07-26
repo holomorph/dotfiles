@@ -1,4 +1,4 @@
-# ~/.config/mpv/config
+# mpv/config
 
 osc=no
 input-lirc=no

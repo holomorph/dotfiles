@@ -1,4 +1,4 @@
-# ~/.config/inputrc
+# ~/.inputrc
 
 set match-hidden-files off
 set show-all-if-ambiguous on

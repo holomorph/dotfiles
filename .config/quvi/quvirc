@@ -1,4 +1,4 @@
-# ~/.config/quvi/quvirc
+# quvi/quvirc
 
 [core]
 check-mode-offline = true

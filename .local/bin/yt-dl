@@ -1,7 +1,5 @@
 #!/bin/bash
-
-# A very simple wrapper around youtube-dl to produce a title for mpv's
-# consumption.  First line of output is the title, second is the url.
+# yt-dl - youtube-dl wrapper to produce a title for mpv
 
 {
     read -r title

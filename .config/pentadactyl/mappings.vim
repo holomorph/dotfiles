@@ -1,4 +1,4 @@
-" ~/.config/pentadactyl/mappings.vim
+" pentadactyl/mappings.vim
 
 " normal mode
 nmap <C-a> <nop>

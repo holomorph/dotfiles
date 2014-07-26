@@ -1,4 +1,4 @@
-# ~/.config/mutt/bindings.muttrc
+# mutt/bindings.muttrc
 
 # keybindings
 bind pager       <Space> toggle-quoted
