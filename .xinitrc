@@ -17,5 +17,5 @@ xmodmap -e "keycode 135 = Super_R"
 [[ -z $(pgrep emacs) ]] && emacs --daemon &
 
 while true; do
-  dwm &> "$XDG_RUNTIME_DIR/dwm.log"
+  dwm
 done

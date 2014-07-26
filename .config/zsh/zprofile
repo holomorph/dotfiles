@@ -2,8 +2,8 @@
 
 emulate sh -c '. ~/.profile'
 
-if (( UID )); then
-  [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && exec startx &> "$XDG_RUNTIME_DIR/x.log"
+if (( UID )) && [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]]; then
+  exec startx
 fi
 
 # vim: syn=sh
