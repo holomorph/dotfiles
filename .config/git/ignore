@@ -1,7 +1,6 @@
-# ~/.config/git/ignore
+# git/ignore
 
-# Compiled source #
-###################
+# compiled
 *.com
 *.class
 *.dll
@@ -11,10 +10,7 @@
 *.pyc
 *.so
 
-# Packages #
-############
-# it's better to unpack these files and commit the raw source
-# git has its own built in compression methods
+# archives
 *.7z
 *.bin
 *.bz2
@@ -31,25 +27,15 @@
 *.zip
 *.Z
 
-# Logs and databases #
-######################
+# logs and databases
 *.log
 *.sql
 *.sqlite
 
-# OS generated files #
-######################
-.DS_Store*
-ehthumbs.db
-Icon?
-Thumbs.db
-
-# Temp files #
-##############
+# temp files
 *.swp
 
-# Crypto #
-##########
+# crypto
 *.asc
 *.crt
 *.gpg
@@ -57,3 +43,9 @@ Thumbs.db
 *.pem
 *.sig
 *.tc
+
+# OS generated
+.DS_Store*
+ehthumbs.db
+Icon?
+Thumbs.db
