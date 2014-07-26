@@ -1,4 +1,7 @@
-# ~/.config/elinks/.gitignore
+# elinks/.gitignore
 
 cookies
-*hist
+exmodehist
+globhist
+gotohist
+searchhist
