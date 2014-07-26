@@ -1,4 +1,4 @@
-# ~/.config/zsh/bindings.zsh
+# zsh/bindkey.zsh
 
 bindkey -e
 

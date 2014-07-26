@@ -1,4 +1,4 @@
-# ~/.config/zsh/zprofile
+# zsh/zprofile
 
 emulate sh -c '. ~/.profile'
 

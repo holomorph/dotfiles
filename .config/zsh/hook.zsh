@@ -1,6 +1,5 @@
-# ~/.config/zsh/hook.zsh
+# zsh/hook.zsh
 
-## hooks
 case $TERM in
 	rxvt* | vte* | xterm* )
 		precmd() {

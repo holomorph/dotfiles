@@ -1,4 +1,4 @@
-# ~/.config/zsh/zstyle.zsh
+# zsh/style.zsh
 
 zstyle ':completion:*' menu select
 zstyle ':completion:*' use-cache on
@@ -12,8 +12,7 @@ zstyle ':completion:*' squeeze-slashes true
 zstyle ':completion:*:functions' ignored-patterns '_*'
 
 # kill
-zstyle ':completion:*:*:kill:*:processes' command \
-  "ps -u$USER -o pid,%cpu,tty,cputime,cmd"
+zstyle ':completion:*:*:kill:*:processes' command "ps -u$USER -o pid,%cpu,tty,cmd"
 
 # apps
 zstyle ':completion:*:*:(vim|gvim):*:*files' ignored-patterns \
@@ -23,8 +22,8 @@ zstyle ':completion:*:*:zathura:*:*' file-patterns \
 
 # users
 zstyle ':completion:*:*:*:users' ignored-patterns \
-	bin daemon mail ftp http nobody dbus avahi named git bitlbee mpd \
-	rtkit ntp usbmux gdm polkitd uuidd sagemath xbmc
+	bin daemon mail ftp http uuidd dbus nobody 'systemd*' avahi git bitlbee mpd \
+	dnsmasq colord rtkit ntp polkitd sagemath xbmc
 
 # ssh/scp/rsync
 zstyle ':completion:*:(scp|rsync):*' group-order \

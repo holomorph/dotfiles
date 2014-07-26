@@ -1,10 +1,9 @@
-# ~/.config/zsh/aliases.zsh
+# zsh/alias.zsh
 
 alias v='vim'
 alias g='git'
 alias e='emacsclient -t'
 alias s='sudoedit'
-alias z='zathura --fork'
 
 alias gdb='gdb -q'
 alias ncmpcpp='ncmpcpp -c ~/.config/ncmpcpp/config'
@@ -26,5 +25,3 @@ alias dirs='dirs -v'
 # pastebins
 alias ix="curl -F 'f:1=<-' http://ix.io"
 alias sprunge="curl -F 'sprunge=<-' http://sprunge.us"
-
-# vim: syn=sh

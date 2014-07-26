@@ -1,7 +1,7 @@
-# ~/.config/zsh/zshrc
+# zsh/zshrc
 
 zmodload zsh/complist
-autoload -Uz compinit && compinit
+autoload -Uz compinit && compinit -d "$HOME/.cache/zsh/zcompdump"
 autoload -U up-line-or-beginning-search
 autoload -U down-line-or-beginning-search
 
@@ -12,12 +12,12 @@ setopt hist_ignore_space hist_reduce_blanks hist_save_no_dups hist_verify
 setopt prompt_subst
 unsetopt flow_control
 
-HISTSIZE=20000
-SAVEHIST=10000
-HISTFILE="$HOME/.logs/zhistory"
+export HISTFILE="$HOME/.cache/zsh/zhistory"
+export HISTSIZE=20000
+export SAVEHIST=10000
 
-## configs
-for cfg in aliases bindings fun git hook style util; do
+# configs
+for cfg in alias bindkey fun git hook style util; do
     f="$HOME/.config/zsh/$cfg.zsh"
     if [[ -r "$f" ]]; then
         source "$f"
@@ -25,7 +25,7 @@ for cfg in aliases bindings fun git hook style util; do
 done
 unset cfg f
 
-## prompt
+# prompt
 PROMPT='%(?..%B%F{red}exit %?%f%b
 )%B%F{black}[%b%f'\
 '%F{red}%m%f '\

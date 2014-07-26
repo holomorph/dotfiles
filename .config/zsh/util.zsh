@@ -1,4 +1,4 @@
-# ~/.config/zsh/util.zsh
+# zsh/util.zsh
 
 cd() {
 	builtin cd "$@" && ls;

@@ -1,4 +1,4 @@
-# ~/.config/zsh/git.zsh
+# zsh/git.zsh
 
 autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git
@@ -9,10 +9,9 @@ zstyle ':vcs_info:*' formats       '%F{9}%b%f%c%u%m '
 zstyle ':vcs_info:*' actionformats '%F{9}%b%f%c%u%m %F{14}%a%f '
 zstyle ':vcs_info:git*+set-message:*' hooks git-stash
 
-### git: Show stash existence
-# Make sure misc is in 'formats':  %m
+# show stash existence (%m)
 +vi-git-stash() {
-  if [[ -s ${hook_com[base]}/.git/refs/stash ]]; then
-    hook_com[misc]+="%B%F{14}#%b%f"
-  fi
+    if [[ -s ${hook_com[base]}/.git/refs/stash ]]; then
+        hook_com[misc]+="%B%F{14}#%b%f"
+    fi
 }
