@@ -18,6 +18,8 @@
 
 (fset 'yes-or-no-p 'y-or-n-p)
 (put 'narrow-to-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
 
 (setq
  default-frame-alist '((font . "monospace-13"))
@@ -27,8 +29,10 @@
  inhibit-startup-screen t
  mode-line-end-spaces '(:eval "-%-")
  auto-save-default nil
+ next-error-highlight t
  search-highlight t
  query-replace-highlight t
+ require-final-newline t
  save-interprogram-paste-before-kill t
  shift-select-mode nil
  scroll-margin 3
@@ -80,9 +84,12 @@
 (windmove-default-keybindings)
 
 ;; tls
-(when (fboundp 'gnutls-available-p) (fmakunbound 'gnutls-available-p))
+(when (fboundp 'gnutls-available-p)
+  (fmakunbound 'gnutls-available-p))
 
 (setq-default
+ smtpmail-stream-type 'starttls
+ starttls-extra-arguments '("--strict-tofu" "--x509cafile" "/etc/ssl/certs/ca-certificates.crt")
  tls-program
  '("gnutls-cli --strict-tofu --x509cafile /etc/ssl/certs/ca-certificates.crt --x509certfile ~/.config/ssl/certs/holomorph.pem --x509keyfile ~/.config/ssl/private/holomorph.key -p %p %h"
    "gnutls-cli --strict-tofu --x509cafile /etc/ssl/certs/ca-certificates.crt -p %p %h"))
@@ -128,7 +135,8 @@
  flycheck-check-syntax-automatically '(save)
  flycheck-disabled-checkers '(emacs-lisp-checkdoc)
  ledger-highlight-xact-under-point nil
- magit-auto-revert-mode-lighter nil)
+ magit-auto-revert-mode-lighter nil
+ notmuch-search-oldest-first nil)
 
 ;; autoloads
 (autoload 'clang-format-buffer "clang-format" "Tool to format C/C++/Obj-C code" t)
@@ -150,7 +158,7 @@
 
 (defun common-prog-modes ()
   "Default modes for `prog-mode-hook'."
-  (ignore-errors (company-mode 1))
-  (ignore-errors (flycheck-mode 1)))
+  (with-demoted-errors (company-mode 1))
+  (with-demoted-errors (flycheck-mode 1)))
 
 (add-hook 'prog-mode-hook 'common-prog-modes)
