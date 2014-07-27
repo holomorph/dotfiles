@@ -146,6 +146,7 @@
 (autoload 'ff++-mode "ff++-mode" "Major mode for FreeFem++ code" t)
 (autoload 'tuareg-mode "tuareg" "Major mode for OCaml code" t)
 (autoload 'ledger-mode "ledger-mode" "Major mode for editing ledger data" t)
+(autoload 'markdown-mode "markdown-mode" "Major mode for editing markdown" t)
 (autoload 'flycheck-mode "flycheck" "Minor mode for on-the-fly syntax checking" t)
 (autoload 'company-mode "company" "Modular in-buffer completion framework" t)
 
@@ -153,6 +154,7 @@
 (add-to-list 'auto-mode-alist '("\\.[ei]dp\\'" . ff++-mode))
 (add-to-list 'auto-mode-alist '("\\.ml[ilyp]?\\'" . tuareg-mode))
 (add-to-list 'auto-mode-alist '("\\.ldg\\'" . ledger-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 (defun common-prog-modes ()
   "Default modes for `prog-mode-hook'."
