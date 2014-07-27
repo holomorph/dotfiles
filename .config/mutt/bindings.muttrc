@@ -18,10 +18,14 @@ bind index,pager R       group-reply
 bind index,pager \#      noop
 
 # paging
-bind index,pager,attach,browser \Cb     previous-page
-bind index,pager,attach,browser \Cf     next-page
-bind index,pager,attach,browser \Cd     half-down
-bind index,pager,attach,browser \Cu     half-up
+bind index,pager,attach,browser,query \Cb previous-page
+bind index,pager,attach,browser,query \Cf next-page
+bind index,pager,attach,browser,query \Cd half-down
+bind index,pager,attach,browser,query \Cu half-up
+bind pager,query b       previous-page
+bind pager,query f       next-page
+bind pager,query d       half-down
+bind pager,query u       half-up
 
 # postpone
 bind compose     P       pgp-menu
@@ -37,6 +41,9 @@ bind attach      G       last-entry
 # browser
 bind browser     gg      first-entry
 bind browser     G       last-entry
+
+# query
+bind query       N       search-opposite
 
 # macros
 macro index,pager ,i "<change-folder>+inbox<enter>"         "go to gmail inbox"

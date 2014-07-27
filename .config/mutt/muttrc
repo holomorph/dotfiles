@@ -8,6 +8,7 @@ set header_cache     = ~/.cache/mutt/headers       # where to store headers
 set message_cachedir = ~/.cache/mutt/bodies        # where to store bodies
 set editor           = "vim +:sil+?^$ +:sil:nohl"  # skip to last blank line
 set ispell           = "aspell -e -c"              # use aspell as ispell
+set query_command    = "abook --mutt-query %s"     # read abook
 
 # sources
 source $alias_file                    # required for functionality
