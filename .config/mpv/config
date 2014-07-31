@@ -2,6 +2,7 @@
 
 osc=no
 input-lirc=no
-vo=xv
+vo=vaapi,opengl-hq
+hwdec=auto
 cache-default=4096
 slang=eng,en
