@@ -129,6 +129,7 @@
 ;; extensions
 (setq-default
  company-default-lighter nil
+ company-idle-delay 0.1
  company-selection-wrap-around t
  flycheck-check-syntax-automatically '(save)
  flycheck-disabled-checkers '(emacs-lisp-checkdoc)
