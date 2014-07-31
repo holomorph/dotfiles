@@ -7,6 +7,8 @@ zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' ignore-parents parent pwd
 zstyle ':completion:*' squeeze-slashes true
 zstyle ':completion:*:functions' ignored-patterns '_*'
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+zstyle ':completion:*' matcher-list '+r:|[.]=* r:|=*' '+l:|=* r:|=*'
 
 # ssh/scp/rsync
 zstyle ':completion:*:(ssh|scp|rsync):*:hosts' ignored-patterns 'localhost*' loopback
