@@ -5,7 +5,7 @@ color normal white default
 color status brightblue black
 color error brightdefault black
 color markers brightwhite color233
-color search color16 color79
+color search black color10
 
 # index
 color tree color8 default
@@ -28,7 +28,7 @@ color body blue default "[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+"
 # message body
 color attachment color109 color232
 color signature brightwhite default
-color tilde color8 default
+color tilde brightblack default
 
 # smileys, the right way and the backward-ass euro way
 color body brightwhite default "(^| )+(|[<>|])[8;:](|[^ ])[)(/|DOPS]( |$)+"
@@ -38,10 +38,6 @@ color body brightwhite default "(^| )+[)(/|DOPS](|[^ ])[8;:](|[<>|])( |$)+"
 color body brightwhite default "(^| )\\*[^*]+\\*( |$)"
 color body brightwhite default "(^| )_[^_]+_( |$)"
 color body brightwhite default "(^| )/[^/]+/( |$)"
-
-color bold      cyan  default # highlighting bold patterns in body
-color underline green default # highlighting underlined patterns in body
-color quoted    cyan  default # quoted text in body
 
 # quote levels
 color quoted magenta default
