@@ -137,6 +137,8 @@
  magit-auto-revert-mode-lighter nil
  notmuch-search-oldest-first nil)
 
+(global-set-key (kbd "C-=") 'er/expand-region)
+
 ;; autoloads
 (autoload 'clang-format-buffer "clang-format" "Tool to format C/C++/Obj-C code" t)
 (autoload 'legalese "legalese" "Add legalese to your program files" t)
@@ -150,6 +152,7 @@
 (autoload 'markdown-mode "markdown-mode" "Major mode for editing markdown" t)
 (autoload 'flycheck-mode "flycheck" "Minor mode for on-the-fly syntax checking" t)
 (autoload 'company-mode "company" "Modular in-buffer completion framework" t)
+(autoload 'er/expand-region "expand-region" "Expand region by semantic units" t)
 
 ;; filetype
 (add-to-list 'auto-mode-alist '("\\.[ei]dp\\'" . ff++-mode))
