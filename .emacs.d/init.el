@@ -131,6 +131,7 @@
  company-default-lighter nil
  company-idle-delay 0.1
  company-selection-wrap-around t
+ company-show-numbers t
  flycheck-check-syntax-automatically '(save)
  flycheck-disabled-checkers '(emacs-lisp-checkdoc)
  ledger-highlight-xact-under-point nil
