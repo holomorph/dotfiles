@@ -6,3 +6,4 @@ vo=vaapi,opengl-hq
 hwdec=auto
 cache-default=4096
 slang=eng,en
+sub-text-font="MS PGothic"
