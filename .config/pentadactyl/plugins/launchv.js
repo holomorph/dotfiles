@@ -64,6 +64,8 @@ function launchv(target) {
         exec("yt-dl", uri);
     else if(uri.match(/(hitbox|twitch)\.tv/))
         exec("livestreamer", uri);
+    else if(uri.match(/youtube.*[?&]list=(?:RD|UU)/))
+            exec("mpv --no-terminal", uri);
     else if(uri.match(/youtube.*[?&]list=PL/)) {
         /* Check if the url is part of a playlist but a direct video
          * (watch?v=) url is provided and return the real playlist url */

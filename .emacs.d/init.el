@@ -119,7 +119,6 @@
 ;; org
 (setq-default
  org-directory "~/doc/notes"
- org-return-follows-link t
  org-use-speed-commands t)
 
 ;; filetype
