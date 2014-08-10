@@ -14,7 +14,6 @@
 (line-number-mode t)
 (column-number-mode t)
 (size-indication-mode t)
-(show-paren-mode 1)
 (winner-mode)
 
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -57,11 +56,15 @@
  mouse-sel-retain-highlight t
  save-place t
  save-place-file "~/.cache/emacs/places"
+ savehist-file "~/.cache/emacs/hist.el"
+ show-paren-delay 0.02
  tramp-persistency-file-name "~/.local/share/emacs/tramp"
  truncate-lines t
  uniquify-buffer-name-style 'forward
  windmove-wrap-around t)
 
+(savehist-mode)
+(show-paren-mode)
 (require 'saveplace)
 (require 'uniquify)
 
@@ -164,7 +167,7 @@
 
 (defun common-prog-modes ()
   "Default modes for `prog-mode-hook'."
-  (with-demoted-errors (company-mode 1))
-  (with-demoted-errors (flycheck-mode 1)))
+  (with-demoted-errors (company-mode))
+  (with-demoted-errors (flycheck-mode)))
 
 (add-hook 'prog-mode-hook 'common-prog-modes)
