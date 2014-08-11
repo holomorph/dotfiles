@@ -2,6 +2,7 @@
 
 zstyle ':completion:*' menu select
 zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "$HOME/.cache/zsh/zcompcache"
 zstyle ':completion:*' rehash yes
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
 zstyle ':completion:*' ignore-parents parent pwd
