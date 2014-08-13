@@ -18,10 +18,10 @@ bind index,pager R       group-reply
 bind index,pager \#      noop
 
 # paging
-bind index,pager,attach,browser,query \Cb previous-page
-bind index,pager,attach,browser,query \Cf next-page
-bind index,pager,attach,browser,query \Cd half-down
-bind index,pager,attach,browser,query \Cu half-up
+bind generic,index,pager,attach \Cb previous-page
+bind generic,index,pager,attach \Cf next-page
+bind generic,index,pager,attach \Cd half-down
+bind generic,index,pager,attach \Cu half-up
 bind pager,query b       previous-page
 bind pager,query f       next-page
 bind pager,query d       half-down
