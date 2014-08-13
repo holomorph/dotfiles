@@ -38,6 +38,11 @@ set tilde                            # show tildes like in vim
 set timeout           = 10           # idle time before scanning
 set wait_key          = no           # shut up, mutt
 
+# threading
+set sort = threads
+set sort_aux = reverse-last-date-received
+set strict_threads
+
 # enriched messages
 auto_view text/html                                  # view html automatically
 alternative_order text/plain text/enriched text/html # but save it for last
@@ -71,5 +76,3 @@ unignore from: to: cc: date: subject:  # show only these
 hdr_order from: to: cc: date: subject: # and in this order
 
 # hooks
-folder-hook . set sort = reverse-date
-folder-hook +cycling source ~/.config/mutt/ml.muttrc
