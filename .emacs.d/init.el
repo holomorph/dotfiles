@@ -171,3 +171,4 @@
   (with-demoted-errors (flycheck-mode)))
 
 (add-hook 'prog-mode-hook 'common-prog-modes)
+(add-hook 'tex-mode-hook 'flycheck-mode)
