@@ -142,6 +142,8 @@
  magit-diff-refine-hunk 'all
  notmuch-search-oldest-first nil)
 
+(global-set-key (kbd "C-x gb") 'magit-blame)
+(global-set-key (kbd "C-x gs") 'magit-status)
 (global-set-key (kbd "C-=") 'er/expand-region)
 
 ;; autoloads
@@ -150,7 +152,8 @@
 (autoload 'newpaste "newpaste" "Paste to http://paste.lisp.org" t)
 (autoload 'notmuch "notmuch" "The mail indexer" t)
 (autoload 'dictionary "dictionary" "Client for RFC2249 dictionary servers" t)
-(autoload 'magit-status "magit" nil t)
+(autoload 'magit-status "magit" "Control Git from Emacs" t)
+(autoload 'magit-blame "magit-blame" "Blame support for Magit" t)
 (autoload 'ff++-mode "ff++-mode" "Major mode for FreeFem++ code" t)
 (autoload 'tuareg-mode "tuareg" "Major mode for OCaml code" t)
 (autoload 'ledger-mode "ledger-mode" "Major mode for editing ledger data" t)
