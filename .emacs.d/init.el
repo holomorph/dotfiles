@@ -139,7 +139,7 @@
  flycheck-disabled-checkers '(emacs-lisp-checkdoc)
  ledger-highlight-xact-under-point nil
  magit-auto-revert-mode-lighter nil
- magit-diff-refine-hunk t
+ magit-diff-refine-hunk 'all
  notmuch-search-oldest-first nil)
 
 (global-set-key (kbd "C-=") 'er/expand-region)
