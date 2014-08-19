@@ -1,4 +1,5 @@
 <llppconfig>
+<ui-font size='15'><![CDATA[/usr/share/fonts/TTF/consola.ttf]]></ui-font>
 <defaults
     width='900'
     height='900'
@@ -39,7 +40,7 @@
     path-launcher='$TERMINAL -d &quot;%s&quot;'
     color-space='rgb'
     invert-colors='false'
-    brightness='1.000000'
+    brightness='1.'
     redirectstderr='false'
     selection-command='xclip -i'
     synctex-command='echo SyncTex'
@@ -47,7 +48,7 @@
     update-cursor='false'
     hint-font-size='12'
     horizontal-scroll-step='72'
-    page-scroll-scale='1.000000'
+    page-scroll-scale='1.'
     use-pbo='true'
     wheel-scrolls-pages='false'
     remote-in-a-new-instance='false'
