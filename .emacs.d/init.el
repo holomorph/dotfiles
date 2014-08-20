@@ -4,7 +4,7 @@
   (normal-top-level-add-to-load-path '("."))
   (normal-top-level-add-subdirs-to-load-path))
 
-(load-theme 'zenburn t)
+(with-demoted-errors (load-theme 'zenburn t))
 
 (when (fboundp 'horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
