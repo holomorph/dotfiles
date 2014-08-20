@@ -4,6 +4,7 @@
   (normal-top-level-add-to-load-path '("."))
   (normal-top-level-add-subdirs-to-load-path))
 
+(setq default-frame-alist '((font . "monospace-13")))
 (with-demoted-errors (load-theme 'zenburn t))
 
 (when (fboundp 'horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))
@@ -22,7 +23,6 @@
 (put 'upcase-region 'disabled nil)
 
 (setq
- default-frame-alist '((font . "monospace-13"))
  dired-listing-switches "-al -hF --group-directories-first"
  echo-keystrokes 0.1
  gnutls-min-prime-bits 2048
