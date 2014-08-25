@@ -55,6 +55,29 @@
     point-and-x='false'
     point-and-x-mark='word'
     scroll-bar-on-the-left='false'>
+<keymap mode='help'>
+<map in='ctrl-[' out='esc'/>
+</keymap>
+<keymap mode='outline'>
+<map in='ctrl-[' out='esc'/>
+</keymap>
+<keymap mode='birdseye'>
+<map in='ctrl-n' out='down'/>
+<map in='u' out='ctrl-k'/>
+<map in='ctrl-p' out='up'/>
+<map in='f' out='pgdown'/>
+<map in='d' out='ctrl-j'/>
+<map in='f11' out='f'/>
+<map in='ctrl-v' out='pgdown'/>
+<map in='ctrl-f' out='pgdown'/>
+<map in='ctrl-[' out='esc'/>
+<map in='alt-v' out='pgup'/>
+<map in='ctrl-b' out='pgup'/>
+<map in='b' out='pgup'/>
+</keymap>
+<keymap mode='textentry'>
+<map in='ctrl-[' out='esc'/>
+</keymap>
 <keymap mode='view'>
 <map in='k' out='up'/>
 <map in='ctrl-u' out='ctrl-k'/>
