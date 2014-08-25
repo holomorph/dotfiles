@@ -1,6 +1,6 @@
 # zathura/zathurarc
 
-set font "monospace normal 10"
+set font "monospace normal 11"
 
 set inputbar-bg "#101010"
 set inputbar-fg "#dcdcdc"
