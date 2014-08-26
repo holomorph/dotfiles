@@ -18,7 +18,7 @@ color listfocus yellow color8 bold
 color listnormal_unread white default bold
 color listfocus_unread yellow color8 bold
 color info green black bold
-search-highlight-colors color16 color79
+search-highlight-colors black color10
 
 highlight article "^Feed:.*" cyan default bold
 highlight article "^Title:.*" yellow default bold
