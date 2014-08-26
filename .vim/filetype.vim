@@ -5,6 +5,7 @@ augroup filetypedetect
 
     au BufNewFile,BufRead PKGBUILD* set syn=sh ts=2 sw=2 et
     au BufNewFile,BufRead */elinks/*.conf setf elinks
+    au BufNewFile,BufRead llpp.conf set ft=xml
     au BufNewFile,BufRead *.md setf markdown
     au BufNewFile,BufRead *.ml,*.ml[ilyp] setl cms=(*%s*)
     au BufNewFile,BufRead *.muttrc setf muttrc
