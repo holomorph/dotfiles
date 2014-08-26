@@ -26,7 +26,6 @@ set softtabstop=2
 set tabstop=4
 
 " editing
-set clipboard=unnamed
 set list listchars=tab:»\ ,extends:$,precedes:^,trail:·
 set nrformats+=alpha
 
