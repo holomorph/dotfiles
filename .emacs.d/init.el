@@ -137,6 +137,7 @@
  company-show-numbers t
  flycheck-check-syntax-automatically '(save)
  flycheck-disabled-checkers '(emacs-lisp-checkdoc)
+ flycheck-display-errors-delay 0.1
  ledger-highlight-xact-under-point nil
  magit-auto-revert-mode-lighter nil
  magit-diff-refine-hunk 'all
