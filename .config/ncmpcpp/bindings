@@ -1,0 +1,31 @@
+# ncmpcpp/bindings
+
+def_key "k"
+  scroll_up
+
+def_key "j"
+  scroll_down
+
+def_key "b"
+  page_up
+
+def_key "f"
+  page_down
+
+def_key "l"
+  next_column
+
+def_key "h"
+  previous_column
+
+def_key "^"
+  jump_to_parent_directory
+
+def_key "u"
+  dummy
+
+def_key "n"
+  next_found_item
+
+def_key "N"
+  previous_found_item

@@ -1,8 +1,14 @@
 # ncmpcpp/keys
 
-# C-u
-key_page_up = 21
-# C-d
-key_page_down = 4
+key_page_up = 339 'b'
+key_page_down = 338 'f'
 key_prev_column = 260 'h'
 key_next_column = 261 'l'
+key_pause = 'p'
+key_update_db = 'U'
+key_next_found_position = 'n'
+key_prev_found_position = 'N'
+key_move_song_up = 0
+key_move_song_down = 0
+key_toggle_auto_center = 0
+key_toggle_display_mode = 'P'

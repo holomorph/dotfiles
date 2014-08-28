@@ -12,6 +12,7 @@ song_columns_list_format = "(40)[]{t|f} (8f)[green]{lr} (35)[cyan]{a} (20)[red]{
 playlist_display_mode = "columns"
 browser_display_mode = "columns"
 playlist_editor_display_mode = "columns"
+centered_cursor = "yes"
 user_interface = "alternative"
 
 ##### colors definitions #####
