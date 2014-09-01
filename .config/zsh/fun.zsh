@@ -14,7 +14,4 @@ n() {
 # add notes completion, thanks to Earnestly
 compdef "_files -W ~/doc/notes -/" n
 
-# moar
-compdef "_files -g '*.(pdf|xps|zip|cbz|jpg)'" llpp
-
 # vim: syn=sh
