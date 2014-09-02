@@ -12,3 +12,4 @@ key_move_song_up = 0
 key_move_song_down = 0
 key_toggle_auto_center = 0
 key_toggle_display_mode = 'P'
+key_go_to_parent_dir = 263 '^'
