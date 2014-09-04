@@ -176,3 +176,4 @@
 
 (add-hook 'prog-mode-hook 'common-prog-modes)
 (add-hook 'tex-mode-hook 'flycheck-mode)
+(remove-hook 'magit-section-highlight-hook 'magit-section-highlight)
