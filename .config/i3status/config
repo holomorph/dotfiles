@@ -19,8 +19,8 @@ order += "volume master"
 order += "load"
 order += "cpu_temperature 0"
 order += "ethernet bond0"
-order += "wireless wlp2s0"
-order += "ethernet enp5s0"
+order += "wireless wl0"
+order += "ethernet en0"
 order += "battery 1"
 order += "tztime local"
 
@@ -45,12 +45,12 @@ ethernet bond0 {
 	format_down = ""
 }
 
-wireless wlp2s0 {
+wireless wl0 {
 	format_up = "W: %quality @ %essid"
 	format_down = "W: down"
 }
 
-ethernet enp5s0 {
+ethernet en0 {
 	format_up = "E: up (%speed)"
 	format_down = ""
 }

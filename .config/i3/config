@@ -6,8 +6,7 @@
 set $mod Mod4
 
 # Font for window titles
-set $font -*-terminus-medium-r-normal-*-*-*-*-*-*-*-*-*
-font $font
+font pango: Terminus 8
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -19,7 +18,7 @@ bindsym $mod+Return exec termite
 bindsym $mod+Shift+c kill
 
 # start dmenu (a program launcher)
-bindsym $mod+o exec dmenu_run -fn "$font" -sf "#ffffff" -sb "#373b41" -nf "#facb70"
+bindsym $mod+o exec dmenu_run
 
 # change focus
 bindsym $mod+h focus left
@@ -128,27 +127,29 @@ bar {
 	}
 }
 
+for_window [class="Display"] floating enable
 for_window [class="feh"] floating enable
 for_window [class="ffplay"] floating enable
+for_window [class="fontforge"] floating enable
 for_window [class="Gbdfed"] floating enable
 for_window [class="Firefox"] floating enable
 for_window [class="Firefox" instance="Navigator"] floating disable
-for_window [class="Mplayer"] floating enable
-for_window [class="mplayer2"] floating enable
 for_window [class="mpv"] floating enable
 for_window [class="MuPDF"] floating enable
 for_window [class="Xfd"] floating enable
 for_window [class="XFontSel"] floating enable
 for_window [class="Zathura"] floating enable
 
+assign [Class="Darktable"] 8
 assign [Class="Fig"] 8
 assign [Class="Firefox"] 1
 assign [Class="Gimp"] 8
 assign [Class="Inkscape"] 8
+assign [Class="Sxiv"] 7
 
 # bindings
 bindsym $mod+w      exec firefox
-bindsym $mod+Ctrl+l exec i3lock -d -c000000
+bindsym $mod+Ctrl+l exec i3lock -d -c000000 -I 0
 bindsym XK_Print    exec printscreen
 bindsym XF86Display exec vex
 
