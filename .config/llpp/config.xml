@@ -1,5 +1,5 @@
 <llppconfig>
-<ui-font size='15'><![CDATA[/usr/share/fonts/TTF/consola.ttf]]></ui-font>
+<ui-font size='16'><![CDATA[/usr/share/fonts/TTF/consola.ttf]]></ui-font>
 <defaults
     width='900'
     height='900'
@@ -55,33 +55,32 @@
     point-and-x='false'
     point-and-x-mark='word'
     scroll-bar-on-the-left='false'>
-<keymap mode='help'>
-<map in='ctrl-[' out='esc'/>
-</keymap>
-<keymap mode='outline'>
-<map in='ctrl-[' out='esc'/>
-</keymap>
-<keymap mode='birdseye'>
+<keymap mode='global'>
+<map in='ctrl-y' out='up'/>
 <map in='ctrl-n' out='down'/>
-<map in='u' out='ctrl-k'/>
 <map in='ctrl-p' out='up'/>
-<map in='f' out='pgdown'/>
-<map in='d' out='ctrl-j'/>
-<map in='f11' out='f'/>
+<map in='ctrl-g' out='esc'/>
+<map in='ctrl-e' out='down'/>
 <map in='ctrl-v' out='pgdown'/>
 <map in='ctrl-f' out='pgdown'/>
 <map in='ctrl-[' out='esc'/>
 <map in='alt-v' out='pgup'/>
 <map in='ctrl-b' out='pgup'/>
+</keymap>
+<keymap mode='outline'>
+<map in='tab' out='esc'/>
+</keymap>
+<keymap mode='birdseye'>
+<map in='u' out='ctrl-k'/>
+<map in='f' out='pgdown'/>
+<map in='d' out='ctrl-j'/>
+<map in='f11' out='f'/>
 <map in='b' out='pgup'/>
 </keymap>
-<keymap mode='textentry'>
-<map in='ctrl-[' out='esc'/>
-</keymap>
 <keymap mode='view'>
+<map in='tab' out='o'/>
 <map in='k' out='up'/>
 <map in='ctrl-u' out='ctrl-k'/>
-<map in='esc' out=''/>
 <map in='u' out='ctrl-k'/>
 <map in='s' out='b'/>
 <map in='l' out='right'/>
@@ -90,11 +89,7 @@
 <map in='f' out='pgdown'/>
 <map in='d' out='ctrl-j'/>
 <map in='f11' out='f'/>
-<map in='ctrl-v' out='pgdown'/>
-<map in='ctrl-f' out='pgdown'/>
-<map in='alt-v' out='pgup'/>
 <map in='ctrl-d' out='ctrl-j'/>
-<map in='ctrl-b' out='pgup'/>
 <map in='b' out='pgup'/>
 <map in='h' out='left'/>
 </keymap>
