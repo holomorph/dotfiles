@@ -54,6 +54,7 @@
  ido-save-directory-list-file "~/.cache/emacs/ido"
  indent-tabs-mode nil
  mouse-sel-retain-highlight t
+ recentf-save-file "~/.local/share/emacs/recentf"
  save-place t
  save-place-file "~/.cache/emacs/places"
  savehist-file "~/.cache/emacs/hist.el"
