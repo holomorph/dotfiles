@@ -47,7 +47,7 @@ ethernet bond0 {
 
 wireless wl0 {
 	format_up = "W: %quality @ %essid"
-	format_down = "W: down"
+	format_down = ""
 }
 
 ethernet en0 {
@@ -59,6 +59,7 @@ battery 1 {
 	format = "%status %percentage (%remaining) %consumption"
 	path = "/sys/class/power_supply/BAT%d/uevent"
 	low_threshold = 10
+	threshold_type = percentage
 }
 
 tztime local {
