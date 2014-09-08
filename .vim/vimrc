@@ -71,6 +71,7 @@ nnoremap <C-l> <C-w>l
 au BufReadPost *
  \ if line("'\"") > 0 && line("'\"") <= line("$") |
  \ exe "normal g`\"" | endif
+au VimLeave * call system("xclip -i", getreg("\""))
 
 " extensions
 let g:tagbar_width = 30
