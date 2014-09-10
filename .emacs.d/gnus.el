@@ -5,7 +5,7 @@
  gnus-mode-line-image-cache nil
  gnus-startup-file (concat gnus-home-directory "newsrc")
  gnus-summary-line-format "%U%R%z%(%[%&user-date; %-15,15f%]%) %B%s\n"
- gnus-user-date-format-alist '((t . "%m/%d %H:%M"))
+ gnus-user-date-format-alist '((t . "%m/%d"))
  gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
  gnus-sum-thread-tree-false-root ""
  gnus-sum-thread-tree-indent " "
