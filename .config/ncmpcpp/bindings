@@ -29,3 +29,6 @@ def_key "n"
 
 def_key "N"
   previous_found_item
+
+def_key "U"
+  update_database
