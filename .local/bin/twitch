@@ -46,17 +46,17 @@ def get_streams()
         dir = File.join(ENV["XDG_CONFIG_DIR"], "twitch")
     end
 
-    @teams = read_config(dir, "teams")
-    @users = read_config(dir, "streamers")
+    teams = read_config(dir, "teams")
+    users = read_config(dir, "streamers")
 
-    @teams.each do |team|
+    teams.each do |team|
         threads << Thread.new do
             data = get_json("http://api.twitch.tv/api/team/#{team}/live_channels.json")
             parse_json(streams_mx, streams, data, "channels", "display_name", "link", "title")
         end
     end
 
-    @users.each_slice(100) do |batch|
+    users.each_slice(100) do |batch|
         threads << Thread.new do
             data = get_json("https://api.twitch.tv/kraken/streams?channel=#{batch.join(",")}&limit=#{batch.count}")
             parse_json(streams_mx, streams, data, "streams", "display_name", "url", "status")
@@ -107,9 +107,9 @@ sel = dmenu(menu.uniq)
 
 if sel
     threads = []
-    @results = sel.split(/\r?\n/)
+    results = sel.split(/\r?\n/)
 
-    @results.each do |name|
+    results.each do |name|
         if name =~ /^(\S+)\s+ / and item = streams_by_user[$1.downcase]
             threads << Thread.new do
                 play_stream(item)
