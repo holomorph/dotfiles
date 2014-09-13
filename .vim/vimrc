@@ -32,6 +32,7 @@ set nrformats+=alpha
 " vim ui
 set autoread
 set autowrite
+set backspace=eol,start
 set completeopt=longest,menuone,preview
 set hidden
 set history=50

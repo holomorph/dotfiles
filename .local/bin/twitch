@@ -21,6 +21,9 @@ end
 
 def get_json(uri)
     JSON.parse(open(uri) {|f| f.read})
+rescue => e
+    puts e.message
+    exit
 end
 
 def parse_json(mutex, streams, data, index, owner, uri, title)

@@ -2,7 +2,7 @@
 
 osc=no
 input-lirc=no
-vo=vdpau,opengl-hq
+vo=vdpau,opengl
 hwdec=auto
 cache-default=4096
 slang=eng,en
