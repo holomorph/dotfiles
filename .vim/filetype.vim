@@ -13,4 +13,6 @@ augroup filetypedetect
     au BufNewFile,BufRead *.sage,*.spyx,*.pyx setf python
     au BufNewFile,BufRead *.pentadactylrc,*.penta set ft=pentadactyl cms=\"%s
     au BufNewFile,BufRead *.vimperatorrc,*.vimp set ft=vimperator cms=\"%s
+
+    au BufNewFile,BufRead /tmp/pentadactyl.wiki.archlinux.org.* set ft=mediawiki wrap
 augroup END
