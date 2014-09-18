@@ -7,9 +7,11 @@ import getopt
 import urllib.request
 import json
 
+
 def usage():
     print("usage: %s [-d] [-t TL] [-s SL] <message>" % sys.argv[0])
     sys.exit(0)
+
 
 def parse_opts():
     optlist, args = getopt.getopt(sys.argv[1:], 't:s:d')
@@ -29,6 +31,7 @@ def parse_opts():
     message = " ".join(args)
     return message, tl, sl, debug
 
+
 def get_response(text, sl=u"auto", tl=u"auto"):
     """
     Processes a Translate API request given a desired message TEXT to be
@@ -39,9 +42,10 @@ def get_response(text, sl=u"auto", tl=u"auto"):
     api = "http://translate.google.com/translate_a"
     args = "&sl=%s&tl=%s&text=%s" % (sl, tl, urllib.parse.quote(text))
     url = api + "/t?client=t&ie=UTF-8&oe=UTF-8" + args
-    req = urllib.request.Request(url, headers={'User-Agent':''})
+    req = urllib.request.Request(url, headers={'User-Agent': ''})
 
     return urllib.request.urlopen(req).read().decode('utf-8')
+
 
 def pretty_print(response):
     # ugly hack to get valid json

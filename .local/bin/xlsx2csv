@@ -7,17 +7,17 @@ import sys
 import xlrd
 
 if len(sys.argv) != 2:
-	print('usage: xlsx2csv <file>')
-	sys.exit(1)
+    print('usage: xlsx2csv <file>')
+    sys.exit(1)
 
 wb = xlrd.open_workbook(sys.argv[1], on_demand=True, logfile=sys.stdout)
 for sh in wb.sheets():
-	data = [sh.row_values(r) for r in range(sh.nrows)]
-	if data:
-		name = sh.name
-		sys.stdout.write(':'+name+':\n')
-		for row in data:
-			for col in row:
-				sys.stdout.write('\"'+str(col)+'\",')
-			sys.stdout.write('\n')
-	wb.unload_sheet(name)
+    data = [sh.row_values(r) for r in range(sh.nrows)]
+    if data:
+        name = sh.name
+        sys.stdout.write(':'+name+':\n')
+        for row in data:
+            for col in row:
+                sys.stdout.write('\"'+str(col)+'\",')
+            sys.stdout.write('\n')
+        wb.unload_sheet(name)
