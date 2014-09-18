@@ -15,4 +15,5 @@ augroup filetypedetect
     au BufNewFile,BufRead *.vimperatorrc,*.vimp set ft=vimperator cms=\"%s
 
     au BufNewFile,BufRead /tmp/pentadactyl.wiki.archlinux.org.* set ft=mediawiki wrap
+    au BufNewFile,BufRead /tmp/pentadactyl.github.com.txt set ft=markdown
 augroup END
