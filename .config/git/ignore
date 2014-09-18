@@ -35,6 +35,10 @@
 # temp files
 *.swp
 
+# tags
+tags
+TAGS
+
 # crypto
 *.asc
 *.crt
