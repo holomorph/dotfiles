@@ -4,6 +4,8 @@ set nocompatible
 call pathogen#infect()
 filetype plugin indent on
 syntax on
+runtime macros/matchit.vim
+
 let g:zenburn_old_Visual = 1
 let g:zenburn_alternate_Visual = 1
 let g:zenburn_high_Contrast = 1
@@ -38,7 +40,7 @@ set hidden
 set history=50
 set laststatus=2
 set mouse=a
-set scrolloff=3
+set scrolloff=3 sidescrolloff=5
 set shortmess=atToOI
 set showcmd
 set statusline=%f\ \ %<%y%m%r%=%12.(\(%l,%c%V\)%)\ \ %P
@@ -77,6 +79,7 @@ au VimLeave * call system("xclip -i", getreg("\""))
 " extensions
 let g:tagbar_width = 30
 let g:syntastic_check_on_wq = 0
+let g:syntastic_always_populate_loc_list = 1
 
 " fugitive
 nnoremap <leader>gg :copen<cr>:Ggrep<space>
