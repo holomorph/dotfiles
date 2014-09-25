@@ -2,6 +2,9 @@
 
 set font "monospace normal 11"
 
+set window-title-basename true
+set statusbar-basename true
+
 set inputbar-bg "#101010"
 set inputbar-fg "#dcdcdc"
 set recolor-darkcolor "#dcdcdc"
