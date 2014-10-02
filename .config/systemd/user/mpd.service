@@ -1,5 +1,6 @@
 [Unit]
 Description=Music Player Daemon
+Documentation=man:mpd(1)
 
 [Service]
 Environment=PULSE_PROP=application.icon_name=sound
