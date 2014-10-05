@@ -3,6 +3,7 @@
 (setq-default
  gnus-message-archive-group "sent"
  gnus-mode-line-image-cache nil
+ gnus-read-newsrc-file nil
  gnus-startup-file (concat gnus-home-directory "newsrc")
  gnus-summary-line-format "%U%R%z%(%[%&user-date; %-15,15f%]%) %B%s\n"
  gnus-user-date-format-alist '((t . "%m/%d"))
