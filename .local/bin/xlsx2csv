@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 # xlsx2csv: uses the xlrd module to print Excel documents to stdout as comma
 # separated values.
