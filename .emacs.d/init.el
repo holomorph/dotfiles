@@ -26,6 +26,7 @@
  dired-listing-switches "-al -hF --group-directories-first"
  echo-keystrokes 0.1
  gnutls-min-prime-bits 2048
+ history-length 1000
  inhibit-startup-screen t
  mode-line-end-spaces '(:eval "-%-")
  auto-save-default nil
