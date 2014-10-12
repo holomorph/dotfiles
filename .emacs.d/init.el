@@ -142,6 +142,7 @@
  flycheck-display-errors-delay 0.1
  ledger-highlight-xact-under-point nil
  magit-auto-revert-mode-lighter nil
+ magit-backup-mode-lighter nil
  magit-diff-refine-hunk 'all
  notmuch-search-oldest-first nil)
 
