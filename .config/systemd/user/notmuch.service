@@ -1,0 +1,8 @@
+[Unit]
+Description=Notmuch mail
+Documentation=man:notmuch-new(1)
+
+[Service]
+Type=oneshot
+Environment=NOTMUCH_CONFIG=%h/.config/notmuch/config
+ExecStart=/usr/bin/notmuch new
