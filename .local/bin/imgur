@@ -8,8 +8,8 @@
 # Optional: xclip
 
 # API Key provided by Alan@imgur.com
-apikey="b3625162d3418ac51a9ee805b1840452"
-apiurl="http://imgur.com/api/upload.xml"
+readonly apikey="b3625162d3418ac51a9ee805b1840452"
+readonly apiurl="http://imgur.com/api/upload.xml"
 
 die() {
     printf >&2 "imgur: %s\n" "$@"

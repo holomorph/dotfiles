@@ -5,9 +5,9 @@
 # find "vim disp" in tmux FAQ
 # http://sourceforge.net/p/tmux/tmux-code/ci/master/tree/FAQ
 
-declare -r s="screen-256color"
-declare -r file="${TERMINFO:-$HOME/.terminfo}/$s.terminfo"
-declare -r dir="${file%/*}"
+readonly s="screen-256color"
+readonly file="${TERMINFO:-$HOME/.terminfo}/$s.terminfo"
+readonly dir="${file%/*}"
 
 # create directory
 mkdir -vp "$dir"

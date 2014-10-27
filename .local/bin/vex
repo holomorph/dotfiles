@@ -3,7 +3,7 @@
 # vex: switch to and from external displays
 
 ## store xrandr output
-xrandr="$(xrandr)"
+readonly xrandr="$(xrandr)"
 
 swap() {
 	if xrandr --output "$1" --off --output "$2" --auto; then

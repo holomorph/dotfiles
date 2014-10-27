@@ -1,6 +1,6 @@
 #!/bin/sh
 
-s='gYw'
+readonly s='gYw'
 
 echo
 printf '            '
