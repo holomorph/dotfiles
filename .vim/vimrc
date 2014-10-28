@@ -54,8 +54,8 @@ set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpg
 set wildignore+=*.a,*.o,*.obj,*.so,*.hi
 set wildignore+=.git,.hg
 
+noremap Q q:
 noremap Y y$
-nnoremap ZW :write<cr>
 nnoremap <silent> <space> :nohlsearch<bar>:echo<cr>
 nnoremap <f5> :!make<cr>
 command! -bar W silent! exec "write !sudo tee % >/dev/null" | silent! edit!
