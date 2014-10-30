@@ -6,6 +6,9 @@ filetype plugin indent on
 syntax on
 runtime macros/matchit.vim
 
+let g:netrw_http_cmd = "curl"
+let g:netrw_http_xcmd = "-o"
+
 let g:zenburn_old_Visual = 1
 let g:zenburn_alternate_Visual = 1
 let g:zenburn_high_Contrast = 1
