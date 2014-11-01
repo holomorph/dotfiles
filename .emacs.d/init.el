@@ -15,6 +15,7 @@
 (line-number-mode t)
 (column-number-mode t)
 (size-indication-mode t)
+(url-handler-mode t)
 (winner-mode)
 
 (fset 'yes-or-no-p 'y-or-n-p)
