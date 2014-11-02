@@ -24,3 +24,6 @@ _notes() {
 }
 
 complete -o default -F _notes n
+
+complete -f -X '!*.docx' -o plusdirs docx2txt
+complete -f -X '!*.xlsx' -o plusdirs xlsx2csv

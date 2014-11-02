@@ -14,4 +14,7 @@ n() {
 # add notes completion, thanks to Earnestly
 compdef "_files -W ~/doc/notes -/" n
 
+compdef "_files -g '*.docx'" docx2txt
+compdef "_files -g '*.xlsx'" xlsx2csv
+
 # vim: syn=sh
