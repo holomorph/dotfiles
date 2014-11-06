@@ -31,6 +31,7 @@ set softtabstop=2
 set tabstop=4
 
 " editing
+set clipboard=unnamed
 set list listchars=tab:»\ ,extends:$,precedes:^,trail:·
 set nrformats+=alpha
 
@@ -82,6 +83,7 @@ au BufReadPost *
 let g:tagbar_width = 30
 let g:syntastic_check_on_wq = 0
 let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_tex_checkers = ["chktex", "lacheck"]
 
 " fugitive
 nnoremap <leader>gg :copen<cr>:Ggrep<space>
