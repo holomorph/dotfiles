@@ -19,4 +19,3 @@ dht = disable
 http_capath = /etc/ssl/certs
 
 system.file_allocate.set = yes
-system.method.set_key = event.download.inserted_new,close_inserted,d.close=
