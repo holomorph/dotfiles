@@ -7,7 +7,6 @@
 (setq default-frame-alist '((font . "monospace-13")))
 (with-demoted-errors (load-theme 'zenburn t))
 
-(when (fboundp 'horizontal-scroll-bar-mode) (horizontal-scroll-bar-mode -1))
 (when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
@@ -136,6 +135,7 @@
 (setq-default
  company-default-lighter nil
  company-idle-delay 0.1
+ company-minimum-prefix-length 2
  company-selection-wrap-around t
  company-show-numbers t
  flycheck-check-syntax-automatically '(save)
@@ -175,8 +175,9 @@
 
 (defun common-prog-modes ()
   "Default modes for `prog-mode-hook'."
-  (with-demoted-errors (company-mode))
-  (with-demoted-errors (flycheck-mode)))
+  (with-demoted-errors
+    (company-mode)
+    (flycheck-mode)))
 
 (add-hook 'prog-mode-hook 'common-prog-modes)
 (add-hook 'tex-mode-hook 'flycheck-mode)
