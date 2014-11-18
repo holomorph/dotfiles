@@ -49,6 +49,7 @@
  bookmark-default-file "~/.local/share/emacs/bookmarks"
  c-basic-offset 4
  compilation-read-command nil
+ eww-bookmarks-directory "~/.local/share/emacs"
  gnus-home-directory "~/.local/share/emacs/gnus/"
  gnus-init-file (concat user-emacs-directory "gnus")
  ido-enable-flex-matching t
