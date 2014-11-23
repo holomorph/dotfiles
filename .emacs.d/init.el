@@ -56,6 +56,8 @@
  ido-save-directory-list-file "~/.cache/emacs/ido"
  indent-tabs-mode nil
  mouse-sel-retain-highlight t
+ nsm-settings-file "~/.local/share/emacs/nsm-data.el"
+ network-security-level 'paranoid
  recentf-save-file "~/.local/share/emacs/recentf"
  save-place t
  save-place-file "~/.cache/emacs/places"
@@ -90,22 +92,14 @@
 
 (windmove-default-keybindings)
 
-;; tls
-(when (fboundp 'gnutls-available-p)
-  (fmakunbound 'gnutls-available-p))
-
-(setq-default
- smtpmail-stream-type 'starttls
- starttls-extra-arguments '("--strict-tofu" "--x509cafile" "/etc/ssl/certs/ca-certificates.crt")
- tls-program '("gnutls-cli --strict-tofu --x509cafile /etc/ssl/certs/ca-certificates.crt -p %p %h"))
-
 ;; mail
 (setq-default
  message-send-mail-function 'smtpmail-send-it
  smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
  smtpmail-default-smtp-server "smtp.gmail.com"
  smtpmail-smtp-server "smtp.gmail.com"
- smtpmail-smtp-service 587)
+ smtpmail-smtp-service 587
+ smtpmail-stream-type 'starttls)
 
 ;; irc
 (setq-default
