@@ -9,6 +9,7 @@ alias gdb='gdb -q'
 alias ncmpcpp='ncmpcpp -c ~/.config/ncmpcpp/config'
 alias weechat='weechat -d ~/.config/weechat'
 
+alias grep='grep --color=auto'
 alias df='df -h'
 alias du='du -h'
 alias cp='cp -iv'
