@@ -2,8 +2,6 @@
 
 zmodload zsh/complist
 autoload -Uz compinit && compinit -d "$HOME/.cache/zsh/zcompdump"
-autoload -U up-line-or-beginning-search
-autoload -U down-line-or-beginning-search
 
 setopt auto_cd auto_pushd pushd_ignore_dups correct
 setopt extended_glob append_history extended_history share_history

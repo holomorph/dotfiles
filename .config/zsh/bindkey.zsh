@@ -5,6 +5,8 @@ bindkey -e
 autoload -U select-word-style
 select-word-style bash
 
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
 zle -N up-line-or-beginning-search
 zle -N down-line-or-beginning-search
 
