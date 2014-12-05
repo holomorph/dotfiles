@@ -8,10 +8,10 @@ set runtimepath=~/.config/vimperator
 set showstatuslinks=0
 set smartcase
 
-hi -a Normal font-size: 11pt !important;
-
 colorscheme hints
 colorscheme zenburn
+
+hi -a Normal font-size: 11pt !important;
 
 " mappings
 runtime mappings.vim
