@@ -1,9 +1,0 @@
-#!/bin/bash
-# yt-dl - youtube-dl wrapper to produce a title for mpv
-
-{
-    read -r title
-    read -r url
-} < <(youtube-dl -eg "$1" 2>/dev/null)
-
-exec mpv --title="$title" "$url"

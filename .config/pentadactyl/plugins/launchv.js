@@ -13,8 +13,7 @@ var INFO =
 
     ["ul", {},
     ["li", {}, "livestreamer, a CLI program that extracts stream info."],
-    ["li", {}, "mpv, a movie player based on MPlayer and mplayer2."],
-    ["li", {}, "quvi, a CLI tool for parsing media stream properties."],
+    ["li", {}, "mpv, a media player based on MPlayer and mplayer2."],
     ["li", {}, "youtube-dl, a CLI tool to download videos from various media sites."]],
 
     ["p", {},
@@ -32,12 +31,10 @@ var INFO =
     ["description", { short: "true" },
     ["p", {}, "Launch video using hint URL."]]],
 
-    ["note", {}, "User configuration is required for the plugin to work. ",
-    "For example, ", ["em", {}, "lstream"], " might be:",
-    ["code", {},
-    "#!/bin/bash\n",
-    "exec livestreamer -pmpv \"$1\" \"${2:-best,mobile_source}\""]]
-
+    ["note", {}, "youtube-dl support was added to mpv in v0.7.0."],
+    ["note", {}, "livestreamer needs to have a player and default stream ",
+    "configured. livestreamer added the --default-stream option in v1.9.0."]
+ 
     ];
 
 function launchv(target) {
@@ -59,23 +56,11 @@ function launchv(target) {
     }
 
     /* filter certain urls to more appropriate programs before passing to
-     * quvi */
-    if(uri.match(/twitch\.tv\/.*\/c\/[0-9]+/))
-        exec("yt-dl", uri);
-    else if(uri.match(/(hitbox|twitch)\.tv/))
+     * mpv */
+    if(uri.match(/(hitbox|twitch)\.tv/))
         exec("livestreamer", uri);
-    else if(uri.match(/youtube.*[?&]list=(?:RD|UU)/))
-            exec("mpv --no-terminal", uri);
-    else if(uri.match(/youtube.*[?&]list=PL/)) {
-        /* Check if the url is part of a playlist but a direct video
-         * (watch?v=) url is provided and return the real playlist url */
-        if(uri.match(/watch\?v=/))
-            exec("mpv --no-terminal", uri.replace(/watch\?v.+?\&/, "playlist\?"));
-        else
-            exec("mpv --no-terminal", uri);
-    }
     else
-        exec("yt-dl", uri);
+        exec("mpv --ytdl", uri);
 }
 
 hints.addMode("l", "Launch video from hint", function (elem, loc) launchv(loc));
