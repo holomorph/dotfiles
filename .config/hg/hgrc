@@ -6,6 +6,8 @@ l = log -G
 [extensions]
 color =
 pager =
+rebase =
+strip =
 
 [pager]
 attend = l,log
