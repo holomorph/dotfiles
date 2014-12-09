@@ -1,0 +1,11 @@
+[Unit]
+Description=Transmission BitTorrent Daemon
+Documentation=man:transmission-daemon(1)
+
+[Service]
+Type=notify
+ExecStart=/usr/bin/transmission-daemon -f --log-error
+ExecReload=/usr/bin/kill -s HUP $MAINPID
+
+[Install]
+WantedBy=default.target
