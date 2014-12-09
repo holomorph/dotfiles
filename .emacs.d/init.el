@@ -140,6 +140,8 @@
  magit-auto-revert-mode-lighter nil
  magit-backup-mode-lighter nil
  magit-diff-refine-hunk 'all
+ merlin-default-flags '("-w" "+a-4" "-safe-string")
+ merlin-show-instance-in-lighter nil
  notmuch-search-oldest-first nil)
 
 (global-set-key (kbd "C-x gb") 'magit-blame)
@@ -161,6 +163,7 @@
 (autoload 'flycheck-mode "flycheck" "Minor mode for on-the-fly syntax checking" t)
 (autoload 'company-mode "company" "Modular in-buffer completion framework" t)
 (autoload 'er/expand-region "expand-region" "Expand region by semantic units" t)
+(autoload 'merlin-mode "merlin" "Minor mode for interacting with a merlin process" t)
 
 ;; filetype
 (add-to-list 'auto-mode-alist '("\\.[ei]dp\\'" . ff++-mode))
@@ -177,3 +180,4 @@
 (add-hook 'prog-mode-hook 'common-prog-modes)
 (add-hook 'tex-mode-hook 'flycheck-mode)
 (remove-hook 'magit-section-highlight-hook 'magit-section-highlight)
+(add-hook 'tuareg-mode-hook 'merlin-mode)
