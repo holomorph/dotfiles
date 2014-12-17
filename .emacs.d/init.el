@@ -57,7 +57,7 @@
  indent-tabs-mode nil
  mouse-sel-retain-highlight t
  nsm-settings-file "~/.local/share/emacs/nsm-data.el"
- network-security-level 'paranoid
+ network-security-level 'high
  recentf-save-file "~/.local/share/emacs/recentf"
  save-place t
  save-place-file "~/.cache/emacs/places"
