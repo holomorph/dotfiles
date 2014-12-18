@@ -142,6 +142,9 @@
  magit-diff-refine-hunk 'all
  merlin-default-flags '("-w" "+a-4" "-safe-string")
  merlin-show-instance-in-lighter nil
+ newpaste-ask-expiration nil
+ newpaste-ask-username nil
+ newpaste-username "holomorph"
  notmuch-search-oldest-first nil)
 
 (global-set-key (kbd "C-x gb") 'magit-blame)
