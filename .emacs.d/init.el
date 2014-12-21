@@ -25,6 +25,7 @@
 (setq
  dired-listing-switches "-al -hF --group-directories-first"
  echo-keystrokes 0.1
+ enable-dir-local-variables nil
  gnutls-min-prime-bits 2048
  history-length 1000
  inhibit-startup-screen t
