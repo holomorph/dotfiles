@@ -45,6 +45,7 @@
 
 (defun play-media-start-process (program &rest args)
   "Thin wrapper for `start-process'."
+  (message "Playing %s %s" program (mapconcat 'identity args " "))
   (apply 'start-process "play-media" nil program args))
 
 ;;;###autoload
@@ -54,16 +55,18 @@ livestreamer, depending on the input."
   (interactive "sURL: ")
   (if (string-match "\\(hitbox\\|twitch\\)\.tv" url)
       (play-media-start-process play-media-livestreamer-program url)
-    (play-media-start-process play-media-mpv-program "--ytdl" (concat "ytdl://" url))))
+    (unless (url-type (url-generic-parse-url url))
+      (setq url (concat "ytdl://" url)))
+    (play-media-start-process play-media-mpv-program "--ytdl" url)))
 
 ;;;###autoload
 (defun play-media-at-point ()
   "Try to play media at point. See `play-media'."
   (interactive)
   (let ((link (or (thing-at-point 'url)
+                  (url-get-url-at-point)
                   (car-safe (eww-links-at-point))
-                  ;; The symbol check facilitates opening media from
-                  ;; incomplete URLs or written youtube video hashes.
+                  ;; catch incomplete URLs
                   (thing-at-point 'symbol))))
     (if link (play-media link)
       (message "No link found"))))
