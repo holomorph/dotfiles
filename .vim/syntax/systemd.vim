@@ -9,15 +9,19 @@ endif
 syn case match
 
 syn match sdGroup	/^\[.*\]/
-syn match sdComment	/^\s*#.*$/
+syn match sdComment	/^\s*[#;].*$/
 syn match sdDelim	/=/ contained
+syn match sdEnv		/\$[A-Z_]\+/
 syn match sdKey		/^\u\w\+=/ contains=sdDelim
+syn match sdLinebreak	/\\$/
 syn match sdSpecifier	/%\([nNpPiIfcrRtuUhsmbHv%]\)/
 
-hi def link sdGroup	Special
+hi def link sdGroup	Type
 hi def link sdComment	Comment
 hi def link sdDelim	Operator
-hi def link sdKey	Identifier
+hi def link sdEnv	Identifier
+hi def link sdKey	Keyword
+hi def link sdLinebreak	Special
 hi def link sdSpecifier	SpecialChar
 
 let b:current_syntax = "systemd"
