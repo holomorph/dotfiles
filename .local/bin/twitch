@@ -22,17 +22,17 @@ end
 def get_json(uri)
     JSON.parse(open(uri) {|f| f.read})
 rescue => e
-    puts e.message
-    exit
+    puts "#{e.message}: when retrieving #{uri}"
+    nil
 end
 
 def parse_json(mutex, streams, data, index, owner, uri, title)
     mutex.synchronize do
-        data[index].each do |s|
+        data and data[index].each do |s|
             streams << {
                 owner: s["channel"][owner], 
                 uri:   s["channel"][uri],
-                title: s["channel"][title],
+                title: s["channel"][title] || '',
             }
         end
     end
