@@ -80,8 +80,8 @@ is filtered for nil values and duplicates.  The return value is
 meant for consumption by `twitch-get-streamers'."
   (let ((copy (delete-dups (delq nil (copy-sequence twitch-streamers)))))
     (if (<= (length copy) twitch-api-streamer-limit)
-	(when copy
-	  (list (mapconcat 'identity copy ",")))
+        (when copy
+          (list (mapconcat 'identity copy ",")))
       (let ((result '()))
         (while copy
           (push (mapconcat 'identity (seq-take copy twitch-api-streamer-limit) ",")
@@ -101,7 +101,7 @@ more compatible with v2."
         (setq vector (vconcat vector
                               (list (list (append channel (list viewers))))))
         (setq index (1+ index))))
-      vector))
+    vector))
 
 (defun twitch--encode-string (s)
   (decode-coding-string (encode-coding-string s 'latin-1) 'utf-8))
@@ -317,10 +317,10 @@ Key bindings:
          (buffer (or (get-buffer name)
                      (generate-new-buffer name))))
     (if (or twitch-streamers twitch-teams)
-	(progn (switch-to-buffer-other-window buffer)
-	       (unless (equal major-mode 'twitch-mode)
-		 (twitch-mode)
-		 (twitch-refresh)))
+        (progn (switch-to-buffer-other-window buffer)
+               (unless (equal major-mode 'twitch-mode)
+                 (twitch-mode)
+                 (twitch-refresh)))
       (message "Nothing to show"))))
 
 (provide 'twitch)
