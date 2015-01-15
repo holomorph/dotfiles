@@ -123,7 +123,7 @@ Do API v3-specific things if V3 is non-nil."
         (when (and (or (eq prop :title) (eq prop :game) (eq prop :bio)) val)
           (let ((newval (if v3 val (twitch--encode-string val))))
             (setq val (replace-regexp-in-string "\r?\n" " " newval t t))))
-        (puthash prop val hashtable)))
+        (puthash prop (or val "") hashtable)))
     hashtable))
 
 (defun twitch-hash-vector (response &optional v3)
@@ -212,7 +212,7 @@ twitch user name, and duplicates are removed."
              (url (gethash :url ht))
              list)
         (push (format "%-22.18s" (propertize name 'face 'font-lock-type-face)) list)
-        (push (format "%s\n" (propertize (or title "") 'face 'font-lock-variable-name-face)) list)
+        (push (format "%s\n" (propertize title 'face 'font-lock-variable-name-face)) list)
         (push (twitch-format-info "Game" (gethash :game ht)) list)
         (push (twitch-format-info "Viewers" (gethash :viewers ht)) list)
         (push (twitch-format-info "Followers" (gethash :followers ht)) list)
