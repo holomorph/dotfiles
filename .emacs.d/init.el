@@ -1,6 +1,7 @@
 ;; ~/.emacs.d/init.el
 
 (let ((default-directory "~/.emacs.d/site-lisp/"))
+  (make-directory default-directory t)
   (normal-top-level-add-to-load-path '("."))
   (normal-top-level-add-subdirs-to-load-path))
 
@@ -47,27 +48,35 @@
 
 (setq-default
  apropos-do-all t
- bookmark-default-file "~/.local/share/emacs/bookmarks"
  c-basic-offset 4
  compilation-read-command nil
- eww-bookmarks-directory "~/.local/share/emacs"
- gnus-home-directory "~/.local/share/emacs/gnus/"
- gnus-init-file (concat user-emacs-directory "gnus")
+ gnus-init-file (concat user-emacs-directory "gnus.el")
+ gnus-home-directory (concat user-emacs-directory "gnus/")
  ido-enable-flex-matching t
- ido-save-directory-list-file "~/.cache/emacs/ido"
  indent-tabs-mode nil
  mouse-sel-retain-highlight t
- nsm-settings-file "~/.local/share/emacs/nsm-data.el"
  network-security-level 'high
- recentf-save-file "~/.local/share/emacs/recentf"
  save-place t
- save-place-file "~/.cache/emacs/places"
- savehist-file "~/.cache/emacs/hist.el"
  show-paren-delay 0.02
- tramp-persistency-file-name "~/.local/share/emacs/tramp"
  truncate-lines t
  uniquify-buffer-name-style 'forward
  windmove-wrap-around t)
+
+(make-directory "~/.cache/emacs" t)
+(make-directory "~/.local/share/emacs" t)
+
+(setq-default
+ bookmark-default-file "~/.local/share/emacs/bookmarks"
+ eww-bookmarks-directory "~/.local/share/emacs"
+ ido-save-directory-list-file "~/.cache/emacs/ido-cache"
+ nsm-settings-file "~/.cache/emacs/nsm-settings"
+ recentf-save-file "~/.local/share/emacs/recentf"
+ save-place-file "~/.local/share/emacs/places"
+ savehist-file "~/.local/share/emacs/history"
+ tramp-persistency-file-name "~/.cache/emacs/tramp")
+
+(setq custom-file "~/.local/share/emacs/custom.el")
+(load custom-file t)
 
 (savehist-mode)
 (show-paren-mode)
