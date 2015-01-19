@@ -188,7 +188,6 @@ twitch user name, and duplicates are removed."
                   (point)))
            (overlay (make-overlay beg end)))
       (overlay-put overlay 'twitch-info t)
-      (overlay-put overlay 'intangible t)
       (overlay-put overlay 'invisible t))))
 
 (defun twitch-format-info (key val &optional face)
@@ -234,10 +233,8 @@ else nil."
 (defun twitch-toggle-overlay (overlay)
   (if (overlay-get overlay 'twitch-info)
       (if (overlay-get overlay 'invisible)
-          (progn (overlay-put overlay 'invisible nil)
-                 (overlay-put overlay 'intangible nil))
-        (overlay-put overlay 'invisible t)
-        (overlay-put overlay 'intangible t))
+          (overlay-put overlay 'invisible nil)
+        (overlay-put overlay 'invisible t))
     (warn "bad input")))
 
 (defun twitch-info ()
