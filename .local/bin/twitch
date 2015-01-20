@@ -9,10 +9,12 @@ require 'json'
 require 'open-uri'
 require 'thread'
 
-def read_config(dir, file)
+def read_config(file)
     array = []
+    xdg = ENV["XDG_CONFIG_DIR"]
+    dir = xdg ? xdg : File.join(ENV["HOME"], ".config")
 
-    IO.foreach(File.join(dir, file)) do |s|
+    IO.foreach(File.join(dir, "twitch", file)) do |s|
         next if s.chomp.empty? || s.start_with?("#")
         array << s.chomp.strip
     end
@@ -22,7 +24,7 @@ end
 def get_json(uri)
     JSON.parse(open(uri) {|f| f.read})
 rescue => e
-    puts "#{e.message}: when retrieving #{uri}"
+    STDERR.puts "#{e.message}: when retrieving #{uri}"
     nil
 end
 
@@ -43,14 +45,8 @@ def get_streams()
     streams = []
     streams_mx = Mutex.new
 
-    unless ENV["XDG_CONFIG_DIR"] then
-        dir = File.join(ENV["HOME"], ".config/twitch")
-    else
-        dir = File.join(ENV["XDG_CONFIG_DIR"], "twitch")
-    end
-
-    teams = read_config(dir, "teams")
-    users = read_config(dir, "streamers")
+    teams = read_config("teams")
+    users = read_config("streamers")
 
     teams.each do |team|
         threads << Thread.new do
