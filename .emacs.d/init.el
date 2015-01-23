@@ -50,6 +50,7 @@
  apropos-do-all t
  c-basic-offset 4
  compilation-read-command nil
+ display-time-24hr-format t
  gnus-init-file (concat user-emacs-directory "gnus.el")
  gnus-home-directory (concat user-emacs-directory "gnus/")
  ido-enable-flex-matching t
