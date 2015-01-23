@@ -71,7 +71,7 @@ def dmenu(items)
     # font = %w[-fn -*-dina-bold-r-*-*-12-*-*-*-*-*-*-*]
     args = %w[-i -l 20] + prompt
 
-    if ENV["DISPLAY"] then
+    if ENV["DISPLAY"] && !ENV["DISPLAY"].empty? then
         font = %w[-fn Dina\ Bold\ 9]
         cmd = %w[dmenu] + args + font
     else
@@ -103,7 +103,6 @@ class String
 end
 
 streams = get_streams()
-streams_by_user = Hash[streams.map{|i| [i[:owner].downcase, i]}]
 
 menu = streams.sort_by{|i| "#{i[:owner].downcase}"}
 menu = menu.map{|i| "#{i[:owner].ljust(24)} #{i[:title].gsub(/\r?\n/, " ")}"}
@@ -112,9 +111,10 @@ sel = dmenu(menu.uniq)
 if sel
     threads = []
     results = sel.split(/\r?\n/)
+    streams_by_user = Hash[streams.map{|i| [i[:owner], i]}]
 
     results.each do |name|
-        if name =~ /^(\S+)\s+ / and item = streams_by_user[$1.downcase]
+        if name =~ /^(\S+)\s+/ and item = streams_by_user[$1]
             threads << Thread.new do
                 play_stream(item)
             end
