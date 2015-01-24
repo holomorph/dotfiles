@@ -2,7 +2,7 @@
 
 emulate sh -c '. ~/.profile'
 
-if (( UID )) && [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]]; then
+if type startx >/dev/null && (( UID )) && [[ -z $DISPLAY && $XDG_VTNR -eq 1 ]]; then
   exec startx
 fi
 
