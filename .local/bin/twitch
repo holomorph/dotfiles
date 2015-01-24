@@ -9,6 +9,11 @@ require 'json'
 require 'open-uri'
 require 'thread'
 
+module Twitch
+    V2 = {index: "channels", owner: "display_name", uri: "link", title: "title"}
+    V3 = {index: "streams", owner: "display_name", url: "url", title: "status"}
+end
+
 def read_config(file)
     array = []
     xdg = ENV["XDG_CONFIG_DIR"]
@@ -24,19 +29,17 @@ end
 def get_json(uri)
     JSON.parse(open(uri) {|f| f.read})
 rescue => e
-    STDERR.puts "#{e.message}: when retrieving #{uri}"
-    nil
+    warn "When retrieving #{uri}"
+    warn e.message
 end
 
-def parse_json(mutex, streams, data, index, owner, uri, title)
-    mutex.synchronize do
-        data and data[index].each do |s|
-            streams << {
-                owner: s["channel"][owner], 
-                uri:   s["channel"][uri],
-                title: s["channel"][title] || '',
-            }
-        end
+def parse_json(streams, data, keys)
+    data and data[keys[:index]].each do |s|
+        streams << {
+            owner: s["channel"][keys[:owner]],
+            uri:   s["channel"][keys[:uri]],
+            title: s["channel"][keys[:title]] || '',
+        }
     end
 end
 
@@ -50,15 +53,22 @@ def get_streams()
 
     teams.each do |team|
         threads << Thread.new do
-            data = get_json("http://api.twitch.tv/api/team/#{team}/live_channels.json")
-            parse_json(streams_mx, streams, data, "channels", "display_name", "link", "title")
+            streams_mx.synchronize do
+                url = "http://api.twitch.tv/api/team/#{team}/live_channels.json"
+                data = get_json(url)
+                parse_json(streams, data, Twitch::V2)
+            end
         end
     end
 
     users.each_slice(100) do |batch|
         threads << Thread.new do
-            data = get_json("https://api.twitch.tv/kraken/streams?channel=#{batch.join(",")}&limit=#{batch.count}")
-            parse_json(streams_mx, streams, data, "streams", "display_name", "url", "status")
+            streams_mx.synchronize do
+                url = format("https://api.twitch.tv/kraken/streams?channel=%s&limit=%d",
+                             batch.join(","), batch.count)
+                data = get_json(url)
+                parse_json(streams, data, Twitch::V3)
+            end
         end
     end
 
@@ -89,9 +99,10 @@ end
 
 def play_stream(item)
     title = %Q(#{item[:title]} (#{item[:owner]}))
+    uri = item[:uri] || "https://twitch.tv/#{item[:owner]}"
 
     pid = fork do
-        exec("livestreamer", "-p", "mpv --title=#{title.escape}", item[:uri])
+        exec("livestreamer", "-p", "mpv --title=#{title.escape}", uri)
     end
     Process.wait(pid)
 end
