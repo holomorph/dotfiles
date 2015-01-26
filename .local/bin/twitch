@@ -99,7 +99,7 @@ end
 
 def play_stream(item)
     title = %Q(#{item[:title]} (#{item[:owner]}))
-    uri = item[:uri] || "https://twitch.tv/#{item[:owner]}"
+    uri = item[:uri] || "http://twitch.tv/#{item[:owner]}"
 
     pid = fork do
         exec("livestreamer", "-p", "mpv --title=#{title.escape}", uri)

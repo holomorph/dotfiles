@@ -208,7 +208,7 @@ twitch user name, and duplicates are removed."
       (let* ((ht (elt vector index))
              (name (gethash :name ht))
              (title (gethash :title ht))
-             (url (gethash :url ht))
+             (url (or (gethash :url ht) (format "http://twitch.tv/%s" name)))
              list)
         (push (format "%-22.18s" (propertize name 'face 'font-lock-type-face)) list)
         (push (format "%s\n" (propertize (or title "") 'face 'font-lock-variable-name-face)) list)
