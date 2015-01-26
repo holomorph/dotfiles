@@ -3,6 +3,8 @@
 ;; Copyright (C) 2015  Mark Oteiza <mvoteiza@udel.edu>
 
 ;; Author: Mark Oteiza <mvoteiza@udel.edu>
+;; Version: 0.1
+;; Package-Requires: ((emacs "24.4") (seq "1.0"))
 ;; Keywords: convenience, multimedia
 
 ;; This program is free software; you can redistribute it and/or
@@ -170,9 +172,7 @@ twitch user name, and duplicates are removed."
                               (lambda (a b)
                                 (string= (gethash :user a) (gethash :user b))))
         (setq result (vconcat result (vector elt)))))
-    (sort result
-          (lambda (a b)
-            (when (string< (gethash :user a) (gethash :user b)) t)))))
+    (seq-sort (lambda (a b) (string< (gethash :user a) (gethash :user b))) result)))
 
 (defun twitch-insert-entry (list url)
   (let* ((entry (mapconcat 'identity (reverse list) ""))
@@ -201,9 +201,9 @@ twitch user name, and duplicates are removed."
 
 (defun twitch-draw ()
   "Erase the buffer and draw a new one."
-  (erase-buffer)
   (let ((vector (twitch-query))
         (index 0))
+    (erase-buffer)
     (while (< index (length vector))
       (let* ((ht (elt vector index))
              (name (gethash :name ht))
@@ -233,7 +233,13 @@ else nil."
 (defun twitch-toggle-overlay (overlay)
   (if (overlay-get overlay 'twitch-info)
       (if (overlay-get overlay 'invisible)
-          (overlay-put overlay 'invisible nil)
+          (progn (overlay-put overlay 'invisible nil)
+                 (or (pos-visible-in-window-p
+                      (save-excursion
+                        (goto-char (overlay-end overlay))
+                        (forward-line -1)
+                        (point)))
+                     (recenter -8)))
         (overlay-put overlay 'invisible t))
     (warn "bad input")))
 
@@ -263,7 +269,12 @@ else nil."
   "Erase the buffer and draw a new one."
   (interactive)
   (setq buffer-read-only nil)
-  (twitch-draw)
+  (let ((old-point (save-excursion
+                     (or (while (overlays-at (point))
+                           (forward-line -1))
+                         (line-beginning-position)))))
+    (twitch-draw)
+    (goto-char old-point))
   (set-buffer-modified-p nil)
   (setq buffer-read-only t))
 

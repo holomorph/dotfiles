@@ -3,6 +3,8 @@
 ;; Copyright (C) 2014-2015  Mark Oteiza <mvoteiza@udel.edu>
 
 ;; Author: Mark Oteiza <mvoteiza@udel.edu>
+;; Version: 0.1
+;; Package-Requires: ((emacs "24.4"))
 ;; Keywords: convenience
 
 ;; This program is free software; you can redistribute it and/or
@@ -65,7 +67,9 @@ livestreamer, depending on the input."
   (interactive)
   (let ((link (or (thing-at-point 'url)
                   (url-get-url-at-point)
-                  (car-safe (eww-links-at-point))
+                  (if (fboundp 'eww-links-at-point)
+                      (car-safe (eww-links-at-point))
+                    (get-text-property (point) 'shr-url))
                   ;; catch incomplete URLs
                   (thing-at-point 'symbol))))
     (if link (play-media link)
