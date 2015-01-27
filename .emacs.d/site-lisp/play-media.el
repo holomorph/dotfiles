@@ -3,7 +3,7 @@
 ;; Copyright (C) 2014-2015  Mark Oteiza <mvoteiza@udel.edu>
 
 ;; Author: Mark Oteiza <mvoteiza@udel.edu>
-;; Version: 0.1
+;; Version: 0.2
 ;; Package-Requires: ((emacs "24.4"))
 ;; Keywords: convenience
 
@@ -29,7 +29,7 @@
 
 ;;; Code:
 
-(require 'eww)
+(require 'url-util)
 
 (defgroup play-media nil
   "Open media with an external player."
@@ -66,10 +66,8 @@ livestreamer, depending on the input."
   "Try to play media at point. See `play-media'."
   (interactive)
   (let ((link (or (thing-at-point 'url)
+                  (get-text-property (point) 'shr-url)
                   (url-get-url-at-point)
-                  (if (fboundp 'eww-links-at-point)
-                      (car-safe (eww-links-at-point))
-                    (get-text-property (point) 'shr-url))
                   ;; catch incomplete URLs
                   (thing-at-point 'symbol))))
     (if link (play-media link)
