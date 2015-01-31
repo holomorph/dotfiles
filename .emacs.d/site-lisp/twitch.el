@@ -3,8 +3,8 @@
 ;; Copyright (C) 2015  Mark Oteiza <mvoteiza@udel.edu>
 
 ;; Author: Mark Oteiza <mvoteiza@udel.edu>
-;; Version: 0.1
-;; Package-Requires: ((emacs "24.4") (seq "1.0"))
+;; Version: 0.3
+;; Package-Requires: ((emacs "24.4") (let-alist "1.0.3") (seq "1.0"))
 ;; Keywords: convenience, multimedia
 
 ;; This program is free software; you can redistribute it and/or
@@ -24,7 +24,9 @@
 
 ;;; Code:
 
+(require 'cl-lib)
 (require 'json)
+(require 'let-alist)
 (require 'seq)
 (require 'url)
 
@@ -70,10 +72,6 @@ https://github.com/justintv/twitch-api for more information.")
     (re-search-forward "\r?\n\r?\n" nil t)
     (json-read)))
 
-(defun twitch--element (alist key)
-  "Return the cdr of of the KEY in ALIST."
-  (cdr (assq key alist)))
-
 (defun twitch--batch-list ()
   "Return a list of strings, each element being comma-separated
 values of `twitch-streamers' sliced into lengths of
@@ -94,16 +92,9 @@ meant for consumption by `twitch-get-streamers'."
 (defun twitch--munge-v3 (response)
   "Munge v3 API response RESPONSE in `twitch-get-streamers' so it is
 more compatible with v2."
-  (let ((index 0)
-        (vector []))
-    (while (< index (length response))
-      (let* ((stream (elt response index))
-             (channel (assq 'channel stream))
-             (viewers (assq 'viewers stream)))
-        (setq vector (vconcat vector
-                              (list (list (append channel (list viewers))))))
-        (setq index (1+ index))))
-    vector))
+  (cl-map 'vector (lambda (a)
+                    (list (append (assq 'channel a) (list (assq 'viewers a)))))
+          response))
 
 (defun twitch--encode-string (s)
   (decode-coding-string (encode-coding-string s 'latin-1) 'utf-8))
@@ -120,42 +111,35 @@ Do API v3-specific things if V3 is non-nil."
     (dotimes (_ props)
       (let* ((prop (pop plist))
              (key (funcall (if v3 'cdr 'car) (pop plist)))
-             (val (twitch--element channel key)))
+             (val (cdr (assq key channel))))
         ;; Remove newlines and "fix" encoding
-        (when (and (or (eq prop :title) (eq prop :game) (eq prop :bio)) val)
+        (when (stringp val)
           (let ((newval (if v3 val (twitch--encode-string val))))
             (setq val (replace-regexp-in-string "\r?\n" " " newval t t))))
         (puthash prop val hashtable)))
     hashtable))
 
 (defun twitch-hash-vector (response &optional v3)
-  (let ((index 0)
-        (vector []))
-    (while (< index (length response))
-      (let ((channel (cdar (elt response index))))
-        (setq vector (vconcat vector (vector (twitch-hash channel v3)))))
-      (setq index (1+ index)))
-    vector))
+  (cl-map 'vector (lambda (elt) (twitch-hash (cdar elt) v3)) response))
 
 (defun twitch-get-streamers ()
   "Get stream information using the v3 API with `twitch-streamers'."
-  (let ((list (twitch--batch-list))
-        vector)
-    (dolist (batch list)
+  (let ((vector []))
+    (dolist (batch (twitch--batch-list))
       (let* ((fmt "https://api.twitch.tv/kraken/streams?channel=%s&limit=%d")
-             (url (format fmt batch twitch-api-streamer-limit))
-             (response (twitch--element (twitch-request url) 'streams)))
-        (setq vector (vconcat vector (twitch--munge-v3 response)))))
+             (url (format fmt batch twitch-api-streamer-limit)))
+        (let-alist (twitch-request url)
+          (setq vector (vconcat vector (twitch--munge-v3 .streams))))))
     (twitch-hash-vector vector t)))
 
 (defun twitch-get-teams ()
   "Get stream information using the v2 API with `twitch-teams'."
-  (let ((vector))
+  (let ((vector []))
     (dolist (team twitch-teams)
       (let* ((fmt "http://api.twitch.tv/api/team/%s/live_channels.json")
-             (url (format fmt team))
-             (response (twitch--element (twitch-request url) 'channels)))
-        (setq vector (vconcat vector response))))
+             (url (format fmt team)))
+        (let-alist (twitch-request url)
+          (setq vector (vconcat vector .channels)))))
     (twitch-hash-vector vector)))
 
 (defun twitch-query ()
@@ -223,25 +207,19 @@ twitch user name, and duplicates are removed."
 (defun twitch-info-overlay-at (position)
   "Return the overlay at POSITION with the 'twitch-info property,
 else nil."
-  (let* ((overlays (overlays-at position)))
-    (when overlays
-      (let ((overlay (pop overlays)))
-        (while (and overlay (not (overlay-get overlay 'twitch-info)))
-          (setq overlay (pop overlays)))
-        overlay))))
+  (seq-some-p (lambda (ov) (overlay-get ov 'twitch-info))
+              (overlays-at position)))
 
 (defun twitch-toggle-overlay (overlay)
-  (if (overlay-get overlay 'twitch-info)
-      (if (overlay-get overlay 'invisible)
-          (progn (overlay-put overlay 'invisible nil)
-                 (or (pos-visible-in-window-p
-                      (save-excursion
-                        (goto-char (overlay-end overlay))
-                        (forward-line -1)
-                        (point)))
-                     (recenter -8)))
-        (overlay-put overlay 'invisible t))
-    (warn "bad input")))
+  (if (overlay-get overlay 'invisible)
+      (progn (overlay-put overlay 'invisible nil)
+             (or (pos-visible-in-window-p
+                  (save-excursion
+                    (goto-char (overlay-end overlay))
+                    (forward-line -1)
+                    (point)))
+                 (recenter -8)))
+    (overlay-put overlay 'invisible t)))
 
 (defun twitch-info ()
   (interactive)
@@ -269,12 +247,8 @@ else nil."
   "Erase the buffer and draw a new one."
   (interactive)
   (setq buffer-read-only nil)
-  (let ((old-point (save-excursion
-                     (or (while (overlays-at (point))
-                           (forward-line -1))
-                         (line-beginning-position)))))
-    (twitch-draw)
-    (goto-char old-point))
+  (twitch-draw)
+  (goto-char (point-min))
   (set-buffer-modified-p nil)
   (setq buffer-read-only t))
 
