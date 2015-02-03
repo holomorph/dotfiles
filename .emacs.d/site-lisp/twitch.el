@@ -3,8 +3,8 @@
 ;; Copyright (C) 2015  Mark Oteiza <mvoteiza@udel.edu>
 
 ;; Author: Mark Oteiza <mvoteiza@udel.edu>
-;; Version: 0.3
-;; Package-Requires: ((emacs "24.4") (let-alist "1.0.3") (seq "1.0"))
+;; Version: 0.4
+;; Package-Requires: ((emacs "24.4") (let-alist "1.0.3") (seq "1.1"))
 ;; Keywords: convenience, multimedia
 
 ;; This program is free software; you can redistribute it and/or
@@ -73,21 +73,9 @@ https://github.com/justintv/twitch-api for more information.")
     (json-read)))
 
 (defun twitch--batch-list ()
-  "Return a list of strings, each element being comma-separated
-values of `twitch-streamers' sliced into lengths of
-`twitch-api-streamer-limit'.  The custom value `twitch-streamers'
-is filtered for nil values and duplicates.  The return value is
-meant for consumption by `twitch-get-streamers'."
-  (let ((copy (delete-dups (delq nil (copy-sequence twitch-streamers)))))
-    (if (<= (length copy) twitch-api-streamer-limit)
-        (when copy
-          (list (mapconcat 'identity copy ",")))
-      (let ((result '()))
-        (while copy
-          (push (mapconcat 'identity (seq-take copy twitch-api-streamer-limit) ",")
-                result)
-          (setq copy (seq-drop copy twitch-api-streamer-limit)))
-        result))))
+  (let ((copy (delete-dups (delq nil (seq-copy twitch-streamers)))))
+    (mapcar (lambda (seq) (mapconcat 'identity seq ","))
+            (seq-partition copy twitch-api-streamer-limit))))
 
 (defun twitch--munge-v3 (response)
   "Munge v3 API response RESPONSE in `twitch-get-streamers' so it is
@@ -100,24 +88,20 @@ more compatible with v2."
   (decode-coding-string (encode-coding-string s 'latin-1) 'utf-8))
 
 (defun twitch-hash (channel &optional v3)
-  "Return a hash table of stream information.  The hash table
-keys are the properties in `twitch-api-plist', the values of
-which are used to find the key-values in the CHANNEL alist.
-
+  "Return a hash table of stream information in CHANNEL.  The
+hash table keys are the properties in `twitch-api-plist', values
+of which are used to find the key-values in the CHANNEL alist.
 Do API v3-specific things if V3 is non-nil."
-  (let ((plist twitch-api-plist)
-        (props (/ (length twitch-api-plist) 2))
-        (hashtable (make-hash-table)))
-    (dotimes (_ props)
-      (let* ((prop (pop plist))
-             (key (funcall (if v3 'cdr 'car) (pop plist)))
-             (val (cdr (assq key channel))))
-        ;; Remove newlines and "fix" encoding
-        (when (stringp val)
-          (let ((newval (if v3 val (twitch--encode-string val))))
-            (setq val (replace-regexp-in-string "\r?\n" " " newval t t))))
-        (puthash prop val hashtable)))
-    hashtable))
+  (let ((table (make-hash-table)))
+    (mapc (lambda (elt)
+            (let* ((key (funcall (if v3 'cdr 'car) (cadr elt)))
+                   (val (cdr (assq key channel))))
+              (when (stringp val)
+                (let ((newval (if v3 val (twitch--encode-string val))))
+                  (setq val (replace-regexp-in-string "\r?\n" " " newval t t))))
+              (puthash (car elt) val table)))
+          (seq-partition twitch-api-plist 2))
+    table))
 
 (defun twitch-hash-vector (response &optional v3)
   (cl-map 'vector (lambda (elt) (twitch-hash (cdar elt) v3)) response))
@@ -144,9 +128,9 @@ Do API v3-specific things if V3 is non-nil."
 
 (defun twitch-query ()
   "Return a vector containing hashtables for each streamer from
-the list of users in `twitch-streamers' and streamers in the
-teams in `twitch-teams'.  The vector is sorted lexically by
-twitch user name, and duplicates are removed."
+the users in `twitch-streamers' and teams in `twitch-teams'.  The
+vector is sorted lexically by twitch user name; duplicates are
+removed."
   (let ((vector (vconcat (twitch-get-teams)
                          (twitch-get-streamers)))
         (result []))
@@ -163,9 +147,8 @@ twitch user name, and duplicates are removed."
          (start (point))
          (end (+ start (length entry))))
     (insert entry)
-    (add-text-properties start end '(url help-echo))
+    (add-text-properties start end 'url)
     (put-text-property start end 'url url)
-    (put-text-property start end 'help-echo url)
     (let* ((beg (save-excursion
                   (goto-char start)
                   (forward-line)
@@ -205,8 +188,6 @@ twitch user name, and duplicates are removed."
         (setq index (1+ index))))))
 
 (defun twitch-info-overlay-at (position)
-  "Return the overlay at POSITION with the 'twitch-info property,
-else nil."
   (seq-some-p (lambda (ov) (overlay-get ov 'twitch-info))
               (overlays-at position)))
 
@@ -244,7 +225,6 @@ else nil."
       (message "No stream selected"))))
 
 (defun twitch-refresh ()
-  "Erase the buffer and draw a new one."
   (interactive)
   (setq buffer-read-only nil)
   (twitch-draw)
