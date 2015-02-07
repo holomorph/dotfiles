@@ -22,7 +22,10 @@ export ELINKS_CONFDIR=~/.config/elinks
 export TERMINFO=~/.local/share/terminfo
 export NETHACKOPTIONS=~/.config/nethack/nethackrc
 export NOTMUCH_CONFIG=~/.config/notmuch/config
+
+# other config
 export MPD_HOST="$XDG_RUNTIME_DIR"/mpd/socket
+export XKB_DEFAULT_OPTIONS=ctrl:nocaps,compose:ralt
 
 # path
 export PATH="$HOME/.local/bin:$PATH"
