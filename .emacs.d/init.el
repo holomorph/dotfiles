@@ -51,6 +51,7 @@
  c-basic-offset 4
  compilation-read-command nil
  display-time-24hr-format t
+ eldoc-idle-delay 0.08
  gnus-init-file (concat user-emacs-directory "gnus.el")
  gnus-home-directory (concat user-emacs-directory "gnus/")
  ido-enable-flex-matching t
@@ -137,9 +138,10 @@
 
 ;; extensions
 (setq-default
- company-default-lighter nil
  company-idle-delay 0.1
+ company-lighter nil
  company-minimum-prefix-length 2
+ company-require-match 'never
  company-selection-wrap-around t
  company-show-numbers t
  flycheck-check-syntax-automatically '(save)
