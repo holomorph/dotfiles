@@ -45,14 +45,14 @@ function launchv(target) {
     function exec(launcher, uri) {
         if(!uri || uri.length === 0) {
             if(typeof dactyl !== "undefined" && "echoerr" in dactyl)
-                dactyl.echoerr("E474: Invalid argument")
+                dactyl.echoerr("E474: Invalid argument");
             else if(typeof liberator !== "undefined" && "echoerr" in liberator)
-                liberator.echoerr("E474: Invalid argument")
-            return
+                liberator.echoerr("E474: Invalid argument");
+            return;
         }
         if(typeof dactyl !== "undefined")
             dactyl.echomsg("Launch " + launcher + " " + uri);
-        return io.system(launcher + ' "' + uri + '" &');
+        io.system(launcher + ' "' + uri + '" &');
     }
 
     /* filter certain urls to more appropriate programs before passing to

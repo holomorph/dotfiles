@@ -166,10 +166,12 @@ removed."
                       'face (if face face 'font-lock-comment-face))
           "\n"))
 
-(defun twitch-draw ()
+(defun twitch-refresh ()
   "Erase the buffer and draw a new one."
+  (interactive)
   (let ((vector (twitch-query))
         (index 0))
+    (setq buffer-read-only nil)
     (erase-buffer)
     (while (< index (length vector))
       (let* ((ht (elt vector index))
@@ -185,7 +187,10 @@ removed."
         (push (twitch-format-info "Total views" (gethash :views ht)) list)
         (push (twitch-format-info "Bio" (gethash :bio ht)) list)
         (twitch-insert-entry list url)
-        (setq index (1+ index))))))
+        (setq index (1+ index)))))
+  (set-buffer-modified-p nil)
+  (setq buffer-read-only t)
+  (goto-char (point-min)))
 
 (defun twitch-info-overlay-at (position)
   (seq-some-p (lambda (ov) (overlay-get ov 'twitch-info))
@@ -223,14 +228,6 @@ removed."
         (progn (message "Playing %s" url)
                (start-process "twitch" nil twitch-livestreamer-program url))
       (message "No stream selected"))))
-
-(defun twitch-refresh ()
-  (interactive)
-  (setq buffer-read-only nil)
-  (twitch-draw)
-  (goto-char (point-min))
-  (set-buffer-modified-p nil)
-  (setq buffer-read-only t))
 
 (defun twitch-copy-url ()
   "Copy the URL of the stream under point to the kill ring."
