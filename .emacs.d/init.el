@@ -15,7 +15,6 @@
 (line-number-mode t)
 (column-number-mode t)
 (size-indication-mode t)
-(url-handler-mode t)
 (winner-mode)
 
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -71,6 +70,7 @@
  bookmark-default-file "~/.local/share/emacs/bookmarks"
  eww-bookmarks-directory "~/.local/share/emacs"
  ido-save-directory-list-file "~/.cache/emacs/ido-cache"
+ kkc-init-file-name "~/.local/share/emacs/kkc-data"
  nsm-settings-file "~/.cache/emacs/nsm-settings"
  recentf-save-file "~/.local/share/emacs/recentf"
  save-place-file "~/.local/share/emacs/places"
@@ -130,6 +130,7 @@
 ;; org
 (setq-default
  org-directory "~/doc/notes"
+ org-export-backends '(ascii html latex man texinfo)
  org-use-speed-commands t)
 
 ;; filetype

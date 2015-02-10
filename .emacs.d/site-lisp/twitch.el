@@ -74,7 +74,7 @@ https://github.com/justintv/twitch-api for more information.")
 
 (defun twitch--batch-list ()
   (let ((copy (delete-dups (delq nil (seq-copy twitch-streamers)))))
-    (mapcar (lambda (seq) (mapconcat 'identity seq ","))
+    (mapcar (lambda (seq) (mapconcat #'identity seq ","))
             (seq-partition copy twitch-api-streamer-limit))))
 
 (defun twitch--munge-v3 (response)
@@ -143,7 +143,7 @@ removed."
     (seq-sort (lambda (a b) (string< (gethash :user a) (gethash :user b))) result)))
 
 (defun twitch-insert-entry (list url)
-  (let* ((entry (mapconcat 'identity (reverse list) ""))
+  (let* ((entry (mapconcat #'identity (reverse list) ""))
          (start (point))
          (end (+ start (length entry))))
     (insert entry)

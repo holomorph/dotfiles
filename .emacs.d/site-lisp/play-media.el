@@ -22,9 +22,9 @@
 
 ;;; Commentary:
 
-;; Play media from Emacs using “mpv” or “livestreamer”.  For mpv, at
-;; least v0.7.0 is required for its “youtube-dl” hook. For
-;; livestreamer, at least v1.9.0 is needed for the “--default-stream”
+;; Play media from Emacs using "mpv" or "livestreamer".  For mpv, at
+;; least v0.7.0 is required for its "youtube-dl" hook. For
+;; livestreamer, at least v1.9.0 is needed for the "--default-stream"
 ;; config option.
 
 ;;; Code:
@@ -47,8 +47,8 @@
 
 (defun play-media-start-process (program &rest args)
   "Thin wrapper for `start-process'."
-  (message "Playing %s %s" program (mapconcat 'identity args " "))
-  (apply 'start-process "play-media" nil program args))
+  (message "Playing %s %s" program (mapconcat #'identity args " "))
+  (apply #'start-process "play-media" nil program args))
 
 ;;;###autoload
 (defun play-media (url)
