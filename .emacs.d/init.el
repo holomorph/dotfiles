@@ -115,13 +115,13 @@
 
 ;; irc
 (setq-default
- erc-default-port 6697
- erc-default-server "chat.freenode.net"
  erc-disable-ctcp-replies t
  erc-hide-list '("329" "353" "366")
  erc-lurker-hide-list '("JOIN" "PART" "QUIT" "NICK" "MODE")
+ erc-port 7070
  erc-prompt-for-password nil
  erc-nick "holomorph"
+ erc-server "chat.freenode.net"
  erc-user-full-name "holomorph"
  erc-user-mode "+R"
  rcirc-default-nick "holomorph"
