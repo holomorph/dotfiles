@@ -166,9 +166,8 @@ removed."
                       'face (if face face 'font-lock-comment-face))
           "\n"))
 
-(defun twitch-refresh ()
+(defun twitch-refresh (&optional _arg _noconfirm)
   "Erase the buffer and draw a new one."
-  (interactive)
   (let ((vector (twitch-query))
         (index 0))
     (setq buffer-read-only nil)
@@ -247,7 +246,7 @@ removed."
     (define-key map (kbd "C-c C-o") 'twitch-open)
     (define-key map (kbd "RET") 'twitch-info)
     (define-key map (kbd "SPC") 'twitch-info)
-    (define-key map "g" 'twitch-refresh)
+    (define-key map "g" 'revert-buffer)
     (define-key map "i" 'twitch-info)
     (define-key map "n" 'next-line)
     (define-key map "p" 'previous-line)
@@ -264,6 +263,7 @@ The hook `twitch-mode-hook' is run at mode initialization.
 Key bindings:
 \\{twitch-mode-map}"
   :group 'twitch
+  (setq-local read-buffer-function #'twitch-refresh)
   (setq buffer-read-only t)
   (run-mode-hooks 'twitch-mode-hook))
 
