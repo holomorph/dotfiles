@@ -3,13 +3,15 @@
 # https://developers.google.com/translate/v2/using_rest#language-params
 
 import sys
+import os.path
 import getopt
 import urllib.request
 import json
 
 
 def usage():
-    print("usage: %s [-d] [-t TL] [-s SL] <message>" % sys.argv[0])
+    print("usage: %s [-d] [-t TL] [-s SL] <message>"
+          % os.path.basename(sys.argv[0]))
     sys.exit(0)
 
 
@@ -17,9 +19,12 @@ def parse_opts():
     optlist, args = getopt.getopt(sys.argv[1:], 't:s:d')
     tl = sl = "auto"
     debug = False
+    data = None
 
     if not args:
-        usage()
+        data = sys.stdin.readlines()
+        if not data:
+            usage()
     for opt, arg in optlist:
         if opt == '-t':
             tl = arg
@@ -28,7 +33,7 @@ def parse_opts():
         elif opt == '-d':
             debug = True
 
-    message = " ".join(args)
+    message = " ".join(data or args)
     return message, tl, sl, debug
 
 
