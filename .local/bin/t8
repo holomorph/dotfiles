@@ -5,35 +5,44 @@
 import sys
 import os.path
 import getopt
+import re
 import urllib.request
 import json
 
 
 def usage():
-    print("usage: %s [-d] [-t TL] [-s SL] <message>"
+    print("usage: %s [-h] [-d] [-t TL] [-s SL] <message>"
           % os.path.basename(sys.argv[0]))
     sys.exit(0)
 
 
 def parse_opts():
-    optlist, args = getopt.getopt(sys.argv[1:], 't:s:d')
     tl = sl = "auto"
     debug = False
     data = None
 
-    if not args:
-        data = sys.stdin.readlines()
-        if not data:
-            usage()
+    try:
+        optlist, args = getopt.getopt(sys.argv[1:], 't:s:dh')
+    except getopt.GetoptError as e:
+        print(e, file=sys.stderr)
+        sys.exit(1)
+
     for opt, arg in optlist:
-        if opt == '-t':
+        if opt == '-h':
+            usage()
+        elif opt == '-t':
             tl = arg
         elif opt == '-s':
             sl = arg
         elif opt == '-d':
             debug = True
+    if not args:
+        data = sys.stdin.readlines()
+        if not data:
+            usage()
 
-    message = " ".join(data or args)
+    message = " ".join(map(lambda s: re.sub(r"\r?\n", "", s),
+                           data or args))
     return message, tl, sl, debug
 
 
