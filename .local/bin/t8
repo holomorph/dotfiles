@@ -5,7 +5,6 @@
 import sys
 import os.path
 import getopt
-import re
 import urllib.request
 import json
 
@@ -41,8 +40,7 @@ def parse_opts():
         if not data:
             usage()
 
-    message = " ".join(map(lambda s: re.sub(r"\r?\n", "", s),
-                           data or args))
+    message = " ".join(map(lambda s: s.strip(), data or args))
     return message, tl, sl, debug
 
 
