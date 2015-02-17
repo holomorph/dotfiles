@@ -186,13 +186,18 @@
 (add-to-list 'auto-mode-alist '("\\.ldg\\'" . ledger-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
-(defun common-prog-modes ()
-  "Default modes for `prog-mode-hook'."
-  (with-demoted-errors
-    (company-mode)
-    (flycheck-mode)))
+(defun default-lisp-modes ()
+  (ignore-errors (paredit-mode))
+  (ignore-errors (rainbow-delimiters-mode)))
 
-(add-hook 'prog-mode-hook 'common-prog-modes)
-(add-hook 'tex-mode-hook 'flycheck-mode)
+(defun default-prog-modes ()
+  (ignore-errors (company-mode))
+  (ignore-errors (flycheck-mode)))
+
+(add-hook 'lisp-interaction-mode-hook #'default-lisp-modes)
+(add-hook 'emacs-lisp-mode-hook #'default-lisp-modes)
+(add-hook 'scheme-mode-hook #'default-lisp-modes)
+(add-hook 'prog-mode-hook #'default-prog-modes)
+(add-hook 'tex-mode-hook #'default-prog-modes)
 (remove-hook 'magit-section-highlight-hook 'magit-section-highlight)
 (add-hook 'tuareg-mode-hook 'merlin-mode)
