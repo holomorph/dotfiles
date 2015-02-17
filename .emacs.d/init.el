@@ -157,7 +157,8 @@
  newpaste-ask-expiration nil
  newpaste-ask-username nil
  newpaste-username "holomorph"
- notmuch-search-oldest-first nil)
+ notmuch-search-oldest-first nil
+ paredit-lighter nil)
 
 (global-set-key (kbd "C-x gb") 'magit-blame)
 (global-set-key (kbd "C-x gs") 'magit-status)
