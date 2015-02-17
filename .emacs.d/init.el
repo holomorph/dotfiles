@@ -161,30 +161,23 @@
 
 (global-set-key (kbd "C-x gb") 'magit-blame)
 (global-set-key (kbd "C-x gs") 'magit-status)
-(global-set-key (kbd "C-=") 'er/expand-region)
 
 ;; autoloads
-(autoload 'clang-format-buffer "clang-format" "Tool to format C/C++/Obj-C code" t)
 (autoload 'legalese "legalese" "Add legalese to your program files" t)
 (autoload 'newpaste "newpaste" "Paste to http://paste.lisp.org" t)
 (autoload 'notmuch "notmuch" "The mail indexer" t)
 (autoload 'dictionary "dictionary" "Client for RFC2249 dictionary servers" t)
 (autoload 'magit-status "magit" "Control Git from Emacs" t)
 (autoload 'magit-blame "magit-blame" "Blame support for Magit" t)
-(autoload 'ff++-mode "ff++-mode" "Major mode for FreeFem++ code" t)
 (autoload 'tuareg-mode "tuareg" "Major mode for OCaml code" t)
 (autoload 'ledger-mode "ledger-mode" "Major mode for editing ledger data" t)
-(autoload 'markdown-mode "markdown-mode" "Major mode for editing markdown" t)
 (autoload 'flycheck-mode "flycheck" "Minor mode for on-the-fly syntax checking" t)
 (autoload 'company-mode "company" "Modular in-buffer completion framework" t)
-(autoload 'er/expand-region "expand-region" "Expand region by semantic units" t)
 (autoload 'merlin-mode "merlin" "Minor mode for interacting with a merlin process" t)
 
 ;; filetype
-(add-to-list 'auto-mode-alist '("\\.[ei]dp\\'" . ff++-mode))
 (add-to-list 'auto-mode-alist '("\\.ml[ilyp]?\\'" . tuareg-mode))
 (add-to-list 'auto-mode-alist '("\\.ldg\\'" . ledger-mode))
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 
 (defun default-lisp-modes ()
   (ignore-errors (paredit-mode))
