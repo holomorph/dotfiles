@@ -1,0 +1,76 @@
+#!/usr/bin/guile -s
+!#
+;; Inspired by the silly little tool by Øyvind Heggstad.
+;; See <https://github.com/MrElendig/kittypack>
+
+(use-modules (gnutls)
+             (ice-9 receive)
+             (ice-9 threads)
+             (json)
+             (rnrs bytevectors)
+             (srfi srfi-1)
+             (web client)
+             (web request)
+             (web uri))
+
+(define (pkg->uri pkg)
+  (build-uri 'https
+             #:host "www.archlinux.org"
+             #:path "/packages/search/json/"
+             #:query (string-append "name=" pkg "&arch=x86_64")))
+
+(define (request->body request)
+  (let* ((uri (request-uri request))
+         (socket (open-socket-for-uri uri))
+         (session (make-session connection-end/client)))
+    (set-session-default-priority! session)
+    (set-session-transport-fd! session (fileno socket))
+    (set-session-credentials! session (make-certificate-credentials))
+    (handshake session)
+    (receive (response body)
+             (http-get uri
+                       #:port (session-record-port session)
+                       #:keep-alive? #t)
+      (bye session close-request/rdwr)
+      (values body))))
+
+(define (pkg->string pkg)
+  (utf8->string (request->body (build-request (pkg->uri pkg)))))
+
+(define (gethash table key)
+  (hashx-ref (lambda (string size)
+               (remainder (string-hash string) size))
+             (lambda (string alist)
+               (find (lambda (pair) (string=? string (car pair))) alist))
+             table key))
+
+(define (color text ls)
+  (string-append (string #\esc #\[) (string-join (map number->string ls) ";") "m"
+                 text
+                 (string #\esc #\[ #\m)))
+
+(define (prettyprint->string table)
+  (let ((flag (gethash table "flag_date")))
+    (format #f "~a/~a/~a  ~a ~a~%"
+            (color (gethash table "repo") '(1 35))
+            (color (gethash table "arch") '(1 33))
+            (color (gethash table "pkgname") '(1))
+            (color (string-append (gethash table "pkgver") "-"
+                                  (gethash table "pkgrel"))
+                   (if flag '(1 31) '(1 32)))
+            (if flag (color "<!>" '(31)) ""))))
+
+(define (display-records string)
+  (let* ((table (json-string->scm string))
+         (results (gethash table "results"))
+         (list (map prettyprint->string results)))
+    (map display (sort list string>?))))
+
+(define (main)
+  (if (> (length (command-line)) 1)
+      (par-map (lambda (elt)
+                 (display-records (pkg->string elt)))
+               (cdr (command-line)))
+      (display "Usage: kitty <pkg> [<pkg> ...]\n")))
+
+(main)
