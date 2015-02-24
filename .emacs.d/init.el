@@ -73,6 +73,7 @@
  kkc-init-file-name "~/.local/share/emacs/kkc-data"
  nsm-settings-file "~/.cache/emacs/nsm-settings"
  recentf-save-file "~/.local/share/emacs/recentf"
+ remember-data-file "~/.local/share/emacs/notes"
  save-place-file "~/.local/share/emacs/places"
  savehist-file "~/.local/share/emacs/history"
  tramp-persistency-file-name "~/.cache/emacs/tramp")
