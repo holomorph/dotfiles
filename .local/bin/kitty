@@ -17,7 +17,7 @@
   (build-uri 'https
              #:host "www.archlinux.org"
              #:path "/packages/search/json/"
-             #:query (string-append "name=" pkg "&arch=x86_64")))
+             #:query (string-append "name=" pkg "&arch=x86_64&arch=any")))
 
 (define (request->body request)
   (let* ((uri (request-uri request))
