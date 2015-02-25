@@ -1,4 +1,11 @@
 # ~/.inputrc
 
+set colored-stats on
+set menu-complete-display-prefix on
 set match-hidden-files off
 set show-all-if-ambiguous on
+set visible-stats on
+
+TAB:menu-complete
+"\C-\M-i":menu-complete-backward
+"\e[Z":menu-complete-backward
