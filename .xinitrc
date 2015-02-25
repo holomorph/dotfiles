@@ -10,8 +10,7 @@ xset +dpms dpms 1800 1800 1800
 feh --no-fehbg --bg-fill "$HOME/pictures/wallpaper/default" &
 
 # key mapping
-setxkbmap -option ctrl:nocaps -option compose:ralt
-xmodmap -e "keycode 135 = Super_R"
+setxkbmap -option altwin:alt_super_win -option ctrl:nocaps -option compose:ralt
 
 termite &
 emacs --daemon &
