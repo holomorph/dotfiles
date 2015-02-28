@@ -196,15 +196,15 @@ removed."
               (overlays-at position)))
 
 (defun twitch-toggle-overlay (overlay)
-  (if (overlay-get overlay 'invisible)
-      (progn (overlay-put overlay 'invisible nil)
-             (or (pos-visible-in-window-p
-                  (save-excursion
-                    (goto-char (overlay-end overlay))
-                    (forward-line -1)
-                    (point)))
-                 (recenter -8)))
-    (overlay-put overlay 'invisible t)))
+  (if (not (overlay-get overlay 'invisible))
+      (overlay-put overlay 'invisible t)
+    (overlay-put overlay 'invisible nil)
+    (or (pos-visible-in-window-p
+         (save-excursion
+           (goto-char (overlay-end overlay))
+           (forward-line -1)
+           (point)))
+        (recenter -8))))
 
 (defun twitch-info ()
   (interactive)
@@ -223,10 +223,10 @@ removed."
 (defun twitch-open ()
   (interactive)
   (let ((url (get-text-property (point) 'url)))
-    (if url
-        (progn (message "Playing %s" url)
-               (start-process "twitch" nil twitch-livestreamer-program url))
-      (message "No stream selected"))))
+    (if (not url)
+        (message "No stream selected")
+      (message "Playing %s" url)
+      (start-process "twitch" nil twitch-livestreamer-program url))))
 
 (defun twitch-copy-url ()
   "Copy the URL of the stream under point to the kill ring."
@@ -275,12 +275,12 @@ Key bindings:
   (let* ((name "*twitch*")
          (buffer (or (get-buffer name)
                      (generate-new-buffer name))))
-    (if (or twitch-streamers twitch-teams)
-        (progn (switch-to-buffer-other-window buffer)
-               (unless (equal major-mode 'twitch-mode)
-                 (twitch-mode)
-                 (twitch-refresh)))
-      (message "Nothing to show"))))
+    (if (not (or twitch-streamers twitch-teams))
+        (message "Nothing to show")
+      (switch-to-buffer-other-window buffer)
+      (unless (equal major-mode 'twitch-mode)
+        (twitch-mode)
+        (twitch-refresh)))))
 
 (provide 'twitch)
 
