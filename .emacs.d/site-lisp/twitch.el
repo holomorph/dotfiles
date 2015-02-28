@@ -264,8 +264,7 @@ Key bindings:
 \\{twitch-mode-map}"
   :group 'twitch
   (setq-local revert-buffer-function #'twitch-refresh)
-  (setq buffer-read-only t)
-  (run-mode-hooks 'twitch-mode-hook))
+  (setq buffer-read-only t))
 
 ;;;###autoload
 (defun twitch ()
