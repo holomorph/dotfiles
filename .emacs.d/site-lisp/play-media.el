@@ -22,10 +22,10 @@
 
 ;;; Commentary:
 
-;; Play media from Emacs using "mpv" or "livestreamer".  For mpv, at
-;; least v0.7.0 is required for its "youtube-dl" hook. For
-;; livestreamer, at least v1.9.0 is needed for the "--default-stream"
-;; config option.
+;; Play media from Emacs using mpv <http://mpv.io/> or livestreamer
+;; <http://docs.livestreamer.io/>.  For mpv, at least v0.7.0 is
+;; required for its ytdl hook. For livestreamer, at least v1.9.0 is
+;; needed for the "--default-stream" config option.
 
 ;;; Code:
 
