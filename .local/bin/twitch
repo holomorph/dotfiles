@@ -4,9 +4,9 @@
 # written by Ogion (on freenode/archforum), inspired by Earnestly (likewise on freenode)
 # edited by holomorph (on freenode)
 
+require 'net/http'
 require 'open3'
 require 'json'
-require 'open-uri'
 require 'thread'
 
 module Twitch
@@ -27,7 +27,7 @@ def read_config(file)
 end
 
 def get_json(uri)
-    JSON.parse(open(uri) {|f| f.read})
+    JSON.parse(Net::HTTP.get(URI(uri)))
 rescue => e
     warn "When retrieving #{uri}"
     warn e.message
