@@ -1,14 +1,12 @@
 " zenburn.penta - Zenburn colorscheme for pentadactyl
 
 " command line
-hi CmdNormal color: #bbbdbb; background: #121212;
-hi CmdLine padding: 0px !important;
-hi Normal color: #bbbdbb; background: #1f1f1f;
-hi StatusLine font-weight: normal; padding-right: 5px; min-height: 18px;
-hi StatusLineBroken color: #ffa0a0; background: #121212;
-hi StatusLineNormal color: #bbbdbb; background: #121212;
-hi StatusLineSecure color: #84aed3; background: #121212;
-hi StatusLineExtended color: #a0ffa0; background: #121212;
+hi CmdNormal color: #dcdccc; background: #121212;
+hi Normal color: #dcdccc; background: #1f1f1f;
+hi StatusLineBroken color: #ecbcbc; background: #121212;
+hi StatusLineNormal color: #efefef; background: #121212;
+hi StatusLineSecure color: #8cd0d3; background: #121212;
+hi StatusLineExtended color: #bef7be; background: #121212;
 
 " completions
 hi Comp margin: 0;
@@ -20,8 +18,8 @@ hi CompTitleSep display: none;
 
 " messages
 hi ErrorMsg color: #80d4aa !important; font-weight: bold !important;
-hi InfoMsg color: #f8f893;
-hi ModeMsg color: #ffcfaf;
+hi InfoMsg color: #f8f893; font-weight: normal;
+hi ModeMsg color: #ffcfaf; font-weight: normal;
 hi MoreMsg color: #b5bd68;
 hi WarningMsg color: #ffffff; font-weight: bold;
 hi StatusErrorMsg color: #80d4aa !important;
@@ -40,7 +38,7 @@ hi Filter color: #ffffff; font-weight: bold;
 hi Indicator /* buffers */ color: #efef8f; font-weight: bold; width: 1.5em; text-align: center;
 hi Key /* Keywords */ color: #f0dfaf; font-weight: bold;
 hi NonText color: #404040; font-weight: bold;
-hi Question /* hint modes */ color: #ffffff; background: #121212; font-weight: bold;
+hi Question /* hint modes */ color: #ffffff; font-weight: bold;
 hi String color: #cc9393; white-space: pre;
 hi Tag /* bmarks */ color: #e89393; font-weight: bold;
 hi Title color: #efefef; font-weight: bold;
