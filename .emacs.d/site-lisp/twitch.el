@@ -88,10 +88,10 @@ more compatible with v2."
   (decode-coding-string (encode-coding-string s 'latin-1) 'utf-8))
 
 (defun twitch-hash (channel &optional v3)
-  "Return a hash table of stream information in CHANNEL.  The
-hash table keys are the properties in `twitch-api-plist', values
-of which are used to find the key-values in the CHANNEL alist.
-Do API v3-specific things if V3 is non-nil."
+  "Return a hash table of stream information in alist CHANNEL.
+The hash table keys are the properties in `twitch-api-plist',
+values of which are used to find the key-values in the CHANNEL
+alist.  Do API v3-specific things if V3 is non-nil."
   (let ((table (make-hash-table)))
     (mapc (lambda (elt)
             (let* ((key (funcall (if v3 'cdr 'car) (cadr elt)))
