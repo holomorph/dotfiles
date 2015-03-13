@@ -47,7 +47,6 @@ set mouse=a
 set scrolloff=3 sidescrolloff=5
 set shortmess=atToOI
 set showcmd
-set statusline=%f\ \ %<%y%m%r%=%12.(\(%l,%c%V\)%)\ \ %P
 set title
 set ttimeoutlen=50
 set whichwrap+=<,>,[,],h,l
@@ -83,6 +82,7 @@ au BufReadPost *
 let g:tagbar_width = 30
 let g:syntastic_check_on_wq = 0
 let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_stl_format = "(Syn:%e/%w)"
 let g:syntastic_tex_checkers = ["chktex", "lacheck"]
 
 " fugitive
