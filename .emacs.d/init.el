@@ -107,7 +107,7 @@
 
 ;; mail
 (setq-default
- message-send-mail-function 'smtpmail-send-it
+ send-mail-function 'sendmail-send-it
  smtpmail-starttls-credentials '(("smtp.gmail.com" 587 nil nil))
  smtpmail-default-smtp-server "smtp.gmail.com"
  smtpmail-smtp-server "smtp.gmail.com"
