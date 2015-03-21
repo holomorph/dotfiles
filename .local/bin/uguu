@@ -1,0 +1,4 @@
+#!/bin/sh
+# post files to http://uguu.se/
+curl -sF 'randomname=t' -F "file=@$1" 'http://uguu.se/api.php?d=upload'
+echo

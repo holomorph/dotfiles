@@ -1,7 +1,0 @@
-#!/bin/bash
-# mediacrush -- post files to https://mediacru.sh
-
-upload=$(curl -sF "file=@$1" https://mediacru.sh/api/upload/file)
-geturl=$(jshon -e hash -u <<< "$upload")
-
-printf "%s/%s.%s\n" 'https://cdn.mediacru.sh' "$geturl" "${1##*.}"
