@@ -12,7 +12,7 @@ let g:netrw_http_xcmd = "-o"
 let g:zenburn_old_Visual = 1
 let g:zenburn_alternate_Visual = 1
 let g:zenburn_high_Contrast = 1
-colorscheme zenburn
+silent! colorscheme zenburn
 
 " searching
 set hlsearch
