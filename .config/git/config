@@ -44,7 +44,9 @@
 [push]
 	default = simple
 [sendemail]
+	aliasesfile = ~/.config/mutt/alias
+	aliasfiletype = mutt
 	confirm = auto
-	smtpencryption = tls
-	smtpserver = smtp.gmail.com
-	smtpserverport = 587
+#	smtpencryption = tls
+#	smtpserver = smtp.gmail.com
+#	smtpserverport = 587
