@@ -9,11 +9,11 @@ stty -ixon
 set -o notify
 
 # history
-export HISTFILE="$HOME/.cache/bash/bash_history"
-export HISTIGNORE="&:ls:exit:reset:clear"
-export HISTCONTROL="ignoreboth:erasedups"
-export HISTSIZE=10000
-export HISTFILESIZE=20000
+HISTFILE="$HOME/.cache/bash/bash_history"
+HISTIGNORE="&:ls:exit:reset:clear"
+HISTCONTROL="ignoreboth:erasedups"
+HISTSIZE=10000
+HISTFILESIZE=20000
 
 # bash completion
 if [[ -r "/usr/share/bash-completion/bash_completion" ]]; then
