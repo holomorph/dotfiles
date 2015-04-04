@@ -1,5 +1,0 @@
-#!/bin/sh
-if ! test -r "$1"; then
-    proto=ytdl://
-fi
-exec mpv --ytdl "$proto$1"
