@@ -6,7 +6,7 @@ import sys
 import urllib.parse
 import urllib.request
 
-if not sys.argv[1]:
+if len(sys.argv) == 1:
     print("Usage: %s <address ...>" % os.path.basename(sys.argv[0]), file=sys.stderr)
 else:
     url = "https://maps.googleapis.com/maps/api/geocode/json"
