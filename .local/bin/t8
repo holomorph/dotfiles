@@ -51,11 +51,10 @@ def get_response(text, sl=u"auto", tl=u"auto"):
     decoded response.
     """
 
-    api = "http://translate.google.com/translate_a"
-    args = "&sl=%s&tl=%s&text=%s" % (sl, tl, urllib.parse.quote(text))
-    url = api + "/t?client=t&ie=UTF-8&oe=UTF-8" + args
-    req = urllib.request.Request(url, headers={'User-Agent': ''})
-
+    api = "http://translate.google.com/translate_a/t"
+    params = urllib.parse.urlencode({"client": "t", "ie": "utf-8", "oe": "utf-8",
+                                     "sl": sl, "tl": tl, "text": text})
+    req = urllib.request.Request("%s?%s" % (api, params), headers={'User-Agent': ''})
     return urllib.request.urlopen(req).read().decode('utf-8')
 
 
