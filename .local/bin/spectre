@@ -1,9 +1,9 @@
 #!/bin/sh
 # make and view a spectrogram
-readonly flags="-n spectrogram -x 3000 -y 513 -z 120 -w Kaiser -o $image"
+readonly flags="-n spectrogram -x 3000 -y 513 -z 120 -w Kaiser"
 
 if image="$(mktemp)"; then
     trap "rm -f $image" EXIT
-    sox "$@" $flags
+    sox "$@" $flags -o "$image"
     feh "$image"
 fi
