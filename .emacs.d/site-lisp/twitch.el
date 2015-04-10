@@ -3,7 +3,7 @@
 ;; Copyright (C) 2015  Mark Oteiza <mvoteiza@udel.edu>
 
 ;; Author: Mark Oteiza <mvoteiza@udel.edu>
-;; Version: 0.4
+;; Version: 0.5
 ;; Package-Requires: ((emacs "24.4") (let-alist "1.0.3") (seq "1.1"))
 ;; Keywords: convenience, multimedia
 
@@ -38,6 +38,11 @@
   "The name by which to invoke livestreamer."
   :group 'twitch
   :type 'string)
+
+(defcustom twitch-livestreamer-options '()
+  "Extra arguments to pass to `twitch-livestreamer-program'."
+  :group 'twitch
+  :type '(repeat string))
 
 (defcustom twitch-streamers nil
   "List of streamer user names on Twitch."
@@ -226,7 +231,8 @@ removed."
     (if (not url)
         (message "No stream selected")
       (message "Playing %s" url)
-      (start-process "twitch" nil twitch-livestreamer-program url))))
+      (apply #'start-process "twitch" nil twitch-livestreamer-program
+             (cons url twitch-livestreamer-options)))))
 
 (defun twitch-copy-url ()
   "Copy the URL of the stream under point to the kill ring."
@@ -243,6 +249,7 @@ removed."
 (defvar twitch-mode-map
   (let ((map (make-sparse-keymap)))
     (suppress-keymap map)
+    (define-key map [double-mouse-1] 'twitch-open)
     (define-key map (kbd "C-c C-o") 'twitch-open)
     (define-key map (kbd "RET") 'twitch-info)
     (define-key map (kbd "SPC") 'twitch-info)
