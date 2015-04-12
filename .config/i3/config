@@ -6,7 +6,7 @@
 set $mod Mod4
 
 # Font for window titles
-font pango: Terminus 8
+font pango:Terminus 8
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -39,7 +39,7 @@ bindsym $mod+v split h
 bindsym $mod+apostrophe split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen
+bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+Shift+s layout stacking
@@ -107,23 +107,23 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # class                 border  backgr. text    indicator
-client.focused          #373b41 #373b41 #ffffff #23abd2
+client.focused          #4c5159 #373b41 #ffffff #23abd2
 client.focused_inactive #222222 #222222 #f0c674 #222222
 client.unfocused        #222222 #222222 #888888 #292d2e
-client.urgent           #a54252 #222222 #cc6666 #cc6666
+client.urgent           #af3a3a #222222 #e06666 #e06666
 
 bar {
 	position top
-	status_command i3status
+	status_command dwmstatus -ibond0
 
 	colors {
 		background         #1b1b1b
 		statusline         #606060
 		separator          #373b41
-		focused_workspace  #373b41 #373b41 #ffffff
+		focused_workspace  #4c5159 #373b41 #ffffff
 		active_workspace   #373b41 #373b41 #ffffff
-		inactive_workspace #1b1b1b #1b1b1b #f0c674
-		urgent_workspace   #a54252 #1b1b1b #cc6666
+		inactive_workspace #1b1b1b #1b1b1b #facb70
+		urgent_workspace   #af3a3a #1b1b1b #e06666
 	}
 }
 
