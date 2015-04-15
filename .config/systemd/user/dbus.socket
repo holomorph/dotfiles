@@ -1,5 +1,0 @@
-[Unit]
-Description=D-Bus User Bus Socket
-
-[Socket]
-ListenStream=%t/bus
