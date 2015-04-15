@@ -11,8 +11,8 @@ general {
 	interval = 15
 	colors = true
 	color_good     = "#00ff00"
-	color_degraded = "#b5bd68"
-	color_bad      = "#a54252"
+	color_degraded = "#c2cc66"
+	color_bad      = "#af3a3a"
 }
 
 order += "volume master"
