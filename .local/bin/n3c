@@ -1,0 +1,19 @@
+#!/usr/bin/python3
+
+import netrc
+import os
+import sys
+
+def wat(host):
+    try:
+        authinfo = netrc.netrc()
+        return authinfo.authenticators(host)
+    except netrc.NetrcParseError as e:
+        print("%s:%s:%s" % (e.filename, e.lineno, e.msg), file=sys.stderr)
+        sys.exit(1)
+
+if len(sys.argv) == 2:
+    print(wat(sys.argv[1])[2])
+else:
+    print("Usage: %s <host>" % os.path.basename(sys.argv[0]), file=sys.stderr)
+    sys.exit(1)
