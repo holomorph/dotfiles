@@ -1,19 +1,18 @@
 augroup filetypedetect
-    au BufNewFile,BufRead *.automount,*.busname,*.mount,*.service,*.socket,*.target,*.timer,*.link,*.netdev,*.network set ft=systemd cms=#%s
-    au BufNewFile,BufRead /etc/systemd/* set ft=systemd cms=#%s
+    au BufNewFile,BufRead *.automount,*.busname,*.mount,*.service,*.slice,*.socket,*.target,*.timer,*.link,*.netdev,*.network setf systemd
+    au BufNewFile,BufRead *.override.conf* setf systemd
+    au BufNewFile,BufRead /etc/systemd/* setf systemd
+
     au BufNewFile,BufRead *.tmux.conf,.tmux.conf*,tmux.conf* setf tmux
 
     au BufNewFile,BufRead PKGBUILD*,*.install set ft=sh ts=2 sw=2 et
     au BufNewFile,BufRead */elinks/*.conf setf elinks
-    au BufNewFile,BufRead llpp.conf set ft=xml
+    au BufNewFile,BufRead llpp.conf setf xml
     au BufNewFile,BufRead *.md setf markdown
     au BufNewFile,BufRead *.ml,*.ml[ilyp] setl cms=(*%s*)
     au BufNewFile,BufRead *.muttrc setf muttrc
-    au BufNewFile,BufRead ~/.rtorrent.rc,*/rtorrent/config set ft=cfg cms=#%s
     au BufNewFile,BufRead *.sage,*.spyx,*.pyx setf python
-    au BufNewFile,BufRead *.pentadactylrc,*.penta set ft=pentadactyl cms=\"%s
-    au BufNewFile,BufRead *.vimperatorrc,*.vimp set ft=vimperator cms=\"%s
 
-    au BufNewFile,BufRead /tmp/pentadactyl.wiki.archlinux.org.* set ft=mediawiki wrap
-    au BufNewFile,BufRead /tmp/pentadactyl.github.com.txt set ft=markdown
+    au BufNewFile,BufRead /tmp/pentadactyl.wiki.archlinux.org.* setf mediawiki
+    au BufNewFile,BufRead /tmp/pentadactyl.github.com.txt setf markdown
 augroup END
