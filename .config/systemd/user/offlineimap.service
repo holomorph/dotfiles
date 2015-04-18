@@ -1,9 +1,0 @@
-[Unit]
-Description=OfflineIMAP sync
-Documentation=man:offlineimap(1)
-After=network.target
-
-[Service]
-Type=oneshot
-ExecStart=/usr/bin/offlineimap -u Quiet -o
-TimeoutStartSec=90s

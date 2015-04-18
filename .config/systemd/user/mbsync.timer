@@ -1,5 +1,5 @@
 [Unit]
-Description=OfflineIMAP timer
+Description=mbsync timer
 
 [Timer]
 OnCalendar=*:0/30
