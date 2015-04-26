@@ -8,7 +8,7 @@ endif
 
 syn case match
 
-syn match sdGroup	/^\[.*\]/
+syn match sdGroup	/^\s*\[\u\w\+\]\s*$/
 syn match sdComment	/^\s*[#;].*$/
 syn match sdDelim	/=/ contained
 syn match sdEnv		/\$[A-Z_]\+/
