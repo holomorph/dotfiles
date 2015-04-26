@@ -73,6 +73,7 @@ https://github.com/justintv/twitch-api for more information.")
 
 (defun twitch-request (url)
   (with-current-buffer (url-retrieve-synchronously url t)
+    (set-buffer-multibyte t)
     (goto-char (point-min))
     (re-search-forward "\r?\n\r?\n" nil t)
     (json-read)))
@@ -89,9 +90,6 @@ more compatible with v2."
                     (list (append (assq 'channel a) (list (assq 'viewers a)))))
           response))
 
-(defun twitch--encode-string (s)
-  (decode-coding-string (encode-coding-string s 'latin-1) 'utf-8))
-
 (defun twitch-hash (channel &optional v3)
   "Return a hash table of stream information in alist CHANNEL.
 The hash table keys are the properties in `twitch-api-plist',
@@ -102,8 +100,7 @@ alist.  Do API v3-specific things if V3 is non-nil."
             (let* ((key (funcall (if v3 'cdr 'car) (cadr elt)))
                    (val (cdr (assq key channel))))
               (when (stringp val)
-                (let ((newval (if v3 val (twitch--encode-string val))))
-                  (setq val (replace-regexp-in-string "\r?\n" " " newval t t))))
+                (setq val (replace-regexp-in-string "\r?\n" " " val t t)))
               (puthash (car elt) val table)))
           (seq-partition twitch-api-plist 2))
     table))
