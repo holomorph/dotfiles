@@ -20,7 +20,7 @@ cursor_blink = off
 cursor_shape = block
 
 # $BROWSER is used by default
-#browser = firefox
+#browser = chromium
 
 # set size hints for the window
 #size_hints = false
@@ -29,10 +29,13 @@ cursor_shape = block
 modify_other_keys = true
 
 [colors]
+#cursor = #dcdccc
 foreground = #bbbdbb
 foreground_bold = #ffffff
 background = #121212
-#cursor = #dcdccc
+
+# 20% background transparency (requires a compositor)
+#background = rgba(63, 63, 63, 0.8)
 
 # if unset, will reverse foreground and background
 highlight = #2d2d2d
