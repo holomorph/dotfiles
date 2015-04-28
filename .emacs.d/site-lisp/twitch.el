@@ -4,7 +4,7 @@
 
 ;; Author: Mark Oteiza <mvoteiza@udel.edu>
 ;; Version: 0.5
-;; Package-Requires: ((emacs "24.4") (let-alist "1.0.3") (seq "1.1"))
+;; Package-Requires: ((emacs "24.4") (seq "1.1"))
 ;; Keywords: convenience, multimedia
 
 ;; This program is free software; you can redistribute it and/or
@@ -26,7 +26,6 @@
 
 (require 'cl-lib)
 (require 'json)
-(require 'let-alist)
 (require 'seq)
 (require 'url)
 
@@ -113,9 +112,9 @@ alist.  Do API v3-specific things if V3 is non-nil."
   (let ((vector []))
     (dolist (batch (twitch--batch-list))
       (let* ((fmt "https://api.twitch.tv/kraken/streams?channel=%s&limit=%d")
-             (url (format fmt batch twitch-api-streamer-limit)))
-        (let-alist (twitch-request url)
-          (setq vector (vconcat vector (twitch--munge-v3 .streams))))))
+             (url (format fmt batch twitch-api-streamer-limit))
+             (streams (cdr-safe (assq 'streams (twitch-request url)))))
+        (setq vector (vconcat vector (twitch--munge-v3 streams)))))
     (twitch-hash-vector vector t)))
 
 (defun twitch-get-teams ()
@@ -123,9 +122,9 @@ alist.  Do API v3-specific things if V3 is non-nil."
   (let ((vector []))
     (dolist (team twitch-teams)
       (let* ((fmt "http://api.twitch.tv/api/team/%s/live_channels.json")
-             (url (format fmt team)))
-        (let-alist (twitch-request url)
-          (setq vector (vconcat vector .channels)))))
+             (url (format fmt team))
+             (channels (cdr-safe (assq 'channels (twitch-request url)))))
+        (setq vector (vconcat vector channels))))
     (twitch-hash-vector vector)))
 
 (defun twitch-query ()

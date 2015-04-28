@@ -4,7 +4,6 @@
 
 ;; Author: Mark Oteiza <mvoteiza@udel.edu>
 ;; Version: 0.2
-;; Package-Requires: ((emacs "24.4"))
 ;; Keywords: convenience
 
 ;; This program is free software; you can redistribute it and/or
