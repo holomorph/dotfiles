@@ -143,7 +143,6 @@
  company-idle-delay 0.1
  company-lighter nil
  company-minimum-prefix-length 2
- company-require-match 'never
  company-selection-wrap-around t
  company-show-numbers t
  flycheck-check-syntax-automatically '(save)
