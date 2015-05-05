@@ -3,8 +3,8 @@
 ;; Copyright (C) 2015  Mark Oteiza <mvoteiza@udel.edu>
 
 ;; Author: Mark Oteiza <mvoteiza@udel.edu>
-;; Version: 0.5
-;; Package-Requires: ((emacs "24.4") (seq "1.1"))
+;; Version: 0.6
+;; Package-Requires: ((emacs "24.4") (seq "1.5"))
 ;; Keywords: convenience, multimedia
 
 ;; This program is free software; you can redistribute it and/or
@@ -132,16 +132,10 @@ alist.  Do API v3-specific things if V3 is non-nil."
 the users in `twitch-streamers' and teams in `twitch-teams'.  The
 vector is sorted lexically by twitch user name; duplicates are
 removed."
-  (let ((vector (vconcat (twitch-get-teams)
-                         (twitch-get-streamers)))
-        (result []))
-    ;; Altered `seq-uniq'
-    (seq-doseq (elt vector)
-      (unless (seq-contains-p result elt
-                              (lambda (a b)
-                                (string= (gethash :user a) (gethash :user b))))
-        (setq result (vconcat result (vector elt)))))
-    (seq-sort (lambda (a b) (string< (gethash :user a) (gethash :user b))) result)))
+  (let ((list (seq-uniq (vconcat (twitch-get-teams) (twitch-get-streamers))
+                        (lambda (a b) (string= (gethash :user a) (gethash :user b))))))
+    (seq-sort (lambda (a b) (string< (gethash :user a) (gethash :user b)))
+              (vconcat list))))
 
 (defun twitch-insert-entry (vec url)
   (let* ((entry (mapconcat #'identity vec ""))
