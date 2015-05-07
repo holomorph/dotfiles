@@ -18,9 +18,7 @@
 (winner-mode)
 
 (fset 'yes-or-no-p 'y-or-n-p)
-(put 'narrow-to-region 'disabled nil)
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
+(mapatoms (lambda (s) (when (get s 'disabled) (put s 'disabled nil))))
 
 (setq
  dired-listing-switches "-al -hF --group-directories-first"
