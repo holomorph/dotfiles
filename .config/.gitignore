@@ -1,9 +1,7 @@
 # ~/.config/.gitignore
 
-autostart/
 dconf/
 gtk-2.0/gtkfilechooser.ini
 inkscape/
 pianobar/
-pulse/
 weather/
