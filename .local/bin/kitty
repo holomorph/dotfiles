@@ -50,12 +50,14 @@
                  (string #\esc #\[ #\m)))
 
 (define (prettyprint->string table)
-  (let ((flag (gethash table "flag_date")))
+  (let ((flag (gethash table "flag_date"))
+        (epoch (gethash table "epoch")))
     (format #f "~a/~a/~a  ~a ~a~%"
             (color (gethash table "repo") '(1 35))
             (color (gethash table "arch") '(1 33))
             (color (gethash table "pkgname") '(1))
-            (color (string-append (gethash table "pkgver") "-"
+            (color (string-append (if (positive? epoch) (format #f "~d:" epoch) "")
+                                  (gethash table "pkgver") "-"
                                   (gethash table "pkgrel"))
                    (if flag '(1 31) '(1 32)))
             (if flag (color "<!>" '(31)) ""))))
