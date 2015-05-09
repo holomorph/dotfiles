@@ -237,31 +237,27 @@ removed."
       (message "No stream under point"))))
 
 (defvar twitch-mode-map
-  (let ((map (make-sparse-keymap)))
-    (suppress-keymap map)
+  (let ((map (copy-keymap special-mode-map)))
     (define-key map [double-mouse-1] 'twitch-open)
     (define-key map (kbd "C-c C-o") 'twitch-open)
     (define-key map (kbd "RET") 'twitch-info)
     (define-key map (kbd "SPC") 'twitch-info)
-    (define-key map "g" 'revert-buffer)
     (define-key map "i" 'twitch-info)
     (define-key map "n" 'next-line)
     (define-key map "p" 'previous-line)
-    (define-key map "q" 'quit-window)
     (define-key map "u" 'twitch-copy-url)
     (define-key map "w" 'twitch-copy-url)
     map)
   "Keymap used in `twitch-mode' buffers.")
 
-(define-derived-mode twitch-mode nil "Twitch"
+(define-derived-mode twitch-mode special-mode "Twitch"
   "Major mode for launching streams from <http://www.twitch.tv>.
 The hook `twitch-mode-hook' is run at mode initialization.
 
 Key bindings:
 \\{twitch-mode-map}"
   :group 'twitch
-  (setq-local revert-buffer-function #'twitch-refresh)
-  (setq buffer-read-only t))
+  (setq-local revert-buffer-function #'twitch-refresh))
 
 ;;;###autoload
 (defun twitch ()
