@@ -29,8 +29,7 @@ end
 def get_json(uri)
     JSON.parse(Net::HTTP.get(URI(uri)))
 rescue => e
-    warn "When retrieving #{uri}"
-    warn e.message
+    warn format("When retrieving %s\n%s", uri, e.message)
 end
 
 def parse_json(streams, data, keys)
@@ -81,7 +80,7 @@ def dmenu(items)
     # font = %w[-fn -*-dina-bold-r-*-*-12-*-*-*-*-*-*-*]
     args = %w[-i -l 20] + prompt
 
-    if ENV["DISPLAY"] && !ENV["DISPLAY"].empty? then
+    if ENV["DISPLAY"] && !ENV["DISPLAY"].empty?
         font = %w[-fn Dina\ Bold\ 9]
         cmd = %w[dmenu] + args + font
     else
@@ -89,12 +88,7 @@ def dmenu(items)
     end
 
     out, status = Open3.capture2(*cmd, stdin_data: items.join("\n"))
-
-    if status.success?
-        out.chomp
-    else
-        nil
-    end
+    status.success? ? out.chomp : nil
 end
 
 def play_stream(item)
@@ -114,18 +108,15 @@ class String
 end
 
 streams = get_streams()
-
 menu = streams.sort_by{|i| "#{i[:owner].downcase}"}
 menu = menu.map{|i| "#{i[:owner].ljust(24)} #{i[:title].gsub(/\r?\n/, " ")}"}
 sel = dmenu(menu.uniq)
 
 if sel
     threads = []
-    results = sel.split(/\r?\n/)
-    streams_by_user = Hash[streams.map{|i| [i[:owner], i]}]
 
-    results.each do |name|
-        if name =~ /^(\S+)\s+/ and item = streams_by_user[$1]
+    sel.split(/\r?\n/).each do |name|
+        if item = streams.find{|i| name =~ /^#{i[:owner]}/}
             threads << Thread.new do
                 play_stream(item)
             end
