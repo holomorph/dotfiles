@@ -69,9 +69,8 @@ def pretty_print(response):
 
     # useful bits
     sl = data[2]
-    array = data[0][0]
-    primary = array[0]
-    alternate = array[2]
+    array = data[0]
+    primary = "".join(map(lambda s: s[0], array))
 
     # auto sl is not perfect, so showing it in [%s] can be helpful
     print("[%s] %s" % (sl, primary))
