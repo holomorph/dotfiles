@@ -51,9 +51,10 @@ def get_response(text, sl=u"auto", tl=u"auto"):
     decoded response.
     """
 
-    api = "http://translate.google.com/translate_a/t"
-    params = urllib.parse.urlencode({"client": "t", "ie": "utf-8", "oe": "utf-8",
-                                     "sl": sl, "tl": tl, "text": text})
+    api = "https://translate.google.com/translate_a/single"
+    params = urllib.parse.urlencode({"client": "t", "dt": "t",
+                                     "ie": "utf-8", "oe": "utf-8",
+                                     "sl": sl, "tl": tl, "q": text})
     req = urllib.request.Request("%s?%s" % (api, params), headers={'User-Agent': ''})
     return urllib.request.urlopen(req).read().decode('utf-8')
 
@@ -72,15 +73,8 @@ def pretty_print(response):
     primary = array[0]
     alternate = array[2]
 
-    # print the alternate form if it exists
     # auto sl is not perfect, so showing it in [%s] can be helpful
-    fmt = "[%s] %s"
-    args = (sl, primary)
-    if alternate:
-        fmt += " (%s)"
-        args = (sl, primary, alternate)
-
-    print(fmt % args)
+    print("[%s] %s" % (sl, primary))
 
 
 message, tl, sl, debug = parse_opts()
