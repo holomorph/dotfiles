@@ -3,8 +3,8 @@
 mkdir -p "$HOME/.cache/zsh"
 emulate sh -c '. ~/.profile'
 
-if type startx >/dev/null && (( UID )) && (( XDG_VTNR == 1 )) && [[ -z $DISPLAY && $TTY = /dev/tty1 ]]; then
-  exec startx
+if (( UID && XDG_VTNR == 1 )) && [[ -z $DISPLAY && $TTY = /dev/tty1 ]]; then
+  type startx >/dev/null && exec startx
 fi
 
 # vim: syn=sh
