@@ -108,9 +108,9 @@ class String
 end
 
 streams = get_streams()
-menu = streams.sort_by{|i| "#{i[:owner].downcase}"}
+menu = streams.uniq{|i| i[:owner]}.sort_by{|i| "#{i[:owner].downcase}"}
 menu = menu.map{|i| "#{i[:owner].ljust(24)} #{i[:title].gsub(/\r?\n/, " ")}"}
-sel = dmenu(menu.uniq)
+sel = dmenu(menu)
 
 if sel
     threads = []
