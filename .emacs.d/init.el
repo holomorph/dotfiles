@@ -31,6 +31,7 @@
  auto-save-default nil
  next-error-highlight t
  search-highlight t
+ lazy-highlight-initial-delay 0
  query-replace-highlight t
  require-final-newline t
  save-interprogram-paste-before-kill t
@@ -55,6 +56,7 @@
  indent-tabs-mode nil
  mouse-sel-retain-highlight t
  network-security-level 'high
+ octave-blink-matching-block nil
  save-place t
  show-paren-delay 0.02
  truncate-lines t
