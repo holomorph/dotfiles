@@ -163,13 +163,11 @@ removed."
 
 (defun twitch-refresh (&optional _arg _noconfirm)
   "Erase the buffer and draw a new one."
-  (let ((vector (twitch-query))
-        (index 0))
+  (let ((vector (twitch-query)))
     (setq buffer-read-only nil)
     (erase-buffer)
-    (while (< index (length vector))
-      (let* ((ht (elt vector index))
-             (name (gethash :name ht))
+    (seq-doseq (ht vector)
+      (let* ((name (gethash :name ht))
              (title (gethash :title ht))
              (url (or (gethash :url ht) (format "http://twitch.tv/%s" name))))
         (twitch-insert-entry
@@ -180,8 +178,7 @@ removed."
                  (twitch-format-info "Followers" (gethash :followers ht))
                  (twitch-format-info "Total views" (gethash :views ht))
                  (twitch-format-info "Bio" (gethash :bio ht)))
-         url)
-        (setq index (1+ index)))))
+         url))))
   (set-buffer-modified-p nil)
   (setq buffer-read-only t)
   (goto-char (point-min)))
