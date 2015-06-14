@@ -3,7 +3,7 @@
 ;; Copyright (C) 2014-2015  Mark Oteiza <mvoteiza@udel.edu>
 
 ;; Author: Mark Oteiza <mvoteiza@udel.edu>
-;; Version: 0.2
+;; Version: 0.3
 ;; Keywords: convenience
 
 ;; This program is free software; you can redistribute it and/or
@@ -64,8 +64,8 @@ livestreamer, depending on the input."
 (defun play-media-at-point ()
   "Try to play media at point. See `play-media'."
   (interactive)
-  (let ((link (or (thing-at-point 'url)
-                  (get-text-property (point) 'shr-url)
+  (let ((link (or (get-text-property (point) 'shr-url)
+                  (thing-at-point 'url)
                   (url-get-url-at-point)
                   ;; catch incomplete URLs
                   (thing-at-point 'symbol))))
