@@ -252,6 +252,7 @@ The hook `twitch-mode-hook' is run at mode initialization.
 Key bindings:
 \\{twitch-mode-map}"
   :group 'twitch
+  (buffer-disable-undo)
   (setq-local revert-buffer-function #'twitch-refresh))
 
 ;;;###autoload
