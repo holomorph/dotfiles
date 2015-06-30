@@ -3,7 +3,7 @@
 ;; Copyright (C) 2015  Mark Oteiza <mvoteiza@udel.edu>
 
 ;; Author: Mark Oteiza <mvoteiza@udel.edu>
-;; Version: 0.6
+;; Version: 0.7
 ;; Package-Requires: ((emacs "24.4") (seq "1.5"))
 ;; Keywords: convenience, multimedia
 
@@ -24,7 +24,6 @@
 
 ;;; Code:
 
-(require 'cl-lib)
 (require 'json)
 (require 'seq)
 (require 'url)
@@ -85,9 +84,9 @@ https://github.com/justintv/twitch-api for more information.")
 (defun twitch--munge-v3 (response)
   "Munge v3 API response RESPONSE in `twitch-get-streamers' so it is
 more compatible with v2."
-  (cl-map 'vector (lambda (a)
-                    (list (append (assq 'channel a) (list (assq 'viewers a)))))
-          response))
+  (vconcat (mapcar (lambda (a)
+                     (list (append (assq 'channel a) (list (assq 'viewers a)))))
+                   response)))
 
 (defun twitch-hash (channel &optional v3)
   "Return a hash table of stream information in alist CHANNEL.
@@ -105,7 +104,7 @@ alist.  Do API v3-specific things if V3 is non-nil."
     table))
 
 (defun twitch-hash-vector (response &optional v3)
-  (cl-map 'vector (lambda (elt) (twitch-hash (cdar elt) v3)) response))
+  (vconcat (mapcar (lambda (elt) (twitch-hash (cdar elt) v3)) response)))
 
 (defun twitch-get-streamers ()
   "Get stream information using the v3 API with `twitch-streamers'."
@@ -142,8 +141,7 @@ removed."
          (start (point))
          (end (+ start (length entry))))
     (insert entry)
-    (add-text-properties start end 'url)
-    (put-text-property start end 'url url)
+    (add-text-properties start end (list 'url url))
     (let* ((beg (save-excursion
                   (goto-char start)
                   (forward-line)
@@ -154,11 +152,11 @@ removed."
 
 (defun twitch-format-info (key val &optional face)
   (concat (propertize (format "  %s " (concat key ":"))
-                      'face 'font-lock-comment-face)
+                      'font-lock-face 'font-lock-comment-face)
           (propertize (format "%s" (if (numberp val)
                                        (number-to-string val)
                                      val))
-                      'face (if face face 'font-lock-comment-face))
+                      'font-lock-face (if face face 'font-lock-comment-face))
           "\n"))
 
 (defun twitch-refresh (&optional _arg _noconfirm)
@@ -171,8 +169,8 @@ removed."
              (title (gethash :title ht))
              (url (or (gethash :url ht) (format "http://twitch.tv/%s" name))))
         (twitch-insert-entry
-         (vector (format "%-22.18s" (propertize name 'face 'font-lock-type-face))
-                 (format "%s\n" (propertize (or title "") 'face 'font-lock-variable-name-face))
+         (vector (format "%-22.18s" (propertize name 'font-lock-face 'font-lock-type-face))
+                 (format "%s\n" (propertize (or title "") 'font-lock-face 'font-lock-variable-name-face))
                  (twitch-format-info "Game" (gethash :game ht))
                  (twitch-format-info "Viewers" (gethash :viewers ht))
                  (twitch-format-info "Followers" (gethash :followers ht))
