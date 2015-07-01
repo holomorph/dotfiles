@@ -169,7 +169,7 @@ removed."
              (title (gethash :title ht))
              (url (or (gethash :url ht) (format "http://twitch.tv/%s" name))))
         (twitch-insert-entry
-         (vector (format "%-22.18s" (propertize name 'font-lock-face 'font-lock-type-face))
+         (vector (format "%-20.18s" (propertize name 'font-lock-face 'font-lock-type-face))
                  (format "%s\n" (propertize (or title "") 'font-lock-face 'font-lock-variable-name-face))
                  (twitch-format-info "Game" (gethash :game ht))
                  (twitch-format-info "Viewers" (gethash :viewers ht))
@@ -221,14 +221,11 @@ removed."
 
 (defun twitch-copy-url ()
   "Copy the URL of the stream under point to the kill ring."
-  ;; Simpler version of `shr-copy-url'
   (interactive)
   (let ((url (get-text-property (point) 'url)))
     (if url
-        (with-temp-buffer
-          (insert url)
-          (copy-region-as-kill (point-min) (point-max))
-          (message "Copied %s" (buffer-string)))
+        (progn (kill-new url)
+               (message "Copied %s" url))
       (message "No stream under point"))))
 
 (defvar twitch-mode-map
