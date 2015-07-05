@@ -55,9 +55,7 @@
  ido-enable-flex-matching t
  indent-tabs-mode nil
  mouse-sel-retain-highlight t
- network-security-level 'high
  octave-blink-matching-block nil
- save-place t
  show-paren-delay 0.02
  truncate-lines t
  uniquify-buffer-name-style 'forward
@@ -83,7 +81,7 @@
 
 (savehist-mode)
 (show-paren-mode)
-(require 'saveplace)
+(if (fboundp 'save-place-mode) (save-place-mode))
 (require 'uniquify)
 
 ;; backup
@@ -130,6 +128,8 @@
 
 ;; org
 (setq-default
+ org-agenda-files '("~/doc/notes")
+ org-default-notes-file "notes.org"
  org-directory "~/doc/notes"
  org-export-backends '(ascii html latex man texinfo)
  org-use-speed-commands t)
@@ -151,6 +151,7 @@
  ledger-highlight-xact-under-point nil
  magit-auto-revert-mode-lighter nil
  magit-backup-mode-lighter nil
+ magit-diff-highlight-hunk-body nil
  magit-diff-refine-hunk 'all
  merlin-default-flags '("-w" "+a-4" "-safe-string")
  merlin-show-instance-in-lighter nil
@@ -193,5 +194,6 @@
 (add-hook 'scheme-mode-hook #'default-lisp-modes)
 (add-hook 'prog-mode-hook #'default-prog-modes)
 (add-hook 'tex-mode-hook #'default-prog-modes)
+(remove-hook 'magit-region-highlight-hook 'magit-diff-update-hunk-region)
 (remove-hook 'magit-section-highlight-hook 'magit-section-highlight)
 (add-hook 'tuareg-mode-hook 'merlin-mode)
