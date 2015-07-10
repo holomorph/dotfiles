@@ -18,10 +18,10 @@
 (winner-mode)
 
 (fset 'yes-or-no-p 'y-or-n-p)
-(mapatoms (lambda (s) (when (get s 'disabled) (put s 'disabled nil))))
 
 (setq
  dired-listing-switches "-al -hF --group-directories-first"
+ disabled-command-function nil
  echo-keystrokes 0.1
  enable-dir-local-variables nil
  gnutls-min-prime-bits 2048
