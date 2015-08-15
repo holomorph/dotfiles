@@ -77,7 +77,7 @@ https://github.com/justintv/twitch-api for more information.")
     (json-read)))
 
 (defun twitch--batch-list ()
-  (let ((copy (delete-dups (delq nil (seq-copy twitch-streamers)))))
+  (let ((copy (delete-dups (remq nil twitch-streamers))))
     (mapcar (lambda (seq) (mapconcat #'identity seq ","))
             (seq-partition copy twitch-api-streamer-limit))))
 
@@ -153,15 +153,14 @@ removed."
 (defun twitch-format-info (key val &optional face)
   (concat (propertize (format "  %s " (concat key ":"))
                       'font-lock-face 'font-lock-comment-face)
-          (propertize (format "%s" (if (numberp val)
-                                       (number-to-string val)
-                                     val))
-                      'font-lock-face (if face face 'font-lock-comment-face))
+          (propertize (format "%s" val)
+                      'font-lock-face (or face 'font-lock-comment-face))
           "\n"))
 
 (defun twitch-refresh (&optional _arg _noconfirm)
   "Erase the buffer and draw a new one."
   (let ((vector (twitch-query)))
+    (delete-all-overlays)
     (setq buffer-read-only nil)
     (erase-buffer)
     (seq-doseq (ht vector)
@@ -263,7 +262,7 @@ Key bindings:
     (if (not (or twitch-streamers twitch-teams))
         (message "Nothing to show")
       (switch-to-buffer-other-window buffer)
-      (unless (equal major-mode 'twitch-mode)
+      (unless (eq major-mode 'twitch-mode)
         (twitch-mode)
         (twitch-refresh)))))
 
