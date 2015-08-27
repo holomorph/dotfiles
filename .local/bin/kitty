@@ -59,20 +59,19 @@
             (color (string-append (if (positive? epoch) (format #f "~d:" epoch) "")
                                   (gethash table "pkgver") "-"
                                   (gethash table "pkgrel"))
-                   (if flag '(1 31) '(1 32)))
+                   `(1 ,(if flag 31 32)))
             (if flag (color "<!>" '(31)) ""))))
 
-(define (display-records string)
-  (let* ((table (json-string->scm string))
+(define (display-records pkg)
+  (let* ((table (json-string->scm (pkg->string pkg)))
          (results (gethash table "results"))
          (list (map prettyprint->string results)))
     (map display (sort list string>?))))
 
 (define (main)
   (if (> (length (command-line)) 1)
-      (par-map (lambda (elt)
-                 (display-records (pkg->string elt)))
-               (cdr (command-line)))
-      (display "Usage: kitty <pkg> [<pkg> ...]\n")))
+      (par-map display-records (cdr (command-line)))
+      (begin (display "Usage: kitty <pkg> [<pkg> ...]\n" (current-error-port))
+             (exit #f))))
 
 (main)
