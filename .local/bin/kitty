@@ -13,12 +13,6 @@
              (web request)
              (web uri))
 
-(define (pkg->uri pkg)
-  (build-uri 'https
-             #:host "www.archlinux.org"
-             #:path "/packages/search/json/"
-             #:query (string-append "name=" pkg "&arch=x86_64&arch=any")))
-
 (define (request->body request)
   (let* ((uri (request-uri request))
          (socket (open-socket-for-uri uri))
@@ -35,7 +29,12 @@
       (values body))))
 
 (define (pkg->string pkg)
-  (utf8->string (request->body (build-request (pkg->uri pkg)))))
+  (let* ((query (string-append "name=" pkg "&arch=x86_64&arch=any"))
+         (uri (build-uri 'https
+                        #:host "www.archlinux.org"
+                        #:path "/packages/search/json/"
+                        #:query query)))
+    (utf8->string (request->body (build-request uri)))))
 
 (define (gethash table key)
   (hashx-ref (lambda (string size)
