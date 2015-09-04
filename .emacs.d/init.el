@@ -100,6 +100,7 @@
 (global-set-key (kbd "C-.") 'repeat)
 (global-set-key (kbd "M-i") 'back-to-indentation)
 (global-set-key (kbd "M-o") 'other-window)
+(global-set-key (kbd "C-c a") 'org-agenda)
 
 (windmove-default-keybindings)
 
