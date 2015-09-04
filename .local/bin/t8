@@ -55,7 +55,8 @@ def get_response(text, sl=u"auto", tl=u"auto"):
     params = urllib.parse.urlencode({"client": "t", "dt": "t",
                                      "ie": "utf-8", "oe": "utf-8",
                                      "sl": sl, "tl": tl, "q": text})
-    req = urllib.request.Request("%s?%s" % (api, params), headers={'User-Agent': ''})
+    req = urllib.request.Request("%s?%s" % (api, params),
+                                 headers={'User-Agent': 'Mozilla/4.0'})
     return urllib.request.urlopen(req).read().decode('utf-8')
 
 
