@@ -147,7 +147,7 @@ removed."
                   (forward-line)
                   (point)))
            (overlay (make-overlay beg end)))
-      (overlay-put overlay 'twitch-info t)
+      (overlay-put overlay 'evaporate t)
       (overlay-put overlay 'invisible t))))
 
 (defun twitch-format-info (key val &optional face)
@@ -160,7 +160,6 @@ removed."
 (defun twitch-refresh (&optional _arg _noconfirm)
   "Erase the buffer and draw a new one."
   (let ((vector (twitch-query)))
-    (delete-all-overlays)
     (setq buffer-read-only nil)
     (erase-buffer)
     (seq-doseq (ht vector)
@@ -180,9 +179,8 @@ removed."
   (setq buffer-read-only t)
   (goto-char (point-min)))
 
-(defun twitch-info-overlay-at (position)
-  (seq-some-p (lambda (ov) (overlay-get ov 'twitch-info))
-              (overlays-at position)))
+(defun twitch-overlay-at (position)
+  (car (overlays-at position)))
 
 (defun twitch-toggle-overlay (overlay)
   (if (not (overlay-get overlay 'invisible))
@@ -197,17 +195,17 @@ removed."
 
 (defun twitch-info ()
   (interactive)
-  (let ((overlay (twitch-info-overlay-at (point))))
+  (let ((overlay (twitch-overlay-at (point))))
     (if overlay
-        (while (twitch-info-overlay-at (point))
+        (while (twitch-overlay-at (point))
           (forward-line -1))
       ;; Find next info overlay
       (save-excursion
         (while (and (not (eobp)) (not overlay))
           (let ((next (next-overlay-change (point))))
-            (setq overlay (twitch-info-overlay-at next))
+            (setq overlay (twitch-overlay-at next))
             (goto-char next)))))
-    (and overlay (twitch-toggle-overlay overlay))))
+    (if overlay (twitch-toggle-overlay overlay))))
 
 (defun twitch-open ()
   (interactive)
