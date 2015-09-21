@@ -1,6 +1,6 @@
 # newsbeuter/config
 
-browser "firefox %u &> /dev/null &"
+browser "$BROWSER %u &> /dev/null &"
 html-renderer "elinks -dump"
 
 auto-reload yes

@@ -148,7 +148,7 @@ assign [Class="Inkscape"] 8
 assign [Class="Sxiv"] 7
 
 # bindings
-bindsym $mod+w      exec firefox
+bindsym $mod+w      exec $BROWSER
 bindsym $mod+Ctrl+l exec i3lock -d -c000000 -I 0
 bindsym XK_Print    exec printscreen
 bindsym XF86Display exec vex
