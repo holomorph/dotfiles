@@ -183,12 +183,12 @@
 (add-to-list 'auto-mode-alist '("\\.ldg\\'" . ledger-mode))
 
 (defun default-lisp-modes ()
-  (ignore-errors (paredit-mode))
-  (ignore-errors (rainbow-delimiters-mode)))
+  (ignore-errors (paredit-mode)))
 
 (defun default-prog-modes ()
   (ignore-errors (company-mode))
-  (ignore-errors (flycheck-mode)))
+  (ignore-errors (flycheck-mode))
+  (ignore-errors (rainbow-delimiters-mode)))
 
 (add-hook 'lisp-interaction-mode-hook #'default-lisp-modes)
 (add-hook 'emacs-lisp-mode-hook #'default-lisp-modes)
