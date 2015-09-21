@@ -65,6 +65,7 @@ livestreamer, depending on the input."
   "Try to play media at point. See `play-media'."
   (interactive)
   (let ((link (or (get-text-property (point) 'shr-url)
+                  (get-text-property (point) :nt-link)
                   (thing-at-point 'url)
                   (url-get-url-at-point)
                   ;; catch incomplete URLs
