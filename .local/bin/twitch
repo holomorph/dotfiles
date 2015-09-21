@@ -108,8 +108,9 @@ class String
 end
 
 streams = get_streams()
+width = streams.map{|i| i[:owner].length}.max + 4
 menu = streams.uniq{|i| i[:owner]}.sort_by{|i| "#{i[:owner].downcase}"}
-menu = menu.map{|i| "#{i[:owner].ljust(24)} #{i[:title].gsub(/\r?\n/, " ")}"}
+menu = menu.map{|i| "#{i[:owner].ljust(width)} #{i[:title].gsub(/\r?\n/, " ")}"}
 sel = dmenu(menu)
 
 if sel
