@@ -259,10 +259,12 @@ Key bindings:
                      (generate-new-buffer name))))
     (if (not (or twitch-streamers twitch-teams))
         (message "Nothing to show")
-      (switch-to-buffer-other-window buffer)
-      (unless (eq major-mode 'twitch-mode)
-        (twitch-mode)
-        (twitch-refresh)))))
+      (unless (eq buffer (current-buffer))
+        (with-current-buffer buffer
+          (unless (eq major-mode 'twitch-mode)
+            (twitch-mode)
+            (twitch-refresh))
+          (switch-to-buffer-other-window buffer))))))
 
 (provide 'twitch)
 
