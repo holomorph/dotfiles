@@ -1,5 +1,6 @@
 user_pref("browser.pocket.enabled", false);
 user_pref("browser.tabs.onTop", false);
+user_pref("browser.warnOnQuit", false);
 user_pref("general.smoothScroll", false);
 user_pref("loop.enabled", false);
 user_pref("plugin.default.state", 1);
