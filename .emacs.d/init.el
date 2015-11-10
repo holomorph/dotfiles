@@ -8,9 +8,10 @@
 (setq default-frame-alist '((font . "monospace-13")))
 (with-demoted-errors (load-theme 'zenburn t))
 
-(when (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-(when (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-(when (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+(if (fboundp 'electric-indent-mode) (electric-indent-mode -1))
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 (blink-cursor-mode 0)
 (line-number-mode t)
 (column-number-mode t)
