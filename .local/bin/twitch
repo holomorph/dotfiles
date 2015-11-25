@@ -78,13 +78,13 @@ end
 def dmenu(items)
     prompt = %W[-p Streams\ (#{items.count})]
     # font = %w[-fn -*-dina-bold-r-*-*-12-*-*-*-*-*-*-*]
+    font = "DejaVu Sans Mono"
     args = %w[-i -l 20] + prompt
 
     if ENV["DISPLAY"] && !ENV["DISPLAY"].empty?
-        font = %w[-fn Dina\ Bold\ 9]
-        cmd = %w[dmenu] + args + font
+        cmd = %w[dmenu] + args + %W[-fn #{font}]
     else
-        cmd = %w[bemenu] + args
+        cmd = %w[bemenu] + args + %W[--fn #{font}]
     end
 
     out, status = Open3.capture2(*cmd, stdin_data: items.join("\n"))
