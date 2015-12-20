@@ -3,12 +3,13 @@
 set guioptions-=br
 set guioptions+=n
 set runtimepath=~/.config/pentadactyl
+set scrollsteps=1
 set showtabline=never
 
 colorscheme zenburn
 colorscheme hints
 
-hi -a FontFixed font-size: 11pt !important;
+hi -a FontFixed font-size: 13pt !important;
 
 " mappings
 runtime mappings.vim

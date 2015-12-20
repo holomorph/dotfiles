@@ -11,7 +11,7 @@ set smartcase
 colorscheme hints
 colorscheme zenburn
 
-hi -a Normal font-size: 11pt !important;
+hi -a Normal font-size: 13pt !important;
 
 " mappings
 runtime mappings.vim

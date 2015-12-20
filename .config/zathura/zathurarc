@@ -1,6 +1,6 @@
 # zathura/zathurarc
 
-set font "monospace normal 11"
+set font "monospace normal 13"
 
 set window-title-basename true
 set statusbar-basename true
