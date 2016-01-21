@@ -18,10 +18,11 @@
 (size-indication-mode t)
 (winner-mode)
 
+(fset 'display-startup-echo-area-message 'ignore)
 (fset 'yes-or-no-p 'y-or-n-p)
 
 (setq
- dired-listing-switches "-al -hF --group-directories-first"
+ dired-listing-switches "-alhF"
  disabled-command-function nil
  echo-keystrokes 0.1
  enable-dir-local-variables nil
