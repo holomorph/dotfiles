@@ -26,6 +26,7 @@
  disabled-command-function nil
  echo-keystrokes 0.1
  enable-dir-local-variables nil
+ enable-recursive-minibuffers t
  gnutls-min-prime-bits 2048
  history-length 1000
  inhibit-startup-screen t
@@ -47,11 +48,13 @@
  x-select-enable-primary t)
 
 (setq-default
+ Man-width fill-column
  apropos-do-all t
  c-basic-offset 4
  compilation-read-command nil
  display-time-24hr-format t
  eldoc-idle-delay 0.08
+ eshell-list-files-after-cd t
  gnus-init-file (concat user-emacs-directory "gnus.el")
  gnus-home-directory (concat user-emacs-directory "gnus/")
  ido-enable-flex-matching t
@@ -59,6 +62,7 @@
  mouse-sel-retain-highlight t
  octave-blink-matching-block nil
  show-paren-delay 0.02
+ shr-width fill-column
  truncate-lines t
  uniquify-buffer-name-style 'forward
  windmove-wrap-around t)
@@ -81,6 +85,7 @@
 (setq custom-file "~/.local/share/emacs/custom.el")
 (load custom-file t)
 
+(display-time-mode)
 (savehist-mode)
 (show-paren-mode)
 (if (fboundp 'save-place-mode) (save-place-mode))
@@ -103,6 +108,7 @@
 (global-set-key (kbd "M-i") 'back-to-indentation)
 (global-set-key (kbd "M-o") 'other-window)
 (global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c i") 'imenu)
 
 (windmove-default-keybindings)
 
@@ -152,8 +158,7 @@
  flycheck-disabled-checkers '(emacs-lisp-checkdoc make)
  flycheck-display-errors-delay 0.1
  ledger-highlight-xact-under-point nil
- magit-auto-revert-mode-lighter nil
- magit-backup-mode-lighter nil
+ magit-auto-revert-mode nil
  magit-diff-highlight-hunk-body nil
  magit-diff-refine-hunk 'all
  merlin-default-flags '("-w" "+a-4" "-safe-string")
@@ -177,6 +182,7 @@
 (autoload 'tuareg-mode "tuareg" "Major mode for OCaml code" t)
 (autoload 'ledger-mode "ledger-mode" "Major mode for editing ledger data" t)
 (autoload 'flycheck-mode "flycheck" "Minor mode for on-the-fly syntax checking" t)
+(autoload 'paredit-mode "paredit" "Minor mode for pseudo-structurally editing Lisp code" t)
 (autoload 'company-mode "company" "Modular in-buffer completion framework" t)
 (autoload 'merlin-mode "merlin" "Minor mode for interacting with a merlin process" t)
 
