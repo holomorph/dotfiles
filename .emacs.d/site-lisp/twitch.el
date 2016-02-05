@@ -238,6 +238,16 @@ removed."
     map)
   "Keymap used in `twitch-mode' buffers.")
 
+(easy-menu-define twitch-mode-menu twitch-mode-map
+  "Menu used in `twitch-mode' buffers."
+  '("Twitch"
+    ["Open Stream" twitch-open]
+    ["Toggle Info" twitch-info]
+    ["Copy Stream URL" twitch-copy-url]
+    "--"
+    ["Refresh" revert-buffer]
+    ["Quit" quit-window]))
+
 (define-derived-mode twitch-mode special-mode "Twitch"
   "Major mode for launching streams from <http://www.twitch.tv>.
 The hook `twitch-mode-hook' is run at mode initialization.
