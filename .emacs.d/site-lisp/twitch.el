@@ -24,6 +24,7 @@
 
 ;;; Code:
 
+(eval-when-compile (require 'cl-lib))
 (require 'json)
 (require 'seq)
 (require 'url)
@@ -82,8 +83,7 @@ https://github.com/justintv/twitch-api for more information.")
             (seq-partition copy twitch-api-streamer-limit))))
 
 (defun twitch--munge-v3 (response)
-  "Munge v3 API response RESPONSE in `twitch-get-streamers' so it is
-more compatible with v2."
+  "Munge streams in v3 API response RESPONSE to be compatible with v2 API."
   (vconcat (mapcar (lambda (a)
                      (list (append (assq 'channel a) (list (assq 'viewers a)))))
                    response)))
