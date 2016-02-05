@@ -209,8 +209,7 @@ removed."
 (defun twitch-open ()
   (interactive)
   (let ((url (get-text-property (point) 'url)))
-    (if (not url)
-        (message "No stream selected")
+    (if (not url) (user-error "No stream selected")
       (message "Playing %s" url)
       (apply #'start-process "twitch" nil twitch-livestreamer-program
              (cons url twitch-livestreamer-options)))))
@@ -219,9 +218,7 @@ removed."
   "Copy the URL of the stream under point to the kill ring."
   (interactive)
   (let ((url (get-text-property (point) 'url)))
-    (if url
-        (progn (kill-new url)
-               (message "Copied %s" url))
+    (if url (progn (kill-new url) (message "Copied %s" url))
       (message "No stream under point"))))
 
 (defvar twitch-mode-map
@@ -264,8 +261,7 @@ Key bindings:
 `twitch-teams' is populated."
   (interactive)
   (let* ((name "*twitch*")
-         (buffer (or (get-buffer name)
-                     (generate-new-buffer name))))
+         (buffer (or (get-buffer name) (generate-new-buffer name))))
     (if (not (or twitch-streamers twitch-teams))
         (message "Nothing to show")
       (unless (eq buffer (current-buffer))
