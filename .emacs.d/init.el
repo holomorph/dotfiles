@@ -163,9 +163,6 @@
  magit-diff-refine-hunk 'all
  merlin-default-flags '("-w" "+a-4" "-safe-string")
  merlin-show-instance-in-lighter nil
- newpaste-ask-expiration nil
- newpaste-ask-username nil
- newpaste-username "holomorph"
  notmuch-search-oldest-first nil
  paredit-lighter nil)
 
@@ -174,7 +171,6 @@
 
 ;; autoloads
 (autoload 'legalese "legalese" "Add legalese to your program files" t)
-(autoload 'newpaste "newpaste" "Paste to http://paste.lisp.org" t)
 (autoload 'notmuch "notmuch" "The mail indexer" t)
 (autoload 'dictionary "dictionary" "Client for RFC2249 dictionary servers" t)
 (autoload 'magit-status "magit" "Control Git from Emacs" t)
