@@ -40,27 +40,30 @@
     path-launcher='$TERMINAL -d &quot;%s&quot;'
     color-space='rgb'
     invert-colors='false'
-    brightness='1.'
-    redirectstderr='false'
+    brightness='1.000000'
     selection-command='xclip -i'
     synctex-command='echo SyncTex'
     pax-command='cat'
+    askpass-command=''
+    savepath-command=''
     update-cursor='false'
     hint-font-size='12'
     horizontal-scroll-step='72'
-    page-scroll-scale='1.'
+    page-scroll-scale='1.000000'
     use-pbo='true'
     wheel-scrolls-pages='false'
     remote-in-a-new-instance='false'
     point-and-x='false'
     point-and-x-mark='word'
-    scroll-bar-on-the-left='false'>
+    scroll-bar-on-the-left='false'
+    edit-annotations-inline='true'>
 <keymap mode='global'>
 <map in='ctrl-y' out='up'/>
 <map in='ctrl-n' out='down'/>
 <map in='ctrl-p' out='up'/>
 <map in='ctrl-g' out='esc'/>
 <map in='ctrl-e' out='down'/>
+<map in='shift-space' out='del'/>
 <map in='ctrl-v' out='pgdown'/>
 <map in='ctrl-f' out='pgdown'/>
 <map in='ctrl-[' out='esc'/>
