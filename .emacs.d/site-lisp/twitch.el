@@ -3,7 +3,7 @@
 ;; Copyright (C) 2015-2016  Mark Oteiza <mvoteiza@udel.edu>
 
 ;; Author: Mark Oteiza <mvoteiza@udel.edu>
-;; Version: 0.7
+;; Version: 0.8
 ;; Package-Requires: ((emacs "24.4") (seq "1.5"))
 ;; Keywords: convenience, multimedia
 
@@ -70,12 +70,11 @@ https://github.com/justintv/twitch-api for more information.")
 (defconst twitch-api-streamer-limit 100
   "Maximum number of streamers allowed in a single query.")
 
-(defun twitch-request (url)
-  (with-current-buffer (url-retrieve-synchronously url t)
-    (set-buffer-multibyte t)
-    (goto-char (point-min))
-    (re-search-forward "\r?\n\r?\n" nil t)
-    (json-read)))
+(defun twitch-handle-response ()
+  (set-buffer-multibyte t)
+  (goto-char (point-min))
+  (re-search-forward "\r?\n\r?\n" nil t)
+  (json-read))
 
 (defun twitch--batch-list ()
   (let ((copy (delete-dups (remq nil twitch-streamers))))
@@ -84,9 +83,9 @@ https://github.com/justintv/twitch-api for more information.")
 
 (defun twitch--munge-v3 (response)
   "Munge streams in v3 API response RESPONSE to be compatible with v2 API."
-  (vconcat (mapcar (lambda (a)
-                     (list (append (assq 'channel a) (list (assq 'viewers a)))))
-                   response)))
+  (mapcar (lambda (a)
+            (list (append (assq 'channel a) (list (assq 'viewers a)))))
+          response))
 
 (defun twitch-hash (channel &optional v3)
   "Return a hash table of stream information in alist CHANNEL.
@@ -102,38 +101,24 @@ alist.  Do API v3-specific things if V3 is non-nil."
                (puthash p val table)))
     table))
 
-(defun twitch-hash-vector (response &optional v3)
-  (vconcat (mapcar (lambda (elt) (twitch-hash (cdar elt) v3)) response)))
+(defun twitch-streamer-urls ()
+  "Return list of v3 API URLs generated from `twitch-streamers'."
+  (mapcar (lambda (batch)
+            (format "https://api.twitch.tv/kraken/streams?channel=%s&limit=%d"
+                    batch twitch-api-streamer-limit))
+          (twitch--batch-list)))
 
-(defun twitch-get-streamers ()
-  "Get stream information using the v3 API with `twitch-streamers'."
-  (let ((vector []))
-    (dolist (batch (twitch--batch-list))
-      (let* ((fmt "https://api.twitch.tv/kraken/streams?channel=%s&limit=%d")
-             (url (format fmt batch twitch-api-streamer-limit))
-             (streams (cdr-safe (assq 'streams (twitch-request url)))))
-        (setq vector (vconcat vector (twitch--munge-v3 streams)))))
-    (twitch-hash-vector vector t)))
+(defun twitch-team-urls ()
+  "Return list of v2 API URLs generated from `twitch-teams'."
+  (mapcar (lambda (team)
+            (format "http://api.twitch.tv/api/team/%s/live_channels.json" team))
+          twitch-teams))
 
-(defun twitch-get-teams ()
-  "Get stream information using the v2 API with `twitch-teams'."
-  (let ((vector []))
-    (dolist (team twitch-teams)
-      (let* ((fmt "http://api.twitch.tv/api/team/%s/live_channels.json")
-             (url (format fmt team))
-             (channels (cdr-safe (assq 'channels (twitch-request url)))))
-        (setq vector (vconcat vector channels))))
-    (twitch-hash-vector vector)))
-
-(defun twitch-query ()
-  "Return a vector containing hashtables for each streamer from
-the users in `twitch-streamers' and teams in `twitch-teams'.  The
-vector is sorted lexically by twitch user name; duplicates are
-removed."
-  (let ((list (seq-uniq (vconcat (twitch-get-teams) (twitch-get-streamers))
-                        (lambda (a b) (string= (gethash :user a) (gethash :user b))))))
-    (seq-sort (lambda (a b) (string< (gethash :user a) (gethash :user b)))
-              (vconcat list))))
+(defun twitch-sort (list)
+  "Sort hash tables in LIST according to user name, removing duplicates."
+  (sort (seq-uniq list
+                  (lambda (a b) (string= (gethash :user a) (gethash :user b))))
+        (lambda (a b) (string< (gethash :user a) (gethash :user b)))))
 
 (defun twitch-insert-entry (vec url)
   (let* ((entry (mapconcat #'identity vec ""))
@@ -156,27 +141,53 @@ removed."
                       'font-lock-face (or face 'font-lock-comment-face))
           "\n"))
 
+(defun twitch-redraw (list)
+  "Erase the buffer and draw a new one from the hash tables in LIST."
+  (let ((first (zerop (length (buffer-string))))
+        (link (get-text-property (point) 'url)))
+    (with-silent-modifications
+      (erase-buffer)
+      (seq-doseq (ht (twitch-sort list))
+        (let* ((name (gethash :name ht))
+               (title (gethash :title ht))
+               (url (or (gethash :url ht) (format "http://twitch.tv/%s" name))))
+          (twitch-insert-entry
+           (vector (format "%-20.18s" (propertize name 'font-lock-face 'font-lock-type-face))
+                   (format "%s\n" (propertize (or title "") 'font-lock-face 'font-lock-variable-name-face))
+                   (twitch-format-info "Game" (gethash :game ht))
+                   (twitch-format-info "Viewers" (gethash :viewers ht))
+                   (twitch-format-info "Followers" (gethash :followers ht))
+                   (twitch-format-info "Total views" (gethash :views ht))
+                   (twitch-format-info "Bio" (gethash :bio ht)))
+           url))))
+    (goto-char
+     (if first (point-min)
+       (save-excursion
+         (goto-char (point-min))
+         (while (string< (get-text-property (point) 'url) link)
+           (forward-line 6))
+         (point))))))
+
 (defun twitch-refresh (&optional _arg _noconfirm)
   "Erase the buffer and draw a new one."
-  (let ((vector (twitch-query)))
-    (setq buffer-read-only nil)
-    (erase-buffer)
-    (seq-doseq (ht vector)
-      (let* ((name (gethash :name ht))
-             (title (gethash :title ht))
-             (url (or (gethash :url ht) (format "http://twitch.tv/%s" name))))
-        (twitch-insert-entry
-         (vector (format "%-20.18s" (propertize name 'font-lock-face 'font-lock-type-face))
-                 (format "%s\n" (propertize (or title "") 'font-lock-face 'font-lock-variable-name-face))
-                 (twitch-format-info "Game" (gethash :game ht))
-                 (twitch-format-info "Viewers" (gethash :viewers ht))
-                 (twitch-format-info "Followers" (gethash :followers ht))
-                 (twitch-format-info "Total views" (gethash :views ht))
-                 (twitch-format-info "Bio" (gethash :bio ht)))
-         url))))
-  (set-buffer-modified-p nil)
-  (setq buffer-read-only t)
-  (goto-char (point-min)))
+  (let* ((buffer (current-buffer))
+         (urls (append (twitch-team-urls) (twitch-streamer-urls)))
+         (count (length urls))
+         (tables nil))
+    (seq-doseq (url urls)
+      (url-retrieve
+       url
+       (lambda (_status)
+         (cl-decf count)
+         (let* ((json (twitch-handle-response))
+                (v3 (string-match-p "\\`https://api.twitch.tv/kraken" url)))
+           (seq-doseq (elt (if v3 (twitch--munge-v3 (cdr (assq 'streams json)))
+                             (cdr (assq 'channels json))))
+             (push (twitch-hash (cdar elt) v3) tables)))
+         (when (zerop count)
+           (with-current-buffer buffer
+             (twitch-redraw tables))))
+       nil t t))))
 
 (defun twitch-overlay-at (position)
   (car (overlays-at position)))
