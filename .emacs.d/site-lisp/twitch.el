@@ -150,7 +150,7 @@ alist.  Do API v3-specific things if V3 is non-nil."
       (seq-doseq (ht (twitch-sort list))
         (let* ((name (gethash :name ht))
                (title (gethash :title ht))
-               (url (or (gethash :url ht) (format "http://twitch.tv/%s" name))))
+               (url (format "http://twitch.tv/%s" (gethash :user ht))))
           (twitch-insert-entry
            (vector (format "%-20.18s" (propertize name 'font-lock-face 'font-lock-type-face))
                    (format "%s\n" (propertize (or title "") 'font-lock-face 'font-lock-variable-name-face))
