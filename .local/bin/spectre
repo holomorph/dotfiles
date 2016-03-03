@@ -1,5 +1,6 @@
 #!/bin/sh
 # make and view a spectrogram
+set -e
 readonly flags="-n spectrogram -x 3000 -y 513 -z 120 -w Kaiser"
 
 if image="$(mktemp)"; then
