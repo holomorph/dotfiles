@@ -6,6 +6,7 @@
  gnus-read-newsrc-file nil
  gnus-startup-file (concat gnus-home-directory "newsrc")
  gnus-summary-line-format "%U%R%z%(%[%&user-date; %-15,15f%]%) %B%s\n"
+ gnus-thread-indent-level 2
  gnus-user-date-format-alist '((t . "%m/%d"))
  gnus-summary-thread-gathering-function 'gnus-gather-threads-by-references
  gnus-sum-thread-tree-false-root ""
