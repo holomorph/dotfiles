@@ -10,7 +10,9 @@ text/x-patch; vim %s;
 text/plain; vim %s;
 
 image/gif; ffplay -loop 0 %s;
-image/*; feh -. %s;
+image/svg; eog %s;
+image/*; feh -. %s; test=feh --version
+image/*; eog %s;
 audio/*; mpv %s;
 video/*; mpv %s;
 
@@ -19,4 +21,5 @@ application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; xls2txt %s; c
 application/vnd.ms-excel; xls2txt %s; copiousoutput;
 application/msword; antiword -f %s; copiousoutput;
 
-application/zip; unzip -l %s; copiousoutput;
+application/zip; unzip -l %s; copiousoutput; test=unzip -h
+application/zip; vim %s; needsterminal
