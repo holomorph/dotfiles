@@ -61,6 +61,7 @@
  indent-tabs-mode nil
  mouse-sel-retain-highlight t
  octave-blink-matching-block nil
+ reftex-idle-time 0.1
  show-paren-delay 0.02
  shr-width fill-column
  truncate-lines t
@@ -145,6 +146,10 @@
 
 ;; filetype
 (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
+
+(add-hook 'latex-mode-hook 'reftex-access-scan-info)
+(add-hook 'latex-mode-hook #'reftex-mode)
+(add-hook 'latex-mode-hook #'auto-fill-mode)
 
 
 ;; extensions

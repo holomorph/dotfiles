@@ -35,23 +35,19 @@
 
 (defcustom twitch-livestreamer-program "livestreamer"
   "The name by which to invoke livestreamer."
-  :group 'twitch
   :type 'string)
 
 (defcustom twitch-livestreamer-options '()
   "Extra arguments to pass to `twitch-livestreamer-program'."
-  :group 'twitch
   :type '(repeat string))
 
 (defcustom twitch-streamers nil
   "List of streamer user names on Twitch."
-  :type '(repeat (string :tag "Name"))
-  :group 'twitch)
+  :type '(repeat (string :tag "Name")))
 
 (defcustom twitch-teams nil
   "List of team names on Twitch."
-  :type '(repeat (string :tag "Name"))
-  :group 'twitch)
+  :type '(repeat (string :tag "Name")))
 
 (defconst twitch-api-plist
   '(:name (display_name . display_name)

@@ -21,10 +21,11 @@
 
 ;;; Commentary:
 
-;; Play media from Emacs using mpv <http://mpv.io/> or livestreamer
-;; <http://docs.livestreamer.io/>.  For mpv, at least v0.7.0 is
-;; required for its ytdl hook. For livestreamer, at least v1.9.0 is
-;; needed for the "--default-stream" config option.
+;; Play media from Emacs using mpv <http://mpv.io/>, livestreamer
+;; <http://docs.livestreamer.io/>, or some other player.  For mpv, at
+;; least v0.7.0 is required for its ytdl hook (turned on by default in
+;; v0.7.2). For livestreamer, at least v1.9.0 is needed for the
+;; "--default-stream" config option.
 
 ;;; Code:
 
@@ -36,12 +37,10 @@
 
 (defcustom play-media-livestreamer-program "livestreamer"
   "The name by which to invoke livestreamer."
-  :group 'play-media
   :type 'string)
 
 (defcustom play-media-mpv-program "mpv"
   "The name by which to invoke mpv."
-  :group 'play-media
   :type 'string)
 
 (defun play-media-start-process (program &rest args)
