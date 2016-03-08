@@ -12,13 +12,12 @@ OPTIONS=checkpoint,checkspace
 OPTIONS=!cmdassist,suppress_alert:3.3.1
 OPTIONS=confirm,prayconfirm,pickup_burden:stressed
 
-## http://alt.org/nethack
+## 3.6.0
+OPTIONS=paranoid_confirmation:pray quit attack remove
 OPTIONS=use_darkgray
-OPTIONS=paranoid_quit,paranoid_hit,paranoid_remove
-OPTIONS=hp_monitor
 OPTIONS=menucolors
-OPTIONS=showbuc
 OPTIONS=sortloot:full
+OPTIONS=statushilites
 
 MENUCOLOR="!B($| )"=white
 MENUCOLOR="!C($| )"=white
@@ -28,25 +27,34 @@ MENUCOLOR=" blessed| B($| )"=blue
 MENUCOLOR=" uncursed| UC?($| )"=green
 MENUCOLOR=" cursed| C($| )"=red
 
-STATUSCOLOR=HP%100:lightgreen,HP%67:yellow,HP%33:orange,HP%14:red
-STATUSCOLOR=PW%100=lightgreen,PW%75=yellow,PW%50:orange,PW%25=red
-STATUSCOLOR=Burdened:lightcyan
-STATUSCOLOR=Stressed:orange
-STATUSCOLOR=Strained:red
-STATUSCOLOR=Overtaxed:lightmagenta
-STATUSCOLOR=Overloaded:lightmagenta
-STATUSCOLOR=Satiated:lightcyan
-STATUSCOLOR=Hungry:orange
-STATUSCOLOR=Weak:red
-STATUSCOLOR=Fainting:lightmagenta
-STATUSCOLOR=Fainted:lightmagenta
-STATUSCOLOR=Starved:lightmagenta
-STATUSCOLOR=FoodPois:lightmagenta
-STATUSCOLOR=Ill:lightmagenta
-STATUSCOLOR=Slime:lightmagenta
-STATUSCOLOR=Conf:yellow
-STATUSCOLOR=Hallu:yellow
-STATUSCOLOR=Stun:yellow
-STATUSCOLOR=Blind:white
+OPTION=hilite_status:hunger/updown/red/green
+OPTION=hilite_status:hitpoints/40%/red/normal
+OPTION=hilite_status:power/40%/red/normal
+
+## http://alt.org/nethack
+# OPTIONS=paranoid_quit,paranoid_hit,paranoid_remove
+# OPTIONS=hp_monitor
+# OPTIONS=showbuc
+
+# STATUSCOLOR=HP%100:lightgreen,HP%67:yellow,HP%33:orange,HP%14:red
+# STATUSCOLOR=PW%100=lightgreen,PW%75=yellow,PW%50:orange,PW%25=red
+# STATUSCOLOR=Burdened:lightcyan
+# STATUSCOLOR=Stressed:orange
+# STATUSCOLOR=Strained:red
+# STATUSCOLOR=Overtaxed:lightmagenta
+# STATUSCOLOR=Overloaded:lightmagenta
+# STATUSCOLOR=Satiated:lightcyan
+# STATUSCOLOR=Hungry:orange
+# STATUSCOLOR=Weak:red
+# STATUSCOLOR=Fainting:lightmagenta
+# STATUSCOLOR=Fainted:lightmagenta
+# STATUSCOLOR=Starved:lightmagenta
+# STATUSCOLOR=FoodPois:lightmagenta
+# STATUSCOLOR=Ill:lightmagenta
+# STATUSCOLOR=Slime:lightmagenta
+# STATUSCOLOR=Conf:yellow
+# STATUSCOLOR=Hallu:yellow
+# STATUSCOLOR=Stun:yellow
+# STATUSCOLOR=Blind:white
 
 # vim: ft=config
