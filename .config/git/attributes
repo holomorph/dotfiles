@@ -1,0 +1,3 @@
+# git/attributes
+*.el diff=elisp
+*.scm diff=scheme
