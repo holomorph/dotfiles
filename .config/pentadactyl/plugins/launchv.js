@@ -31,7 +31,8 @@ var INFO =
     ["description", { short: "true" },
     ["p", {}, "Launch video using hint URL."]]],
 
-    ["note", {}, "youtube-dl support was added to mpv in v0.7.0."],
+    ["note", {}, "youtube-dl support was added to mpv in v0.7.0 ",
+    "and turned on by default in v0.7.2."],
     ["note", {}, "livestreamer needs to have a player and default stream ",
     "configured. livestreamer added the --default-stream option in v1.9.0."]
 
@@ -60,7 +61,7 @@ function launchv(target) {
     if(uri.match(/(hitbox|twitch)\.tv/))
         exec("livestreamer", uri);
     else
-        exec("mpv --ytdl", uri);
+        exec("mpv", uri);
 }
 
 hints.addMode("l", "Launch video from hint", function (elem, loc) launchv(loc));
