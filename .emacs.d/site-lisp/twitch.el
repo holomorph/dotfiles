@@ -116,12 +116,27 @@ alist.  Do API v3-specific things if V3 is non-nil."
                   (lambda (a b) (string= (gethash :user a) (gethash :user b))))
         (lambda (a b) (string< (gethash :user a) (gethash :user b)))))
 
-(defun twitch-insert-entry (vec url)
-  (let* ((entry (mapconcat #'identity vec ""))
+(defun twitch-format-data (ht)
+  (let* ((name (gethash :name ht))
+         (title (gethash :title ht))
+         (user (gethash :user ht))
+         (bio (gethash :bio ht)))
+    (propertize
+     (concat
+      (format "%-20.18s" (propertize name 'font-lock-face 'font-lock-type-face))
+      (format "%s\n" (propertize (or title "") 'font-lock-face 'font-lock-variable-name-face))
+      (twitch-format-info "Game" (gethash :game ht))
+      (twitch-format-info "Viewers" (gethash :viewers ht))
+      (twitch-format-info "Followers" (gethash :followers ht))
+      (twitch-format-info "Total views" (gethash :views ht))
+      (if bio (twitch-format-info "Bio" bio)))
+     'url (format "http://twitch.tv/%s" user))))
+
+(defun twitch-insert-entry (ht)
+  (let* ((entry (twitch-format-data ht))
          (start (point))
          (end (+ start (length entry))))
     (insert entry)
-    (add-text-properties start end (list 'url url))
     (let* ((beg (save-excursion
                   (goto-char start)
                   (forward-line)
@@ -143,25 +158,13 @@ alist.  Do API v3-specific things if V3 is non-nil."
         (link (get-text-property (point) 'url)))
     (with-silent-modifications
       (erase-buffer)
-      (seq-doseq (ht (twitch-sort list))
-        (let* ((name (gethash :name ht))
-               (title (gethash :title ht))
-               (url (format "http://twitch.tv/%s" (gethash :user ht))))
-          (twitch-insert-entry
-           (vector (format "%-20.18s" (propertize name 'font-lock-face 'font-lock-type-face))
-                   (format "%s\n" (propertize (or title "") 'font-lock-face 'font-lock-variable-name-face))
-                   (twitch-format-info "Game" (gethash :game ht))
-                   (twitch-format-info "Viewers" (gethash :viewers ht))
-                   (twitch-format-info "Followers" (gethash :followers ht))
-                   (twitch-format-info "Total views" (gethash :views ht))
-                   (twitch-format-info "Bio" (gethash :bio ht)))
-           url))))
+      (mapc #'twitch-insert-entry (twitch-sort list)))
     (goto-char
      (if first (point-min)
        (save-excursion
          (goto-char (point-min))
          (while (string< (get-text-property (point) 'url) link)
-           (forward-line 6))
+           (forward-line))
          (point))))))
 
 (defun twitch-refresh (&optional _arg _noconfirm)
