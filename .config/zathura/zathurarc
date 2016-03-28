@@ -1,5 +1,6 @@
 # zathura/zathurarc
 
+set adjust-open "width"
 set font "monospace normal 13"
 
 set window-title-basename true
