@@ -18,6 +18,8 @@
 (size-indication-mode t)
 (winner-mode)
 
+(if (fboundp 'calc) (defalias 'bc 'calc))
+(defalias 'cal 'calendar)
 (fset 'display-startup-echo-area-message 'ignore)
 (fset 'yes-or-no-p 'y-or-n-p)
 
@@ -87,7 +89,7 @@
 (load custom-file t)
 
 (display-time-mode)
-(savehist-mode)
+(if (fboundp 'savehist-mode) (savehist-mode 1))
 (show-paren-mode)
 (if (fboundp 'save-place-mode) (save-place-mode))
 (require 'uniquify)
@@ -106,7 +108,7 @@
 (global-set-key (kbd "RET") 'newline-and-indent)
 (global-set-key (kbd "<f5>") 'recompile)
 (global-set-key (kbd "C-.") 'repeat)
-(global-set-key (kbd "M-i") 'back-to-indentation)
+(global-set-key (kbd "M-i") 'imenu)
 (global-set-key (kbd "M-o") 'other-window)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c i") 'imenu)
@@ -142,6 +144,7 @@
  org-default-notes-file "notes.org"
  org-directory "~/doc/notes"
  org-export-backends '(ascii html latex man texinfo)
+ org-log-done 'time
  org-use-speed-commands t)
 
 ;; filetype
