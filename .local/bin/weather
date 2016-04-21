@@ -1,8 +1,11 @@
-#!/bin/bash
-
+#!/bin/sh
 # weather: shell wrapper that colors output for readability
 
-sed -re "\
+if test "x$TERM" = "xdumb"; then
+    /usr/bin/weather
+else
+    /usr/bin/weather $@ | sed -r "\
 s/[0-9]+/[1;37m&[0m/g
 s/^( *)([ -~]+)(:)/\1[34m\2[0m\3/g
-s/(\.)(([A-Z]+ ?)+)(\.{3})/\1[34m\2[0m\4/g" <(/usr/bin/weather $@)
+s/(\.)(([A-Z]+ ?)+)(\.{3})/\1[34m\2[0m\4/g"
+fi
