@@ -1,4 +1,4 @@
-;;; twitch.el --- Query teams and streamers from http://twitch.tv -*- lexical-binding: t -*-
+;;; twitch.el --- Query streamers from http://twitch.tv -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2015-2016  Mark Oteiza <mvoteiza@udel.edu>
 
@@ -31,7 +31,7 @@
 (require 'url)
 
 (defgroup twitch nil
-  "Query teams and streamers from http://twitch.tv"
+  "Query streamers from http://twitch.tv"
   :group 'external)
 
 (defcustom twitch-player "mpv"
@@ -48,23 +48,17 @@ stream title, respectively."
   "List of streamer user names on Twitch."
   :type '(repeat (string :tag "Name")))
 
-(defcustom twitch-teams nil
-  "List of team names on Twitch."
-  :type '(repeat (string :tag "Name")))
-
 (defconst twitch-api-plist
-  '(:name (display_name . display_name)
-    :title (title . status)
-    :viewers (current_viewers . viewers) ; somewhere else in v3
-    :views (total_views . views)
-    :followers (followers_count . followers)
-    :url (link . url)
-    :game (meta_game . game)
-    :bio (description . bio)            ; somewhere else in v3
-    :user (name . name))
-  "Plist containing keys for corresponding values of Twitch APIs.
-The car of each value corresponds to v2, the cdr to v3. See
-https://github.com/justintv/twitch-api for more information.")
+  '(:name display_name
+    :title status
+    :viewers viewers
+    :views views
+    :followers followers
+    :url url
+    :game game
+    :user name)
+  "Plist containing keywords for corresponding Twitch API keys.
+See https://github.com/justintv/twitch-api for more information.")
 
 (defconst twitch-api-streamer-limit 100
   "Maximum number of streamers allowed in a single query.")
@@ -86,32 +80,25 @@ https://github.com/justintv/twitch-api for more information.")
             (list (append (assq 'channel a) (list (assq 'viewers a)))))
           response))
 
-(defun twitch-hash (channel &optional v3)
+(defun twitch-hash (channel)
   "Return a hash table of stream information in alist CHANNEL.
 The hash table keys are the properties in `twitch-api-plist',
 values of which are used to find the key-values in the CHANNEL
-alist.  Do API v3-specific things if V3 is non-nil."
+alist."
   (let ((table (make-hash-table)))
-    (cl-loop for (p v) on twitch-api-plist by #'cddr
-             with getter = (if v3 'cdr 'car) do
-             (let ((val (cdr (assq (funcall getter v) channel))))
+    (cl-loop for (p v) on twitch-api-plist by #'cddr do
+             (let ((val (cdr (assq v channel))))
                (when (stringp val)
                  (setq val (replace-regexp-in-string "\r?\n" " " val t t)))
                (puthash p val table)))
     table))
 
 (defun twitch-streamer-urls ()
-  "Return list of v3 API URLs generated from `twitch-streamers'."
+  "Return list of API URLs generated from `twitch-streamers'."
   (mapcar (lambda (batch)
             (format "https://api.twitch.tv/kraken/streams?channel=%s&limit=%d"
                     batch twitch-api-streamer-limit))
           (twitch--batch-list)))
-
-(defun twitch-team-urls ()
-  "Return list of v2 API URLs generated from `twitch-teams'."
-  (mapcar (lambda (team)
-            (format "http://api.twitch.tv/api/team/%s/live_channels.json" team))
-          twitch-teams))
 
 (defun twitch-sort (list)
   "Sort hash tables in LIST according to user name, removing duplicates."
@@ -179,7 +166,7 @@ alist.  Do API v3-specific things if V3 is non-nil."
 (defun twitch-refresh (&optional _arg _noconfirm)
   "Erase the buffer and draw a new one."
   (let* ((buffer (current-buffer))
-         (urls (append (twitch-team-urls) (twitch-streamer-urls)))
+         (urls (twitch-streamer-urls))
          (count (length urls))
          (tables nil))
     (seq-doseq (url urls)
@@ -187,11 +174,9 @@ alist.  Do API v3-specific things if V3 is non-nil."
        url
        (lambda (_status)
          (cl-decf count)
-         (let* ((json (twitch-handle-response))
-                (v3 (string-match-p "\\`https://api.twitch.tv/kraken" url)))
-           (seq-doseq (elt (if v3 (twitch--munge-v3 (cdr (assq 'streams json)))
-                             (cdr (assq 'channels json))))
-             (push (twitch-hash (cdar elt) v3) tables)))
+         (let ((json (twitch-handle-response)))
+           (seq-doseq (elt (twitch--munge-v3 (cdr (assq 'streams json))))
+             (push (twitch-hash (cdar elt)) tables)))
          (when (zerop count)
            (with-current-buffer buffer
              (twitch-redraw tables))))
@@ -276,12 +261,11 @@ Key bindings:
 
 ;;;###autoload
 (defun twitch ()
-  "Open a `twitch-mode' buffer if `twitch-streamers' or
-`twitch-teams' is populated."
+  "Open a `twitch-mode' buffer if `twitch-streamers' or is populated."
   (interactive)
   (let* ((name "*twitch*")
          (buffer (or (get-buffer name) (generate-new-buffer name))))
-    (if (not (or twitch-streamers twitch-teams))
+    (if (not twitch-streamers)
         (message "Nothing to show")
       (unless (eq buffer (current-buffer))
         (with-current-buffer buffer

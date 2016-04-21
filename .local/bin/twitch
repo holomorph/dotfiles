@@ -10,7 +10,7 @@ require 'json'
 require 'thread'
 
 module Twitch
-    V2 = {index: "channels", owner: "display_name", uri: "link", title: "title"}
+    API = "https://api.twitch.tv/kraken"
     V3 = {index: "streams", owner: "display_name", url: "url", title: "status"}
 end
 
@@ -47,24 +47,13 @@ def get_streams()
     streams = []
     streams_mx = Mutex.new
 
-    teams = read_config("teams")
     users = read_config("streamers")
-
-    teams.each do |team|
-        threads << Thread.new do
-            streams_mx.synchronize do
-                url = "http://api.twitch.tv/api/team/#{team}/live_channels.json"
-                data = get_json(url)
-                parse_json(streams, data, Twitch::V2)
-            end
-        end
-    end
 
     users.each_slice(100) do |batch|
         threads << Thread.new do
             streams_mx.synchronize do
-                url = format("https://api.twitch.tv/kraken/streams?channel=%s&limit=%d",
-                             batch.join(","), batch.count)
+                url = "#{Twitch::API}/streams?channel=#{batch.join(",")}" +
+                      "&limit=#{batch.count}"
                 data = get_json(url)
                 parse_json(streams, data, Twitch::V3)
             end
