@@ -25,6 +25,7 @@
 ;;; Code:
 
 (eval-when-compile (require 'cl-lib))
+(require 'format-spec)
 (require 'json)
 (require 'seq)
 (require 'url)
@@ -33,12 +34,14 @@
   "Query teams and streamers from http://twitch.tv"
   :group 'external)
 
-(defcustom twitch-livestreamer-program "livestreamer"
-  "The name by which to invoke livestreamer."
+(defcustom twitch-player "mpv"
+  "The name by which to invoke stream player."
   :type 'string)
 
-(defcustom twitch-livestreamer-options '()
-  "Extra arguments to pass to `twitch-livestreamer-program'."
+(defcustom twitch-player-options '("--title=" "%t (%n)")
+  "Extra arguments to pass to `twitch-player'.
+Format specifiers %n and %t will expand to streamer name and
+stream title, respectively."
   :type '(repeat string))
 
 (defcustom twitch-streamers nil
@@ -130,7 +133,13 @@ alist.  Do API v3-specific things if V3 is non-nil."
       (twitch-format-info "Followers" (gethash :followers ht))
       (twitch-format-info "Total views" (gethash :views ht))
       (if bio (twitch-format-info "Bio" bio)))
-     'url (format "http://twitch.tv/%s" user))))
+     'url (format "http://twitch.tv/%s" user) 'name name 'title title)))
+
+(defun twitch-format-spec (str)
+  "Interpolate format specifiers in STR."
+  (let ((title (or (get-text-property (point) 'title) ""))
+        (name (or (get-text-property (point) 'name) "")))
+    (format-spec str `((?t . ,title) (?n . ,name)))))
 
 (defun twitch-insert-entry (ht)
   (let* ((entry (twitch-format-data ht))
@@ -221,8 +230,8 @@ alist.  Do API v3-specific things if V3 is non-nil."
   (let ((url (get-text-property (point) 'url)))
     (if (not url) (user-error "No stream selected")
       (message "Playing %s" url)
-      (apply #'start-process "twitch" nil twitch-livestreamer-program
-             (cons url twitch-livestreamer-options)))))
+      (apply #'start-process "twitch" nil twitch-player
+             url (mapcar #'twitch-format-spec twitch-player-options)))))
 
 (defun twitch-copy-url ()
   "Copy the URL of the stream under point to the kill ring."
