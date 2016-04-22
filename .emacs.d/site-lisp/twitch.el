@@ -24,6 +24,7 @@
 
 ;;; Code:
 
+(require 'calc-ext)
 (eval-when-compile (require 'cl-lib))
 (require 'format-spec)
 (require 'json)
@@ -106,11 +107,17 @@ alist."
                   (lambda (a b) (string= (gethash :user a) (gethash :user b))))
         (lambda (a b) (string< (gethash :user a) (gethash :user b)))))
 
+(defun twitch-format-info (key val)
+  (let* ((v (cond ((numberp val) (if (< val 10000) (number-to-string val)
+                                   (math-group-float (number-to-string val))))
+                  ((stringp val) val)))
+         (entry (concat "  " key ": " v)))
+    (concat (propertize entry 'font-lock-face 'font-lock-comment-face) "\n")))
+
 (defun twitch-format-data (ht)
   (let* ((name (gethash :name ht))
          (title (gethash :title ht))
-         (user (gethash :user ht))
-         (bio (gethash :bio ht)))
+         (user (gethash :user ht)))
     (propertize
      (concat
       (format "%-20.18s" (propertize name 'font-lock-face 'font-lock-type-face))
@@ -118,8 +125,7 @@ alist."
       (twitch-format-info "Game" (gethash :game ht))
       (twitch-format-info "Viewers" (gethash :viewers ht))
       (twitch-format-info "Followers" (gethash :followers ht))
-      (twitch-format-info "Total views" (gethash :views ht))
-      (if bio (twitch-format-info "Bio" bio)))
+      (twitch-format-info "Total views" (gethash :views ht)))
      'url (format "http://twitch.tv/%s" user) 'name name 'title title)))
 
 (defun twitch-format-spec (str)
@@ -140,13 +146,6 @@ alist."
            (overlay (make-overlay beg end)))
       (overlay-put overlay 'evaporate t)
       (overlay-put overlay 'invisible t))))
-
-(defun twitch-format-info (key val &optional face)
-  (concat (propertize (format "  %s " (concat key ":"))
-                      'font-lock-face 'font-lock-comment-face)
-          (propertize (format "%s" val)
-                      'font-lock-face (or face 'font-lock-comment-face))
-          "\n"))
 
 (defun twitch-redraw (list)
   "Erase the buffer and draw a new one from the hash tables in LIST."
