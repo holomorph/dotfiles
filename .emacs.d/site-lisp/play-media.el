@@ -3,7 +3,7 @@
 ;; Copyright (C) 2014-2016  Mark Oteiza <mvoteiza@udel.edu>
 
 ;; Author: Mark Oteiza <mvoteiza@udel.edu>
-;; Version: 0.3
+;; Version: 0.4
 ;; Keywords: convenience
 
 ;; This program is free software; you can redistribute it and/or
@@ -29,6 +29,7 @@
 
 ;;; Code:
 
+(require 'url-parse)
 (require 'url-util)
 
 (defgroup play-media nil
@@ -55,9 +56,11 @@ livestreamer, depending on the input."
   (interactive "sURL: ")
   (if (string-match "\\(hitbox\\|twitch\\)\.tv" url)
       (play-media-start-process play-media-livestreamer-program url)
-    (unless (url-type (url-generic-parse-url url))
-      (setq url (concat "ytdl://" url)))
-    (play-media-start-process play-media-mpv-program "--ytdl" url)))
+    (cond
+     ((file-readable-p url) (setq url (expand-file-name url)))
+     ((not (url-type (url-generic-parse-url url)))
+      (setq url (concat "ytdl://" url))))
+    (play-media-start-process play-media-mpv-program url)))
 
 ;;;###autoload
 (defun play-media-at-point ()
@@ -66,6 +69,10 @@ livestreamer, depending on the input."
   (let ((link (or (get-text-property (point) 'shr-url)
                   (get-text-property (point) :nt-link)
                   (thing-at-point 'url)
+                  (let ((fn (or (ffap-guess-file-name-at-point)
+                                (if (fboundp 'dired-file-name-at-point)
+                                    (dired-file-name-at-point)))))
+                    (unless (equal (file-name-as-directory fn) fn) fn))
                   (url-get-url-at-point)
                   ;; catch incomplete URLs
                   (thing-at-point 'symbol))))
