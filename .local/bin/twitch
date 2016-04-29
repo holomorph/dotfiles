@@ -10,90 +10,90 @@ require 'json'
 require 'thread'
 
 module Twitch
-    API = "https://api.twitch.tv/kraken"
-    V3 = {index: "streams", owner: "display_name", url: "url", title: "status"}
+  API = "https://api.twitch.tv/kraken"
+  V3 = {index: "streams", owner: "display_name", url: "url", title: "status"}
 end
 
 def read_config(file)
-    array = []
-    xdg = ENV["XDG_CONFIG_DIR"]
-    dir = xdg ? xdg : File.join(ENV["HOME"], ".config")
+  array = []
+  xdg = ENV["XDG_CONFIG_DIR"]
+  dir = xdg ? xdg : File.join(ENV["HOME"], ".config")
 
-    IO.foreach(File.join(dir, "twitch", file)) do |s|
-        next if s.chomp.empty? || s.start_with?("#")
-        array << s.chomp.strip
-    end
-    array
+  IO.foreach(File.join(dir, "twitch", file)) do |s|
+    next if s.chomp.empty? || s.start_with?("#")
+    array << s.chomp.strip
+  end
+  array
 end
 
 def get_json(uri)
-    JSON.parse(Net::HTTP.get(URI(uri)))
+  JSON.parse(Net::HTTP.get(URI(uri)))
 rescue => e
-    warn format("When retrieving %s\n%s", uri, e.message)
+  warn format("When retrieving %s\n%s", uri, e.message)
 end
 
 def parse_json(streams, data, keys)
-    data and data[keys[:index]].each do |s|
-        streams << {
-            owner: s["channel"][keys[:owner]],
-            uri:   s["channel"][keys[:uri]],
-            title: s["channel"][keys[:title]] || '',
-        }
-    end
+  data and data[keys[:index]].each do |s|
+    streams << {
+      owner: s["channel"][keys[:owner]],
+      uri:   s["channel"][keys[:uri]],
+      title: s["channel"][keys[:title]] || '',
+    }
+  end
 end
 
 def get_streams()
-    threads = []
-    streams = []
-    streams_mx = Mutex.new
+  threads = []
+  streams = []
+  streams_mx = Mutex.new
 
-    users = read_config("streamers")
+  users = read_config("streamers")
 
-    users.each_slice(100) do |batch|
-        threads << Thread.new do
-            streams_mx.synchronize do
-                url = "#{Twitch::API}/streams?channel=#{batch.join(",")}" +
-                      "&limit=#{batch.count}"
-                data = get_json(url)
-                parse_json(streams, data, Twitch::V3)
-            end
-        end
+  users.each_slice(100) do |batch|
+    threads << Thread.new do
+      streams_mx.synchronize do
+        url = "#{Twitch::API}/streams?channel=#{batch.join(",")}" +
+              "&limit=#{batch.count}"
+        data = get_json(url)
+        parse_json(streams, data, Twitch::V3)
+      end
     end
+  end
 
-    threads.each(&:join)
-    streams
+  threads.each(&:join)
+  streams
 end
 
 def dmenu(items)
-    prompt = %W[-p Streams\ (#{items.count})]
-    # font = %w[-fn -*-dina-bold-r-*-*-12-*-*-*-*-*-*-*]
-    font = "DejaVu Sans Mono"
-    args = %w[-i -l 20] + prompt
+  prompt = %W[-p Streams\ (#{items.count})]
+  # font = %w[-fn -*-dina-bold-r-*-*-12-*-*-*-*-*-*-*]
+  font = "DejaVu Sans Mono"
+  args = %w[-i -l 20] + prompt
 
-    if ENV["DISPLAY"] && !ENV["DISPLAY"].empty?
-        cmd = %w[dmenu] + args + %W[-fn #{font}]
-    else
-        cmd = %w[bemenu] + args + %W[--fn #{font}]
-    end
+  if ENV["DISPLAY"] && !ENV["DISPLAY"].empty?
+    cmd = %w[dmenu] + args + %W[-fn #{font}]
+  else
+    cmd = %w[bemenu] + args + %W[--fn #{font}]
+  end
 
-    out, status = Open3.capture2(*cmd, stdin_data: items.join("\n"))
-    status.success? ? out.chomp : nil
+  out, status = Open3.capture2(*cmd, stdin_data: items.join("\n"))
+  status.success? ? out.chomp : nil
 end
 
 def play_stream(item)
-    title = %Q(#{item[:title]} (#{item[:owner]}))
-    uri = item[:uri] || "http://twitch.tv/#{item[:owner]}"
+  title = %Q(#{item[:title]} (#{item[:owner]}))
+  uri = item[:uri] || "http://twitch.tv/#{item[:owner]}"
 
-    pid = fork do
-        exec("livestreamer", "-p", "mpv --title=#{title.escape}", uri)
-    end
-    Process.wait(pid)
+  pid = fork do
+    exec("livestreamer", "-p", "mpv --title=#{title.escape}", uri)
+  end
+  Process.wait(pid)
 end
 
 class String
-    def escape
-        '"' + self.gsub(/["`\\$]/) { "\\" + $& } + '"'
-    end
+  def escape
+    '"' + self.gsub(/["`\\$]/) { "\\" + $& } + '"'
+  end
 end
 
 streams = get_streams()
@@ -103,15 +103,15 @@ menu = menu.map{|i| "#{i[:owner].ljust(width)} #{i[:title].gsub(/\r?\n/, " ")}"}
 sel = dmenu(menu)
 
 if sel
-    threads = []
+  threads = []
 
-    sel.split(/\r?\n/).each do |name|
-        if item = streams.find{|i| name =~ /^#{i[:owner]}/}
-            threads << Thread.new do
-                play_stream(item)
-            end
-        end
+  sel.split(/\r?\n/).each do |name|
+    if item = streams.find{|i| name =~ /^#{i[:owner]}/}
+      threads << Thread.new do
+        play_stream(item)
+      end
     end
+  end
 
-    threads.each(&:join)
+  threads.each(&:join)
 end
