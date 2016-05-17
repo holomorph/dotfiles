@@ -14,6 +14,18 @@ module Twitch
   V3 = {index: "streams", owner: "display_name", url: "url", title: "status"}
 end
 
+class Hash
+  def display_s(just)
+    self.dig("display_name").ljust(just) + self.dig("status").gsub(/\r?\n/, " ")
+  end
+end
+
+class String
+  def escape
+    '"' + self.gsub(/["`\\$]/) { "\\" + $& } + '"'
+  end
+end
+
 def read_config(file)
   array = []
   xdg = ENV["XDG_CONFIG_DIR"]
@@ -26,20 +38,10 @@ def read_config(file)
   array
 end
 
-def get_json(uri)
-  JSON.parse(Net::HTTP.get(URI(uri)))
+def request(uri)
+  Net::HTTP.get(URI(uri))
 rescue => e
   warn format("When retrieving %s\n%s", uri, e.message)
-end
-
-def parse_json(streams, data, keys)
-  data and data[keys[:index]].each do |s|
-    streams << {
-      owner: s["channel"][keys[:owner]],
-      uri:   s["channel"][keys[:uri]],
-      title: s["channel"][keys[:title]] || '',
-    }
-  end
 end
 
 def get_streams()
@@ -54,8 +56,10 @@ def get_streams()
       streams_mx.synchronize do
         url = "#{Twitch::API}/streams?channel=#{batch.join(",")}" +
               "&limit=#{batch.count}"
-        data = get_json(url)
-        parse_json(streams, data, Twitch::V3)
+        data = JSON.parse(request(url))
+        data.dig("streams").each do |s|
+          streams << s.dig("channel")
+        end
       end
     end
   end
@@ -81,8 +85,8 @@ def dmenu(items)
 end
 
 def play_stream(item)
-  title = %Q(#{item[:title]} (#{item[:owner]}))
-  uri = item[:uri] || "http://twitch.tv/#{item[:owner]}"
+  title = %Q(#{item["status"]} (#{item["display_name"]}))
+  uri = item[:uri] || "http://twitch.tv/#{item["name"]}"
 
   pid = fork do
     exec("livestreamer", "-p", "mpv --title=#{title.escape}", uri)
@@ -90,23 +94,11 @@ def play_stream(item)
   Process.wait(pid)
 end
 
-class String
-  def escape
-    '"' + self.gsub(/["`\\$]/) { "\\" + $& } + '"'
-  end
-end
-
-streams = get_streams()
-width = streams.map{|i| i[:owner].length}.max + 4
-menu = streams.uniq{|i| i[:owner]}.sort_by{|i| "#{i[:owner].downcase}"}
-menu = menu.map{|i| "#{i[:owner].ljust(width)} #{i[:title].gsub(/\r?\n/, " ")}"}
-sel = dmenu(menu)
-
-if sel
+def play_selected(sel, streams)
   threads = []
 
   sel.split(/\r?\n/).each do |name|
-    if item = streams.find{|i| name =~ /^#{i[:owner]}/}
+    if item = streams.find{|i| name =~ /^#{i["display_name"]}/}
       threads << Thread.new do
         play_stream(item)
       end
@@ -114,4 +106,13 @@ if sel
   end
 
   threads.each(&:join)
+end
+
+streams = get_streams()
+unless streams.empty?
+  width = streams.map{|i| i.dig("display_name").length}.max + 4
+  menu = streams.uniq{|i| i.dig("name")}.sort_by{|i| i.dig("name")}
+  menu = menu.map{|i| i.display_s(width) }
+  sel = dmenu(menu)
+  play_selected(sel, streams) if sel
 end
