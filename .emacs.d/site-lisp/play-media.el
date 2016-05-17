@@ -49,12 +49,31 @@
   (message "Playing %s %s" program (mapconcat #'identity args " "))
   (apply #'start-process "play-media" nil program args))
 
+(defun play-media-media-at-point ()
+  "Return URL, file name, etc. of media at point, otherwise nil."
+  (or (get-text-property (point) 'shr-url)
+      (if (fboundp 'eww-current-url) (eww-current-url))
+      (get-text-property (point) :nt-link)
+      (thing-at-point 'url)
+      (let* ((fn (or (ffap-guess-file-name-at-point)
+                     (if (fboundp 'dired-file-name-at-point)
+                         (dired-file-name-at-point))))
+             (dir (and fn (file-name-as-directory fn))))
+        (and (equal dir fn) fn))
+      (url-get-url-at-point)
+      ;; catch incomplete URLs
+      (thing-at-point 'symbol)))
+
 ;;;###autoload
 (defun play-media (url)
   "Play media from URL.  Uses mpv (with its youtube-dl hook) or
 livestreamer, depending on the input."
-  (interactive "sURL: ")
-  (if (string-match "\\(hitbox\\|twitch\\)\.tv" url)
+  (interactive
+   (let* ((str (play-media-media-at-point))
+          (prompt (if str (format "Play media (default %s): " str)
+                    "Play media: ")))
+     (list (read-string prompt nil nil str))))
+  (if (string-match-p "\\(hitbox\\|twitch\\)\.tv" url)
       (play-media-start-process play-media-livestreamer-program url)
     (cond
      ((file-readable-p url) (setq url (expand-file-name url)))
@@ -64,18 +83,10 @@ livestreamer, depending on the input."
 
 ;;;###autoload
 (defun play-media-at-point ()
-  "Try to play media at point. See `play-media'."
+  "Try to play media at point.
+See `play-media' and `play-media-media-at-point'."
   (interactive)
-  (let ((link (or (get-text-property (point) 'shr-url)
-                  (get-text-property (point) :nt-link)
-                  (thing-at-point 'url)
-                  (let ((fn (or (ffap-guess-file-name-at-point)
-                                (if (fboundp 'dired-file-name-at-point)
-                                    (dired-file-name-at-point)))))
-                    (unless (equal (file-name-as-directory fn) fn) fn))
-                  (url-get-url-at-point)
-                  ;; catch incomplete URLs
-                  (thing-at-point 'symbol))))
+  (let ((link (play-media-media-at-point)))
     (if link (play-media link)
       (message "No link found"))))
 
