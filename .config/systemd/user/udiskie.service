@@ -1,5 +1,7 @@
 [Unit]
 Description=UDiskie Automounter
+Documentation=https://github.com/coldfix/udiskie/wiki
+Documentation=man:udiskie(8)
 
 [Service]
 ExecStart=/usr/bin/udiskie -N -F
