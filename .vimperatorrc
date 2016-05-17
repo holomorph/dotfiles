@@ -5,7 +5,6 @@ set focuscontent=true
 set incsearch
 set noscrollbars
 set runtimepath=~/.config/vimperator
-set showstatuslinks=0
 set smartcase
 
 colorscheme hints
