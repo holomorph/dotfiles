@@ -44,6 +44,7 @@
  scroll-margin 3
  scroll-conservatively 40
  scroll-preserve-screen-position t
+ switch-to-buffer-preserve-window-point t
  vc-follow-symlinks t
  x-gtk-use-system-tooltips nil
  x-select-enable-clipboard t
@@ -53,6 +54,7 @@
  Man-width fill-column
  apropos-do-all t
  c-basic-offset 4
+ comint-prompt-read-only t
  compilation-read-command nil
  display-time-24hr-format t
  eldoc-idle-delay 0.08
@@ -63,6 +65,8 @@
  indent-tabs-mode nil
  mouse-sel-retain-highlight t
  octave-blink-matching-block nil
+ package-check-signature t
+ python-indent-guess-indent-offset nil
  reftex-idle-time 0.1
  show-paren-delay 0.02
  shr-width fill-column
@@ -153,6 +157,7 @@
 (add-hook 'latex-mode-hook 'reftex-access-scan-info)
 (add-hook 'latex-mode-hook #'reftex-mode)
 (add-hook 'latex-mode-hook #'auto-fill-mode)
+(remove-hook 'sh-mode-hook 'sh-electric-here-document-mode)
 
 
 ;; extensions
@@ -169,7 +174,7 @@
  magit-auto-revert-mode nil
  magit-diff-highlight-hunk-body nil
  magit-diff-refine-hunk 'all
- merlin-default-flags '("-w" "+a-4" "-safe-string")
+ merlin-default-flags '("-w" "+a" "-safe-string")
  merlin-show-instance-in-lighter nil
  notmuch-search-oldest-first nil
  paredit-lighter nil)
