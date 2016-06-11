@@ -65,6 +65,7 @@
  indent-tabs-mode nil
  mouse-sel-retain-highlight t
  octave-blink-matching-block nil
+ octave-comment-char ?%
  package-check-signature t
  python-indent-guess-indent-offset nil
  reftex-idle-time 0.1

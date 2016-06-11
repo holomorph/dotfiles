@@ -8,6 +8,7 @@ reload-time 30
 reload-threads 3
 mark-as-read-on-hover yes
 max-items 100
+prepopulate-query-feeds yes
 
 bind-key g home
 bind-key G end

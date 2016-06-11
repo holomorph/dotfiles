@@ -1,5 +1,6 @@
 user_pref("extensions.pocket.enabled", false);
 user_pref("browser.cache.disk.enable", false);
+user_pref("browser.newtabpage.enhanced", false);
 user_pref("browser.tabs.onTop", false);
 user_pref("browser.warnOnQuit", false);
 user_pref("general.smoothScroll", false);

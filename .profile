@@ -26,6 +26,7 @@ export NOTMUCH_CONFIG=~/.config/notmuch/config
 # other config
 export MPD_HOST="$XDG_RUNTIME_DIR"/mpd/socket
 export XKB_DEFAULT_OPTIONS=altwin:alt_super_win,ctrl:nocaps,compose:ralt
+export GTK_IM_MODULE=xim
 
 # path
 export PATH="$HOME/.local/bin:$PATH"

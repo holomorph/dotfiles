@@ -2,6 +2,7 @@
 
 set complete-=f
 set focuscontent=true
+set gui=none
 set incsearch
 set noscrollbars
 set runtimepath=~/.config/vimperator

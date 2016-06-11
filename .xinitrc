@@ -16,6 +16,4 @@ redshift &
 termite &
 emacs --daemon &
 
-while true; do
-  dwm
-done
+exec dwm

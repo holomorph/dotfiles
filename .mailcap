@@ -11,7 +11,7 @@ text/plain; vim %s;
 
 image/gif; ffplay -loop 0 %s;
 image/svg; eog %s;
-image/*; feh -. %s; test=feh --version
+image/*; feh -. %s; test=feh --version; test=sh -c 'test $DISPLAY';
 image/*; eog %s;
 audio/*; mpv %s;
 video/*; mpv %s;
