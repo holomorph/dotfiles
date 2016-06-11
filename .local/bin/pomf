@@ -1,5 +1,5 @@
 #!/bin/sh
-# pomf: post files to http://pomf.se/
+# pomf: post files to https://pomf.cat/
 
 upload=$(curl -sF "files[]=@$1" https://pomf.cat/upload.php)
 geturl=$(echo "$upload" | jshon -e files -e 0 -e url -u)
