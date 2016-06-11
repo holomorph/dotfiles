@@ -144,6 +144,7 @@ alist."
                   (forward-line)
                   (point)))
            (overlay (make-overlay beg end)))
+      (overlay-put overlay 'twitch t)
       (overlay-put overlay 'evaporate t)
       (overlay-put overlay 'invisible t))))
 
@@ -182,7 +183,8 @@ alist."
        nil t t))))
 
 (defun twitch-overlay-at (position)
-  (car (overlays-at position)))
+  (cl-loop for ov in (overlays-at position)
+           if (overlay-get ov 'twitch) return ov))
 
 (defun twitch-toggle-overlay (overlay)
   (if (not (overlay-get overlay 'invisible))
