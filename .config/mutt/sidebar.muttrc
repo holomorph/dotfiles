@@ -1,0 +1,10 @@
+# mutt/sidebar.muttrc
+
+color sidebar_divider brightgreen black
+color sidebar_new brightdefault default
+
+set mail_check_stats
+set sidebar_format = "%B%?F? [%F]?%* %?N?%N/?%S"
+set sidebar_width = 18
+
+bind index,pager <f9> sidebar-toggle-visible
