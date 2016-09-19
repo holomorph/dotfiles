@@ -3,7 +3,7 @@
 ;; Copyright (C) 2014-2016  Mark Oteiza <mvoteiza@udel.edu>
 
 ;; Author: Mark Oteiza <mvoteiza@udel.edu>
-;; Version: 0.4
+;; Version: 0.4.1
 ;; Keywords: convenience
 
 ;; This program is free software; you can redistribute it and/or
@@ -55,11 +55,9 @@
       (if (fboundp 'eww-current-url) (eww-current-url))
       (get-text-property (point) :nt-link)
       (thing-at-point 'url)
-      (let* ((fn (or (ffap-guess-file-name-at-point)
-                     (if (fboundp 'dired-file-name-at-point)
-                         (dired-file-name-at-point))))
+      (let* ((fn (run-hook-with-args-until-success 'file-name-at-point-functions))
              (dir (and fn (file-name-as-directory fn))))
-        (and (equal dir fn) fn))
+        (unless (equal dir fn) fn))
       (url-get-url-at-point)
       ;; catch incomplete URLs
       (thing-at-point 'symbol)))

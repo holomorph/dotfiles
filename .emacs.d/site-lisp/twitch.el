@@ -3,7 +3,7 @@
 ;; Copyright (C) 2015-2016  Mark Oteiza <mvoteiza@udel.edu>
 
 ;; Author: Mark Oteiza <mvoteiza@udel.edu>
-;; Version: 0.8
+;; Version: 0.9
 ;; Package-Requires: ((emacs "24.4") (seq "1.5"))
 ;; Keywords: convenience, multimedia
 
@@ -35,30 +35,27 @@
   "Query streamers from http://twitch.tv"
   :group 'external)
 
+(defcustom twitch-client-id "jzkbprff40iqj646a697cyrvl0zt2m6"
+  "Client ID for accessing Twitch API."
+  :type 'string)
+
 (defcustom twitch-player "mpv"
   "The name by which to invoke stream player."
   :type 'string)
 
 (defcustom twitch-player-options '("--title" "%t (%n)")
   "Extra arguments to pass to `twitch-player'.
-Format specifiers %n and %t will expand to streamer name and
-stream title, respectively."
+Format specifiers %n, %t, and %i will expand to streamer name,
+stream title, and client ID, respectively."
   :type '(repeat string))
 
 (defcustom twitch-streamers nil
   "List of streamer user names on Twitch."
   :type '(repeat (string :tag "Name")))
 
-(defconst twitch-api-plist
-  '(:name display_name
-    :title status
-    :viewers viewers
-    :views views
-    :followers followers
-    :url url
-    :game game
-    :user name)
-  "Plist containing keywords for corresponding Twitch API keys.
+(defconst twitch-api-list
+  '(display_name status viewers views followers url game name)
+  "List of useful keys from Twitch API.
 See https://github.com/justintv/twitch-api for more information.")
 
 (defconst twitch-api-streamer-limit 100
@@ -81,18 +78,16 @@ See https://github.com/justintv/twitch-api for more information.")
             (list (append (assq 'channel a) (list (assq 'viewers a)))))
           response))
 
-(defun twitch-hash (channel)
-  "Return a hash table of stream information in alist CHANNEL.
-The hash table keys are the properties in `twitch-api-plist',
-values of which are used to find the key-values in the CHANNEL
-alist."
-  (let ((table (make-hash-table)))
-    (cl-loop for (p v) on twitch-api-plist by #'cddr do
-             (let ((val (cdr (assq v channel))))
-               (when (stringp val)
-                 (setq val (replace-regexp-in-string "\r?\n" " " val t t)))
-               (puthash p val table)))
-    table))
+(defun twitch-filter (channel)
+  "Return an alist of stream information in alist CHANNEL.
+The keys are the properties in `twitch-api-list', values of which
+are used to find the key-values in the CHANNEL alist."
+  (mapcar (lambda (key)
+            (let ((val (cdr (assq key channel))))
+              (when (stringp val)
+                (setq val (replace-regexp-in-string "\r?\n" " " val t t)))
+              (cons key val)))
+          twitch-api-list))
 
 (defun twitch-streamer-urls ()
   "Return list of API URLs generated from `twitch-streamers'."
@@ -101,11 +96,9 @@ alist."
                     batch twitch-api-streamer-limit))
           (twitch--batch-list)))
 
-(defun twitch-sort (list)
-  "Sort hash tables in LIST according to user name, removing duplicates."
-  (sort (seq-uniq list
-                  (lambda (a b) (string= (gethash :user a) (gethash :user b))))
-        (lambda (a b) (string< (gethash :user a) (gethash :user b)))))
+(defun twitch-sort-pred (alist1 alist2)
+  "Predicate for sorting alists according to user name."
+  (string< (cdr (assq 'name alist1)) (cdr (assq 'name alist2))))
 
 (defun twitch-format-info (key val)
   (let* ((v (cond ((numberp val) (if (< val 10000) (number-to-string val)
@@ -115,24 +108,25 @@ alist."
     (concat (propertize entry 'font-lock-face 'font-lock-comment-face) "\n")))
 
 (defun twitch-format-data (ht)
-  (let* ((name (gethash :name ht))
-         (title (gethash :title ht))
-         (user (gethash :user ht)))
+  (let* ((name (cdr (assq 'display_name ht)))
+         (title (cdr (assq 'status ht)))
+         (user (cdr (assq 'name ht))))
     (propertize
      (concat
       (format "%-20.18s" (propertize name 'font-lock-face 'font-lock-type-face))
       (format "%s\n" (propertize (or title "") 'font-lock-face 'font-lock-variable-name-face))
-      (twitch-format-info "Game" (gethash :game ht))
-      (twitch-format-info "Viewers" (gethash :viewers ht))
-      (twitch-format-info "Followers" (gethash :followers ht))
-      (twitch-format-info "Total views" (gethash :views ht)))
+      (twitch-format-info "Game" (cdr (assq 'game ht)))
+      (twitch-format-info "Viewers" (cdr (assq 'viewers ht)))
+      (twitch-format-info "Followers" (cdr (assq 'followers ht)))
+      (twitch-format-info "Total views" (cdr (assq 'views ht))))
      'url (format "http://twitch.tv/%s" user) 'name name 'title title)))
 
 (defun twitch-format-spec (str)
   "Interpolate format specifiers in STR."
   (let ((title (or (get-text-property (point) 'title) ""))
-        (name (or (get-text-property (point) 'name) "")))
-    (format-spec str `((?t . ,title) (?n . ,name)))))
+        (name (or (get-text-property (point) 'name) ""))
+        deactivate-mark)
+    (format-spec str `((?t . ,title) (?n . ,name) (?i . ,twitch-client-id)))))
 
 (defun twitch-insert-entry (ht)
   (let* ((entry (twitch-format-data ht))
@@ -149,12 +143,12 @@ alist."
       (overlay-put overlay 'invisible t))))
 
 (defun twitch-redraw (list)
-  "Erase the buffer and draw a new one from the hash tables in LIST."
+  "Erase the buffer and draw a new one from the alists in LIST."
   (let ((first (zerop (length (buffer-string))))
         (link (get-text-property (point) 'url)))
     (with-silent-modifications
       (erase-buffer)
-      (mapc #'twitch-insert-entry (twitch-sort list)))
+      (mapc #'twitch-insert-entry (sort list #'twitch-sort-pred)))
     (goto-char
      (if first (point-min)
        (save-excursion
@@ -168,15 +162,16 @@ alist."
   (let* ((buffer (current-buffer))
          (urls (twitch-streamer-urls))
          (count (length urls))
-         (tables nil))
-    (seq-doseq (url urls)
+         (tables nil)
+         (url-request-extra-headers `(("Client-ID" . ,twitch-client-id))))
+    (dolist (url urls)
       (url-retrieve
        url
        (lambda (_status)
          (cl-decf count)
          (let ((json (twitch-handle-response)))
-           (seq-doseq (elt (twitch--munge-v3 (cdr (assq 'streams json))))
-             (push (twitch-hash (cdar elt)) tables)))
+           (dolist (elt (twitch--munge-v3 (cdr (assq 'streams json))))
+             (push (twitch-filter (cdar elt)) tables)))
          (when (zerop count)
            (with-current-buffer buffer
              (twitch-redraw tables))))
