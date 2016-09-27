@@ -11,7 +11,7 @@ require 'thread'
 
 module Twitch
   API = "https://api.twitch.tv/kraken"
-  V3 = {index: "streams", owner: "display_name", url: "url", title: "status"}
+  CLIENT_ID = "jzkbprff40iqj646a697cyrvl0zt2m6"
 end
 
 class Hash
@@ -38,10 +38,16 @@ def read_config(file)
   array
 end
 
-def request(uri)
-  Net::HTTP.get(URI(uri))
+def request(url)
+  uri = URI(url)
+  res = Net::HTTP.start(uri.host, uri.port, :use_ssl => true) do |http|
+    req = Net::HTTP::Get.new(uri)
+    req['Client-ID'] = Twitch::CLIENT_ID
+    http.request(req)
+  end
+  res.body
 rescue => e
-  warn format("When retrieving %s\n%s", uri, e.message)
+  warn format("When retrieving %s\n%s", url, e.message)
 end
 
 def get_streams()
