@@ -1,15 +1,12 @@
 #!/bin/bash
 
-# imgur v5
-#
-# inspired by imgur v4 written by Bart Nagel <bart@tremby.net>
-#
-# Required: curl
-# Optional: xclip
+# inspired by script written by Bart Nagel <bart@tremby.net>
+# client id from <https://github.com/ceryn/img> at <https://imgur.com/tools/>
+# requires curl, optionally uses xclip
 
-# API Key provided by Alan@imgur.com
-readonly apikey="b3625162d3418ac51a9ee805b1840452"
-readonly apiurl="http://imgur.com/api/upload.xml"
+readonly clientid="3e7a4deb7ac67da"
+readonly authheader="Authorization: Client-ID $clientid"
+readonly apiurl="https://api.imgur.com/3"
 
 die() {
     printf >&2 "imgur: %s\n" "$@"
@@ -33,18 +30,19 @@ handle_response() {
     local err url del
 
     # check for errors from imgur
-    if err=$(print_tag "$response" 'error_msg'); then
+    if err=$(print_tag "$response" 'error'); then
         die "response: $err"
     fi
 
     # print direct image link
-    if url=$(print_tag "$response" 'original_image'); then
+    if url=$(print_tag "$response" 'link'); then
         printf "url: %s\n" "$url"
     fi
 
     # print deletion link
-    if del=$(print_tag "$response" 'delete_page'); then
-        printf "del: %s\n" "$del" >&2
+    if del=$(print_tag "$response" 'deletehash'); then
+        printf "del: curl -X DELETE -sH \"%s\" %s/image/%s\n" \
+            "$authheader" "$apiurl" "$del" >&2
     fi
 
     # try putting the url on the clipboard
@@ -61,15 +59,14 @@ elif [[ "$1" = @(-h|--help) ]]; then
     exit 0
 fi
 
-# ensure argument is a file
 if [[ ! -f "$1" ]]; then
     die "no such file: $1"
 fi
 
 # upload the image
-if response="$(curl -s -F "key=$apikey" -F "image=@$1" "$apiurl")"; then
+if response="$(curl -s -H "$authheader" -F "image=@$1" "$apiurl/upload.xml")";
+then
     handle_response "$response"
 else
-    # die if curl errors
     die "upload failed: $1"
 fi
