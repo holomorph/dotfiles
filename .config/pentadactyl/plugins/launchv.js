@@ -56,12 +56,7 @@ function launchv(target) {
         io.system(launcher + ' "' + uri + '" &');
     }
 
-    /* filter certain urls to more appropriate programs before passing to
-     * mpv */
-    if(uri.match(/(hitbox|twitch)\.tv/))
-        exec("livestreamer", uri);
-    else
-        exec("mpv", uri);
+    exec("mpv", uri);
 }
 
 hints.addMode("l", "Launch video from hint", function (elem, loc) launchv(loc));
