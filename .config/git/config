@@ -19,6 +19,8 @@
 	xfuncname = "^\\(((cl-)?def.*)"
 [diff "scheme"]
 	xfuncname = "^\\((def.*)"
+[commit]
+	verbose = true
 [merge]
 	tool = vimdiff
 	verbosity = 1
@@ -54,3 +56,7 @@
 #	smtpencryption = tls
 #	smtpserver = smtp.gmail.com
 #	smtpserverport = 587
+#[pack]
+#	windowMemory = "1000m"
+#	packSizeLimit = "1000m"
+#	threads = 2
