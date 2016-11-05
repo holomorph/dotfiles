@@ -1,5 +1,6 @@
 # livestreamer/config
-default-stream=medium,high,720p,best,source
+default-stream=medium,high,720p30,best,source
 player=mpv
 player-no-close
+player-passthrough=hls
 retry-open=3

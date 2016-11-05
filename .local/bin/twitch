@@ -95,7 +95,7 @@ def play_stream(item)
   uri = item[:uri] || "http://twitch.tv/#{item["name"]}"
 
   pid = fork do
-    exec("livestreamer", "-p", "mpv --title=#{title.escape}", uri)
+    exec("mpv", "--title", title, uri)
   end
   Process.wait(pid)
 end

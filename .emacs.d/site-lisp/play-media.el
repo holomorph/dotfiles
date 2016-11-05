@@ -1,4 +1,4 @@
-;;; play-media.el --- Launch videos and stuff from Emacs
+;;; play-media.el --- Launch videos and stuff from Emacs -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2014-2016  Mark Oteiza <mvoteiza@udel.edu>
 
@@ -36,10 +36,6 @@
   "Open media with an external player."
   :group 'external)
 
-(defcustom play-media-livestreamer-program "livestreamer"
-  "The name by which to invoke livestreamer."
-  :type 'string)
-
 (defcustom play-media-mpv-program "mpv"
   "The name by which to invoke mpv."
   :type 'string)
@@ -64,20 +60,17 @@
 
 ;;;###autoload
 (defun play-media (url)
-  "Play media from URL.  Uses mpv (with its youtube-dl hook) or
-livestreamer, depending on the input."
+  "Play media from URL."
   (interactive
    (let* ((str (play-media-media-at-point))
           (prompt (if str (format "Play media (default %s): " str)
                     "Play media: ")))
      (list (read-string prompt nil nil str))))
-  (if (string-match-p "\\(hitbox\\|twitch\\)\.tv" url)
-      (play-media-start-process play-media-livestreamer-program url)
-    (cond
-     ((file-readable-p url) (setq url (expand-file-name url)))
-     ((not (url-type (url-generic-parse-url url)))
-      (setq url (concat "ytdl://" url))))
-    (play-media-start-process play-media-mpv-program url)))
+  (cond
+   ((file-readable-p url) (setq url (expand-file-name url)))
+   ((not (url-type (url-generic-parse-url url)))
+    (setq url (concat "ytdl://" url))))
+  (play-media-start-process play-media-mpv-program url))
 
 ;;;###autoload
 (defun play-media-at-point ()

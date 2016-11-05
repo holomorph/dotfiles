@@ -57,6 +57,7 @@
  comint-prompt-read-only t
  compilation-read-command nil
  display-time-24hr-format t
+ ediff-window-setup-function 'ediff-setup-windows-plain
  eldoc-idle-delay 0.08
  eshell-list-files-after-cd t
  gnus-init-file (concat user-emacs-directory "gnus.el")
@@ -175,8 +176,6 @@
  magit-auto-revert-mode nil
  magit-diff-highlight-hunk-body nil
  magit-diff-refine-hunk 'all
- merlin-default-flags '("-w" "+a" "-safe-string")
- merlin-show-instance-in-lighter nil
  notmuch-search-oldest-first nil
  paredit-lighter nil)
 
@@ -186,19 +185,12 @@
 ;; autoloads
 (autoload 'legalese "legalese" "Add legalese to your program files" t)
 (autoload 'notmuch "notmuch" "The mail indexer" t)
-(autoload 'dictionary "dictionary" "Client for RFC2249 dictionary servers" t)
 (autoload 'magit-status "magit" "Control Git from Emacs" t)
 (autoload 'magit-blame "magit-blame" "Blame support for Magit" t)
-(autoload 'tuareg-mode "tuareg" "Major mode for OCaml code" t)
 (autoload 'ledger-mode "ledger-mode" "Major mode for editing ledger data" t)
 (autoload 'flycheck-mode "flycheck" "Minor mode for on-the-fly syntax checking" t)
 (autoload 'paredit-mode "paredit" "Minor mode for pseudo-structurally editing Lisp code" t)
 (autoload 'company-mode "company" "Modular in-buffer completion framework" t)
-(autoload 'merlin-mode "merlin" "Minor mode for interacting with a merlin process" t)
-
-;; filetype
-(add-to-list 'auto-mode-alist '("\\.ml[ilyp]?\\'" . tuareg-mode))
-(add-to-list 'auto-mode-alist '("\\.ldg\\'" . ledger-mode))
 
 (defun default-lisp-modes ()
   (ignore-errors (paredit-mode)))
@@ -215,4 +207,3 @@
 (add-hook 'tex-mode-hook #'default-prog-modes)
 (remove-hook 'magit-region-highlight-hook 'magit-diff-update-hunk-region)
 (remove-hook 'magit-section-highlight-hook 'magit-section-highlight)
-(add-hook 'tuareg-mode-hook 'merlin-mode)

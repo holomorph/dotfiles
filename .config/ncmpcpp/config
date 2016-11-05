@@ -16,6 +16,8 @@ centered_cursor = "yes"
 user_interface = "alternative"
 display_remaining_time = yes
 regular_expressions = basic
+ignore_leading_the = yes
+mouse_list_scroll_whole_page = no
 
 ##### colors definitions #####
 state_line_color = "black"
