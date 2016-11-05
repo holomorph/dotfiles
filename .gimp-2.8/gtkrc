@@ -1,0 +1,9 @@
+# gtkrc
+
+# to facilitate use F6 and F8 bindings in menurc:
+# https://developer.gimp.org/api/2.0/gtk/GtkPaned.html
+binding "no-cycle-focus" {
+  unbind "F6"
+  unbind "F8"
+}
+class "GtkPaned" binding "no-cycle-focus"
