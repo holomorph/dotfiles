@@ -1,6 +1,6 @@
 ;;; play-media.el --- Launch videos and stuff from Emacs -*- lexical-binding: t -*-
 
-;; Copyright (C) 2014-2016  Mark Oteiza <mvoteiza@udel.edu>
+;; Copyright (C) 2014-2017  Mark Oteiza <mvoteiza@udel.edu>
 
 ;; Author: Mark Oteiza <mvoteiza@udel.edu>
 ;; Version: 0.4.1
@@ -21,7 +21,8 @@
 
 ;;; Commentary:
 
-;; Play media from Emacs using mpv <http://mpv.io/>, livestreamer
+;; Play media from Emacs using an external player.
+;; Written originally to use mpv <http://mpv.io/> and livestreamer
 ;; <http://docs.livestreamer.io/>, or some other player.  For mpv, at
 ;; least v0.7.0 is required for its ytdl hook (turned on by default in
 ;; v0.7.2). For livestreamer, at least v1.9.0 is needed for the
@@ -36,9 +37,13 @@
   "Open media with an external player."
   :group 'external)
 
-(defcustom play-media-mpv-program "mpv"
-  "The name by which to invoke mpv."
+(defcustom play-media-program "mpv"
+  "The name by which to invoke a media player."
   :type 'string)
+
+(defcustom play-media-switches nil
+  "Options specified for `play-media-program'."
+  :type '(repeat string))
 
 (defun play-media-start-process (program &rest args)
   "Thin wrapper for `start-process'."
@@ -70,7 +75,8 @@
    ((file-readable-p url) (setq url (expand-file-name url)))
    ((not (url-type (url-generic-parse-url url)))
     (setq url (concat "ytdl://" url))))
-  (play-media-start-process play-media-mpv-program url))
+  (apply #'play-media-start-process play-media-program
+         (append play-media-switches (list url))))
 
 ;;;###autoload
 (defun play-media-at-point ()

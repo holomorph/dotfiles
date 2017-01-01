@@ -1,6 +1,6 @@
 ;;; twitch.el --- Query streamers from http://twitch.tv -*- lexical-binding: t -*-
 
-;; Copyright (C) 2015-2016  Mark Oteiza <mvoteiza@udel.edu>
+;; Copyright (C) 2015-2017  Mark Oteiza <mvoteiza@udel.edu>
 
 ;; Author: Mark Oteiza <mvoteiza@udel.edu>
 ;; Version: 0.9
@@ -219,10 +219,10 @@ are used to find the key-values in the CHANNEL alist."
   (interactive)
   (let ((url (get-text-property (point) 'url)))
     (if url (progn (kill-new url) (message "Copied %s" url))
-      (message "No stream under point"))))
+      (user-error "No stream under point"))))
 
 (defvar twitch-mode-map
-  (let ((map (copy-keymap special-mode-map)))
+  (let ((map (make-sparse-keymap)))
     (define-key map [double-mouse-1] 'twitch-open)
     (define-key map (kbd "C-c C-o") 'twitch-open)
     (define-key map (kbd "RET") 'twitch-info)
@@ -246,11 +246,7 @@ are used to find the key-values in the CHANNEL alist."
     ["Quit" quit-window]))
 
 (define-derived-mode twitch-mode special-mode "Twitch"
-  "Major mode for launching streams from <http://www.twitch.tv>.
-The hook `twitch-mode-hook' is run at mode initialization.
-
-Key bindings:
-\\{twitch-mode-map}"
+  "Major mode for launching streams from <http://www.twitch.tv>."
   :group 'twitch
   (buffer-disable-undo)
   (setq-local revert-buffer-function #'twitch-refresh))
