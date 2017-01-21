@@ -113,13 +113,16 @@ are used to find the key-values in the CHANNEL alist."
          (user (cdr (assq 'name ht))))
     (propertize
      (concat
-      (format "%-20.18s" (propertize name 'font-lock-face 'font-lock-type-face))
-      (format "%s\n" (propertize (or title "") 'font-lock-face 'font-lock-variable-name-face))
+      (truncate-string-to-width
+       (propertize name 'font-lock-face 'font-lock-type-face) 15 nil nil "…")
+      (propertize " " 'display '(space :align-to 16))
+      (propertize (or title "") 'font-lock-face 'font-lock-variable-name-face)
+      "\n"
       (twitch-format-info "Game" (cdr (assq 'game ht)))
       (twitch-format-info "Viewers" (cdr (assq 'viewers ht)))
       (twitch-format-info "Followers" (cdr (assq 'followers ht)))
       (twitch-format-info "Total views" (cdr (assq 'views ht))))
-     'url (format "http://twitch.tv/%s" user) 'name name 'title title)))
+     'url (format "https://twitch.tv/%s" user) 'name name 'title title)))
 
 (defun twitch-format-spec (str)
   "Interpolate format specifiers in STR."
@@ -221,16 +224,22 @@ are used to find the key-values in the CHANNEL alist."
     (if url (progn (kill-new url) (message "Copied %s" url))
       (user-error "No stream under point"))))
 
+(defun twitch-browse-url ()
+  "Browse the URL of the stream under point."
+  (interactive)
+  (let ((url (get-text-property (point) 'url)))
+    (if url (browse-url url) (user-error "No stream under point"))))
+
 (defvar twitch-mode-map
   (let ((map (make-sparse-keymap)))
     (define-key map [double-mouse-1] 'twitch-open)
     (define-key map (kbd "C-c C-o") 'twitch-open)
+    (define-key map "X" 'twitch-open)
     (define-key map (kbd "RET") 'twitch-info)
-    (define-key map (kbd "SPC") 'twitch-info)
     (define-key map "i" 'twitch-info)
     (define-key map "n" 'next-line)
     (define-key map "p" 'previous-line)
-    (define-key map "u" 'twitch-copy-url)
+    (define-key map "W" 'twitch-browse-url)
     (define-key map "w" 'twitch-copy-url)
     map)
   "Keymap used in `twitch-mode' buffers.")
@@ -240,6 +249,7 @@ are used to find the key-values in the CHANNEL alist."
   '("Twitch"
     ["Open Stream" twitch-open]
     ["Toggle Info" twitch-info]
+    ["Browse Stream URL" twitch-browse-url]
     ["Copy Stream URL" twitch-copy-url]
     "--"
     ["Refresh" revert-buffer]
