@@ -1,5 +1,5 @@
 # flake8
-# http://flake8.readthedocs.org/en/latest/config.html
+# http://flake8.pycqa.org/en/latest/user/configuration.html
 # http://pep8.readthedocs.org/en/latest/intro.html#error-codes
 
 [flake8]

@@ -10,7 +10,7 @@ xset +dpms dpms 1800 1800 1800
 feh --no-fehbg --bg-fill "$HOME/pictures/wallpaper/default" &
 
 # key mapping
-setxkbmap -option altwin:alt_super_win -option ctrl:nocaps -option compose:ralt
+setxkbmap -option ctrl:nocaps -option compose:ralt
 
 redshift &
 termite &

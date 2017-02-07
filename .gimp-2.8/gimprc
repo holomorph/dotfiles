@@ -1,4 +1,10 @@
-# gimprc
+# GIMP gimprc
+# 
+# This is your personal gimprc file.  Any variable defined in this file takes
+# precedence over the value defined in the system-wide gimprc:
+# /etc/gimp/2.0/gimprc
+# Most values can be set within GIMP by changing some options in the
+# Preferences dialog.
 
 (default-grid
     (style solid)
@@ -12,7 +18,7 @@
     (offset-unit inches))
 (undo-size 128M)
 (thumbnail-size large)
-(thumbnail-filesize-limit 8M)
+(thumbnail-filesize-limit 150M)
 (color-profile-policy keep)
 (cursor-mode tool-crosshair)
 (navigation-preview-size large)
@@ -35,3 +41,6 @@
 (theme "Small")
 (help-browser web-browser)
 (user-manual-online yes)
+
+
+# end of gimprc

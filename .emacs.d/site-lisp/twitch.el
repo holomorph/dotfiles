@@ -4,7 +4,7 @@
 
 ;; Author: Mark Oteiza <mvoteiza@udel.edu>
 ;; Version: 0.9
-;; Package-Requires: ((emacs "24.4") (seq "1.5"))
+;; Package-Requires: ((emacs "24.3") (seq "1.5"))
 ;; Keywords: convenience, multimedia
 
 ;; This program is free software; you can redistribute it and/or
