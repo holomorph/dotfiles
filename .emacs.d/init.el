@@ -8,6 +8,7 @@
 (setq default-frame-alist '((font . "monospace-13")))
 (with-demoted-errors (load-theme 'zenburn t))
 
+(if (fboundp 'minibuffer-depth-indicate-mode) (minibuffer-depth-indicate-mode))
 (if (fboundp 'electric-indent-mode) (electric-indent-mode -1))
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
