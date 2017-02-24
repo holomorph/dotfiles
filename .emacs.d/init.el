@@ -193,18 +193,26 @@
 (autoload 'paredit-mode "paredit" "Minor mode for pseudo-structurally editing Lisp code" t)
 (autoload 'company-mode "company" "Modular in-buffer completion framework" t)
 
-(defun default-lisp-modes ()
-  (ignore-errors (paredit-mode)))
+;; hooks
+(add-hook 'my-lisp-mode-hook 'paredit-mode)
+(add-hook 'my-prog-mode-hook 'company-mode)
+(add-hook 'my-prog-mode-hook 'flycheck-mode)
+(add-hook 'my-prog-mode-hook 'rainbow-delimiters-mode)
 
-(defun default-prog-modes ()
-  (ignore-errors (company-mode))
-  (ignore-errors (flycheck-mode))
-  (ignore-errors (rainbow-delimiters-mode)))
+(defun my-hook-wrapper (fun &rest args)
+  (ignore-errors (apply fun args))
+  nil)
 
-(add-hook 'lisp-interaction-mode-hook #'default-lisp-modes)
-(add-hook 'emacs-lisp-mode-hook #'default-lisp-modes)
-(add-hook 'scheme-mode-hook #'default-lisp-modes)
-(add-hook 'prog-mode-hook #'default-prog-modes)
-(add-hook 'tex-mode-hook #'default-prog-modes)
+(defun my-lisp-modes ()
+  (run-hook-wrapped 'my-lisp-mode-hook #'my-hook-wrapper))
+
+(defun my-prog-modes ()
+  (run-hook-wrapped 'my-prog-mode-hook #'my-hook-wrapper))
+
+(add-hook 'lisp-interaction-mode-hook #'my-lisp-modes)
+(add-hook 'emacs-lisp-mode-hook #'my-lisp-modes)
+(add-hook 'scheme-mode-hook #'my-lisp-modes)
+(add-hook 'prog-mode-hook #'my-prog-modes)
+(add-hook 'tex-mode-hook #'my-prog-modes)
 (remove-hook 'magit-region-highlight-hook 'magit-diff-update-hunk-region)
 (remove-hook 'magit-section-highlight-hook 'magit-section-highlight)
