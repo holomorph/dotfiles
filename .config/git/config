@@ -13,6 +13,7 @@
 [log]
 	decorate = short
 [diff]
+	algorithm = patience
 	tool = vimdiff
 	renames = copies
 [diff "elisp"]
