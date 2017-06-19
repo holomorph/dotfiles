@@ -16,7 +16,9 @@ end
 
 class Hash
   def display_s(just)
-    self.dig("display_name").ljust(just) + self.dig("status").gsub(/\r?\n/, " ")
+    name = self.dig("display_name").ljust(just)
+    title = self.dig("status").gsub(/\r?\n/, " ")
+    "#{name}#{title} [#{self.dig("game")}]"
   end
 end
 
