@@ -1,3 +1,3 @@
 #!/bin/sh
 # silly wrapper for docx2txt.pl
-exec docx2txt.pl "$1" - | sed '/./,$!d'
+exec /usr/bin/docx2txt "$1" - | sed '/./,$!d'
