@@ -1,7 +1,10 @@
 text/html; elinks -dump-charset %{charset} -dump %s; copiousoutput;
 
-application/pdf; zathura %s;
-application/postscript; zathura %s;
+application/pdf; zathura %s; test=zathura -h;
+application/pdf; mupdf %s;
+application/postscript; zathura %s; test=zathura -h;
+application/x-dvi; evince %s;
+image/vnd.djvu; djview %s;
 
 application/x-tex; vim %s;
 application/x-latex; vim %s;
@@ -11,10 +14,14 @@ text/plain; vim %s;
 
 image/gif; ffplay -loop 0 %s;
 image/svg; eog %s;
+image/*; imv %s; test=imv -h;
 image/*; feh -. %s; test=feh --version; test=sh -c 'test $DISPLAY';
-image/*; eog %s;
+image/*; eog %s; test=eog -h;
 audio/*; mpv %s;
+audio/*; play %s; test=play --version;
 video/*; mpv %s;
+application/x-cue; mpv %s;
+text/x-cue; mpv %s;
 
 application/vnd.openxmlformats-officedocument.wordprocessingml.document; docx2txt %s; nametemplate=%s.docx; copiousoutput;
 application/vnd.openxmlformats-officedocument.spreadsheetml.sheet; xls2txt %s; copiousoutput;
