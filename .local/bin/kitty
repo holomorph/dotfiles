@@ -3,29 +3,18 @@
 ;; Inspired by the silly little tool by Øyvind Heggstad.
 ;; See <https://github.com/MrElendig/kittypack>
 
-(use-modules (gnutls)
-             (ice-9 receive)
+(use-modules (ice-9 receive)
              (ice-9 threads)
              (json)
              (rnrs bytevectors)
-             (srfi srfi-1)
              (web client)
              (web request)
              (web uri))
 
 (define (request->body request)
-  (let* ((uri (request-uri request))
-         (socket (open-socket-for-uri uri))
-         (session (make-session connection-end/client)))
-    (set-session-default-priority! session)
-    (set-session-transport-fd! session (fileno socket))
-    (set-session-credentials! session (make-certificate-credentials))
-    (handshake session)
+  (let ((uri (request-uri request)))
     (receive (response body)
-             (http-get uri
-                       #:port (session-record-port session)
-                       #:keep-alive? #t)
-      (bye session close-request/rdwr)
+        (http-get uri #:port (open-socket-for-uri uri))
       (values body))))
 
 (define (pkg->string pkg)
@@ -36,34 +25,27 @@
                         #:query query)))
     (utf8->string (request->body (build-request uri)))))
 
-(define (gethash table key)
-  (hashx-ref (lambda (string size)
-               (remainder (string-hash string) size))
-             (lambda (string alist)
-               (find (lambda (pair) (string=? string (car pair))) alist))
-             table key))
-
 (define (color text ls)
   (string-append (string #\esc #\[) (string-join (map number->string ls) ";") "m"
                  text
                  (string #\esc #\[ #\m)))
 
 (define (prettyprint->string table)
-  (let ((flag (gethash table "flag_date"))
-        (epoch (gethash table "epoch")))
+  (let ((flag (hash-ref table "flag_date"))
+        (epoch (hash-ref table "epoch")))
     (format #f "~a/~a/~a  ~a ~a~%"
-            (color (gethash table "repo") '(1 35))
-            (color (gethash table "arch") '(1 33))
-            (color (gethash table "pkgname") '(1))
-            (color (string-append (if (positive? epoch) (format #f "~d:" epoch) "")
-                                  (gethash table "pkgver") "-"
-                                  (gethash table "pkgrel"))
+            (color (hash-ref table "repo") '(1 35))
+            (color (hash-ref table "arch") '(1 33))
+            (color (hash-ref table "pkgname") '(1))
+            (color (string-append
+                    (if (positive? epoch) (format #f "~d:" epoch) "")
+                    (hash-ref table "pkgver") "-" (hash-ref table "pkgrel"))
                    `(1 ,(if flag 31 32)))
             (if flag (color "<!>" '(31)) ""))))
 
 (define (display-records pkg)
   (let* ((table (json-string->scm (pkg->string pkg)))
-         (results (gethash table "results"))
+         (results (hash-ref table "results"))
          (list (map prettyprint->string results)))
     (map display (sort list string>?))))
 
