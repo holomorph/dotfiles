@@ -31,7 +31,7 @@
  enable-dir-local-variables nil
  enable-recursive-minibuffers t
  gnutls-min-prime-bits 2048
- history-length 1000
+ history-length 10000
  inhibit-startup-screen t
  mode-line-end-spaces '(:eval "-%-")
  auto-save-default nil
@@ -59,7 +59,9 @@
  compilation-read-command nil
  display-time-24hr-format t
  ediff-window-setup-function 'ediff-setup-windows-plain
+ ediff-split-window-function 'split-window-horizontally
  eldoc-idle-delay 0.08
+ eldoc-minor-mode-string nil
  eshell-list-files-after-cd t
  gnus-init-file (concat user-emacs-directory "gnus.el")
  gnus-home-directory (concat user-emacs-directory "gnus/")
@@ -155,6 +157,7 @@
  org-use-speed-commands t)
 
 ;; filetype
+(add-to-list 'auto-coding-alist '("\\.nfo\\'" . ibm437))
 (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
 
 (add-hook 'latex-mode-hook 'reftex-access-scan-info)
@@ -214,5 +217,6 @@
 (add-hook 'scheme-mode-hook #'my-lisp-modes)
 (add-hook 'prog-mode-hook #'my-prog-modes)
 (add-hook 'tex-mode-hook #'my-prog-modes)
+(add-hook 'comint-mode-hook #'my-prog-modes)
 (remove-hook 'magit-region-highlight-hook 'magit-diff-update-hunk-region)
 (remove-hook 'magit-section-highlight-hook 'magit-section-highlight)
