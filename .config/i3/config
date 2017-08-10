@@ -13,6 +13,7 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec termite
+bindsym $mod+Shift+Return exec termite
 
 # kill focused window
 bindsym $mod+Shift+c kill
@@ -90,7 +91,7 @@ bindsym $mod+Ctrl+r reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'Really quit?' -b 'Yes' 'i3-msg exit'"
+bindsym $mod+Shift+q exit
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -134,18 +135,15 @@ for_window [class="fontforge"] floating enable
 for_window [class="Gbdfed"] floating enable
 for_window [class="Firefox"] floating enable
 for_window [class="Firefox" instance="Navigator"] floating disable
-for_window [class="mpv"] floating enable
-for_window [class="MuPDF"] floating enable
 for_window [class="Xfd"] floating enable
 for_window [class="XFontSel"] floating enable
-for_window [class="Zathura"] floating enable
 
-assign [Class="Darktable"] 8
-assign [Class="Fig"] 8
+assign [Class="Chromium"] 1
 assign [Class="Firefox"] 1
+assign [Class="Darktable"] 7
+assign [Class="Fig"] 8
 assign [Class="Gimp"] 8
 assign [Class="Inkscape"] 8
-assign [Class="Sxiv"] 7
 
 # bindings
 bindsym $mod+w      exec $BROWSER
