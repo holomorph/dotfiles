@@ -24,6 +24,7 @@ export NETHACKOPTIONS=~/.config/nethack/nethackrc
 export NOTMUCH_CONFIG=~/.config/notmuch/config
 
 # other config
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR"/ssh-agent
 export MPD_HOST="$XDG_RUNTIME_DIR"/mpd/socket
 export XKB_DEFAULT_OPTIONS=altwin:alt_super_win,ctrl:nocaps,compose:ralt
 export GTK_IM_MODULE=xim
