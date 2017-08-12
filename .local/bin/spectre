@@ -13,8 +13,10 @@ view () {
     command "$x" "$1"
 }
 
-if image="$(mktemp)"; then
-    trap "rm -f $image" EXIT
-    sox "$@" $flags -o "$image"
-    view "$image"
+unset name
+if name="$(mktemp -d "${TMPDIR:-/tmp}/spectre-XXXXXXX")"; then
+    trap "rm -rf $name" EXIT
+    name="$name/spectrogram-$PPID.png"
+    sox "$@" $flags -o "$name"
+    view "$name"
 fi
