@@ -3,8 +3,18 @@
 set -e
 readonly flags="-n spectrogram -x 3000 -y 513 -z 120 -w Kaiser"
 
+view () {
+    local x
+    for x in imv feh ffplay mpv display; do
+        if command -v "$x" > /dev/null; then
+            break
+        fi
+    done
+    command "$x" "$1"
+}
+
 if image="$(mktemp)"; then
     trap "rm -f $image" EXIT
     sox "$@" $flags -o "$image"
-    feh "$image"
+    view "$image"
 fi
