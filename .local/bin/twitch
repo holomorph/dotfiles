@@ -7,10 +7,12 @@
 require 'net/http'
 require 'open3'
 require 'json'
+require 'sdbm'
 require 'thread'
 
 module Twitch
   API = "https://api.twitch.tv/kraken"
+  API_TYPE = 'application/vnd.twitchtv.v5+json'
   CLIENT_ID = "jzkbprff40iqj646a697cyrvl0zt2m6"
 end
 
@@ -28,12 +30,15 @@ class String
   end
 end
 
-def read_config(file)
-  array = []
+def xdg_config_twitch(name)
   xdg = ENV["XDG_CONFIG_DIR"]
   dir = xdg ? xdg : File.join(ENV["HOME"], ".config")
+  File.join(dir, "twitch", name)
+end
 
-  IO.foreach(File.join(dir, "twitch", file)) do |s|
+def parse_config(file)
+  array = []
+  IO.foreach(file) do |s|
     next if s.chomp.empty? || s.start_with?("#")
     array << s.chomp.strip
   end
@@ -45,6 +50,7 @@ def request(url)
   res = Net::HTTP.start(uri.host, uri.port, :use_ssl => true) do |http|
     req = Net::HTTP::Get.new(uri)
     req['Client-ID'] = Twitch::CLIENT_ID
+    req['Accept'] = Twitch::API_TYPE
     http.request(req)
   end
   res.body
@@ -56,14 +62,38 @@ def get_streams()
   threads = []
   streams = []
   streams_mx = Mutex.new
+  file = xdg_config_twitch("streamers")
+  users = parse_config(file)
+  db = SDBM.new(file)
 
-  users = read_config("streamers")
+  case (olddb = File.mtime(file) > File.mtime("#{file}.pag"))
+  when false
+    olddb = true if db.empty?
+  when true
+    db.clear unless db.empty?
+  end
 
   users.each_slice(100) do |batch|
     threads << Thread.new do
       streams_mx.synchronize do
-        url = "#{Twitch::API}/streams?channel=#{batch.join(",")}" +
-              "&limit=#{batch.count}"
+        ids = []
+        if olddb
+          url = "#{Twitch::API}/users?login=#{batch.join(",")}"
+          data = JSON.parse(request(url))
+          data.dig("users").each do |s|
+            id = s.dig("_id")
+            name = s.dig("name")
+            # must use names as they appear in the config
+            db[batch.find{|n| name =~ /#{n.downcase}/}] = id
+            ids << id
+          end
+        else
+          batch.each do |user|
+            ids << db[user]
+          end
+        end
+
+        url = "#{Twitch::API}/streams?channel=#{ids.join(",")}"
         data = JSON.parse(request(url))
         data.dig("streams").each do |s|
           streams << s.dig("channel")
@@ -73,6 +103,7 @@ def get_streams()
   end
 
   threads.each(&:join)
+  db.close unless db.closed?
   streams
 end
 
