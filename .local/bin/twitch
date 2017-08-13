@@ -28,6 +28,12 @@ class String
   def escape
     '"' + self.gsub(/["`\\$]/) { "\\" + $& } + '"'
   end
+
+  def take_until(char)
+    x = index(char)
+    return self if x.nil?
+    x == 0 ? "" : self[0..(x - 1)]
+  end
 end
 
 def xdg_config_twitch(name)
@@ -40,7 +46,7 @@ def parse_config(file)
   array = []
   IO.foreach(file) do |s|
     next if s.chomp.empty? || s.start_with?("#")
-    array << s.chomp.strip
+    array << s.take_until(?#).chomp.strip
   end
   array
 end
