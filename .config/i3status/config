@@ -46,12 +46,12 @@ ethernet bond0 {
 }
 
 wireless wl0 {
-	format_up = "W: %quality @ %essid"
+	format_up = "W: %quality @ %essid (%frequency)"
 	format_down = ""
 }
 
 ethernet en0 {
-	format_up = "E: up (%speed)"
+	format_up = "E: %speed"
 	format_down = ""
 }
 

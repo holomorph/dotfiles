@@ -1,4 +1,5 @@
-text/html; elinks -dump-charset %{charset} -dump %s; copiousoutput;
+text/html; xdg-open %s; test=xdg-open --help; needsterminal;
+text/html; elinks -dump-charset %{charset} -dump %s; test=elinks -version; copiousoutput;
 
 application/pdf; zathura %s; test=zathura -h;
 application/pdf; mupdf %s;

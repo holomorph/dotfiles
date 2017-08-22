@@ -56,10 +56,10 @@
       (if (fboundp 'eww-current-url) (eww-current-url))
       (get-text-property (point) :nt-link)
       (thing-at-point 'url)
+      (url-get-url-at-point)
       (let* ((fn (run-hook-with-args-until-success 'file-name-at-point-functions))
              (dir (and fn (file-name-as-directory fn))))
         (unless (equal dir fn) fn))
-      (url-get-url-at-point)
       ;; catch incomplete URLs
       (thing-at-point 'symbol)))
 

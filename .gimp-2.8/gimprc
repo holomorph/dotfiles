@@ -39,7 +39,6 @@
 (toolbox-image-area yes)
 (toolbox-wilber no)
 (theme "Small")
-(help-browser web-browser)
 (user-manual-online yes)
 
 

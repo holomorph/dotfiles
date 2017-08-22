@@ -56,7 +56,9 @@
     point-and-x='false'
     point-and-x-mark='word'
     scroll-bar-on-the-left='false'
-    edit-annotations-inline='true'>
+    edit-annotations-inline='true'
+    coarse-presentation-positioning='false'
+    use-document-css='true'>
 <keymap mode='global'>
 <map in='ctrl-y' out='up'/>
 <map in='ctrl-n' out='down'/>
