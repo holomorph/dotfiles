@@ -1,19 +1,15 @@
 # zsh/hook.zsh
 
+precmd_functions+=(vcs_info)
+
+__print_title() {
+  print -Pn "\e];%n@%m (%~) - Terminal\a"
+}
+
+chpwd() {
+  ls
+}
+
 case $TERM in
-	rxvt* | vte* | xterm* )
-		precmd() {
-			print -Pn "\e];%m (%~) - Terminal\a"
-			vcs_info
-		}
-		preexec() {
-			local cmd=${1[(wr)^(*=*|sudo|-*)]}
-			print -Pn "\e];$cmd:q - Terminal\a"
-		}
-		;;
-	*)
-		precmd() {
-			vcs_info
-		}
-		;;
+  ( rxvt* | vte* | xterm* ) precmd_functions+=(__print_title) ;;
 esac
