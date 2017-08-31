@@ -32,11 +32,13 @@
 (require 'url)
 
 (defgroup twitch nil
-  "Query streamers from http://twitch.tv"
+  "Query streamers from Twitch"
+  :link '(url-link "https://twitch.tv")
   :group 'external)
 
 (defcustom twitch-client-id "jzkbprff40iqj646a697cyrvl0zt2m6"
   "Client ID for accessing Twitch API."
+  :link '(url-link "https://dev.twitch.tv/docs/v5/guides/using-the-twitch-api")
   :type 'string)
 
 (defcustom twitch-player "mpv"
@@ -55,11 +57,14 @@ stream title, and client ID, respectively."
 
 (defconst twitch-api-list
   '(display_name status viewers views followers url game name)
-  "List of useful keys from Twitch API.
-See https://github.com/justintv/twitch-api for more information.")
+  "List of useful keys from Twitch API 5.0.
+See https://dev.twitch.tv/docs/ for more information.")
 
 (defconst twitch-api-streamer-limit 100
   "Maximum number of streamers allowed in a single query.")
+
+(defvar twitch-uid-table nil
+  "Cache of user names to UIDs.")
 
 (defun twitch-handle-response ()
   (set-buffer-multibyte t)
@@ -67,10 +72,10 @@ See https://github.com/justintv/twitch-api for more information.")
   (re-search-forward "\r?\n\r?\n" nil t)
   (json-read))
 
-(defun twitch--batch-list ()
-  (let ((copy (delete-dups (remq nil twitch-streamers))))
-    (mapcar (lambda (seq) (mapconcat #'identity seq ","))
-            (seq-partition copy twitch-api-streamer-limit))))
+(defun twitch-batch-join (strings count separator)
+  "Batch STRINGS in groups of COUNT, joined by SEPARATOR"
+  (mapcar (lambda (seq) (mapconcat #'identity seq separator))
+          (seq-partition (delete-dups (remq nil strings)) count)))
 
 (defun twitch--munge-v3 (response)
   "Munge streams in v3 API response RESPONSE to be compatible with v2 API."
@@ -88,13 +93,6 @@ are used to find the key-values in the CHANNEL alist."
                 (setq val (replace-regexp-in-string "\r?\n" " " val t t)))
               (cons key val)))
           twitch-api-list))
-
-(defun twitch-streamer-urls ()
-  "Return list of API URLs generated from `twitch-streamers'."
-  (mapcar (lambda (batch)
-            (format "https://api.twitch.tv/kraken/streams?channel=%s&limit=%d"
-                    batch twitch-api-streamer-limit))
-          (twitch--batch-list)))
 
 (defun twitch-sort-pred (alist1 alist2)
   "Predicate for sorting alists according to user name."
@@ -160,25 +158,63 @@ are used to find the key-values in the CHANNEL alist."
            (forward-line))
          (point))))))
 
+(defmacro twitch-request (url &rest body)
+  (declare (indent 1) (debug t))
+  `(let ((url-mime-accept-string "application/vnd.twitchtv.v5+json")
+         (url-request-extra-headers `(("Client-ID" . ,twitch-client-id))))
+     (url-retrieve ,url (lambda (_arg) ,@body) nil t t)))
+
+(defun twitch-retrieve-uids (&optional callback)
+  "Fetch UIDs for each username in `twitch-streamers'.
+Optional CALLBACK is called with no arguments once each request
+has been received."
+  (let ((buffer (current-buffer))
+        (batches (twitch-batch-join twitch-streamers twitch-api-streamer-limit ","))
+        (url-mime-accept-string "application/vnd.twitchtv.v5+json")
+        (url-request-extra-headers `(("Client-ID" . ,twitch-client-id)))
+        (table (make-hash-table :test #'equal))
+        count uids)
+    (setq count (length batches))
+    (dolist (batch batches)
+      (twitch-request (format "https://api.twitch.tv/kraken/users?login=%s" batch)
+        (cl-decf count)
+        (let ((users (cdr (assq 'users (twitch-handle-response))))
+              user uid)
+          (dotimes (i (length users))
+            (setq user (aref users i))
+            (setq uid (cdr (assq '_id user)))
+            (puthash (cdr (assq 'name user)) uid table)
+            (push uid uids)))
+        (setq uids (mapconcat #'identity uids ","))
+        (when (zerop count)
+          (setq twitch-uid-table table)
+          (with-current-buffer buffer (funcall callback)))
+        (setq uids nil)))))
+
 (defun twitch-refresh (&optional _arg _noconfirm)
   "Erase the buffer and draw a new one."
-  (let* ((buffer (current-buffer))
-         (urls (twitch-streamer-urls))
-         (count (length urls))
-         (tables nil)
-         (url-request-extra-headers `(("Client-ID" . ,twitch-client-id))))
-    (dolist (url urls)
-      (url-retrieve
-       url
-       (lambda (_status)
-         (cl-decf count)
-         (let ((json (twitch-handle-response)))
-           (dolist (elt (twitch--munge-v3 (cdr (assq 'streams json))))
-             (push (twitch-filter (cdar elt)) tables)))
-         (when (zerop count)
-           (with-current-buffer buffer
-             (twitch-redraw tables))))
-       nil t t))))
+  (let ((buffer (current-buffer))
+        (uids (twitch-batch-join
+               (cl-loop for x being the hash-values of twitch-uid-table collect x)
+               twitch-api-streamer-limit ","))
+        (url-mime-accept-string "application/vnd.twitchtv.v5+json")
+        (url-request-extra-headers `(("Client-ID" . ,twitch-client-id)))
+        count tables)
+    (setq count (length uids))
+    (dolist (batch uids)
+      (twitch-request (format "https://api.twitch.tv/kraken/streams?channel=%s" batch)
+       (cl-decf count)
+       (let ((json (twitch-handle-response)))
+         (dolist (elt (twitch--munge-v3 (cdr (assq 'streams json))))
+           (push (twitch-filter (cdar elt)) tables)))
+       (when (zerop count)
+         (with-current-buffer buffer
+           (twitch-redraw tables)))))))
+
+(defun twitch-refresh-v5 (&optional _arg _noconfirm)
+  (if twitch-uid-table
+      (twitch-refresh)
+    (twitch-retrieve-uids #'twitch-refresh)))
 
 (defun twitch-overlay-at (position)
   (cl-loop for ov in (overlays-at position)
@@ -256,14 +292,14 @@ are used to find the key-values in the CHANNEL alist."
     ["Quit" quit-window]))
 
 (define-derived-mode twitch-mode special-mode "Twitch"
-  "Major mode for launching streams from <http://www.twitch.tv>."
+  "Major mode for launching streams from <https://www.twitch.tv>."
   :group 'twitch
   (buffer-disable-undo)
-  (setq-local revert-buffer-function #'twitch-refresh))
+  (setq-local revert-buffer-function #'twitch-refresh-v5))
 
 ;;;###autoload
 (defun twitch ()
-  "Open a `twitch-mode' buffer if `twitch-streamers' or is populated."
+  "Open a `twitch-mode' buffer if `twitch-streamers' is populated."
   (interactive)
   (let* ((name "*twitch*")
          (buffer (or (get-buffer name) (generate-new-buffer name))))
@@ -273,7 +309,7 @@ are used to find the key-values in the CHANNEL alist."
         (with-current-buffer buffer
           (unless (eq major-mode 'twitch-mode)
             (twitch-mode)
-            (twitch-refresh))
+            (twitch-refresh-v5))
           (switch-to-buffer-other-window buffer))))))
 
 (provide 'twitch)
