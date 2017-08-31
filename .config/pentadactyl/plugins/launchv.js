@@ -44,22 +44,24 @@ function launchv(target) {
     var uri = target.replace(/([$`"\\])/g, "\\$1");
 
     function exec(launcher, uri) {
-        if(!uri || uri.length === 0) {
-            if(typeof dactyl !== "undefined" && "echoerr" in dactyl)
+        if (!uri || uri.length === 0) {
+            if (dactyl !== undefined && dactyl.hasOwnProperty("echoerr")) {
                 dactyl.echoerr("E474: Invalid argument");
-            else if(typeof liberator !== "undefined" && "echoerr" in liberator)
+            } else if (liberator !== undefined && liberator.hasOwnProperty("echoerr")) {
                 liberator.echoerr("E474: Invalid argument");
+            }
             return;
         }
-        if(typeof dactyl !== "undefined")
+        if (dactyl !== undefined) {
             dactyl.echomsg("Launch " + launcher + " " + uri);
-        io.system(launcher + ' "' + uri + '" &');
+        }
+        io.system(launcher + " \"" + uri + "\" &");
     }
 
     exec("mpv", uri);
 }
 
-hints.addMode("l", "Launch video from hint", function (elem, loc) launchv(loc));
+hints.addMode("l", "Launch video from hint", function (elem, loc) { launchv(loc) });
 
 commands.add(["launchv", "lv"], "Launches current buffer video.",
     function(args) { launchv(buffer.URL); });
