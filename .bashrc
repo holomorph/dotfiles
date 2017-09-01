@@ -21,13 +21,12 @@ if [[ -r "/usr/share/bash-completion/bash_completion" ]]; then
 fi
 
 # configs
-for cfg in alias bind fun git util; do
-    f="$HOME/.config/bash/$cfg.bash"
+for f in ~/.config/bash/{*.bash,*.sh}; do
     if [[ -r "$f" ]]; then
         . "$f"
     fi
 done
-unset cfg f
+unset f
 
 # prompt
 PS1="\[\e[1;30m\][\[\e[0;91m\]\u\[\e[30m\]@\[\e[0;31m\]\h\$(_vcs_info) \

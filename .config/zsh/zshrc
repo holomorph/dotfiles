@@ -3,25 +3,25 @@
 zmodload zsh/complist
 autoload -Uz compinit && compinit -d "$HOME/.cache/zsh/zcompdump"
 
-setopt auto_cd auto_pushd pushd_ignore_dups correct
+setopt auto_cd auto_pushd pushd_to_home correct
+setopt auto_menu always_to_end complete_in_word
 setopt extended_glob append_history extended_history share_history
 setopt hist_find_no_dups hist_expire_dups_first hist_ignore_dups
 setopt hist_ignore_space hist_reduce_blanks hist_save_no_dups hist_verify
 setopt prompt_subst
-unsetopt flow_control
+unsetopt flow_control nomatch
 
 HISTFILE="$HOME/.cache/zsh/zhistory"
 HISTSIZE=20000
-SAVEHIST=10000
+SAVEHIST=$HISTSIZE
 
 # configs
-for cfg in alias bindkey fun git hook style util; do
-    f="$HOME/.config/zsh/$cfg.zsh"
+for f in ~/.config/zsh/{*.zsh,*.sh}; do
     if [[ -r "$f" ]]; then
         source "$f"
     fi
 done
-unset cfg f
+unset f
 
 # prompt
 PROMPT='%(?..%B%F{red}exit %?%f%b
