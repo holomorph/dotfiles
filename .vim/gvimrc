@@ -4,6 +4,6 @@ set lines=40
 set columns=80
 
 set guicursor=a:blinkon0
-set guifont=Consolas\ 13
+set guifont=Monospace\ 13
 set guioptions=acpig
 set mousefocus
