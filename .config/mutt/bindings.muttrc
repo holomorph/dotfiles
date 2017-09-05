@@ -6,8 +6,10 @@ bind index       <Space> collapse-thread
 bind index       i       noop
 bind pager       j       next-line
 bind pager       k       previous-line
+bind pager       g       noop
 bind pager       gg      top
 bind pager       G       bottom
+bind index       g       noop
 bind index       gg      first-entry
 bind index       G       last-entry
 bind pager       J       next-undeleted
@@ -35,6 +37,7 @@ bind postpone    p       exit
 
 # attach
 bind attach      i       exit
+bind attach      g       noop
 bind attach      gg      first-entry
 bind attach      G       last-entry
 
