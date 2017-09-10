@@ -57,6 +57,7 @@ ethernet en0 {
 
 battery 1 {
 	format = "%status %percentage (%remaining) %consumption"
+	format_down = ""
 	path = "/sys/class/power_supply/BAT%d/uevent"
 	low_threshold = 10
 	threshold_type = percentage
