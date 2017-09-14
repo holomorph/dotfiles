@@ -36,7 +36,6 @@ set sleep_time        = 0            # no delays please
 set smart_wrap                       # don't wrap mid-word
 set thorough_search                  # strip headers and eval mimes before searching
 set tilde                            # show tildes like in vim
-set text_flowed                      # format=flowed
 set timeout           = 10           # idle time before scanning
 set wait_key          = no           # shut up, mutt
 
