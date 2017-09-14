@@ -1,4 +1,4 @@
-text/html; xdg-open %s; test=xdg-open --help; needsterminal;
+text/html; xdg-open %s; test=xdg-open --help;
 text/html; elinks -dump-charset %{charset} -dump %s; test=elinks -version; copiousoutput;
 
 application/pdf; zathura %s; test=zathura -h;
@@ -7,11 +7,11 @@ application/postscript; zathura %s; test=zathura -h;
 application/x-dvi; evince %s;
 image/vnd.djvu; djview %s;
 
-application/x-tex; vim %s;
-application/x-latex; vim %s;
-text/x-diff; vim %s;
-text/x-patch; vim %s;
-text/plain; vim %s;
+application/x-tex; vim %s; needsterminal;
+application/x-latex; vim %s; needsterminal;
+text/x-diff; vim %s; needsterminal;
+text/x-patch; vim %s; needsterminal;
+text/plain; vim %s; needsterminal;
 
 image/gif; ffplay -loop 0 %s;
 image/svg; eog %s;
@@ -19,7 +19,7 @@ image/*; imv %s; test=imv -h;
 image/*; feh -. %s; test=feh --version; test=sh -c 'test $DISPLAY';
 image/*; eog %s; test=eog -h;
 audio/*; mpv %s;
-audio/*; play %s; test=play --version;
+audio/*; play %s;
 video/*; mpv %s;
 application/x-cue; mpv %s;
 text/x-cue; mpv %s;
