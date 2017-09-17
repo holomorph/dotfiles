@@ -20,6 +20,7 @@ source ~/.config/mutt/sidebar.muttrc  # wow
 # main options
 set beep_new
 unset confirmappend                  # don't ask, just do!
+set collapse_unread   = no           # keep threads with new mail uncollapsed
 set delete                           # don't ask, just do!
 set mail_check        = 0            # minimum time between scans
 unset markers                        # no ugly plus signs
