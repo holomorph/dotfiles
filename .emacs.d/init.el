@@ -30,7 +30,9 @@
  echo-keystrokes 0.1
  enable-dir-local-variables nil
  enable-recursive-minibuffers t
+ debugger-stack-frame-as-list t
  gnutls-min-prime-bits 2048
+ history-delete-duplicates t
  history-length 10000
  inhibit-startup-screen t
  mode-line-end-spaces '(:eval "-%-")
@@ -39,6 +41,7 @@
  search-highlight t
  lazy-highlight-initial-delay 0
  query-replace-highlight t
+ recenter-positions '(top middle bottom)
  require-final-newline t
  save-interprogram-paste-before-kill t
  shift-select-mode nil
@@ -57,6 +60,7 @@
  c-basic-offset 4
  comint-prompt-read-only t
  compilation-read-command nil
+ dired-dwim-target t
  display-time-24hr-format t
  ediff-window-setup-function 'ediff-setup-windows-plain
  ediff-split-window-function 'split-window-horizontally
@@ -121,6 +125,7 @@
 (global-set-key (kbd "M-o") 'other-window)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c i") 'imenu)
+(global-set-key (kbd "C-h a") 'apropos)
 
 (windmove-default-keybindings)
 
@@ -217,6 +222,5 @@
 (add-hook 'scheme-mode-hook #'my-lisp-modes)
 (add-hook 'prog-mode-hook #'my-prog-modes)
 (add-hook 'tex-mode-hook #'my-prog-modes)
-(add-hook 'comint-mode-hook #'my-prog-modes)
 (remove-hook 'magit-region-highlight-hook 'magit-diff-update-hunk-region)
 (remove-hook 'magit-section-highlight-hook 'magit-section-highlight)
