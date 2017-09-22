@@ -6,7 +6,7 @@ augroup filetypedetect
     au BufNewFile,BufRead *.md setf markdown
     au BufNewFile,BufRead *.ml,*.ml[ilyp] setl cms=(*%s*)
     au BufNewFile,BufRead *.muttrc setf muttrc
-    au BufNewFile,BufRead *.rl setf ragel setl cms=#%s
+    au BufNewFile,BufRead *.rl setf ragel
     au BufNewFile,BufRead *.rst set tw=70 fo+=t
     au BufNewFile,BufRead *.sage,*.spyx,*.pyx setf python
     au BufNewFile,BufRead *.rules setf udevrules
