@@ -35,6 +35,7 @@ set list listchars=tab:»\ ,extends:$,precedes:^,trail:·
 set nrformats+=alpha
 
 " vim ui
+set autochdir
 set autoread
 set autowrite
 set backspace=eol,start

@@ -1,5 +1,6 @@
-text/html; xdg-open %s; test=xdg-open --help;
-text/html; elinks -dump-charset %{charset} -dump %s; test=elinks -version; copiousoutput;
+text/html; xdg-open %s; test=xdg-open --help >/dev/null;
+text/html; elinks -dump-charset %{charset} -dump %s; \
+  test=elinks -version >/dev/null; copiousoutput;
 
 application/pdf; zathura %s; test=zathura -h;
 application/pdf; mupdf %s;

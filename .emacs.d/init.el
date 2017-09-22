@@ -57,7 +57,6 @@
 (setq-default
  Man-width fill-column
  apropos-do-all t
- c-basic-offset 4
  comint-prompt-read-only t
  compilation-read-command nil
  dired-dwim-target t
