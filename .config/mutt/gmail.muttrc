@@ -11,6 +11,7 @@ set spoolfile = "+inbox"
 set postponed = "+drafts"
 set trash     = "+trash"
 
+set mail_check = 0 # ok for maildir, not ok for imap
 unset record # gmail saves sent mail in +sent anyways
 
 mailboxes +inbox +amazon +drafts +sent +thesis +trash
