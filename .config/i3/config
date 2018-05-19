@@ -151,6 +151,7 @@ for_window [class="XFontSel"] floating enable
 assign [Class="Chromium"] 1
 assign [Class="Firefox"] 1
 assign [Class="Darktable"] 7
+assign [Class="Rawtherapee"] 7
 assign [Class="Fig"] 8
 assign [Class="Gimp"] 8
 assign [Class="Inkscape"] 8
