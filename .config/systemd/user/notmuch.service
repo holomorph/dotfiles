@@ -4,5 +4,5 @@ Documentation=man:notmuch-new(1)
 
 [Service]
 Type=oneshot
-Environment=NOTMUCH_CONFIG=%h/.config/notmuch/config
+Environment=NOTMUCH_CONFIG=%S/notmuch/config
 ExecStart=/usr/bin/notmuch new
