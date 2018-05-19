@@ -1,12 +1,12 @@
 # zsh/util.zsh
 
 x() {
-  if test $(( $# == 0 )); then
+  if test $(( $# == 0 )) -ne 0; then
     printf '%s\n' "usage: x <archive1> [<archive2> [...]]"
     return 1
   fi
 
-  while test $(( $# > 0 )); do
+  while test $(( $# > 0 )) -ne 0; do
     case "$1" in
       *.tar.gz | *.tgz) bsdtar -xvzf "$1";;
       *.tar.bz2 | *.tbz) bsdtar -xvjf "$1";;
