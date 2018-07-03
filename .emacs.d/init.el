@@ -75,6 +75,7 @@
  octave-comment-char ?%
  package-check-signature t
  python-indent-guess-indent-offset nil
+ pulse-flag nil
  reftex-idle-time 0.1
  show-paren-delay 0.02
  shr-width fill-column
@@ -124,7 +125,7 @@
 (global-set-key (kbd "M-o") 'other-window)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c i") 'imenu)
-(global-set-key (kbd "C-h a") 'apropos)
+(define-key help-map "a" 'apropos)
 
 (windmove-default-keybindings)
 
