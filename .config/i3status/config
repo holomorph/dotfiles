@@ -26,6 +26,7 @@ order += "tztime local"
 
 volume master {
 	format = "V: %volume"
+	format_muted = "M: %volume"
 	device = "default"
 	mixer = "Master"
 	mixer_idx = 0
@@ -33,6 +34,7 @@ volume master {
 
 load {
 	format = "L: %1min %5min %15min"
+	max_threshold = "1"
 }
 
 cpu_temperature 0 {
