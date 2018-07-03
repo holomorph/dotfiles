@@ -1,6 +1,6 @@
 ;;; twitch.el --- Query streamers from http://twitch.tv -*- lexical-binding: t -*-
 
-;; Copyright (C) 2015-2017  Mark Oteiza <mvoteiza@udel.edu>
+;; Copyright (C) 2015-2018  Mark Oteiza <mvoteiza@udel.edu>
 
 ;; Author: Mark Oteiza <mvoteiza@udel.edu>
 ;; Version: 0.9
@@ -141,6 +141,7 @@ are used to find the key-values in the CHANNEL alist."
            (overlay (make-overlay beg end)))
       (overlay-put overlay 'twitch t)
       (overlay-put overlay 'evaporate t)
+      (overlay-put overlay 'isearch-open-invisible #'twitch-toggle-overlay)
       (overlay-put overlay 'invisible t))))
 
 (defun twitch-redraw (list)
