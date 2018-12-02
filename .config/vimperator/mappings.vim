@@ -1,1 +1,0 @@
-../pentadactyl/mappings.vim
