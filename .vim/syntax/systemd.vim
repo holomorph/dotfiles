@@ -14,7 +14,7 @@ syn match sdDelim	/=/ contained
 syn match sdEnv		/\$[A-Z_]\+/
 syn match sdKey		/^\u\w\+=/ contains=sdDelim
 syn match sdLinebreak	/\\$/
-syn match sdSpecifier	/%\([nNpPiIfcrRtSCLuUhsmbHv%]\)/
+syn match sdSpecifier	/%\([bcCEfhHiIjJLmnNpPrRsStTuUvV%]\)/
 
 hi def link sdGroup	Type
 hi def link sdComment	Comment
