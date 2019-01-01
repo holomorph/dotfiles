@@ -1,6 +1,6 @@
 ;;; twitch.el --- Query streamers from http://twitch.tv -*- lexical-binding: t -*-
 
-;; Copyright (C) 2015-2018  Mark Oteiza <mvoteiza@udel.edu>
+;; Copyright (C) 2015-2019  Mark Oteiza <mvoteiza@udel.edu>
 
 ;; Author: Mark Oteiza <mvoteiza@udel.edu>
 ;; Version: 0.9

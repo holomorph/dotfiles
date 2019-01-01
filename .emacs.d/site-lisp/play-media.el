@@ -1,6 +1,6 @@
 ;;; play-media.el --- Launch videos and stuff from Emacs -*- lexical-binding: t -*-
 
-;; Copyright (C) 2014-2017  Mark Oteiza <mvoteiza@udel.edu>
+;; Copyright (C) 2014-2019  Mark Oteiza <mvoteiza@udel.edu>
 
 ;; Author: Mark Oteiza <mvoteiza@udel.edu>
 ;; Version: 0.4.1
