@@ -144,6 +144,7 @@ for_window [class="fontforge"] floating enable
 for_window [class="Gbdfed"] floating enable
 for_window [class="Firefox"] floating enable
 for_window [class="Firefox" instance="Navigator"] floating disable
+for_window [class="keepassxc"] floating enable
 for_window [class="Pinentry"] floating enable
 for_window [class="Xfd"] floating enable
 for_window [class="XFontSel"] floating enable
