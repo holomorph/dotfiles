@@ -84,7 +84,9 @@
  windmove-wrap-around t)
 
 (make-directory "~/.cache/emacs" t)
+(set-file-modes "~/.cache/emacs" #o700)
 (make-directory "~/.local/share/emacs" t)
+(set-file-modes "~/.local/share/emacs" #o700)
 
 (setq-default
  bookmark-default-file "~/.local/share/emacs/bookmarks"
