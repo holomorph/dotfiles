@@ -1,10 +1,10 @@
-;;; twitch.el --- Query streamers from http://twitch.tv -*- lexical-binding: t -*-
+;;; twitch.el --- Query streamers from https://twitch.tv -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2015-2019  Mark Oteiza <mvoteiza@udel.edu>
 
 ;; Author: Mark Oteiza <mvoteiza@udel.edu>
-;; Version: 0.9
-;; Package-Requires: ((emacs "24.3") (seq "1.5"))
+;; Version: 0.9.1
+;; Package-Requires: ((emacs "24.3") (let-alist "1.0.5") (seq "1.5"))
 ;; Keywords: convenience, multimedia
 
 ;; This program is free software; you can redistribute it and/or
@@ -25,11 +25,14 @@
 ;;; Code:
 
 (require 'calc-ext)
-(eval-when-compile (require 'cl-lib))
 (require 'format-spec)
 (require 'json)
 (require 'seq)
 (require 'url)
+
+(eval-when-compile
+  (require 'cl-lib)
+  (require 'let-alist))
 
 (defgroup twitch nil
   "Query streamers from Twitch"
@@ -38,7 +41,7 @@
 
 (defcustom twitch-client-id "jzkbprff40iqj646a697cyrvl0zt2m6"
   "Client ID for accessing Twitch API."
-  :link '(url-link "https://dev.twitch.tv/docs/v5/guides/using-the-twitch-api")
+  :link '(url-link "https://dev.twitch.tv/docs/v5/#getting-a-client-id")
   :type 'string)
 
 (defcustom twitch-player "mpv"
@@ -58,7 +61,7 @@ stream title, and client ID, respectively."
 (defconst twitch-api-list
   '(display_name status viewers views followers url game name)
   "List of useful keys from Twitch API 5.0.
-See https://dev.twitch.tv/docs/ for more information.")
+See https://dev.twitch.tv/docs/v5/ for more information.")
 
 (defconst twitch-api-streamer-limit 100
   "Maximum number of streamers allowed in a single query.")
@@ -77,50 +80,41 @@ See https://dev.twitch.tv/docs/ for more information.")
   (mapcar (lambda (seq) (mapconcat #'identity seq separator))
           (seq-partition (delete-dups (remq nil strings)) count)))
 
-(defun twitch--munge-v3 (response)
-  "Munge streams in v3 API response RESPONSE to be compatible with v2 API."
-  (mapcar (lambda (a)
-            (list (append (assq 'channel a) (list (assq 'viewers a)))))
-          response))
+(defun twitch--munge-v5 (stream)
+  (append (list (assq 'viewers stream)) (cdr (assq 'channel stream))))
 
 (defun twitch-filter (channel)
-  "Return an alist of stream information in alist CHANNEL.
-The keys are the properties in `twitch-api-list', values of which
-are used to find the key-values in the CHANNEL alist."
-  (mapcar (lambda (key)
-            (let ((val (cdr (assq key channel))))
-              (when (stringp val)
-                (setq val (replace-regexp-in-string "\r?\n" " " val t t)))
-              (cons key val)))
-          twitch-api-list))
+  "Return an alist derived from CHANNEL filtered for keys in `twitch-api-list'."
+  (cl-loop for key in twitch-api-list collect (assq key channel)))
 
 (defun twitch-sort-pred (alist1 alist2)
   "Predicate for sorting alists according to user name."
   (string< (cdr (assq 'name alist1)) (cdr (assq 'name alist2))))
 
-(defun twitch-format-info (key val)
-  (let* ((v (cond ((numberp val) (if (< val 10000) (number-to-string val)
-                                   (math-group-float (number-to-string val))))
-                  ((stringp val) val)))
-         (entry (concat "  " key ": " v)))
-    (concat (propertize entry 'font-lock-face 'font-lock-comment-face) "\n")))
+(defun twitch-group-digits (number)
+  "Return a formatted string of integer N with digits grouped."
+  (let ((str (number-to-string number)))
+    (if (< number 10000) str (math-group-float str))))
+
+(defun twitch-format-info (k v)
+  (let ((str (format "  %s: %s" k (if (numberp v) (twitch-group-digits v) v))))
+    (concat (propertize str 'font-lock-face 'font-lock-comment-face) "\n")))
 
 (defun twitch-format-data (ht)
-  (let* ((name (cdr (assq 'display_name ht)))
-         (title (cdr (assq 'status ht)))
-         (user (cdr (assq 'name ht))))
+  (let-alist ht
     (propertize
      (concat
       (truncate-string-to-width
-       (propertize name 'font-lock-face 'font-lock-type-face) 15 nil nil "…")
+       (propertize .display_name 'font-lock-face 'font-lock-type-face) 15 nil nil "…")
       (propertize " " 'display '(space :align-to 16))
-      (propertize (or title "") 'font-lock-face 'font-lock-variable-name-face)
+      (propertize (replace-regexp-in-string "\r?\n" " " (or .status "") t t)
+                  'font-lock-face 'font-lock-variable-name-face)
       "\n"
-      (twitch-format-info "Game" (cdr (assq 'game ht)))
-      (twitch-format-info "Viewers" (cdr (assq 'viewers ht)))
-      (twitch-format-info "Followers" (cdr (assq 'followers ht)))
-      (twitch-format-info "Total views" (cdr (assq 'views ht))))
-     'url (format "https://twitch.tv/%s" user) 'name name 'title title)))
+      (twitch-format-info "Game" .game)
+      (twitch-format-info "Viewers" .viewers)
+      (twitch-format-info "Followers" .followers)
+      (twitch-format-info "Total views" .views))
+     'url (format "https://twitch.tv/%s" .name) 'name .display_name 'title .status)))
 
 (defun twitch-format-spec (str)
   "Interpolate format specifiers in STR."
@@ -167,30 +161,22 @@ are used to find the key-values in the CHANNEL alist."
 
 (defun twitch-retrieve-uids (&optional callback)
   "Fetch UIDs for each username in `twitch-streamers'.
+Populate `twitch-uid-table' with the associations.
 Optional CALLBACK is called with no arguments once each request
 has been received."
   (let ((buffer (current-buffer))
         (batches (twitch-batch-join twitch-streamers twitch-api-streamer-limit ","))
-        (url-mime-accept-string "application/vnd.twitchtv.v5+json")
-        (url-request-extra-headers `(("Client-ID" . ,twitch-client-id)))
         (table (make-hash-table :test #'equal))
-        count uids)
+        count)
     (setq count (length batches))
     (dolist (batch batches)
       (twitch-request (format "https://api.twitch.tv/kraken/users?login=%s" batch)
         (cl-decf count)
-        (let ((users (cdr (assq 'users (twitch-handle-response))))
-              user uid)
-          (dotimes (i (length users))
-            (setq user (aref users i))
-            (setq uid (cdr (assq '_id user)))
-            (puthash (cdr (assq 'name user)) uid table)
-            (push uid uids)))
-        (setq uids (mapconcat #'identity uids ","))
+        (cl-loop for x across (cdr (assq 'users (twitch-handle-response)))
+                 do (puthash (cdr (assq 'name x)) (cdr (assq '_id x)) table))
         (when (zerop count)
           (setq twitch-uid-table table)
-          (with-current-buffer buffer (funcall callback)))
-        (setq uids nil)))))
+          (with-current-buffer buffer (funcall callback)))))))
 
 (defun twitch-refresh (&optional _arg _noconfirm)
   "Erase the buffer and draw a new one."
@@ -198,28 +184,24 @@ has been received."
         (uids (twitch-batch-join
                (cl-loop for x being the hash-values of twitch-uid-table collect x)
                twitch-api-streamer-limit ","))
-        (url-mime-accept-string "application/vnd.twitchtv.v5+json")
-        (url-request-extra-headers `(("Client-ID" . ,twitch-client-id)))
         count tables)
     (setq count (length uids))
     (dolist (batch uids)
       (twitch-request (format "https://api.twitch.tv/kraken/streams?channel=%s" batch)
-       (cl-decf count)
-       (let ((json (twitch-handle-response)))
-         (dolist (elt (twitch--munge-v3 (cdr (assq 'streams json))))
-           (push (twitch-filter (cdar elt)) tables)))
-       (when (zerop count)
-         (with-current-buffer buffer
-           (twitch-redraw tables)))))))
+        (cl-decf count)
+        (cl-loop for x across (cdr (assq 'streams (twitch-handle-response)))
+                 do (push (twitch-filter (twitch--munge-v5 x)) tables))
+        (when (zerop count)
+          (with-current-buffer buffer
+            (twitch-redraw tables)))))))
 
 (defun twitch-refresh-v5 (&optional _arg _noconfirm)
   (if twitch-uid-table
       (twitch-refresh)
     (twitch-retrieve-uids #'twitch-refresh)))
 
-(defun twitch-overlay-at (position)
-  (cl-loop for ov in (overlays-at position)
-           if (overlay-get ov 'twitch) return ov))
+(defun twitch-overlay-at (pos)
+  (cl-loop for ov in (overlays-at pos) when (overlay-get ov 'twitch) return ov))
 
 (defun twitch-toggle-overlay (overlay)
   (if (not (overlay-get overlay 'invisible))
