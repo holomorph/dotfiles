@@ -1,0 +1,19 @@
+#!/usr/bin/python
+
+import json
+import os.path
+import sys
+import urllib.parse
+import urllib.request
+
+if len(sys.argv) == 1:
+    print("Usage: %s <address ...>" % os.path.basename(sys.argv[0]), file=sys.stderr)
+else:
+    url = "https://nominatim.openstreetmap.org/search"
+    params = urllib.parse.urlencode({"format": "json", "addressdetails": 1, "limit": 1,
+                                     "q": " ".join(sys.argv[1:])})
+    with urllib.request.urlopen("%s?%s" % (url, params)) as r:
+        data = json.load(r)
+        data = data[0]
+        print("%.5f:%.5f:%s" % (float(data["lat"]), float(data["lon"]),
+                                data["display_name"]))
