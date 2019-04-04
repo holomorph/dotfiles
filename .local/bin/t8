@@ -45,26 +45,17 @@ def parse_opts():
 
 
 def get_response(text, sl=u"auto", tl=u"auto"):
-    """
-    Processes a Translate API request given a desired message TEXT to be
-    translated, source language SL, and translated language TL.  Returns
-    decoded response.
-    """
-
     api = "http://translate.googleapis.com/translate_a/single"
     params = urllib.parse.urlencode({"client": "gtx", "dt": "t",
                                      "ie": "utf-8", "oe": "utf-8",
                                      "sl": sl, "tl": tl, "q": text})
     req = urllib.request.Request("%s?%s" % (api, params),
                                  headers={'User-Agent': 'Mozilla/4.0'})
-    return urllib.request.urlopen(req).read().decode('utf-8')
+    with urllib.request.urlopen(req) as r:
+        return json.load(r)
 
 
-def pretty_print(response):
-    # ugly hack to get valid json
-    hack = response.replace(',,,', ',"","",').replace(',,', ',"",')
-    hack = hack.replace('[,', '["",')
-    data = json.loads(hack)
+def pretty_print(data, debug):
     if debug:
         print(data, file=sys.stderr)
 
@@ -79,4 +70,4 @@ def pretty_print(response):
 
 message, tl, sl, debug = parse_opts()
 text = get_response(message, sl, tl)
-pretty_print(text)
+pretty_print(text, debug)
