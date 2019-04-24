@@ -4,7 +4,7 @@
 #
 
 # turn off screen after 1800s
-xset +dpms dpms 1800 1800 1800
+#xset +dpms dpms 1800 1800 1800
 
 # set background
 feh --no-fehbg --bg-fill "$HOME/pictures/wallpaper/default" &
