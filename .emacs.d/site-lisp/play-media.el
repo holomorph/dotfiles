@@ -22,11 +22,6 @@
 ;;; Commentary:
 
 ;; Play media from Emacs using an external player.
-;; Written originally to use mpv <http://mpv.io/> and livestreamer
-;; <http://docs.livestreamer.io/>, or some other player.  For mpv, at
-;; least v0.7.0 is required for its ytdl hook (turned on by default in
-;; v0.7.2). For livestreamer, at least v1.9.0 is needed for the
-;; "--default-stream" config option.
 
 ;;; Code:
 
