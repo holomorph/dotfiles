@@ -28,7 +28,6 @@
 (require 'format-spec)
 (require 'json)
 (require 'seq)
-(require 'url)
 
 (eval-when-compile
   (require 'cl-lib)
@@ -57,6 +56,14 @@ stream title, and client ID, respectively."
 (defcustom twitch-streamers nil
   "List of streamer user names on Twitch."
   :type '(repeat (string :tag "Name")))
+
+(defcustom twitch-curl-program "curl"
+  "Name by which to invoke the curl program."
+  :type 'string)
+
+(defconst twitch-curl-config "header=\"Accept: application/vnd.twitchtv.v5+json\"
+header=\"Client-ID: %s\"
+url=\"%s\"\n")
 
 (defconst twitch-api-list
   '(display_name status viewers views followers url game name)
@@ -155,9 +162,18 @@ See https://dev.twitch.tv/docs/v5/ for more information.")
 
 (defmacro twitch-request (url &rest body)
   (declare (indent 1) (debug t))
-  `(let ((url-mime-accept-string "application/vnd.twitchtv.v5+json")
-         (url-request-extra-headers `(("Client-ID" . ,twitch-client-id))))
-     (url-retrieve ,url (lambda (_arg) ,@body) nil t t)))
+  (let ((p (make-symbol "process")))
+    `(let ((,p (start-process "twitch" (generate-new-buffer " *twitch")
+                              twitch-curl-program "-q" "-K" "-")))
+       (setf (process-sentinel ,p)
+             (lambda (process _status)
+               (unwind-protect
+                   (when (buffer-live-p (process-buffer process))
+                     (with-current-buffer (process-buffer process)
+                       ,@body))
+                 (kill-buffer (process-buffer process)))))
+       (process-send-string ,p (format twitch-curl-config twitch-client-id ,url))
+       (process-send-eof ,p))))
 
 (defun twitch-retrieve-uids (&optional callback)
   "Fetch UIDs for each username in `twitch-streamers'.
