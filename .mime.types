@@ -1,0 +1,5 @@
+# ~/.mime.types
+application/x-cue				cue
+text/x-cue					cue
+video/MP2T					ts
+video/mpeg					vob
