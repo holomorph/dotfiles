@@ -50,21 +50,21 @@
  scroll-preserve-screen-position t
  switch-to-buffer-preserve-window-point t
  vc-follow-symlinks t
- x-gtk-use-system-tooltips nil
- x-select-enable-clipboard t
- x-select-enable-primary t)
+ x-gtk-use-system-tooltips nil)
 
 (setq-default
  Man-width fill-column
  apropos-do-all t
  comint-prompt-read-only t
  compilation-read-command nil
+ diff-font-lock-syntax nil
  dired-dwim-target t
  display-time-24hr-format t
  ediff-window-setup-function 'ediff-setup-windows-plain
  ediff-split-window-function 'split-window-horizontally
  eldoc-idle-delay 0.08
  eldoc-minor-mode-string nil
+ eshell-hist-ignoredups t
  eshell-list-files-after-cd t
  gnus-init-file (concat user-emacs-directory "gnus.el")
  gnus-home-directory (concat user-emacs-directory "gnus/")
