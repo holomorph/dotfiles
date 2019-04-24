@@ -6,6 +6,7 @@ Documentation=man:transmission-daemon(1)
 Type=notify
 ExecStart=/usr/bin/transmission-daemon -f --log-error
 ExecReload=/usr/bin/kill -s HUP $MAINPID
+NoNewPrivileges=true
 
 [Install]
 WantedBy=default.target
