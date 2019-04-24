@@ -48,7 +48,7 @@ def parse_config(file)
     next if s.chomp.empty? || s.start_with?("#")
     array << s.take_until(?#).chomp.strip
   end
-  array
+  array.uniq
 end
 
 def request(url)
@@ -131,7 +131,7 @@ end
 
 def play_stream(item)
   title = %Q(#{item["status"]} (#{item["display_name"]}))
-  uri = item[:uri] || "http://twitch.tv/#{item["name"]}"
+  uri = item[:uri] || "https://twitch.tv/#{item["name"]}"
 
   pid = fork do
     exec("mpv", "--title", title, uri)
@@ -155,8 +155,8 @@ end
 
 streams = get_streams()
 unless streams.empty?
-  width = streams.map{|i| i.dig("display_name").length}.max + 4
-  menu = streams.uniq{|i| i.dig("name")}.sort_by{|i| i.dig("name")}
+  width = streams.map{|i| i.dig("display_name").length}.max + 3
+  menu = streams.sort_by{|i| i.dig("display_name").downcase}
   menu = menu.map{|i| i.display_s(width) }
   sel = dmenu(menu)
   play_selected(sel, streams) if sel
