@@ -31,27 +31,27 @@
                  (string #\esc #\[ #\m)))
 
 (define (prettyprint->string table)
-  (let ((flag (hash-ref table "flag_date"))
-        (epoch (hash-ref table "epoch")))
+  (let ((flag (assoc-ref table "flag_date"))
+        (epoch (assoc-ref table "epoch")))
     (format #f "~a/~a/~a  ~a ~a~%"
-            (color (hash-ref table "repo") '(1 35))
-            (color (hash-ref table "arch") '(1 33))
-            (color (hash-ref table "pkgname") '(1))
+            (color (assoc-ref table "repo") '(1 35))
+            (color (assoc-ref table "arch") '(1 33))
+            (color (assoc-ref table "pkgname") '(1))
             (color (string-append
                     (if (positive? epoch) (format #f "~d:" epoch) "")
-                    (hash-ref table "pkgver") "-" (hash-ref table "pkgrel"))
+                    (assoc-ref table "pkgver") "-" (assoc-ref table "pkgrel"))
                    `(1 ,(if flag 31 32)))
             (if flag (color "<!>" '(31)) ""))))
 
-(define (display-records pkg)
+(define (format-record pkg)
   (let* ((table (json-string->scm (pkg->string pkg)))
-         (results (hash-ref table "results"))
-         (list (map prettyprint->string results)))
-    (map display (sort list string>?))))
+         (results (assoc-ref table "results")))
+    (prettyprint->string (vector-ref results 0))))
 
 (define (main)
   (if (> (length (command-line)) 1)
-      (par-map display-records (cdr (command-line)))
+      (let ((list (par-map format-record (cdr (command-line)))))
+        (map display (sort list string>?)))
       (begin (display "Usage: kitty <pkg> [<pkg> ...]\n" (current-error-port))
              (exit #f))))
 
