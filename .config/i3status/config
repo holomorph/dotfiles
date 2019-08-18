@@ -18,6 +18,7 @@ general {
 order += "volume master"
 order += "load"
 order += "cpu_temperature 0"
+order += "memory"
 order += "ethernet bond0"
 order += "wireless wl0"
 order += "ethernet en0"
@@ -39,7 +40,14 @@ load {
 
 cpu_temperature 0 {
 	format = "T: %degreesC"
-	path = "/sys/class/hwmon/hwmon0/temp2_input"
+	path = "/sys/devices/platform/coretemp.0/hwmon/hwmon*/temp1_input"
+}
+
+memory {
+	format = "M: %used (%percentage_used)"
+	memory_used_method = classical
+	threshold_degraded = "10%"
+	threshold_critical = "5%"
 }
 
 ethernet bond0 {
