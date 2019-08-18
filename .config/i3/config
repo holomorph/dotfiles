@@ -8,7 +8,7 @@ set $mod Mod4
 # Font for window titles
 font pango:Terminus 8
 
-# Use Mouse+$mod to drag floating windows to their wanted position
+# use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # start a terminal
@@ -59,6 +59,15 @@ bindsym $mod+p focus parent
 # focus the child container
 bindsym $mod+c focus child
 
+# move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
+# show next, hide, or cycle the scratchpad
+bindsym $mod+minus scratchpad show
+# toggle bar
+bindsym $mod+b bar mode toggle
+# toggle last workspace
+bindsym $mod+Tab workspace back_and_forth
+
 # switch to workspace
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
@@ -82,15 +91,6 @@ bindsym $mod+Shift+7 move container to workspace 7
 bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
-
-# move the currently focused window to the scratchpad
-bindsym $mod+Shift+minus move scratchpad
-# show next, hide, or cycle the scratchpad
-bindsym $mod+minus scratchpad show
-# toggle bar
-bindsym $mod+b bar mode toggle
-# toggle last workspace
-bindsym $mod+Tab workspace back_and_forth
 
 # reload the configuration file
 bindsym $mod+Ctrl+r reload
@@ -121,7 +121,7 @@ client.urgent           #af3a3a #222222 #e06666 #e06666
 
 bar {
 	position top
-	status_command dwmstatus -ibond0
+	status_command i3status
 	modifier none
 
 	colors {
@@ -139,6 +139,7 @@ bar {
 focus_on_window_activation urgent
 hide_edge_borders smart
 workspace_auto_back_and_forth yes
+workspace_layout tabbed
 
 for_window [class="fontforge"] floating enable
 for_window [class="Gbdfed"] floating enable
