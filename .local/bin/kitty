@@ -43,15 +43,15 @@
                    `(1 ,(if flag 31 32)))
             (if flag (color "<!>" '(31)) ""))))
 
-(define (format-record pkg)
+(define (display-records pkg)
   (let* ((table (json-string->scm (pkg->string pkg)))
-         (results (assoc-ref table "results")))
-    (prettyprint->string (vector-ref results 0))))
+         (results (vector->list (assoc-ref table "results")))
+         (list (map prettyprint->string results)))
+    (map display (sort list string>?))))
 
 (define (main)
   (if (> (length (command-line)) 1)
-      (let ((list (par-map format-record (cdr (command-line)))))
-        (map display (sort list string>?)))
+      (par-map display-records (cdr (command-line)))
       (begin (display "Usage: kitty <pkg> [<pkg> ...]\n" (current-error-port))
              (exit #f))))
 
