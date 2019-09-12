@@ -16,4 +16,4 @@ redshift &
 termite &
 emacs --daemon &
 
-exec dwm
+exec i3
