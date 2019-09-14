@@ -143,15 +143,15 @@ workspace_layout tabbed
 
 for_window [class="fontforge"] floating enable
 for_window [class="Gbdfed"] floating enable
-for_window [class="Firefox"] floating enable
-for_window [class="Firefox" instance="Navigator"] floating disable
+for_window [class="firefox"] floating enable
+for_window [class="firefox" instance="Navigator"] floating disable
 for_window [class="keepassxc"] floating enable
 for_window [class="Pinentry"] floating enable
 for_window [class="Xfd"] floating enable
 for_window [class="XFontSel"] floating enable
 
 assign [Class="Chromium"] 1
-assign [Class="Firefox"] 1
+assign [Class="firefox"] 1
 assign [Class="Darktable"] 7
 assign [Class="Rawtherapee"] 7
 assign [Class="Fig"] 8
