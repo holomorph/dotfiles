@@ -31,5 +31,4 @@
  gnus-decay-scores "\\.ADAPT\\'")
 
 ;; methods
-(setq-default
- gnus-select-method '(nntp "news.gmane.org" (nntp-address "news.gmane.org")))
+(setq-default gnus-select-method '(nntp "news.gmane.io"))
