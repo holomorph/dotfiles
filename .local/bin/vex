@@ -16,7 +16,7 @@ swap() {
 toggle() {
 	## store xrandr info for the display
 	local display="$(grep "^$1" <<< "$xrandr")"
-	local internal="LVDS1"
+	local internal="LVDS-1"
 	local ret
 
 	if [[ $display =~ "+" ]]; then
@@ -31,7 +31,7 @@ toggle() {
 }
 
 ## generate list of connected external displays
-list=($(awk '/^(HDMI|VGA)[0-9]+ connected/ {print $1}' <<< "$xrandr"))
+list=($(awk '/^(HDMI|VGA)-[0-9]+ connected/ {print $1}' <<< "$xrandr"))
 
 ## toggle first display in the list
 for display in ${list[@]}; do
