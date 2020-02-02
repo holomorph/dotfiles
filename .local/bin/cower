@@ -1,0 +1,31 @@
+#!/bin/sh --
+# because muscle memory
+
+usage() {
+  printf "%s\n\n%s\n" "Usage: cower <operation> target..." "\
+Operations:
+  -h   display this help and exit
+  -d   download target(s)
+  -i   show info for target(s)
+  -m   show packages maintained by target(s)
+  -s   search for target(s)
+  -u   check for updates against AUR"
+}
+
+if getopts hum:d:i:s: flag; then
+  case $flag in
+    h) usage; exit 0;;
+    u) exec auracle outdated;;
+    m) exec auracle search --searchby=maintainer "$OPTARG";;
+    d | i | s) shift $((OPTIND - 2));;
+  esac
+
+  case $flag in
+    d) exec auracle clone "$@";;
+    i) exec auracle info "$@";;
+    s) exec auracle search "$@";;
+  esac
+else
+  printf >&2 "error: no operation specified (use -h for help)\n"
+  exit 1
+fi
