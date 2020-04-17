@@ -4,13 +4,7 @@
 f="$1"
 
 if [[ "$f" = *.xlsx ]]; then
-    sed -f - <<EOF <(xlsx2csv "$f") | column -ts'	'
-s/^,*$//g
-s/^"//
-s/",$//
-s/,,/,"",/g
-s/","/	/g
-EOF
+    xlsx2csv "$f" | column -ts'	'
 else
     # for everything else, use xls2csv
     sed -rf - <<EOF <(xls2csv "$f" 2>/dev/null) | column -ts'	'
