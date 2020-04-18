@@ -47,7 +47,7 @@
   "The name by which to invoke stream player."
   :type 'string)
 
-(defcustom twitch-player-options '("--title" "%t (%n)")
+(defcustom twitch-player-options '("--title=%t (%n)")
   "Extra arguments to pass to `twitch-player'.
 Format specifiers %n, %t, and %i will expand to streamer name,
 stream title, and client ID, respectively."
