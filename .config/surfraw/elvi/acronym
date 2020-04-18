@@ -1,0 +1,33 @@
+#!/bin/sh
+# $Id$
+# elvis: acronym		-- Look for acronyms definitions (www.acronymfinder.com)
+. surfraw || exit 1
+
+w3_config_hook () {
+    def   SURFRAW_acronym_path
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [keyword]
+Description:
+  Surfraw searches for possible definitions of acronyms using acronymfinder.com
+
+
+
+EOF
+    w3_global_usage
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+
+if test -z "$w3_args"; then
+    SURFRAW_acronym_path='http://www.acronymfinder.com/random.aspx'
+else
+    SURFRAW_acronym_path='http://www.acronymfinder.com/'
+    escaped_args="$(w3_url_of_arg $w3_args)"
+fi
+w3_browse_url "$SURFRAW_acronym_path${escaped_args}.html"
+
