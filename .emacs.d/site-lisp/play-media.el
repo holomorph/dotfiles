@@ -1,9 +1,9 @@
 ;;; play-media.el --- Launch videos and stuff from Emacs -*- lexical-binding: t -*-
 
-;; Copyright (C) 2014-2019  Mark Oteiza <mvoteiza@udel.edu>
+;; Copyright (C) 2014-2020  Mark Oteiza <mvoteiza@udel.edu>
 
 ;; Author: Mark Oteiza <mvoteiza@udel.edu>
-;; Version: 0.4.1
+;; Version: 0.5
 ;; Keywords: convenience
 
 ;; This program is free software; you can redistribute it and/or
@@ -40,29 +40,57 @@
   "Options specified for `play-media-program'."
   :type '(repeat string))
 
+(defcustom play-media-at-point-functions
+  '(play-media-eww-at-point
+    play-media-feed-at-point
+    play-media-url-at-point
+    play-media-file-at-point
+    symbol-at-point)
+  "List of functions to try in sequence to get media at point.
+Elements should return URL, file name, etc. at point,
+otherwise nil."
+  :type 'hook
+  :options '(play-media-eww-at-point
+             play-media-feed-at-point
+             play-media-url-at-point
+             play-media-file-at-point
+             symbol-at-point))
+
+(defun play-media-eww-at-point ()
+  "Return shr or EWW URL at point, otherwise nil."
+  (or (get-text-property (point) 'shr-url)
+      (if (fboundp 'eww-current-url) (eww-current-url))))
+
+(defun play-media-feed-at-point ()
+  "Return elfeed or newsticker link at point, otherwise nil."
+  (or (when (and (fboundp 'elfeed-search-selected)
+                 (fboundp 'elfeed-entry-link))
+        (let ((entry (elfeed-search-selected t)))
+          (when entry
+            (elfeed-entry-link entry))))
+      (get-text-property (point) :nt-link)))
+
+(defun play-media-url-at-point ()
+  "Return URL at point, otherwise nil."
+  (or (thing-at-point 'url)
+      (url-get-url-at-point)))
+
+(defun play-media-file-at-point ()
+  "Return file name at point, otherwise nil."
+  (let* ((fn (run-hook-with-args-until-success 'file-name-at-point-functions))
+         (dir (and fn (file-name-as-directory fn))))
+    (unless (equal dir fn) fn)))
+
 (defun play-media-start-process (program &rest args)
   "Thin wrapper for `start-process'."
   (message "Playing %s %s" program (mapconcat #'identity args " "))
   (apply #'start-process "play-media" nil program args))
 
-(defun play-media-media-at-point ()
-  "Return URL, file name, etc. of media at point, otherwise nil."
-  (or (get-text-property (point) 'shr-url)
-      (if (fboundp 'eww-current-url) (eww-current-url))
-      (get-text-property (point) :nt-link)
-      (thing-at-point 'url)
-      (url-get-url-at-point)
-      (let* ((fn (run-hook-with-args-until-success 'file-name-at-point-functions))
-             (dir (and fn (file-name-as-directory fn))))
-        (unless (equal dir fn) fn))
-      ;; catch incomplete URLs
-      (thing-at-point 'symbol)))
-
 ;;;###autoload
 (defun play-media (url)
   "Play media from URL."
   (interactive
-   (let* ((str (play-media-media-at-point))
+   (let* ((str (run-hook-with-args-until-success 'play-media-at-point-functions))
           (prompt (if str (format "Play media (default %s): " str)
                     "Play media: ")))
      (list (read-string prompt nil nil str))))
@@ -78,7 +106,7 @@
   "Try to play media at point.
 See `play-media' and `play-media-media-at-point'."
   (interactive)
-  (let ((link (play-media-media-at-point)))
+  (let ((link (run-hook-with-args-until-success 'play-media-at-point-functions)))
     (if link (play-media link)
       (message "No link found"))))
 
