@@ -17,7 +17,7 @@
 	tool = vimdiff
 	renames = copies
 [diff "elisp"]
-	xfuncname = "^\\(((cl-)?def.*)"
+	xfuncname = "^\\(((cl-|ert-)?def.*)"
 [diff "scheme"]
 	xfuncname = "^\\((def.*)"
 [commit]

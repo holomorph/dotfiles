@@ -27,7 +27,7 @@ MENUCOLOR=" blessed| B($| )"=blue
 MENUCOLOR=" uncursed| UC?($| )"=green
 MENUCOLOR=" cursed| C($| )"=red
 
-OPTION=hilite_status:hunger/updown/red/green
+OPTION=hilite_status:hunger/2/red/green
 OPTION=hilite_status:hitpoints/40%/red/normal
 OPTION=hilite_status:power/40%/red/normal
 
