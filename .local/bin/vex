@@ -1,41 +1,34 @@
-#!/bin/bash
+#!/bin/sh
 
 # vex: switch to and from external displays
-
-## store xrandr output
-readonly xrandr="$(xrandr)"
 
 swap() {
 	if xrandr --output "$1" --off --output "$2" --auto; then
 		return 0
 	fi
-	printf >&2 "vex: operation failed: %s off %s auto" "$1" "$2"
+	printf >&2 "vex: xrandr operation failed: %s off %s auto\n" "$1" "$2"
 	return 1
 }
 
 toggle() {
 	## store xrandr info for the display
-	local display="$(grep "^$1" <<< "$xrandr")"
 	local internal="LVDS-1"
-	local ret
 
-	if [[ $display =~ "+" ]]; then
+	if test -z "${2##*+*}"; then
 		## display active
-		ret=$(swap "$1" "$internal")
+		return $(swap "$1" "$internal")
 	else
 		## display not active
-		ret=$(swap "$internal" "$1")
+		return $(swap "$internal" "$1")
 	fi
-
-	return $ret
 }
 
-## generate list of connected external displays
-list=($(awk '/^(HDMI|VGA)-[0-9]+ connected/ {print $1}' <<< "$xrandr"))
+try() {
+  while read -r output geometry; do
+    if toggle "$output" "$geometry"; then
+      break
+    fi
+  done
+}
 
-## toggle first display in the list
-for display in ${list[@]}; do
-	if toggle "$display"; then
-		break
-	fi
-done
+xrandr | awk '/^(HDMI|VGA)-[0-9]+ connected/ {print $1,$3}' | try
