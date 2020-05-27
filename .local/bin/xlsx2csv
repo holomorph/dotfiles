@@ -12,7 +12,7 @@ if len(sys.argv) != 2:
     print('Usage: %s <file>' % os.path.basename(sys.argv[0]), file=sys.stderr)
     sys.exit(1)
 
-writer = csv.writer(sys.stdout, delimiter='\t', quoting=csv.QUOTE_NONE)
+writer = csv.writer(sys.stdout, delimiter='\t', quoting=csv.QUOTE_NONE, escapechar='\\')
 wb = xlrd.open_workbook(sys.argv[1], on_demand=True, logfile=sys.stdout)
 for sh in wb.sheets():
     data = [sh.row_values(r) for r in range(sh.nrows)]
