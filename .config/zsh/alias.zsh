@@ -24,6 +24,7 @@ alias pu='pushd'
 alias dirs='dirs -v'
 
 # pastebins
+alias np="curl -F 'file=@-' https://0x0.st"
 alias ix="curl -F 'f:1=<-' http://ix.io"
 alias ptpb="curl -F 'c=<-' https://ptpb.pw"
 alias sprunge="curl -F 'sprunge=<-' http://sprunge.us"
