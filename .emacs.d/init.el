@@ -89,11 +89,13 @@
 (set-file-modes "~/.local/share/emacs" #o700)
 
 (setq-default
+ abbrev-file-name "~/.local/share/emacs/abbrev_defs"
  bookmark-default-file "~/.local/share/emacs/bookmarks"
  eww-bookmarks-directory "~/.local/share/emacs"
  ido-save-directory-list-file "~/.cache/emacs/ido-cache"
  kkc-init-file-name "~/.local/share/emacs/kkc-data"
  nsm-settings-file "~/.cache/emacs/nsm-settings"
+ org-id-locations-file "~/.cache/emacs/org-id-locations"
  recentf-save-file "~/.local/share/emacs/recentf"
  remember-data-file "~/.local/share/emacs/notes"
  save-place-file "~/.local/share/emacs/places"
