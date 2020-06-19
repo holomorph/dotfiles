@@ -1,0 +1,21 @@
+#!/bin/sh --
+set -e
+
+confirm_clobber () {
+  local answer
+  IFS= read -p "File '$1' already exists. Overwrite ? [y/N] " answer
+  test "$answer" = "y"
+}
+
+transcode () {
+  exec opusenc --discard-pictures --bitrate 192 --vbr --comp 10 "$1" "$2"
+}
+
+case $# in
+  1) output="${1%%.flac}".opus;;
+  2) output="$2";;
+  *) printf >&2 'Usage: %s infile [outfile]\n' "${0##*/}"
+     exit 1;;
+esac
+
+! test -f "$output" || confirm_clobber "$output" && transcode "$1" "$output"
