@@ -1,0 +1,20 @@
+# mutt/comcast.muttrc
+
+color status brightgreen black
+
+set realname = $my_realname
+set from = $my_comcast
+set imap_user = $my_comcast
+set imap_pass = `n3c imap.comcast.net`
+set folder = imaps://imap.comcast.net:993
+set spoolfile = +INBOX
+set smtp_url = "smtp://$my_comcast@smtp.comcast.net:587"
+set smtp_pass = `n3c smtp.comcast.net`
+set postponed = +Drafts
+
+mailboxes +INBOX +Sent +Archive +Trash
+
+set ssl_force_tls = yes
+set imap_idle = yes
+
+macro index,pager ,a "<save-message>=Archive<enter>" "archive message"

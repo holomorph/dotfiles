@@ -1,0 +1,27 @@
+# mutt/imap.muttrc
+
+color status brightgreen black
+
+set realname  = $my_realname
+set from      = $my_gmail
+set imap_user = $my_gmail
+set imap_pass = `n3c imap.gmail.com $imap_user`
+set folder = "imaps://imap.gmail.com:993"
+set spoolfile = +INBOX
+set smtp_url = "smtp://$my_gmail@smtp.gmail.com:587"
+set smtp_pass = $imap_pass
+set postponed = +[Gmail]/Drafts
+
+unset record # gmail saves sent mail in +sent anyways
+
+mailboxes +INBOX "+[Gmail]/Sent Mail" "+[Gmail]/All Mail" "+[Gmail]/Trash"
+
+set read_inc = 0
+set imap_idle = yes
+set imap_deflate = yes
+set mail_check = 3600
+
+set ssl_force_tls = yes
+
+# apparently the space in the sequence automagically completes "All Mail"
+macro index,pager ,a "<save-message>=[Gmail]/All <enter>" "archive message"
