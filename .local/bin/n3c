@@ -1,19 +1,21 @@
-#!/usr/bin/python3
+#!/usr/bin/env perl
 
-import netrc
-import os
-import sys
+use strict;
+use warnings;
+use File::Basename;
+use Net::Netrc;
 
-def wat(host):
-    try:
-        authinfo = netrc.netrc()
-        return authinfo.authenticators(host)
-    except netrc.NetrcParseError as e:
-        print("%s:%s:%s" % (e.filename, e.lineno, e.msg), file=sys.stderr)
-        sys.exit(1)
+if (@ARGV == 0 || @ARGV > 2) {
+    printf("Usage: %s <host> [login]\n", basename($0));
+    exit(1);
+}
 
-if len(sys.argv) == 2:
-    print(wat(sys.argv[1])[2])
-else:
-    print("Usage: %s <host>" % os.path.basename(sys.argv[0]), file=sys.stderr)
-    sys.exit(1)
+my $machine = Net::Netrc->lookup($ARGV[0], $ARGV[1]);
+
+if($machine) {
+    printf("%s\n", $machine->password);
+}
+else {
+    print STDERR "No entry for '$ARGV[0]' found!\n";
+    exit(1);
+}
