@@ -13,7 +13,4 @@ augroup filetypedetect
     au BufNewFile,BufRead *.rules setf udevrules
 
     au BufReadPre *.nfo setl ro fencs=cp437,utf-8
-
-    au BufNewFile,BufRead /tmp/pentadactyl.wiki.archlinux.org.* setf mediawiki
-    au BufNewFile,BufRead /tmp/pentadactyl.github.com.txt setf markdown
 augroup END
