@@ -17,18 +17,22 @@ module Twitch
 end
 
 class Hash
+  def format_title()
+    self.dig("status").strip.gsub(/\r?\n/, " ")
+  end
+
   def display_s(just)
     name = self.dig("display_name").ljust(just)
-    title = self.dig("status").gsub(/\r?\n/, " ")
-    "#{name}#{title} [#{self.dig("game")}]"
+    "#{name}#{self.format_title} [#{self.dig("game")}]"
+  end
+
+  def wintitle_s()
+    name = self.dig("display_name")
+    %Q(#{self.format_title} (#{name}))
   end
 end
 
 class String
-  def escape
-    '"' + self.gsub(/["`\\$]/) { "\\" + $& } + '"'
-  end
-
   def take_until(char)
     x = index(char)
     return self if x.nil?
@@ -122,19 +126,18 @@ def dmenu(items)
   if ENV["DISPLAY"] && !ENV["DISPLAY"].empty?
     cmd = %w[dmenu] + args + %W[-fn #{font}]
   else
-    cmd = %w[bemenu] + args + %W[--fn #{font}]
+    cmd = %w[bemenu] + args + %W[--fn #{font.gsub("-", " ")}]
   end
 
-  out, status = Open3.capture2(*cmd, stdin_data: items.join("\n"))
+  out, status = Open3.capture2(*cmd, stdin_data: items.join("\n") + "\n")
   status.success? ? out.chomp : nil
 end
 
 def play_stream(item)
-  title = %Q(#{item["status"]} (#{item["display_name"]}))
   uri = item[:uri] || "https://twitch.tv/#{item["name"]}"
 
   pid = fork do
-    exec("mpv", %Q(--title=#{title}), uri)
+    exec("mpv", %Q(--title=#{item.wintitle_s}), uri)
   end
   Process.wait(pid)
 end
@@ -157,7 +160,7 @@ streams = get_streams()
 unless streams.empty?
   width = streams.map{|i| i.dig("display_name").length}.max + 3
   menu = streams.sort_by{|i| i.dig("display_name").downcase}
-  menu = menu.map{|i| i.display_s(width) }
+  menu = menu.map{|i| i.display_s(width)}
   sel = dmenu(menu)
   play_selected(sel, streams) if sel
 end
