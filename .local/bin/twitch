@@ -7,27 +7,26 @@
 require 'net/http'
 require 'open3'
 require 'json'
-require 'sdbm'
 require 'thread'
 
 module Twitch
-  API = "https://api.twitch.tv/kraken"
-  API_TYPE = 'application/vnd.twitchtv.v5+json'
+  API = "https://api.twitch.tv/gql"
+  QUERY = "query{users(logins:[%s]){id,login,displayName,stream{title,game{name}}}}"
   CLIENT_ID = "jzkbprff40iqj646a697cyrvl0zt2m6"
 end
 
 class Hash
   def format_title()
-    self.dig("status").strip.gsub(/\r?\n/, " ")
+    self.dig("stream", "title").strip.gsub(/\r?\n/, " ")
   end
 
   def display_s(just)
-    name = self.dig("display_name").ljust(just)
-    "#{name}#{self.format_title} [#{self.dig("game")}]"
+    name = self.dig("displayName").ljust(just)
+    "#{name}#{self.format_title} [#{self.dig("stream", "game", "name")}]"
   end
 
   def wintitle_s()
-    name = self.dig("display_name")
+    name = self.dig("displayName")
     %Q(#{self.format_title} (#{name}))
   end
 end
@@ -55,17 +54,14 @@ def parse_config(file)
   array.uniq
 end
 
-def request(url)
-  uri = URI(url)
+def request(data)
+  uri = URI(Twitch::API)
   res = Net::HTTP.start(uri.host, uri.port, :use_ssl => true) do |http|
-    req = Net::HTTP::Get.new(uri)
+    req = Net::HTTP::Post.new(uri)
     req['Client-ID'] = Twitch::CLIENT_ID
-    req['Accept'] = Twitch::API_TYPE
-    http.request(req)
+    http.request(req, data)
   end
   res.body
-rescue => e
-  warn format("When retrieving %s\n%s", url, e.message)
 end
 
 def get_streams()
@@ -74,46 +70,21 @@ def get_streams()
   streams_mx = Mutex.new
   file = xdg_config_twitch("streamers")
   users = parse_config(file)
-  db = SDBM.new(file)
-
-  case (olddb = File.mtime(file) > File.mtime("#{file}.pag"))
-  when false
-    olddb = true if db.empty?
-  when true
-    db.clear unless db.empty?
-  end
 
   users.each_slice(100) do |batch|
     threads << Thread.new do
       streams_mx.synchronize do
-        ids = []
-        if olddb
-          url = "#{Twitch::API}/users?login=#{batch.join(",")}"
-          data = JSON.parse(request(url))
-          data.dig("users").each do |s|
-            id = s.dig("_id")
-            name = s.dig("name")
-            # must use names as they appear in the config
-            db[batch.find{|n| name =~ /#{n.downcase}/}] = id
-            ids << id
-          end
-        else
-          batch.each do |user|
-            ids << db[user]
-          end
-        end
 
-        url = "#{Twitch::API}/streams?channel=#{ids.join(",")}"
-        data = JSON.parse(request(url))
-        data.dig("streams").each do |s|
-          streams << s.dig("channel")
+        query = format(Twitch::QUERY, batch.map{|e|"\"#{e}\""}.join(','))
+        data = JSON.parse(request(JSON.generate([{:query => query}])))
+        data[0].dig("data", "users").each do |u|
+          streams << u unless u.nil? || u.dig("stream").nil?
         end
       end
     end
   end
 
   threads.each(&:join)
-  db.close unless db.closed?
   streams
 end
 
@@ -134,7 +105,7 @@ def dmenu(items)
 end
 
 def play_stream(item)
-  uri = item[:uri] || "https://twitch.tv/#{item["name"]}"
+  uri = item[:uri] || "https://twitch.tv/#{item["login"]}"
 
   pid = fork do
     exec("mpv", %Q(--title=#{item.wintitle_s}), uri)
@@ -146,7 +117,7 @@ def play_selected(sel, streams)
   threads = []
 
   sel.split(/\r?\n/).each do |name|
-    if item = streams.find{|i| name =~ /^#{i["display_name"]}/}
+    if item = streams.find{|i| name =~ /^#{i["displayName"]}/}
       threads << Thread.new do
         play_stream(item)
       end
@@ -158,9 +129,9 @@ end
 
 streams = get_streams()
 unless streams.empty?
-  width = streams.map{|i| i.dig("display_name").length}.max + 3
-  menu = streams.sort_by{|i| i.dig("display_name").downcase}
-  menu = menu.map{|i| i.display_s(width)}
+  width = streams.map{|i| i.dig("displayName").length}.max + 3
+  menu = streams.sort_by{|i| i.dig("displayName").downcase}
+  menu = menu.map{|i| i.display_s(width) }
   sel = dmenu(menu)
   play_selected(sel, streams) if sel
 end
