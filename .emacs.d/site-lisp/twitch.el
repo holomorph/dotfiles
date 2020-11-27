@@ -1,9 +1,9 @@
 ;;; twitch.el --- Query streamers from https://twitch.tv -*- lexical-binding: t -*-
 
-;; Copyright (C) 2015-2019  Mark Oteiza <mvoteiza@udel.edu>
+;; Copyright (C) 2015-2020  Mark Oteiza <mvoteiza@udel.edu>
 
 ;; Author: Mark Oteiza <mvoteiza@udel.edu>
-;; Version: 0.9.1
+;; Version: 0.10
 ;; Package-Requires: ((emacs "24.3") (let-alist "1.0.5") (seq "1.5"))
 ;; Keywords: convenience, multimedia
 
@@ -38,7 +38,7 @@
   :link '(url-link "https://twitch.tv")
   :group 'external)
 
-(defcustom twitch-client-id "jzkbprff40iqj646a697cyrvl0zt2m6"
+(defcustom twitch-client-id "kimne78kx3ncx6brgo4mv6wki5h1ko"
   "Client ID for accessing Twitch API."
   :link '(url-link "https://dev.twitch.tv/docs/v5/#getting-a-client-id")
   :type 'string)
@@ -61,42 +61,24 @@ stream title, and client ID, respectively."
   "Name by which to invoke the curl program."
   :type 'string)
 
-(defconst twitch-curl-config "header=\"Accept: application/vnd.twitchtv.v5+json\"
-header=\"Client-ID: %s\"
-url=\"%s\"\n")
-
-(defconst twitch-api-list
-  '(display_name status viewers views followers url game name)
-  "List of useful keys from Twitch API 5.0.
-See https://dev.twitch.tv/docs/v5/ for more information.")
+(defconst twitch-curl-config "header=\"Client-ID: %s\"
+url=https://api.twitch.tv/gql
+data=%s\n")
 
 (defconst twitch-api-streamer-limit 100
   "Maximum number of streamers allowed in a single query.")
 
-(defvar twitch-uid-table nil
-  "Cache of user names to UIDs.")
+(defconst twitch-graphql-query "query{users(logins:[\"%s\"]){id,login,displayName,profileViewCount,followers{totalCount}stream{title,viewersCount,game{name}}}}")
 
-(defun twitch-handle-response ()
-  (set-buffer-multibyte t)
-  (goto-char (point-min))
-  (re-search-forward "\r?\n\r?\n" nil t)
-  (json-read))
 
-(defun twitch-batch-join (strings count separator)
-  "Batch STRINGS in groups of COUNT, joined by SEPARATOR"
-  (mapcar (lambda (seq) (mapconcat #'identity seq separator))
-          (seq-partition (delete-dups (remq nil strings)) count)))
-
-(defun twitch--munge-v5 (stream)
-  (append (list (assq 'viewers stream)) (cdr (assq 'channel stream))))
-
-(defun twitch-filter (channel)
-  "Return an alist derived from CHANNEL filtered for keys in `twitch-api-list'."
-  (cl-loop for key in twitch-api-list collect (assq key channel)))
+(defun twitch-build-queries (list count)
+  "Return a list of GraphQL queries from user logins in LIST in groups of COUNT."
+  (cl-loop for seq in (seq-partition (delete-dups (remq nil list)) count)
+           collect (format twitch-graphql-query (mapconcat #'identity seq "\",\""))))
 
 (defun twitch-sort-pred (alist1 alist2)
   "Predicate for sorting alists according to user name."
-  (string< (cdr (assq 'name alist1)) (cdr (assq 'name alist2))))
+  (string< (cdr (assq 'login alist1)) (cdr (assq 'login alist2))))
 
 (defun twitch-group-digits (number)
   "Return a formatted string of integer N with digits grouped."
@@ -107,21 +89,21 @@ See https://dev.twitch.tv/docs/v5/ for more information.")
   (let ((str (format "  %s: %s" k (if (numberp v) (twitch-group-digits v) v))))
     (concat (propertize str 'font-lock-face 'font-lock-comment-face) "\n")))
 
-(defun twitch-format-data (ht)
-  (let-alist ht
+(defun twitch-format-stream (object)
+  (let-alist object
     (propertize
      (concat
       (truncate-string-to-width
-       (propertize .display_name 'font-lock-face 'font-lock-type-face) 15 nil nil "…")
+       (propertize .displayName 'font-lock-face 'font-lock-type-face) 15 nil nil "…")
       (propertize " " 'display '(space :align-to 16))
-      (propertize (replace-regexp-in-string "\r?\n" " " (or .status "") t t)
+      (propertize (replace-regexp-in-string "\r?\n" " " (or .stream.title "") t t)
                   'font-lock-face 'font-lock-variable-name-face)
       "\n"
-      (twitch-format-info "Game" .game)
-      (twitch-format-info "Viewers" .viewers)
-      (twitch-format-info "Followers" .followers)
-      (twitch-format-info "Total views" .views))
-     'url (format "https://twitch.tv/%s" .name) 'name .display_name 'title .status)))
+      (twitch-format-info "Game" .stream.game.name)
+      (twitch-format-info "Viewers" .stream.viewersCount)
+      (twitch-format-info "Followers" .followers.totalCount)
+      (twitch-format-info "Total views" .profileViewCount))
+     'url (format "https://twitch.tv/%s" .login) 'name .displayName 'title .stream.title)))
 
 (defun twitch-format-spec (str)
   "Interpolate format specifiers in STR."
@@ -130,8 +112,8 @@ See https://dev.twitch.tv/docs/v5/ for more information.")
         deactivate-mark)
     (format-spec str `((?t . ,title) (?n . ,name) (?i . ,twitch-client-id)))))
 
-(defun twitch-insert-entry (ht)
-  (let* ((entry (twitch-format-data ht))
+(defun twitch-insert-entry (object)
+  (let* ((entry (twitch-format-stream object))
          (start (point))
          (end (+ start (length entry))))
     (insert entry)
@@ -160,11 +142,11 @@ See https://dev.twitch.tv/docs/v5/ for more information.")
            (forward-line))
          (point))))))
 
-(defmacro twitch-request (url &rest body)
+(defmacro twitch-request (data &rest body)
   (declare (indent 1) (debug t))
   (let ((p (make-symbol "process")))
     `(let ((,p (start-process "twitch" (generate-new-buffer " *twitch")
-                              twitch-curl-program "-q" "-K" "-")))
+                              twitch-curl-program "-sSqK" "-")))
        (setf (process-sentinel ,p)
              (lambda (process _status)
                (unwind-protect
@@ -172,49 +154,25 @@ See https://dev.twitch.tv/docs/v5/ for more information.")
                      (with-current-buffer (process-buffer process)
                        ,@body))
                  (kill-buffer (process-buffer process)))))
-       (process-send-string ,p (format twitch-curl-config twitch-client-id ,url))
+       (process-send-string ,p (format twitch-curl-config twitch-client-id ,data))
        (process-send-eof ,p))))
-
-(defun twitch-retrieve-uids (&optional callback)
-  "Fetch UIDs for each username in `twitch-streamers'.
-Populate `twitch-uid-table' with the associations.
-Optional CALLBACK is called with no arguments once each request
-has been received."
-  (let ((buffer (current-buffer))
-        (batches (twitch-batch-join twitch-streamers twitch-api-streamer-limit ","))
-        (table (make-hash-table :test #'equal))
-        count)
-    (setq count (length batches))
-    (dolist (batch batches)
-      (twitch-request (format "https://api.twitch.tv/kraken/users?login=%s" batch)
-        (cl-decf count)
-        (cl-loop for x across (cdr (assq 'users (twitch-handle-response)))
-                 do (puthash (cdr (assq 'name x)) (cdr (assq '_id x)) table))
-        (when (zerop count)
-          (setq twitch-uid-table table)
-          (with-current-buffer buffer (funcall callback)))))))
 
 (defun twitch-refresh (&optional _arg _noconfirm)
   "Erase the buffer and draw a new one."
   (let ((buffer (current-buffer))
-        (uids (twitch-batch-join
-               (cl-loop for x being the hash-values of twitch-uid-table collect x)
-               twitch-api-streamer-limit ","))
-        count tables)
-    (setq count (length uids))
-    (dolist (batch uids)
-      (twitch-request (format "https://api.twitch.tv/kraken/streams?channel=%s" batch)
+        (queries (twitch-build-queries twitch-streamers twitch-api-streamer-limit))
+        count list)
+    (setq count (length queries))
+    (dolist (query queries)
+      (twitch-request (json-encode `[(:query ,query)])
         (cl-decf count)
-        (cl-loop for x across (cdr (assq 'streams (twitch-handle-response)))
-                 do (push (twitch-filter (twitch--munge-v5 x)) tables))
+        (goto-char (point-min))
+        (search-forward "\"users\":" nil t)
+        (cl-loop for object across (json-read-array)
+                 when (cdr (assq 'stream object)) do (push object list))
         (when (zerop count)
           (with-current-buffer buffer
-            (twitch-redraw tables)))))))
-
-(defun twitch-refresh-v5 (&optional _arg _noconfirm)
-  (if twitch-uid-table
-      (twitch-refresh)
-    (twitch-retrieve-uids #'twitch-refresh)))
+            (twitch-redraw list)))))))
 
 (defun twitch-overlay-at (pos)
   (cl-loop for ov in (overlays-at pos) when (overlay-get ov 'twitch) return ov))
@@ -294,7 +252,7 @@ has been received."
   "Major mode for launching streams from <https://www.twitch.tv>."
   :group 'twitch
   (buffer-disable-undo)
-  (setq-local revert-buffer-function #'twitch-refresh-v5))
+  (setq-local revert-buffer-function #'twitch-refresh))
 
 ;;;###autoload
 (defun twitch ()
@@ -308,7 +266,7 @@ has been received."
         (with-current-buffer buffer
           (unless (eq major-mode 'twitch-mode)
             (twitch-mode)
-            (twitch-refresh-v5))
+            (twitch-refresh))
           (switch-to-buffer-other-window buffer))))))
 
 (provide 'twitch)
