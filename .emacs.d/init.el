@@ -126,12 +126,36 @@
 (global-set-key (kbd "<f5>") 'recompile)
 (global-set-key (kbd "C-.") 'repeat)
 (global-set-key (kbd "M-i") 'imenu)
-(global-set-key (kbd "M-o") 'other-window)
-(global-set-key (kbd "C-c a") 'org-agenda)
-(global-set-key (kbd "C-c i") 'imenu)
+(global-set-key (kbd "M-z") 'zap-up-to-char)
 (define-key help-map "a" 'apropos)
+(define-key ctl-x-map "I" 'insert-buffer)
 
 (windmove-default-keybindings)
+(windmove-display-default-keybindings)
+
+(defvar my-ctl-c-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map "a" 'org-agenda)
+    (define-key map "c" 'calc)
+    (define-key map "d" 'disassemble)
+    (define-key map "e" 'macrostep-expand)
+    (define-key map "i" 'ibuffer)
+    (define-key map "t" 'transmission)
+    (define-key map "fl" 'find-library)
+    (define-key map "ff" 'find-function)
+    map))
+
+(defvar my-bindings-mode-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "M-o") 'other-window) ; here to override `diff-mode'
+    (define-key map (kbd "C-c") my-ctl-c-map)
+    map))
+
+(define-minor-mode my-bindings-mode
+  "Minor mode for my custom keybindings.
+Key bindings:
+\\{my-bindings-mode-map}" ; :lighter " ｶﾀ"
+  :group 'local :global t :init-value t)
 
 ;; mail
 (setq-default
