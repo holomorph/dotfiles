@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 
 # xlsx2csv: uses the xlrd module to print Excel documents to stdout as tab
 # separated values.

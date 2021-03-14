@@ -52,7 +52,7 @@ def get_response(text, sl=u"auto", tl=u"auto"):
     req = urllib.request.Request("%s?%s" % (api, params),
                                  headers={'User-Agent': 'Mozilla/4.0'})
     with urllib.request.urlopen(req) as r:
-        return json.load(r)
+        return json.loads(r.read().decode('utf-8'))
 
 
 def pretty_print(data, debug):

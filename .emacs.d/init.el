@@ -108,7 +108,9 @@
 (display-time-mode)
 (if (fboundp 'savehist-mode) (savehist-mode 1))
 (show-paren-mode)
-(if (fboundp 'save-place-mode) (save-place-mode))
+(if (fboundp 'save-place-mode) (save-place-mode)
+  (setq-default save-place t)
+  (require 'saveplace))
 (require 'uniquify)
 
 ;; backup
@@ -131,7 +133,7 @@
 (define-key ctl-x-map "I" 'insert-buffer)
 
 (windmove-default-keybindings)
-(windmove-display-default-keybindings)
+(if (fboundp 'windmove-display-default-keybindings) (windmove-display-default-keybindings))
 
 (defvar my-ctl-c-map
   (let ((map (make-sparse-keymap)))

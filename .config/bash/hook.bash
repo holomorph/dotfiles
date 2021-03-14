@@ -8,7 +8,7 @@ chpwd() {
 }
 
 cd() {
-  builtin pushd "$@" >/dev/null && chpwd;
+  builtin pushd "${@:-$HOME}" >/dev/null && chpwd;
 }
 
 pushd() {
