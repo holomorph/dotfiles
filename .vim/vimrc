@@ -77,6 +77,7 @@ nnoremap <C-l> <C-w>l
 au BufReadPost *
  \ if line("'\"") > 0 && line("'\"") <= line("$") |
  \ exe "normal g`\"" | endif
+au FileType PKGBUILD setl ft=sh ts=2 sw=2 et cms=#%s
 
 " extensions
 let g:tagbar_width = 30

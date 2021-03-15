@@ -20,7 +20,7 @@
 (define (pkg->string pkg)
   (let* ((query (string-append "name=" pkg "&arch=x86_64&arch=any"))
          (uri (build-uri 'https
-                        #:host "www.archlinux.org"
+                        #:host "archlinux.org"
                         #:path "/packages/search/json/"
                         #:query query)))
     (utf8->string (request->body (build-request uri)))))

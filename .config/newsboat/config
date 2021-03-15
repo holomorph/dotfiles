@@ -34,5 +34,5 @@ highlight article "^Link:.*" cyan default
 highlight article "^Date:.*" cyan default
 
 feedlist-format    "%4i %n %11u %t"
-articlelist-format "%4i %f %D  %?T?|%-17T|  ?%t"
+articlelist-format "%4i %f %D  %?T?%-17T  ?%t"
 notify-format      "%d new articles (%n unread articles, %f unread feeds)"

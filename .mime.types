@@ -1,5 +1,7 @@
 # ~/.mime.types
 application/x-cue				cue
+audio/flac					flac
+image/x-nikon-nef				nef
 text/x-cue					cue
 video/MP2T					ts
 video/mpeg					vob
