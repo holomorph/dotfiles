@@ -1,0 +1,46 @@
+#!/bin/sh --
+
+usage() {
+  printf "%s\n\n%s\n" "Usage: ponymix <operation> [args]..." "\
+Operations:
+  toggle           toggle mute
+  increase VALUE   increase volume
+  decrease VALUE   decrease volume"
+}
+
+set_volume () {
+  case "$1" in
+    [+-][1-3]dB | [+-][1-5]% | [+-][1-5])
+      # XXX assuming the first sink in the list is the one we want
+      pactl list sinks | awk -v d="$1" '
+$1" "$2 == "Channel Map:" { count = gsub(",", "", $3) + 1 }
+$1 == "Volume:" { v = $3 }
+$1" "$2 == "Base Volume:" { n = $3 }
+END {
+  if (index(d, "dB") == 0)
+    new = v + (n * int(d) / 100)
+  else
+    new = n * exp((log((v/n)^3) + log(10)*d/20)/3)
+  if (new != n) {
+    s = sprintf("%.0f", (new > n) ? n : new)
+    for (i = 0; i < count; i++)
+      print s
+  }
+}' |  { set --
+        while read -r level; do
+          set -- "$@" "$level"
+        done
+        if test -n "$1"; then
+          exec pactl set-sink-volume @DEFAULT_SINK@ "$@"
+        fi
+      };;
+    *) printf >&2 'invalid input: %s\n' "${1#[+-]}"; exit 1;;
+  esac
+}
+
+case $1 in
+  toggle) exec pactl set-sink-mute @DEFAULT_SINK@ toggle;;
+  increase) shift 1; set_volume "+$1";;
+  decrease) shift 1; set_volume "-$1";;
+  *) usage; exit 1;;
+esac
