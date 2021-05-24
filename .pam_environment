@@ -7,5 +7,5 @@ PAGER=less
 GCC_COLORS=-
 GREP_COLORS=mt=01;32
 LESS=-R
-TERMINAL=termite
+TERMINAL=alacritty
 BC_ENV_ARGS=-ql

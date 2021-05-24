@@ -13,7 +13,7 @@ feh --no-fehbg --bg-fill "$HOME/pictures/wallpaper/default" &
 setxkbmap -option ctrl:nocaps -option compose:ralt
 
 redshift &
-termite &
+alacritty &
 emacs --daemon &
 
 exec i3

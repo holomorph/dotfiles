@@ -12,8 +12,8 @@ font pango:Terminus 8
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec termite
-bindsym $mod+Shift+Return exec termite
+bindsym $mod+Return exec alacritty
+bindsym $mod+Shift+Return exec alacritty
 
 # kill focused window
 bindsym $mod+q kill
