@@ -1,4 +1,3 @@
-text/html; xdg-open %s; test=xdg-open --help >/dev/null;
 text/html; elinks -dump-charset %{charset} -dump %s; \
   test=elinks -version >/dev/null; copiousoutput;
 
@@ -20,8 +19,10 @@ image/*; imv %s; test=imv -h;
 image/*; feh -. %s; test=feh --version; test=sh -c 'test $DISPLAY';
 image/*; eog %s; test=eog -h;
 audio/*; mpv %s;
+audio/*; ffplay %s;
 audio/*; play %s;
 video/*; mpv %s;
+video/*; ffplay %s;
 application/x-cue; mpv %s;
 text/x-cue; mpv %s;
 
