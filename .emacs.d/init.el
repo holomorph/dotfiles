@@ -57,18 +57,26 @@
  apropos-do-all t
  comint-prompt-read-only t
  compilation-read-command nil
+ compilation-scroll-output 'first-error
  diff-font-lock-syntax nil
  dired-dwim-target t
  display-time-24hr-format t
+ display-time-default-load-average nil
  ediff-window-setup-function 'ediff-setup-windows-plain
  ediff-split-window-function 'split-window-horizontally
  eldoc-idle-delay 0.08
  eldoc-minor-mode-string nil
  eshell-hist-ignoredups t
  eshell-list-files-after-cd t
+ eshell-pushd-tohome t
+ flymake-no-changes-timeout nil
+ flymake-suppress-zero-counters t
+ flymake-wrap-around t
  gnus-init-file (concat user-emacs-directory "gnus.el")
  gnus-home-directory (concat user-emacs-directory "gnus/")
  ido-enable-flex-matching t
+ image-dired-thumb-relief 0
+ image-dired-thumbnail-storage 'standard
  indent-tabs-mode nil
  mouse-sel-retain-highlight t
  octave-blink-matching-block nil
@@ -188,16 +196,21 @@ Key bindings:
  org-default-notes-file "notes.org"
  org-directory "~/doc/notes"
  org-export-backends '(ascii html latex man texinfo)
+ org-fontify-done-headline nil
  org-log-done 'time
+ org-src-fontify-natively nil
+ org-startup-folded t
  org-use-speed-commands t)
 
 ;; filetype
 (add-to-list 'auto-coding-alist '("\\.nfo\\'" . ibm437))
 (add-to-list 'auto-mode-alist '("\\.m\\'" . octave-mode))
 
+(add-hook 'eshell-mode-hook 'toggle-truncate-lines)
 (add-hook 'latex-mode-hook 'reftex-access-scan-info)
 (add-hook 'latex-mode-hook #'reftex-mode)
 (add-hook 'latex-mode-hook #'auto-fill-mode)
+(add-hook 'org-mode-hook #'auto-fill-mode)
 (remove-hook 'sh-mode-hook 'sh-electric-here-document-mode)
 
 
@@ -249,8 +262,13 @@ Key bindings:
 
 (add-hook 'lisp-interaction-mode-hook #'my-lisp-modes)
 (add-hook 'emacs-lisp-mode-hook #'my-lisp-modes)
+(add-hook 'ielm-mode-hook #'company-mode)
+(add-hook 'ielm-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'ielm-mode-hook #'my-lisp-modes)
 (add-hook 'scheme-mode-hook #'my-lisp-modes)
 (add-hook 'prog-mode-hook #'my-prog-modes)
 (add-hook 'tex-mode-hook #'my-prog-modes)
 (remove-hook 'magit-region-highlight-hook 'magit-diff-update-hunk-region)
 (remove-hook 'magit-section-highlight-hook 'magit-section-highlight)
+(add-hook 'backtrace-mode 'rainbow-delimiters-mode)
+(add-hook 'debugger-mode 'rainbow-delimiters-mode)
